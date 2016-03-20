@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Objection.git",
-                "reference": "3ceaac2989951f41cf62d9c830c97ee067e87173"
+                "reference": "6b129d3099f62ebecb004bf8abf8b3f324c82991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/3ceaac2989951f41cf62d9c830c97ee067e87173",
-                "reference": "3ceaac2989951f41cf62d9c830c97ee067e87173",
+                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/6b129d3099f62ebecb004bf8abf8b3f324c82991",
+                "reference": "6b129d3099f62ebecb004bf8abf8b3f324c82991",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
             ],
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
-            "time": "2016-03-20 15:50:56"
+            "time": "2016-03-20 15:54:48"
         }
     ],
     "packages-dev": [],

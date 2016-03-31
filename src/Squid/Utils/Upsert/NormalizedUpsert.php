@@ -3,7 +3,7 @@ namespace Squid\Utils\Upsert;
 
 use \Squid\Base\Utils\IMappedObject;
 use \Squid\Base\Utils\IUpsertObject;
-use \Squid\Base\CmdCreators\ICmdUpsert;
+use \Squid\Base\Cmd\ICmdUpsert;
 
 
 /**

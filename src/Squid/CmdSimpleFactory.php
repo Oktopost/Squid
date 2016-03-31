@@ -2,71 +2,71 @@
 namespace Squid;
 
 
-use \Squid\Cmd;
-use \Squid\Base\CmdCreators;
+use \Squid\MySql\Cmd;
+use \Squid\Base\Cmd;
 use \Squid\Base\ICmdSimpleFactory;
 
 
 class CmdSimpleFactory implements ICmdSimpleFactory {
 	
 	/**
-	 * @return CmdCreators\ICmdController
+	 * @return Cmd\ICmdController
 	 */
 	public function createController() {
 		return new Cmd\CmdController();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdDelete
+	 * @return Cmd\ICmdDelete
 	 */
 	public function createDelete() {
 		return new Cmd\CmdDelete();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdDirect New direct object.
+	 * @return Cmd\ICmdDirect New direct object.
 	 */
 	public function createDirect() {
 		return new Cmd\CmdDirect();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdInsert
+	 * @return Cmd\ICmdInsert
 	 */
 	public function createInsert() {
 		return new Cmd\CmdInsert();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdLock
+	 * @return Cmd\ICmdLock
 	 */
 	public function createLock() {
 		return new Cmd\CmdLock();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdSelect
+	 * @return Cmd\ICmdSelect
 	 */
 	public function createSelect() {
 		return new Cmd\CmdSelect();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdUpdate
+	 * @return Cmd\ICmdUpdate
 	 */
 	public function createUpdate() {
 		return new Cmd\CmdUpdate;
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdUpsert
+	 * @return Cmd\ICmdUpsert
 	 */
 	public function createUpsert() {
 		return new Cmd\CmdUpsert();
 	}
 	
 	/**
-	 * @return CmdCreators\ICmdDB
+	 * @return Cmd\ICmdDB
 	 */
 	public function createDB() {
 		return new Cmd\CmdDB();

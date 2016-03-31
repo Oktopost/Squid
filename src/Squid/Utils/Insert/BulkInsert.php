@@ -2,7 +2,7 @@
 namespace Squid\Utils\Insert;
 
 
-use \Squid\Base\CmdCreators\ICmdInsert;
+use \Squid\Base\Cmd\ICmdInsert;
 
 
 class BulkInsert {

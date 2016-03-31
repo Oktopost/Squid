@@ -4,7 +4,7 @@ namespace Squid\Utils\Select;
 
 use \Squid\Base\Utils\ISelectIntoObject;
 use \Squid\Base\Utils\IColumnToPropertyResolve;
-use \Squid\Base\CmdCreators\ICmdSelect;
+use \Squid\Base\Cmd\ICmdSelect;
 use \Squid\Utils\ColumnResolve\PropertyResolve;
 
 

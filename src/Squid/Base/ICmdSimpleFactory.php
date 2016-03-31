@@ -2,53 +2,53 @@
 namespace Squid\Base;
 
 
-use \Squid\Base\CmdCreators;
+use \Squid\Base\Cmd;
 
 
 interface ICmdSimpleFactory {
 	
 	/**
-	 * @return CmdCreators\ICmdController
+	 * @return Cmd\ICmdController
 	 */
 	public function createController();
 	
 	/**
-	 * @return CmdCreators\ICmdDelete
+	 * @return Cmd\ICmdDelete
 	 */
 	public function createDelete();
 	
 	/**
-	 * @return CmdCreators\ICmdDirect
+	 * @return Cmd\ICmdDirect
 	 */
 	public function createDirect();
 	
 	/**
-	 * @return CmdCreators\ICmdInsert
+	 * @return Cmd\ICmdInsert
 	 */
 	public function createInsert();
 	
 	/**
-	 * @return CmdCreators\ICmdLock
+	 * @return Cmd\ICmdLock
 	 */
 	public function createLock();
 	
 	/**
-	 * @return CmdCreators\ICmdSelect
+	 * @return Cmd\ICmdSelect
 	 */
 	public function createSelect();
 	
 	/**
-	 * @return CmdCreators\ICmdUpdate
+	 * @return Cmd\ICmdUpdate
 	 */
 	public function createUpdate();
 	
 	/**
-	 * @return CmdCreators\ICmdUpsert
+	 * @return Cmd\ICmdUpsert
 	 */
 	public function createUpsert();
 	
 	/**
-	 * @return CmdCreators\ICmdDB
+	 * @return Cmd\ICmdDB
 	 */
 	public function createDB();	
 }

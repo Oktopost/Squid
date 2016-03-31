@@ -2,7 +2,7 @@
 namespace Squid\Base\Utils;
 
 
-use \Squid\Base\CmdCreators\ICmdSelect;
+use \Squid\Base\Cmd\ICmdSelect;
 
 
 interface ISelectIntoObject {

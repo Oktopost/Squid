@@ -6,15 +6,13 @@ use \Squid\Base\ICmdCreator;
 
 
 /**
- * Create a delete statment. This does not support select 
- * from mulitplay tables.
+ * Create a delete from a single table
  */
-interface ICmdDelete extends IDml, ICmdCreator, IWithWhere, IWithLimit {
-	
+interface ICmdDelete extends IDml, ICmdCreator, IWithWhere, IWithLimit 
+{	
 	/**
 	 * @param string $table
 	 * @return static
 	 */
 	public function from($table);
-	
 }

@@ -8,8 +8,8 @@ use \Squid\Base\ICmdCreator;
 /**
  * Controller on a DB level.
  */
-interface ICmdDB extends ICmdCreator {
-	
+interface ICmdDB extends ICmdCreator 
+{	
 	/**
 	 * @return array Array of all tables in DB.
 	 */

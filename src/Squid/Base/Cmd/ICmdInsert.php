@@ -5,11 +5,8 @@ namespace Squid\Base\Cmd;
 use \Squid\Base\ICmdCreator;
 
 
-/**
- * Create insert statment for a single row or multiplay rows.
- */
-interface ICmdInsert extends IDml, ICmdCreator {
-	
+interface ICmdInsert extends IDml, ICmdCreator 
+{	
 	/**
 	 * Set the status of the ignore flag.
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
@@ -70,5 +67,4 @@ interface ICmdInsert extends IDml, ICmdCreator {
 	 * @return static
 	 */
 	public function asSelect(ICmdSelect $select);
-	
 }

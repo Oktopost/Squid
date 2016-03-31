@@ -8,8 +8,8 @@ use \Squid\Base\ICmdCreator;
 /**
  * Other none Dml/Query operations.
  */
-interface ICmdController extends ICmdCreator {
-	
+interface ICmdController extends ICmdCreator 
+{	
 	/**
 	 * Get the last inserted ID.
 	 * @see http://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_last-insert-id

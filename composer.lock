@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1eda928b2ae79181bacd8ea61dd787c2",
-    "content-hash": "e60033167ad1cc33e22809a57814cdf4",
+    "hash": "af83fcc060c4961797342441caa5b434",
+    "content-hash": "dce05f65716d0687c3953a21c901d727",
     "packages": [
         {
             "name": "oktopost/objection",
@@ -17,7 +17,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/6b129d3099f62ebecb004bf8abf8b3f324c82991",
+                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/f4195f29376d37aba11ddf77628dfb3ca6893b5f",
                 "reference": "6b129d3099f62ebecb004bf8abf8b3f324c82991",
                 "shasum": ""
             },
@@ -44,13 +44,52 @@
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
             "time": "2016-03-20 15:54:48"
+        },
+        {
+            "name": "oktopost/skeleton",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Oktopost/Skeleton.git",
+                "reference": "b752d992628faf01f88ad0722a606da34a8b9fb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Oktopost/Skeleton/zipball/b752d992628faf01f88ad0722a606da34a8b9fb8",
+                "reference": "b752d992628faf01f88ad0722a606da34a8b9fb8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Skeleton": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Puchkov",
+                    "email": "alexey@oktopost.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Inversion of Control library",
+            "homepage": "https://github.com/Oktopost/Skeleton",
+            "time": "2016-03-31 13:20:50"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "oktopost/objection": 20
+        "oktopost/objection": 20,
+        "oktopost/skeleton": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

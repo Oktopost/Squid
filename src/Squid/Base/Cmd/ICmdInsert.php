@@ -30,12 +30,12 @@ interface ICmdInsert extends IDml, ICmdCreator
 	 * @return static
 	 */
 	public function defaultValues(array $default);
-	
+
 	/**
 	 * Append a set of values to insert.
-	 * @param array $values If numeric array, values must match fields that were set earlier.
-	 * If assoc array, key must be the field name. If defaultValues was called, any missing field value, 
-	 * (if fields where set yerlier) will be checked to have a default value.
+	 * @param array $values If numeric array, values must match fields that were set in into(...) method.
+	 * If assoc array, key must be the field name. If defaultValues was called, any missing field value,
+	 * will be set to the default. See defaultValues(...) method.
 	 * @return static
 	 */
 	public function values($values);
@@ -43,19 +43,17 @@ interface ICmdInsert extends IDml, ICmdCreator
 	/**
 	 * Append a number of rows at once.
 	 * @param array $valuesSet Numeric array were each value is array of values to insert into the table.
-	 * For each row in the set, values function must be called, so all rules applaying on the
-	 * $values parameter in values function, must applay on each value in the $valuesSet array.
+	 * For each row in the set, values function must be called, so all rules applied on the
+	 * $values parameter in values function, must apply on each value in the $valuesSet array.
 	 * @return static
 	 */
-	public function valuesSet($valuesSet);
+	public function valuesBulk($valuesSet);
 	
 	/**
-	 * Insert data using given expression. That can be sued if some of the values are expressions.
-	 * Expressions must be Sql safe.
-	 * @param string $expression Expression to insert. Expression must start from ( and end with ). 
-	 * Expression can contain a number of rows to insert. It will not be validated in no way so number 
-	 * of fields must match number of table fields.
-	 * @param mixed|array $bind Single bind param or array of bind params.
+	 * Insert data using row sql string. Note that expressions must be Sql safe.
+	 * @param string $expression Expression to insert. Note that "(" and ")" are not appended.
+	 * Expression can contain a number of rows to insert. It will not be validated in any way.
+	 * @param array|mixed $bind
 	 * @return static
 	 */
 	public function valuesExp($expression, $bind = false);

@@ -2,9 +2,6 @@
 namespace Squid\Base;
 
 
-require_once 'Oktopost/MySql/Interfaces/IMySqlConn.php';
-
-
 /**
  * Handle all errors returned by query execution or connection.
  * Classes with this interface should work similar to Decorator Class.

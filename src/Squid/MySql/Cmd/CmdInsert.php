@@ -142,7 +142,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * $values parameter in values function, must applay on each value in the $valuesSet array.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function valuesSet($valuesSet) {
+	public function valuesBulk($valuesSet) {
 		foreach ($valuesSet as $row) {
 			$this->appendByPosition($row);
 		}

@@ -36,7 +36,7 @@ class NormalizedUpsert implements IUpsertObject {
 				$keys = $object->getKeyFields();
 			}
 			
-			$upsert->valuesSet($rows);
+			$upsert->valuesBulk($rows);
 		}
 		
 		return $upsert

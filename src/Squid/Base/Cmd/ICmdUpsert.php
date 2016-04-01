@@ -15,8 +15,6 @@ interface ICmdUpsert extends IDml, ICmdInsert, IWithSet {
 	 * @param string|array $fields single field, or array of fields that should 
 	 * be ignored or used (depending on the value if $negate) to set them to the new 
 	 * values used in insert.
-	 * @param bool $negate If true, use all fields passed to insert expect given in 
-	 * $fields. Otherwise use only $fields values.
 	 * @return static
 	 */
 	public function setUseNewValues($fields);

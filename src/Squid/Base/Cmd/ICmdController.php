@@ -39,8 +39,7 @@ interface ICmdController extends ICmdCreator
 	public function rollback();
 	
 	/**
-	 * Is there a pending transaction right now, waiting to be commited.
-	 * @return bool Is there a transaction pending.
+	 * @return bool
 	 */
 	public function isInTransaction();
 	

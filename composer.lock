@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Objection.git",
-                "reference": "6b129d3099f62ebecb004bf8abf8b3f324c82991"
+                "reference": "f4195f29376d37aba11ddf77628dfb3ca6893b5f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Oktopost/Objection/zipball/f4195f29376d37aba11ddf77628dfb3ca6893b5f",
-                "reference": "6b129d3099f62ebecb004bf8abf8b3f324c82991",
+                "reference": "f4195f29376d37aba11ddf77628dfb3ca6893b5f",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
             ],
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
-            "time": "2016-03-20 15:54:48"
+            "time": "2016-03-24 13:26:37"
         },
         {
             "name": "oktopost/skeleton",

@@ -2,13 +2,13 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
 /**
  * Create a delete from a single table
  */
-interface ICmdDelete extends IDml, ICmdCreator, IWithWhere, IWithLimit 
+interface ICmdDelete extends IDml, IMySqlCommand, IWithWhere, IWithLimit 
 {	
 	/**
 	 * @param string $table

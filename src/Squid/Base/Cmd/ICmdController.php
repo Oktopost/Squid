@@ -2,13 +2,13 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
 /**
  * Other none Dml/Query operations.
  */
-interface ICmdController extends ICmdCreator 
+interface ICmdController extends IMySqlCommand 
 {	
 	/**
 	 * Get the last inserted ID.

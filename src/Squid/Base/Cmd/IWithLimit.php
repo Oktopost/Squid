@@ -2,15 +2,14 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Consts\OrderBy;
+use \Squid\OrderBy;
 
 
 /**
  * Queries that have the limit option.
  */
-interface IWithLimit {
-	
-	
+interface IWithLimit
+{
 	/**
 	 * @param int $from Zero based index.
 	 * @param int $count

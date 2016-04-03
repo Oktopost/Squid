@@ -2,13 +2,13 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
 /**
  * Used to execute complex queries
  */
-interface ICmdDirect extends IQuery, IDml, ICmdCreator 
+interface ICmdDirect extends IQuery, IDml, IMySqlCommand 
 {	
 	/**
 	 * @param string $sql Sql command to execute (Must be safe!!!)

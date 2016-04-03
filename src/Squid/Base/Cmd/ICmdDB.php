@@ -2,13 +2,13 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
 /**
  * Controller on a DB level.
  */
-interface ICmdDB extends ICmdCreator 
+interface ICmdDB extends IMySqlCommand 
 {	
 	/**
 	 * @return array Array of all tables in DB.

@@ -2,11 +2,11 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
-interface ICmdLock extends ICmdCreator {
-	
+interface ICmdLock extends IMySqlCommand
+{
 	/**
 	 * @param string $key
 	 * @param int $timeout In seconds

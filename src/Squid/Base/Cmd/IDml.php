@@ -3,17 +3,14 @@ namespace Squid\Base\Cmd;
 
 
 /**
- * Data manipulation language command.
+ * Data Manipulation Language command.
  */
-interface IDml {
-	
+interface IDml
+{
 	/**
-	 * Execute a dml command.
-	 * @param bool $returnCount If true, return the nubmer of affected rows or 
-	 * -1 for error; otheriwse return true for success or false for error.
-	 * @return int|bool -1 on error, number of affected rows, or true/false 
-	 * for succes/failer.
+	 * @param bool $returnCount If true, return the number of affected.
+	 * @return int|bool Number of affected rows, or true/false
+	 * for success/failure
 	 */
 	public function executeDml($returnCount = false);
-	
 }

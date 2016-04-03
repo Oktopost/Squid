@@ -2,14 +2,14 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
 /**
  * Create a new update query.
  */
-interface ICmdUpdate extends IDml, ICmdCreator, IWithWhere, IWithSet, IWithLimit {
-	
+interface ICmdUpdate extends IDml, IMySqlCommand, IWithWhere, IWithSet, IWithLimit
+{
 	/**
 	 * Set the status of the ignore flag.
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
@@ -23,5 +23,4 @@ interface ICmdUpdate extends IDml, ICmdCreator, IWithWhere, IWithSet, IWithLimit
 	 * @return static
 	 */
 	public function table($table);
-	
 }

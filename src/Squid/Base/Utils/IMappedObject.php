@@ -2,9 +2,6 @@
 namespace Squid\Base\Utils;
 
 
-/**
- * 
- */
 interface IMappedObject {
 	
 	/**

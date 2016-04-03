@@ -3,10 +3,10 @@ namespace Squid\MySql\Cmd;
 
 
 use \Squid\Base\IMySqlConn;
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
-abstract class AbstractCommand implements ICmdCreator {
+abstract class AbstractCommand implements IMySqlCommand {
 	
 	/** @var IMySqlConn Connection to use for execution. */
 	private $conn	= null;

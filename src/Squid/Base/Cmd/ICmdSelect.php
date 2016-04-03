@@ -2,13 +2,13 @@
 namespace Squid\Base\Cmd;
 
 
-use \Squid\Base\ICmdCreator;
+use \Squid\Base\IMySqlCommand;
 
 
 /**
  * @see https://dev.mysql.com/doc/refman/5.7/en/select.html
  */
-interface ICmdSelect extends IQuery, ICmdCreator, IWithWhere, IWithLimit {
+interface ICmdSelect extends IQuery, IMySqlCommand, IWithWhere, IWithLimit {
 	
 	/**
 	 * @param bool $distinct 

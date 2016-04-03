@@ -8,54 +8,70 @@ use \Squid\Base\Utils\QueryFailedException;
 /**
  * Select query command.
  */
-interface IQuery {
-	
+interface IQuery
+{
 	/**
-	 * @param bool|int $isAssoc If true return assoc result; otherwise false. Also
-	 * int, representing \PDO::FETCH_* mode can be passed for other mods.
+	 * @param bool|int $isAssoc If true return assoc result; otherwise return numeric.
+	 * Also integer value as \PDO::FETCH_* mode can be passed for other results.
 	 * @return array
 	 */
 	public function queryAll($isAssoc = false);
 	
 	/**
-	 * @param bool|int $isAssoc If true return assoc result; otherwise false. Also
-	 * int, representing \PDO::FETCH_* mode can be passed for other mods.
-	 * @param bool $oneOrNone
+	 * @param bool|int $isAssoc If true return assoc result; otherwise return numeric.
+	 * Also integer value as \PDO::FETCH_* mode can be passed for other results.
+	 * @param bool $expectOne If true and more then one row is selected by the query,
+	 * throw an exception.
 	 * @return array|bool
 	 */
-	public function queryRow($isAssoc = false, $oneOrNone = true);
+	public function queryRow($isAssoc = false, $expectOne = true);
 	
 	/**
-	 * @param bool $oneOrNone
-	 * @return array|bool
+	 * @param bool $expectOne If true and more then one row is selected by the query,
+	 * throw an exception.
+	 * @return array|bool Assoc array of the first found row.
 	 */
-	public function queryRowAssoc($oneOrNone = true);
+	public function queryRowAssoc($expectOne = true);
 	
 	/**
-	 * @param bool $oneOrNone
-	 * @return array|bool
+	 * @param bool $expectOne If true and more then one column is selected by the query,
+	 * throw an exception.
+	 * @return array|bool Numeric array of all the values in the first found row.
 	 */
-	public function queryColumn($oneOrNone = true);
+	public function queryColumn($expectOne = true);
 	
 	/**
-	 * @param mixed $default
-	 * @param bool $expectOne
-	 * @return mixed|bool
+	 * @param mixed $default Default value to return if no results found.
+	 * @param bool $expectOne If true and more then one column or row are
+	 * selected by the query, throw an exception.
+	 * @return mixed First column of the first row, or $default value if nothing found.
 	 */
 	public function queryScalar($default = false, $expectOne = true);
 	
 	/**
-	 * @param bool $expectOne
-	 * @return int|bool
+	 * Query scalar value and return as int.
+	 * @param bool $expectOne If true and more then one column or row are
+	 * selected by the query, throw an exception.
+	 * @return int|bool False on error.
 	 */
 	public function queryInt($expectOne = true);
+
+	/**
+	 * Query scalar value and return as boolean.
+	 * @param bool $expectOne If true and more then one column or row are
+	 * selected by the query, throw an exception.
+	 * @return bool|null Null on error.
+	 */
+	public function queryBool($expectOne = true);
 	
 	/**
-	 * @return bool|null
+	 * Execute a SELECT EXISTS (Current query)
+	 * @return bool|null Null on error
 	 */
 	public function queryExists();
 	
 	/**
+	 * Execute SELECT COUNT(*). If the query is a group by query, number of distinct values is returned.
 	 * @return int|bool
 	 */
 	public function queryCount();
@@ -71,7 +87,9 @@ interface IQuery {
 	public function queryWithCallback($callback, $isAssoc = true);
 	
 	/**
-	 * @param bool $isAssoc
+	 * Return an iterator to iterate over all found rows.
+	 * @param bool $isAssoc If true return assoc result; otherwise return numeric.
+	 * Also integer value as \PDO::FETCH_* mode can be passed for other results.
 	 * @return \Iterator
 	 * @throws QueryFailedException
 	 */

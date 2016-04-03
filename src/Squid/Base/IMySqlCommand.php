@@ -2,10 +2,7 @@
 namespace Squid\Base;
 
 
-/**
- * All the cmd creators must implement this class.
- */
-interface ICmdCreator {
+interface IMySqlCommand {
 	
 	/**
 	 * Set the connection to use.

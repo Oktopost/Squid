@@ -2,23 +2,23 @@
 namespace Squid;
 
 
-use \Squid\Base\IConnStringLoader;
+use Squid\MySql\IConnectionLoader;
 
 
-class ConnStringLoadersCollection implements IConnStringLoader {
+class ConnectionLoadersCollection implements IConnectionLoader {
 	
 	private $collections;
 	
 	
 	public function __construct() {
-		$this->collections = array(new DefaultConnStringLoader());
+		$this->collections = array(new DefaultConnectionLoader());
 	}
 	
 	
 	/**
-	 * @param IConnStringLoader $loader
+	 * @param IConnectionLoader $loader
 	 */
-	public function add(IConnStringLoader $loader) {
+	public function add(IConnectionLoader $loader) {
 		$this->collections[] = $loader;
 	}
 	
@@ -27,7 +27,7 @@ class ConnStringLoadersCollection implements IConnStringLoader {
 	 * @param string $connName
 	 * @return array
 	 */
-	public function getConnString($connName) {
+	public function getConnectionConfig($connName) {
 		foreach ($this->collections as $loader) {
 			if ($loader->hasConnString($connName)) {
 				return $loader->getConnString($connName);
@@ -39,7 +39,7 @@ class ConnStringLoadersCollection implements IConnStringLoader {
 	 * @param string $connName
 	 * @return bool
 	 */
-	public function hasConnString($connName) {
+	public function hasConnectionConfig($connName) {
 		foreach ($this->collections as $loader) {
 			if ($loader->hasConnString($connName)) {
 				return true;

@@ -2,7 +2,7 @@
 namespace Squid\Utils;
 
 
-use \Squid\DBConn;
+use Squid\DBConn;
 
 
 class DBManager {

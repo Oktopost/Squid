@@ -2,7 +2,7 @@
 namespace Squid\Utils\ColumnResolve;
 
 
-use \Squid\Base\Utils\IColumnToPropertyResolve;
+use Squid\MySql\Utils\IColumnToPropertyResolve;
 
 
 class SameNameResolve implements IColumnToPropertyResolve {

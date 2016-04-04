@@ -2,8 +2,8 @@
 namespace Squid;
 
 
-use \Squid\Base\IMySqlConn;
-use \Squid\Base\IConnStringLoader;
+use Squid\MySql\Connection\IMySqlConnection;
+use Squid\MySql\IConnectionLoader;
 
 
 /**
@@ -17,7 +17,7 @@ class ActiveConn {
 	private $all = array();
 	
 	/**
-	 * @var IConnStringLoader Object used to get the connection string.
+	 * @var IConnectionLoader Object used to get the connection string.
 	 */
 	private $configLoader;
 	
@@ -30,7 +30,7 @@ class ActiveConn {
 	/**
 	 * Create a new object and set what connection loader to use.
 	 */
-	public function __construct(IConnStringLoader $loader) {
+	public function __construct(IConnectionLoader $loader) {
 		$this->configLoader = $loader;
 	}
 	
@@ -47,7 +47,7 @@ class ActiveConn {
 	 * Get connection by name.
 	 * @param string|false $connName Name of the connection to get. Set to false to 
 	 * get the active connection.
-	 * @return IMySqlConn Connection.
+	 * @return IMySqlConnection Connection.
 	 */
 	public function get($connName = false) {
 		if (!$connName) {
@@ -64,7 +64,7 @@ class ActiveConn {
 	/**
 	 * Set the currenly active connecton.
 	 * @param string $connName Name of the connection to use.
-	 * @return IMySqlConn New connection.
+	 * @return IMySqlConnection New connection.
 	 */
 	public function set($connName) {
 		$this->activeConn = $connName;
@@ -76,7 +76,7 @@ class ActiveConn {
 	 * the second connection will be activated. 
 	 * @param string|bool $connName Connection to remove. If false, remove the active connection.
 	 * @param bool $close If true, also close the connection.
-	 * @return IMySqlConn|bool New connection or false if no other connection exists.
+	 * @return IMySqlConnection|bool New connection or false if no other connection exists.
 	 */
 	public function remove($connName = false, $close = true) {
 		if ($connName == false) {
@@ -105,7 +105,7 @@ class ActiveConn {
 	 * Unset existing connection and return it.
 	 * @param string $connName Name of the connection to unset.
 	 * @param bool $close If true, also close the connection.
-	 * @return IMySqlConn The removed connection.
+	 * @return IMySqlConnection The removed connection.
 	 */
 	private function unsetConnection($connName, $close) {
 		$conn = $this->all[$connName];
@@ -132,11 +132,11 @@ class ActiveConn {
 	/**
 	 * Load connection by name.
 	 * @param string $connName Name of the connection to load.
-	 * @return IMySqlConn New connection.
+	 * @return IMySqlConnection New connection.
 	 */
 	private function load($connName) {
-		$config = $this->configLoader->getConnString($connName);
-		$conn = new MySqlConn();
+		$config = $this->configLoader->getConnectionConfig($connName);
+		$conn = new MySqlConnection();
 		
 		$conn->connect($config['db'], $config['user'], $config['pass'], $config['host']);
 		
@@ -145,7 +145,7 @@ class ActiveConn {
 	
 	/**
 	 * Get the active connection.
-	 * @return IMySqlConn|bool Active connection or false if none.
+	 * @return IMySqlConnection|bool Active connection or false if none.
 	 */
 	private function getActive() {
 		if (!isset($this->activeConn)) {

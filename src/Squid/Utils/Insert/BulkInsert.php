@@ -2,7 +2,7 @@
 namespace Squid\Utils\Insert;
 
 
-use \Squid\Base\Cmd\ICmdInsert;
+use Squid\MySql\Command\ICmdInsert;
 
 
 class BulkInsert {

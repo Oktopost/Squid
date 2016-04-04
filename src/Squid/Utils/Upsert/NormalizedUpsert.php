@@ -1,9 +1,9 @@
 <?php
 namespace Squid\Utils\Upsert;
 
-use \Squid\Base\Utils\IMappedObject;
-use \Squid\Base\Utils\IUpsertObject;
-use \Squid\Base\Cmd\ICmdUpsert;
+use Squid\MySql\Utils\IMappedObject;
+use Squid\MySql\Utils\IUpsertObject;
+use Squid\MySql\Command\ICmdUpsert;
 
 
 /**

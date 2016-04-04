@@ -2,10 +2,10 @@
 namespace Squid\Utils\Select;
 
 
-use \Squid\Base\Utils\ISelectIntoObject;
-use \Squid\Base\Utils\IColumnToPropertyResolve;
-use \Squid\Base\Cmd\ICmdSelect;
-use \Squid\Utils\ColumnResolve\PropertyResolve;
+use Squid\MySql\Utils\ISelectIntoObject;
+use Squid\MySql\Utils\IColumnToPropertyResolve;
+use Squid\MySql\Command\ICmdSelect;
+use Squid\Utils\ColumnResolve\PropertyResolve;
 
 
 class NormalizedSelect implements ISelectIntoObject {

@@ -9,3 +9,6 @@
 
 # Composer
 /vendor/
+
+# Test objects
+test.php

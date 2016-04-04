@@ -2,10 +2,10 @@
 namespace Squid\Utils;
 
 
-use \Squid\Base\ICmdSimpleFactory;
-use \Squid\Base\Utils\IMappedObject;
-use \Squid\Base\Utils\IColumnToPropertyResolve;
-use \Squid\Utils\ColumnResolve\PropertyResolve;
+use Squid\MySql\ICmdSimpleFactory;
+use Squid\MySql\Utils\IMappedObject;
+use Squid\MySql\Utils\IColumnToPropertyResolve;
+use Squid\Utils\ColumnResolve\PropertyResolve;
 
 
 abstract class MappedObject implements IMappedObject {

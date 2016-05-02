@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Cmd;
+namespace Squid\MySql\Impl\Command;
 
 
 use Squid\Common;

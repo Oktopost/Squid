@@ -4,6 +4,7 @@ namespace Squid\MySql\Connection;
 
 use Squid\MySql\Config\MySqlConnectionConfig;
 
+
 interface IMySqlConnection 
 {
 	/**

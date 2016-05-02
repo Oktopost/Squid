@@ -72,4 +72,13 @@ class ConfigCollection
 		
 		return $this->configs[$name];
 	}
+	
+	/**.
+	 * @param string $name
+	 * @return MySqlConnectionConfig
+	 */
+	public function has($name) 
+	{
+		return isset($this->configs[$name]) || $this->configLoader->hasConfig($name);
+	}
 }

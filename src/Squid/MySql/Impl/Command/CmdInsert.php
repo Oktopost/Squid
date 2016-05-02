@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Cmd;
+namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdInsert;
@@ -7,7 +7,7 @@ use Squid\MySql\Command\ICmdSelect;
 
 
 class CmdInsert extends PartsCommand implements ICmdInsert {
-	use Squid\MySql\Traits\CmdTraits\TDml;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
 	
 	
 	const PART_IGNORE	= 0;

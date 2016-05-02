@@ -4,71 +4,71 @@ namespace Squid;
 
 use Squid\MySql\Command;
 use Squid\MySql\ICmdSimpleFactory;
-use Squid\MySql\Impl\Cmd;
+use Squid\MySql\Impl\Command\CmdController;
 
 
 class CmdSimpleFactory implements ICmdSimpleFactory {
 	
 	/**
-	 * @return Cmd\ICmdController
+	 * @return Command\ICmdController
 	 */
 	public function controller() {
-		return new Cmd\CmdController();
+		return new CmdController();
 	}
 	
 	/**
-	 * @return Cmd\ICmdDelete
+	 * @return Command\ICmdDelete
 	 */
 	public function delete() {
-		return new Cmd\CmdDelete();
+		return new Command\CmdDelete();
 	}
 	
 	/**
-	 * @return Cmd\ICmdDirect New direct object.
+	 * @return Command\ICmdDirect New direct object.
 	 */
 	public function direct() {
-		return new Cmd\CmdDirect();
+		return new Command\CmdDirect();
 	}
 	
 	/**
-	 * @return Cmd\ICmdInsert
+	 * @return Command\ICmdInsert
 	 */
 	public function insert() {
-		return new Cmd\CmdInsert();
+		return new Command\CmdInsert();
 	}
 	
 	/**
-	 * @return Cmd\ICmdLock
+	 * @return Command\ICmdLock
 	 */
 	public function lock() {
-		return new Cmd\CmdLock();
+		return new Command\CmdLock();
 	}
 	
 	/**
-	 * @return Cmd\ICmdSelect
+	 * @return Command\ICmdSelect
 	 */
 	public function select() {
-		return new Cmd\CmdSelect();
+		return new Command\CmdSelect();
 	}
 	
 	/**
-	 * @return Cmd\ICmdUpdate
+	 * @return Command\ICmdUpdate
 	 */
 	public function update() {
-		return new Cmd\CmdUpdate;
+		return new Command\CmdUpdate;
 	}
 	
 	/**
-	 * @return Cmd\ICmdUpsert
+	 * @return Command\ICmdUpsert
 	 */
 	public function upsert() {
-		return new Cmd\CmdUpsert();
+		return new Command\CmdUpsert();
 	}
 	
 	/**
-	 * @return Cmd\ICmdDB
+	 * @return Command\ICmdDB
 	 */
 	public function db() {
-		return new Cmd\CmdDB();
+		return new Command\CmdDB();
 	}
 }

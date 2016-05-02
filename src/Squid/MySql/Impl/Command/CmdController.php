@@ -1,13 +1,13 @@
 <?php
-namespace Squid\MySql\Impl\Cmd;
+namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdController;
 
 
 class CmdController extends AbstractCommand implements ICmdController {
-	use Squid\MySql\Traits\CmdTraits\TDml;
-	use Squid\MySql\Traits\CmdTraits\TQuery;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	
 	
 	private $command;

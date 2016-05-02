@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Cmd;
+namespace Squid\MySql\Impl\Command;
 
 
 use Squid\Common;
@@ -7,8 +7,8 @@ use Squid\MySql\Command\ICmdDB;
 
 
 class CmdDB extends AbstractCommand implements ICmdDB {
-	use Squid\MySql\Traits\CmdTraits\TDml;
-	use Squid\MySql\Traits\CmdTraits\TQuery;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	
 	
 	private $command	= '';

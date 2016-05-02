@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Connection;
+namespace Squid\MySql\Config;
 
 
 use Objection\LiteSetup;

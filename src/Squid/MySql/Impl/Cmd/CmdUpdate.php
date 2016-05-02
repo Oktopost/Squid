@@ -5,11 +5,12 @@ namespace Squid\MySql\Impl\Cmd;
 use Squid\MySql\Command\ICmdUpdate;
 
 
-class CmdUpdate extends PartsCommand implements ICmdUpdate {
-	use Squid\MySql\Traits\CmdTraits\TDml;
-	use Squid\MySql\Traits\CmdTraits\TWithSet;
-	use Squid\MySql\Traits\CmdTraits\TWithWhere;
-	use Squid\MySql\Traits\CmdTraits\TWithLimit;
+class CmdUpdate extends PartsCommand implements ICmdUpdate
+{
+	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithSet;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 	
 	
 	const PART_IGNORE	= 0;

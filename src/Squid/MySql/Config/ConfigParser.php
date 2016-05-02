@@ -1,15 +1,14 @@
 <?php
-namespace Squid\MySql\Impl\Utils;
+namespace Squid\MySql\Config;
 
 
-use Squid\MySql\Connection\MySqlConnectionConfig;
-
-
-class ConfigParser {
+class ConfigParser 
+{
 	use \Objection\TStaticClass;
 	
 	
-	private static $MAP = [
+	private static $MAP = 
+	[
 		'db'	=> ['db', 'database', 'dbname'],
 		'host'	=> ['host'],
 		'pass'	=> ['pass', 'password', 'pwd'],

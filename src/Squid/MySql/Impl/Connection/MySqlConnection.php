@@ -3,7 +3,7 @@ namespace Squid\MySql\Impl\Connection;
 
 
 use Squid\MySql\Connection\IMySqlConnection;
-use Squid\MySql\Connection\MySqlConnectionConfig;
+use Squid\MySql\Config\MySqlConnectionConfig;
 use Squid\MySql\Connection\IOpenConnectionsManager;
 
 
@@ -36,7 +36,8 @@ class MySqlConnection implements IMySqlConnection
 	 * @param string $pass
 	 * @param string $host
 	 */
-	public function connect($db, $user = null, $pass = null, $host = null) {
+	public function connect($db, $user = null, $pass = null, $host = null)
+	{
 		if ($db instanceof MySqlConnectionConfig) 
 		{
 			$this->config = $db;

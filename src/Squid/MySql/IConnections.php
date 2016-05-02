@@ -2,9 +2,10 @@
 namespace Squid\MySql;
 
 
+use Squid\MySql\Config\IConfigLoader;
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Connection\IConnectionBuilder;
-use Squid\MySql\Connection\MySqlConnectionConfig;
+use Squid\MySql\Config\MySqlConnectionConfig;
 
 
 interface IConnections 
@@ -23,10 +24,10 @@ interface IConnections
 	public function addConfig($name, $config);
 	
 	/**
-	 * @param IConnectionLoader $loader
+	 * @param IConfigLoader $loader
 	 * @return static
 	 */
-	public function addLoader(IConnectionLoader $loader);
+	public function addLoader(IConfigLoader $loader);
 	
 	/**
 	 * Get a connection by name. If connection for this name already exists, it's returned.

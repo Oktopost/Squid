@@ -54,8 +54,13 @@ abstract class PartsCommand extends AbstractCommand {
 	public function assemble() {
 		return $this->generate();
 	}
-	
-	
+
+	public function __toString()
+	{
+		return "[{$this->assemble()}] : [" . json_encode($this->bind()) . "]";
+	}
+
+
 	/**
 	 * Get the parts this query can have.
 	 * @return array Array contianing only the part as keys and values set to false.

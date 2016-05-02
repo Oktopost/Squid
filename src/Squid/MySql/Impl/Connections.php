@@ -3,14 +3,14 @@ namespace Squid\MySql\Impl;
 
 
 use Squid\MySql\Impl\Connection\MySqlConnection;
-use Squid\MySql\Impl\Utils\ConfigParser;
+use Squid\MySql\Config\ConfigParser;
 use Squid\MySql\Impl\Utils\OpenConnectionsManager;
 
 use Squid\MySql\IConnections;
-use Squid\MySql\IConnectionLoader;
+use Squid\MySql\Config\IConfigLoader;
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Connection\IConnectionBuilder;
-use Squid\MySql\Connection\MySqlConnectionConfig;
+use Squid\MySql\Config\MySqlConnectionConfig;
 
 use Squid\Exceptions\SquidException;
 
@@ -20,7 +20,7 @@ class Connections implements IConnections {
 	/** @var MySqlConnectionConfig[] */
 	private $configs = [];
 	
-	/** @var IConnectionLoader[] */
+	/** @var IConfigLoader[] */
 	private $loaders = [];
 	
 	/** @var IMySqlConnection[] */
@@ -33,7 +33,7 @@ class Connections implements IConnections {
 	private $builder = null;
 	
 	
-	public function __construct() 
+	public function __construct()
 	{
 		$this->openConnectionsManager = new OpenConnectionsManager();
 	}
@@ -51,9 +51,9 @@ class Connections implements IConnections {
 		
 		foreach ($this->loaders as $loader)
 		{
-			if ($loader->hasConnectionConfig($name)) 
+			if ($loader->hasConfig($name)) 
 			{
-				$this->addConfig($name, $loader->getConnectionConfig($name));
+				$this->addConfig($name, $loader->getConfig($name));
 				return $this->configs[$name];
 			}
 		}
@@ -105,10 +105,10 @@ class Connections implements IConnections {
 	}
 	
 	/**
-	 * @param IConnectionLoader $loader
+	 * @param IConfigLoader $loader
 	 * @return static
 	 */
-	public function addLoader(IConnectionLoader $loader)
+	public function addLoader(IConfigLoader $loader)
 	{
 		$this->loaders[] = $loader;
 	}

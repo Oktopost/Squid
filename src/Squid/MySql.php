@@ -23,6 +23,12 @@ class MySql
 	private $connectionBuilder = null;
 	
 	
+	public function __construct()
+	{
+		$this->configFacade = new ConfigFacade();
+	}
+	
+	
 	/**
 	 * @param $name
 	 * @return IMySqlConnection

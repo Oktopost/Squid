@@ -5,8 +5,8 @@ namespace Squid\MySql;
 use Squid\MySql\Config\IConfigLoader;
 use Squid\MySql\Config\ConfigParser;
 use Squid\MySql\Config\ConfigCollection;
-use Squid\MySql\Config\ConfigLoadersCollection;
 use Squid\MySql\Config\MySqlConnectionConfig;
+use Squid\MySql\Config\ConfigLoadersCollection;
 
 
 class ConfigFacade

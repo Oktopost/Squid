@@ -143,12 +143,4 @@ abstract class PartsCommand extends AbstractCommand {
 	{
 		return $this->generate();
 	}
-	
-	/**
-	 * @return string
-	 */
-	public function __toString()
-	{
-		return "[{$this->assemble()}] : [" . json_encode($this->bind()) . "]";
-	}
 }

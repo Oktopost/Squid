@@ -53,20 +53,20 @@ class Assembly
 	 * @param array $bind
 	 * @return string
 	 */
-	public static function appendLimit($limit, array $bind)
+	public static function appendLimit($limit, $bind)
 	{
 		if (!$limit) return '';
 		
-		return (count($bind) == 1 ? 'LIMIT ? ' : 'LIMIT ?, ? ');
+		return ((!is_array($bind) || count($bind) == 1) ? 'LIMIT ? ' : 'LIMIT ?, ? ');
 	}
 	
 	/**
 	 * @param string $prefix
-	 * @param array $values
+	 * @param array|bool $values
 	 * @param string $glue
 	 * @return string
 	 */
-	public static function append($prefix, array $values, $glue = ',')
+	public static function append($prefix, $values, $glue = ',')
 	{
 		return ($values ? $prefix . ' ' . implode($glue, $values) . ' ' : '');
 	}

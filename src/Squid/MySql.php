@@ -71,7 +71,7 @@ class MySql
 			$this->sharedConnectors[$name] = $this->createConnector($name);
 		}
 		
-		return isset($this->sharedConnectors[$name]);
+		return $this->sharedConnectors[$name];
 	}
 	
 	/**

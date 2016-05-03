@@ -30,7 +30,7 @@ interface IConnector
 	/**
 	 * @return Command\ICmdLock
 	 */
-	public function lock();;
+	public function lock();
 	
 	/**
 	 * @return Command\ICmdSelect

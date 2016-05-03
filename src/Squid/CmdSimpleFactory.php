@@ -3,11 +3,11 @@ namespace Squid;
 
 
 use Squid\MySql\Command;
-use Squid\MySql\ICmdSimpleFactory;
+use Squid\MySql\IConnector;
 use Squid\MySql\Impl\Command\CmdController;
 
 
-class CmdSimpleFactory implements ICmdSimpleFactory {
+class Connector implements IConnector {
 	
 	/**
 	 * @return Command\ICmdController

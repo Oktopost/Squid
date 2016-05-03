@@ -5,7 +5,7 @@ namespace Squid\MySql;
 use Squid\MySql\Command;
 
 
-interface ICmdSimpleFactory 
+interface IConnector 
 {
 	/**
 	 * @return Command\ICmdController
@@ -30,7 +30,7 @@ interface ICmdSimpleFactory
 	/**
 	 * @return Command\ICmdLock
 	 */
-	public function lock();
+	public function lock();;
 	
 	/**
 	 * @return Command\ICmdSelect

@@ -15,9 +15,6 @@ class MySqlConnection implements IMySqlConnection
 	/** @var \PDO */
 	private $pdo = null;
 	
-	/** @var IOpenConnectionsManager */
-	private $manager = null;
-	
 	
 	private function openConnection() 
 	{
@@ -25,8 +22,12 @@ class MySqlConnection implements IMySqlConnection
 			$this->config->getPDOConnectionString(), 
 			$this->config->User,
 			$this->config->Pass);
-		
-		if ($this->manager) $this->manager->subscribeToClose($this);
+	}
+	
+	
+	public function __destruct()
+	{
+		$this->close();
 	}
 	
 	
@@ -49,14 +50,6 @@ class MySqlConnection implements IMySqlConnection
 		$this->config->User = $user;
 		$this->config->Pass = $pass;
 		$this->config->Host = $host;
-	}
-	
-	/** 
-	 * @param IOpenConnectionsManager $manager
-	 */
-	public function setOpenConnectionsManager(IOpenConnectionsManager $manager) 
-	{
-		$this->manager = $manager;
 	}
 	
 	/**

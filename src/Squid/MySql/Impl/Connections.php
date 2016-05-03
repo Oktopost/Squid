@@ -4,7 +4,6 @@ namespace Squid\MySql\Impl;
 
 use Squid\MySql\Impl\Connection\MySqlConnection;
 use Squid\MySql\Config\ConfigParser;
-use Squid\MySql\Connection\OpenConnectionsManager;
 
 use Squid\MySql\IConnections;
 use Squid\MySql\Config\IConfigLoader;
@@ -26,17 +25,8 @@ class Connections implements IConnections {
 	/** @var IMySqlConnection[] */
 	private $connections = [];
 	
-	/** @var \Squid\MySql\Connection\OpenConnectionsManager */
-	private $openConnectionsManager = null;
-	
 	/** @var IConnectionBuilder */
 	private $builder = null;
-	
-	
-	public function __construct()
-	{
-		$this->openConnectionsManager = new OpenConnectionsManager();
-	}
 	
 	
 	/**
@@ -131,18 +121,14 @@ class Connections implements IConnections {
 	
 	/**
 	 * Always return a new connection.
-	 * @param string $name Name of the connection to get.
-	 * @param bool $setOpenConnectionsManager
+	 * @param string $name
 	 * @return IMySqlConnection
 	 * @throws SquidException
 	 */
-	public function getNew($name, $setOpenConnectionsManager = true)
+	public function getNew($name)
 	{
 		$config = $this->findConnectionConfig($name);
 		$connection = $this->createConnection($config);
-		
-		if ($setOpenConnectionsManager)
-			$connection->setOpenConnectionsManager($this->openConnectionsManager);
 		
 		return $connection;
 	}
@@ -156,7 +142,5 @@ class Connections implements IConnections {
 		{
 			$connection->close();
 		}
-		
-		$this->openConnectionsManager->closeAll();
 	}
 }

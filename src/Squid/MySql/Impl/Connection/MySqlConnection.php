@@ -4,7 +4,6 @@ namespace Squid\MySql\Impl\Connection;
 
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Config\MySqlConnectionConfig;
-use Squid\MySql\Connection\IOpenConnectionsManager;
 
 
 class MySqlConnection implements IMySqlConnection 

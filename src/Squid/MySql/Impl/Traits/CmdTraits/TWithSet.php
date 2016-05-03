@@ -11,6 +11,82 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 trait TWithSet 
 {
 	/**
+	 * @inheritdoc
+	 */
+	private function setFields($fields, $values)
+	{
+		$fieldsCount = count($fields);
+		
+		for ($i = 0; $i < $fieldsCount; $i++)
+		{
+			$this->setField($fields[$i], $values[$i]);
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	private function setFieldsAssoc($fields)
+	{
+		foreach ($fields as $field => $value)
+		{
+			$this->setField($field, $value);
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	private function setField($field, $value)
+	{
+		if (is_null($value))
+		{
+			$exp = 'NULL';
+			$value = false;
+		}
+		else
+		{
+			$exp = '?';
+		}
+		
+		return $this->_set("$field=$exp", $value);
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	private function setExpressionFields($fields, $expressions, $bind)
+	{
+		$fieldsCount = count($fields);
+		
+		for ($i = 0; $i < $fieldsCount; $i++)
+		{
+			$currBind = ($bind ? $bind[$i] : false);
+			$this->_set("$fields[$i]=$expressions[$i]", $currBind);
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	private function setExpressionFieldsAssoc($fields)
+	{
+		foreach ($fields as $field => $exp)
+		{
+			$this->_set("$field=$exp");
+		}
+		
+		return $this;
+	}
+	
+	
+	/**
 	 * @param array|bool $value
 	 * @inheritdoc
 	 */
@@ -35,7 +111,7 @@ trait TWithSet
 		
 		if (isset($field[0])) return $this->setExpressionFields($field, $exp, $bind);
 		
-		return $this->setExpresionFieldsAssoc($field);
+		return $this->setExpressionFieldsAssoc($field);
 	}
 	
 	/**
@@ -68,92 +144,16 @@ trait TWithSet
 	 */
 	public function setCaseExp($field, $caseExp, array $whenValuesThenExp, $elseExp = false, $bindParams = false) 
 	{
-		$statment = '';
+		$statement = '';
 		
 		foreach ($whenValuesThenExp as $when => $then) 
 		{
-			$statment .= "WHEN $when THEN $then ";
+			$statement .= "WHEN $when THEN $then ";
 		}
 		
 		if ($elseExp) 
-			$statment .= "ELSE $elseExp ";
+			$statement .= "ELSE $elseExp ";
 		
-		return $this->_set("$field=CASE $caseExp {$statment}END", $bindParams);
-	}
-	
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function setFields($fields, $values)
-	{
-		$fieldsCount = count($fields);
-		
-		for ($i = 0; $i < $fieldsCount; $i++) 
-		{
-			$this->setField($fields[$i], $values[$i]);
-		}
-		
-		return $this;
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function setFieldsAssoc($fields)
-	{
-		foreach ($fields as $field => $value)
-		{
-			$this->setField($field, $value);
-		}
-		
-		return $this;
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function setField($field, $value) 
-	{
-		if (is_null($value)) 
-		{
-			$exp = 'NULL';
-			$value = false;
-		}
-		else 
-		{
-			$exp = '?';
-		}
-		
-		return $this->_set("$field=$exp", $value);
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function setExpressionFields($fields, $expressions, $bind) 
-	{
-		$fieldsCount = count($fields);
-		
-		for ($i = 0; $i < $fieldsCount; $i++)
-		{
-			$currBind = ($bind ? $bind[$i] : false);
-			$this->_set("$fields[$i]=$expressions[$i]", $currBind);
-		}
-		
-		return $this;
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function setExpresionFieldsAssoc($fields)
-	{
-		foreach ($fields as $field => $exp) 
-		{
-			$this->_set("$field=$exp");
-		}
-		
-		return $this;
+		return $this->_set("$field=CASE $caseExp {$statement}END", $bindParams);
 	}
 }

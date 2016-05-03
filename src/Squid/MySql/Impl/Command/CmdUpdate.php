@@ -43,7 +43,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	}
 	
 	/**
-	 * Commbine all the parts into one sql.
+	 * Combined all the parts into one sql.
 	 * @return string Created query.
 	 */
 	protected function generate() 
@@ -64,7 +64,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	/**
 	 * Set the status of the ignore flag.
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
-	 * @return ICmdUpdate Always returns self.
+	 * @return static
 	 */
 	public function ignore($ignore = true) 
 	{
@@ -74,7 +74,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	/**
 	 * Set the table to update.
 	 * @param string $table Name of the table to update.
-	 * @return ICmdUpdate Always returns self.
+	 * @return static
 	 */
 	public function table($table) 
 	{
@@ -86,7 +86,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param string $exp Expression to append.
 	 * @param mixed|array|null $bind Single bind value, array of values or false if no 
 	 * bind values are needed for this expression.
-	 * @return mixed Always returns self.
+	 * @return static
 	 */
 	public function where($exp, $bind = false) 
 	{
@@ -96,7 +96,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	/**
 	 * Required by the TLimit trait.
 	 * @param array $columns Array of expressions to order by.
-	 * @return mixed Always returns self.
+	 * @return static
 	 */
 	public function _orderBy(array $columns) 
 	{
@@ -107,7 +107,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * Limit the query for given set.
 	 * @param int $from Select form this row.
 	 * @param int $count Maximum number of rows to select.
-	 * @return mixed Always returns self.
+	 * @return static
 	 */
 	public function limit($from, $count) 
 	{
@@ -119,7 +119,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * Function called by TWithSet.
 	 * @param string $exp Full set expression.
 	 * @param mixed $bind Bind params, if any.
-	 * @return mixed Always returns self.
+	 * @return static
 	 */
 	public function _set($exp, $bind = false) 
 	{

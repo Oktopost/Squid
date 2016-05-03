@@ -18,11 +18,11 @@ class CmdDirect extends AbstractCommand implements ICmdDirect
 	
 	
 	/**
-	 * Execute this query as a sub query of other query that must return a scalar value.
+	 * Execute this query as a sub query of another query that must return a scalar value.
 	 * @param callable $callback Callback to use to create the new query. Callback must be
 	 * of format string func(string), where the param is the current query and return value is
 	 * the new query to execute.
-	 * @param mixed $default Default value to return for failer.
+	 * @param mixed $default Default value to return on failure.
 	 * @return bool|mixed
 	 */
 	private function asScalarSubQuery($callback, $default = false) 

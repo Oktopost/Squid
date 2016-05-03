@@ -80,7 +80,7 @@ class CmdController extends AbstractCommand implements ICmdController
 	}
 	
 	/**
-	 * Is there a pending transaction right now, waiting to be commited.
+	 * Is there a pending transaction right now, waiting to be committed.
 	 * @return bool Is there a transaction pending.
 	 */
 	public function isInTransaction() 

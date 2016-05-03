@@ -16,6 +16,39 @@ class CmdDB extends AbstractCommand implements ICmdDB
 	
 	
 	/**
+	 * @see http://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_foreign_key_checks
+	 * @param bool $value
+	 * @return bool
+	 */
+	private function setForeignKeyCheck($value)
+	{
+		$value = ($value ? '1' : '0');
+		return $this->executeDmlCommand("SET foreign_key_checks = $value");
+	}
+	
+	/**
+	 * @param string $cmd
+	 * @param array $bind
+	 * @return bool
+	 */
+	private function executeDmlCommand($cmd, array $bind = array())
+	{
+		$this->setCommand($cmd, $bind);
+		return $this->executeDml();
+	}
+	
+	/**
+	 * @param string $cmd
+	 * @param array $bind
+	 */
+	private function setCommand($cmd, array $bind = array())
+	{
+		$this->command = $cmd;
+		$this->bind = $bind;
+	}
+	
+	
+	/**
 	 * @return string
 	 */
 	public function assemble() 
@@ -85,38 +118,5 @@ class CmdDB extends AbstractCommand implements ICmdDB
 	{
 		$this->setCommand('SELECT DATABASE()');
 		return $this->queryScalar();
-	}
-	
-	
-	/**
-	 * @see http://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_foreign_key_checks
-	 * @param bool $value
-	 * @return bool
-	 */
-	private function setForeignKeyCheck($value)
-	{
-		$value = ($value ? '1' : '0');
-		return $this->executeDmlCommand("SET foreign_key_checks = $value");
-	}
-	
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 * @return bool 
-	 */
-	private function executeDmlCommand($cmd, array $bind = array())
-	{
-		$this->setCommand($cmd, $bind);
-		return $this->executeDml();
-	}
-	
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 */
-	private function setCommand($cmd, array $bind = array())
-	{
-		$this->command = $cmd;
-		$this->bind = $bind;
 	}
 }

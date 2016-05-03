@@ -105,8 +105,8 @@ abstract class PartsCommand extends AbstractCommand {
 	protected abstract function getDefaultParts();
 	
 	/**
-	 * Commbine all the parts into one sql.
-	 * @return string Created query.
+	 * Combine all the parts into one sql.
+	 * @return string Sql query
 	 */
 	protected abstract function generate();
 	

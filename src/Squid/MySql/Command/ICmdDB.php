@@ -28,7 +28,7 @@ interface ICmdDB extends IMySqlCommand
 	public function showCreateTable($table);
 	
 	/**
-	 * @return string Name of the current database.
+	 * @return string
 	 */
 	public function getDatabaseName();
 }

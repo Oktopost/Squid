@@ -58,7 +58,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	/**
 	 * Set the table to delete from.
 	 * @param string $table Name of the table to delete from.
-	 * @return ICmdDelete Always returns self.
+	 * @return static
 	 */
 	public function from($table)
 	{
@@ -69,7 +69,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	 * Add additional where clause.
 	 * @param string $exp Expression to append.
 	 * @param mixed|array|null $bind
-	 * @return mixed Always returns self.
+	 * @return static
 	 */
 	public function where($exp, $bind = false)
 	{
@@ -79,7 +79,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	/**
 	 * Required by the TLimit trait.
 	 * @param array $columns
-	 * @return mixed Always returns self.
+	 * @return static
 	 */
 	public function _orderBy(array $columns)
 	{
@@ -95,7 +95,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	public function limit($from, $count)
 	{
 		if ($from)
-			throw new SquidException('MySQL DELETE query supports only LIMIT <count> and not LIMIT <from>, <count>');
+			throw new SquidException('MySQL DELETE query supports only LIMIT [count] and not LIMIT [from], [count]');
 		
 		return $this->setPart(CmdDelete::PART_LIMIT, true, $count);
 	}

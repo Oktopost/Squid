@@ -17,21 +17,21 @@ interface ICmdController extends IMySqlCommand
 	/**
 	 * Start a new transaction.
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/commit.html
-	 * @return bool True on success; otherwise false.
+	 * @return bool
 	 */
 	public function startTransaction();
 	
 	/**
 	 * Commit current transaction.
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/commit.html
-	 * @return bool True on success; otherwise false.
+	 * @return bool
 	 */
 	public function commit();
 	
 	/**
 	 * Rollback current transaction.
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/commit.html
-	 * @return bool True on success; otherwise false.
+	 * @return bool
 	 */
 	public function rollback();
 	

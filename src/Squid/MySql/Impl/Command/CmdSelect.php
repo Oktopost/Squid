@@ -44,6 +44,55 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	
 	/**
+	 * @param ICmdSelect $from
+	 * @param string $alias
+	 * @param string $condition
+	 * @param string $join
+	 * @return ICmdSelect
+	 */
+	private function fromSubQuery(ICmdSelect $from, $alias, $condition = '', $join = '')
+	{
+		if ($join) $join .= ' ';
+		
+		$cmd = '';
+		
+		if ($alias)
+			$cmd .= " $alias";
+		
+		if ($condition)
+			$cmd .= " ON $condition";
+		
+		$sql = $from->assemble();
+		
+		return $this->appendPart(
+			CmdSelect::PART_FROM,
+			"$join($sql)$cmd",
+			$from->bind()
+		);
+	}
+	
+	/**
+	 * @param string|ICmdSelect $joinWith
+	 * @param string $alias
+	 * @param string $condition
+	 * @param array|bool $bind
+	 * @param string $join
+	 * @return ICmdSelect
+	 */
+	private function joinWith($joinWith, $alias, $condition, $bind, $join)
+	{
+		if ($joinWith instanceof ICmdSelect)
+			return $this->fromSubQuery($joinWith, $alias, $condition, $join);
+		
+		return $this->appendPart(
+			CmdSelect::PART_FROM,
+			"$join $joinWith $alias ON $condition",
+			$bind
+		);
+	}
+	
+	
+	/**
 	 * @inheritdoc
 	 */
 	protected function getDefaultParts() 
@@ -358,56 +407,5 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		$select->setPart(CmdSelect::PART_ORDER_BY, '', false);
 		
 		return $select->queryInt();
-	}
-	
-	
-	/**
-	 * @param ICmdSelect $from
-	 * @param string $alias
-	 * @param string $condition
-	 * @param string $join
-	 * @return ICmdSelect
-	 */
-	private function fromSubQuery(ICmdSelect $from, $alias, $condition = '', $join = '') 
-	{
-		if ($join) $join .= ' ';
-		
-		$cmd = '';
-		
-		if ($alias) 
-			$cmd .= " $alias";
-		
-		if ($condition) 
-			$cmd .= " ON $condition";
-		
-		$sql = $from->assemble();
-		
-		return $this->appendPart(
-			CmdSelect::PART_FROM, 
-			"$join($sql)$cmd", 
-			$from->bind()
-		);
-	}
-	
-	/**
-	 * @param string|ICmdSelect $joinWith
-	 * @param string $alias
-	 * @param string $condition
-	 * @param array|bool $bind
-	 * @param string $join
-	 * @return ICmdSelect
-	 */
-	private function joinWith($joinWith, $alias, $condition, $bind, $join)
-	{
-		if ($joinWith instanceof ICmdSelect)
-		{
-			return $this->fromSubQuery($joinWith, $alias, $condition, $join);
-		}
-		
-		return $this->appendPart(
-			CmdSelect::PART_FROM, 
-			"$join $joinWith $alias ON $condition", 
-			$bind
-		);
 	}
 }

@@ -205,8 +205,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 */
 	private function fixDefaultValues(&$values)
 	{
-		if (!$this->default) 
-			return;
+		if (!$this->default) return;
 		
 		$values = array_merge($this->default, $values);
 	}

@@ -2,68 +2,105 @@
 namespace Squid\MySql\Impl\Command;
 
 
-use Squid\Common;
 
-
-/**
- * Abstraction for a command class that is build using different parts.
- * Clone can be applied on this object.
- * Note that part does not have to be an array as long as appendPart is not used 
- * for this specific part. 
- */
 abstract class PartsCommand extends AbstractCommand {
 	
-	/**
-	 * @var array Array of all parts.
-	 */
-	private $parts	= array();
+	/** @var array */
+	private $parts	= [];
 	
-	/**
-	 * @var array Array of bind params for each part.
-	 */
-	private $bind	= array();
-	
-	
-	public function __construct() {
-		$this->parts= $this->getDefaultParts();
-		$this->bind	= $this->parts;
-	}
+	/** @var array */
+	private $bind	= [];
 	
 	
 	/**
-	 * Get the bind parameters.
-	 * @return array Array of bind params.
+	 * Append bind values to given part.
+	 * @param int $part Part to append to.
+	 * @param mixed|array|false $bind
+	 * @return static
 	 */
-	public function bind() {
-		$bindParams = array();
+	private function appendBind($part, $bind) 
+	{
+		if ($bind === false) return $this;
 		
-		// NOTE: array_reduce is much slower function, so it's not used.
-		foreach ($this->bind as $partParams) {
-			if ($partParams) {
-				$bindParams = array_merge($bindParams, $partParams);
-			}
+		if (!is_array($bind)) $bind = [$bind];
+		
+		if (!$this->bind[$part]) 
+		{
+			$this->bind[$part] = $bind;
+		}
+		else 
+		{
+			$this->bind[$part] = array_merge($this->bind[$part], $bind);
 		}
 		
-		return $bindParams;
+		return $this;
+	}
+	
+	
+	
+	/**
+	 * Append new query to given part.
+	 * @param int $part Part to append to.
+	 * @param string $sql Command to append.
+	 * @param array|bool $bind Bind params.
+	 * @return static
+	 */
+	protected function appendPart($part, $sql, $bind = false) 
+	{
+		if (!is_array($sql)) $sql = [$sql];
+		
+		if (!$this->parts[$part]) 
+		{
+			$this->parts[$part] = $sql;
+		}
+		else
+		{
+			$this->parts[$part] = array_merge($this->parts[$part], $sql);
+		}
+		
+		return $this->appendBind($part, $bind);
 	}
 	
 	/**
-	 * Generate the query string.
-	 * @return string Currently set query.
+	 * Override part value.
+	 * @param int $part Part to set.
+	 * @param string|array $sql Value to set for this part. Use only for parts that will not
+	 * be appended to. Otherwise pass as array.
+	 * @param array|bool $bind Array of bind values if any.
+	 * @return static
 	 */
-	public function assemble() {
-		return $this->generate();
-	}
-
-	public function __toString()
+	protected function setPart($part, $sql, $bind = false)
 	{
-		return "[{$this->assemble()}] : [" . json_encode($this->bind()) . "]";
+		$this->parts[$part] = $sql;
+		
+		if (is_array($bind)) 		$this->bind[$part] = $bind;
+		else if ($bind === false)	$this->bind[$part] = false;
+		else						$this->bind[$part] = [$bind];
+		
+		return $this;
 	}
-
-
+	
+	/**
+	 * @param int $part Part to return.
+	 * @return mixed Value stored in this part.
+	 */
+	protected function getPart($part) 
+	{
+		return $this->parts[$part];
+	}
+	
+	/**
+	 * @param int $part Part to the the bind values for.
+	 * @return mixed
+	 */
+	protected function getBind($part)
+	{
+		return $this->bind[$part];
+	}
+	
 	/**
 	 * Get the parts this query can have.
-	 * @return array Array contianing only the part as keys and values set to false.
+	 * @return array Array containing only the part as keys and values set to false.
 	 */
 	protected abstract function getDefaultParts();
 	
@@ -74,85 +111,44 @@ abstract class PartsCommand extends AbstractCommand {
 	protected abstract function generate();
 	
 	
-	/**
-	 * Append new query to given part.
-	 * @param int $part Part to append to.
-	 * @param string $sql Command to append.
-	 * @param array|bool $bind Bind params.
-	 * @return mixed Always returns self.
-	 */
-	protected function appendPart($part, $sql, $bind = false) {
-		Common::toArray($sql);
-		
-		if (!$this->parts[$part]) {
-			$this->parts[$part]	= $sql;
-		} else {
-			$this->parts[$part] = array_merge($this->parts[$part], $sql);
-		}
-		
-		return $this->appendBind($part, $bind);
-	}
-	
-	/**
-	 * Override part value.
-	 * @param int $part Part to set.
-	 * @param string|array $sql Value to set for this part. Use only for parts that will not 
-	 * be appended to. Otherwise pass as array.
-	 * @param array|bool $bind Array of bind values if any.
-	 * @return mixed Always returns self.
-	 */
-	protected function setPart($part, $sql, $bind = false) {
-		$this->parts[$part] = $sql;
-		
-		if (is_array($bind)) {
-			$this->bind[$part] = $bind;
-		} else if ($bind === false) {
-			$this->bind[$part] = false;
-		} else {
-			$this->bind[$part] = array($bind);
-		}
-		
-		return $this;
-	}
-	
-	/**
-	 * Get the values stored in given part.
-	 * @param int $part Part to return.
-	 * @return mixed Value stored in this part.
-	 */
-	protected function getPart($part) {
-		return $this->parts[$part];
-	}
-	
-	/**
-	 * Get the bind values for given aprt.
-	 * @param int $part Part to the the bind values for.
-	 */
-	protected function getBind($part) {
-		return $this->bind[$part];
+	public function __construct() 
+	{
+		$this->parts= $this->getDefaultParts();
+		$this->bind	= $this->parts;
 	}
 	
 	
 	/**
-	 * Append bind values to given part.
-	 * @param int $part Part to appenf to.
-	 * @param mixed|array|false $bind Single value to append, false to ignore, array of bind 
-	 * values or array of arrays of bind values.
-	 * @return mixed Always returns self.
+	 * @return array
 	 */
-	private function appendBind($part, $bind) {
-		if ($bind === false) {
-			return $this;
+	public function bind() 
+	{
+		$bindParams = [];
+		
+		foreach ($this->bind as $partParams) 
+		{
+			if ($partParams) 
+			{
+				$bindParams = array_merge($bindParams, $partParams);
+			}
 		}
 		
-		Common::toArray($bind);
-		
-		if (!$this->bind[$part]) {
-			$this->bind[$part] = $bind;
-		} else {
-			$this->bind[$part] = array_merge($this->bind[$part], $bind);
-		}
-		
-		return $this;
+		return $bindParams;
+	}
+	
+	/**
+	 * @return string 
+	 */
+	public function assemble() 
+	{
+		return $this->generate();
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return "[{$this->assemble()}] : [" . json_encode($this->bind()) . "]";
 	}
 }

@@ -22,14 +22,39 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert
 	
 	
 	/**
-	 * Use the new values of the fields that have duplicate error.
-	 * This function fill generate: fieldA = VALUES(fieldA) sub queries for all
-	 * the fields specified in the array, or all the insert fields minus $fields
-	 * if $negate is true (default behavior).
-	 * @param string|array $fields single field, or array of fields that should
-	 * be ignored or used (depending on the value if $negate) to set them to the new
-	 * values used in insert.
-	 * @return static
+	 * Get the parts this query can have.
+	 * @return array Array containing only the part as keys and values set to false.
+	 */
+	protected function getDefaultParts()
+	{
+		if (!isset(CmdUpsert::$DEFAULT))
+		{
+			CmdUpsert::$DEFAULT		= parent::getDefaultParts();
+			CmdUpsert::$PART_SET	= count(CmdUpsert::$DEFAULT);
+			
+			CmdUpsert::$DEFAULT[CmdUpsert::$PART_SET] = false;
+		}
+		
+		return CmdUpsert::$DEFAULT;
+	}
+	
+	/**
+	 * Combine all the parts into one sql.
+	 * @return string Created query.
+	 */
+	protected function generate()
+	{
+		return
+			parent::generate() .
+			Assembly::append(
+				'ON DUPLICATE KEY UPDATE',
+				$this->getPart(CmdUpsert::$PART_SET),
+				', ');
+	}
+	
+	
+	/**
+	 * @inheritdoc
 	 */
 	public function setUseNewValues($fields) 
 	{
@@ -44,11 +69,7 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert
 	}
 	
 	/**
-	 * List of fields that are the keys of this insert and on duplicate, all fields
-	 * but this keys should be copied. This is as logical inversion to setUseNewValues(...)
-	 * @param string|array $fields single field, or array of fields that are a part of a 
-	 * unique/primary key on the table. On Duplicate all fields but thouse are used in the set cluster.
-	 * @return ICmdUpsert
+	 * @inheritdoc
 	 */
 	public function setDuplicateKeys($fields) 
 	{
@@ -60,45 +81,10 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert
 	}
 	
 	/**
-	 * Function called by TWithSet.
-	 * @param string $exp Full set expression.
-	 * @param mixed $bind Bind params, if any.
-	 * @return mixed Always returns self.
+	 * @inheritdoc
 	 */
 	public function _set($exp, $bind = false) 
 	{
 		return $this->appendPart(CmdUpsert::$PART_SET, $exp, $bind); 
-	}
-	
-	
-	/**
-	 * Get the parts this query can have.
-	 * @return array Array containing only the part as keys and values set to false.
-	 */
-	protected function getDefaultParts() 
-	{
-		if (!isset(CmdUpsert::$DEFAULT)) 
-		{
-			CmdUpsert::$DEFAULT		= parent::getDefaultParts();
-			CmdUpsert::$PART_SET	= count(CmdUpsert::$DEFAULT);
-			
-			CmdUpsert::$DEFAULT[CmdUpsert::$PART_SET] = false;
-		}
-		
-		return CmdUpsert::$DEFAULT; 
-	}
-	
-	/**
-	 * Commbine all the parts into one sql.
-	 * @return string Created query.
-	 */
-	protected function generate() 
-	{
-		return 
-			parent::generate() . 
-			Assembly::append(
-				'ON DUPLICATE KEY UPDATE', 
-				$this->getPart(CmdUpsert::$PART_SET), 
-				', ');
 	}
 }

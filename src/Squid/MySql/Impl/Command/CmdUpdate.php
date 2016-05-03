@@ -35,10 +35,10 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	
 	
 	/**
-	 * Get the parts this query can have.
-	 * @return array Array contianing only the part as keys and values set to false.
+	 * @return array Array containing only the part as keys and values set to false.
 	 */
-	protected function getDefaultParts() {
+	protected function getDefaultParts()
+	{
 		return CmdUpdate::$DEFAULT;
 	}
 	
@@ -46,7 +46,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * Commbine all the parts into one sql.
 	 * @return string Created query.
 	 */
-	protected function generate() {
+	protected function generate() 
+	{
 		return 
 			'UPDATE ' . 
 				($this->getPart(CmdUpdate::PART_IGNORE) ? 'IGNORE ' : '') . 
@@ -65,7 +66,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
 	 * @return ICmdUpdate Always returns self.
 	 */
-	public function ignore($ignore = true) {
+	public function ignore($ignore = true) 
+	{
 		return $this->setPart(CmdUpdate::PART_IGNORE, $ignore);
 	}
 	
@@ -74,7 +76,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param string $table Name of the table to update.
 	 * @return ICmdUpdate Always returns self.
 	 */
-	public function table($table) {
+	public function table($table) 
+	{
 		return $this->setPart(CmdUpdate::PART_TABLE, $table);
 	}
 	
@@ -85,7 +88,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * bind values are needed for this expression.
 	 * @return mixed Always returns self.
 	 */
-	public function where($exp, $bind = false) {
+	public function where($exp, $bind = false) 
+	{
 		return $this->appendPart(CmdUpdate::PART_WHERE, $exp, $bind); 
 	}
 	
@@ -94,7 +98,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param array $columns Array of expressions to order by.
 	 * @return mixed Always returns self.
 	 */
-	public function _orderBy(array $columns) {
+	public function _orderBy(array $columns) 
+	{
 		return $this->appendPart(CmdUpdate::PART_ORDER_BY, $columns);
 	}
 	
@@ -104,7 +109,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param int $count Maximum number of rows to select.
 	 * @return mixed Always returns self.
 	 */
-	public function limit($from, $count) {
+	public function limit($from, $count) 
+	{
 		return $this->setPart(CmdUpdate::PART_LIMIT, true, ($from ? array($from, $count) : $count));
 	}
 	
@@ -115,7 +121,8 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param mixed $bind Bind params, if any.
 	 * @return mixed Always returns self.
 	 */
-	public function _set($exp, $bind = false) {
+	public function _set($exp, $bind = false) 
+	{
 		return $this->appendPart(CmdUpdate::PART_SET, $exp, $bind); 
 	}
 }

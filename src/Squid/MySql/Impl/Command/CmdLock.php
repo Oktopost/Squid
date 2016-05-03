@@ -3,95 +3,87 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdLock;
+use Squid\Exceptions\SquidException;
 
 
-class CmdLock extends AbstractCommand implements ICmdLock {
-	
-	/**
-	 * @var string Command to execute. 
-	 */
+class CmdLock extends AbstractCommand implements ICmdLock 
+{
 	private $sql;
 	
-	/**
-	 * @var array Array of bind params.
-	 */
+	/** @var array */
 	private $params;
 	
 	
 	/**
-	 * Get the bind parameters.
-	 * @return array Array of bind params.
+	 * @return array
 	 */
-	public function bind() {
+	public function bind() 
+	{
 		return $this->params;
 	}
 	
 	/**
-	 * Generate the query string.
-	 * @return string Currently set query.
+	 * @return string
 	 */
-	public function assemble() {
+	public function assemble() 
+	{
 		return $this->sql;
 	}
 	
 	
 	/**
-	 * Lock the given keyword.
-	 * @param string $key Key to use to lock.
-	 * @param int $timeout Number of seconds to wait for the lock. Can't be greater than 5.
-	 * @return true on successfull lock, false otherwise.
+	 * @inheritdoc
+	 * @throws SquidException
 	 */
-	public function lock($key, $timeout = 5) {
-		if (!is_int($timeout) || $timeout < 0 || $timeout > 5) {
-			throw new \Exception("Invalid value for timeout '$timeout'");
-		}
+	public function lock($key, $timeout = 5) 
+	{
+		if (!is_int($timeout) || $timeout < 0 || $timeout > 5) 
+			throw new SquidException("Invalid value for timeout '$timeout'");
 		
 		$this->sql = 'SELECT GET_LOCK(?, ?)';
 		$this->params = array($key, $timeout);
 		
 		$result = parent::execute();
 		
-		if (!$result || $result->errorCode() != '00000') {
-			return false;
-		}
+		if (!$result || $result->errorCode() != '00000') return false;
 		
 		$row = $result->fetch(\PDO::FETCH_NUM);
 		return ((int)$row[0] == 1);
 	}
 	
 	/**
-	 * Unlock given lock.
-	 * @param string $key Key to unlock.
+	 * @inheritdoc
 	 */
-	public function unlock($key) {
+	public function unlock($key) 
+	{
 		$this->sql = 'DO RELEASE_LOCK(?)';
 		$this->params = array($key);
 		parent::execute();
 	}
 	
 	/**
-	 * @param callable $callback
-	 * @param string $key
-	 * @param int $timeout In seconds
-	 * @return mixed|bool False if failed to acquire lock.
+	 * @inheritdoc
 	 */
-	public function safe($callback, $key, $timeout = 5) {
-		if (!$this->lock($key, $timeout)) {
-			return false;
-		}
+	public function safe($callback, $key, $timeout = 5) 
+	{
+		if (!$this->lock($key, $timeout)) return false;
 		
-		try {
+		try 
+		{
 			return $callback();
-		} finally {
+		}
+		finally
+		{
 			$this->unlock($key);
 		}
 	}
 	
 	/**
-	 * Privent the use of execute for lock/unlock.
-	 * @throws \Exception
+	 * @inheritdoc
+	 * @throws SquidException
 	 */
-	public function execute() {
-		throw new \Exception('Use lock or unlock methods for this command!');
+	public function execute() 
+	{
+		throw new SquidException('Use lock or unlock methods for this command!');
 	}
 }

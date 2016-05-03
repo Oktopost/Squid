@@ -1,9 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Utils;
-
-
-use Squid\MySql\Connection\IMySqlConnection;
-use Squid\MySql\Connection\IOpenConnectionsManager;
+namespace Squid\MySql\Connection;
 
 
 class OpenConnectionsManager implements IOpenConnectionsManager 

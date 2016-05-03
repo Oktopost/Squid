@@ -4,7 +4,7 @@ namespace Squid\MySql\Impl;
 
 use Squid\MySql\Impl\Connection\MySqlConnection;
 use Squid\MySql\Config\ConfigParser;
-use Squid\MySql\Impl\Utils\OpenConnectionsManager;
+use Squid\MySql\Connection\OpenConnectionsManager;
 
 use Squid\MySql\IConnections;
 use Squid\MySql\Config\IConfigLoader;
@@ -26,7 +26,7 @@ class Connections implements IConnections {
 	/** @var IMySqlConnection[] */
 	private $connections = [];
 	
-	/** @var \Squid\MySql\Impl\Utils\OpenConnectionsManager */
+	/** @var \Squid\MySql\Connection\OpenConnectionsManager */
 	private $openConnectionsManager = null;
 	
 	/** @var IConnectionBuilder */

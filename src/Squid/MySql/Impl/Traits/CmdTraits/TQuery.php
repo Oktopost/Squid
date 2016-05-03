@@ -12,7 +12,7 @@ use Squid\Exceptions\SquidException;
  * @see \Squid\MySql\Command\IQuery
  */
 trait TQuery 
-{	
+{
 	/**
 	 * @inheritdoc
 	 */

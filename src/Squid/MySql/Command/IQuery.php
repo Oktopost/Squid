@@ -5,37 +5,23 @@ namespace Squid\MySql\Command;
 use Squid\MySql\Utils\QueryFailedException;
 
 
-/**
- * Select query command.
- */
 interface IQuery
 {
 	/**
-	 * @param bool|int $isAssoc If true return assoc result; otherwise return numeric.
-	 * Also integer value as \PDO::FETCH_* mode can be passed for other results.
+	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
 	 * @return array
 	 */
 	public function queryAll($isAssoc = false);
 	
 	/**
-	 * @param bool|int $isAssoc If true return assoc result; otherwise return numeric.
-	 * Also integer value as \PDO::FETCH_* mode can be passed for other results.
-	 * @param bool $expectOne If true and more then one row is selected by the query,
-	 * throw an exception.
-	 * @return array|bool
+	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
+	 * @param bool $expectOne
+	 * @return array|false
 	 */
 	public function queryRow($isAssoc = false, $expectOne = true);
 	
 	/**
-	 * @param bool $expectOne If true and more then one row is selected by the query,
-	 * throw an exception.
-	 * @return array|bool Assoc array of the first found row.
-	 */
-	public function queryRowAssoc($expectOne = true);
-	
-	/**
-	 * @param bool $expectOne If true and more then one column is selected by the query,
-	 * throw an exception.
+	 * @param bool $expectOne If true and more then one column is selected by the query, throw an exception.
 	 * @return array|bool Numeric array of all the values in the first found row.
 	 */
 	public function queryColumn($expectOne = true);
@@ -49,7 +35,6 @@ interface IQuery
 	public function queryScalar($default = false, $expectOne = true);
 	
 	/**
-	 * Query scalar value and return as int.
 	 * @param bool $expectOne If true and more then one column or row are
 	 * selected by the query, throw an exception.
 	 * @return int|bool False on error.
@@ -57,7 +42,6 @@ interface IQuery
 	public function queryInt($expectOne = true);
 
 	/**
-	 * Query scalar value and return as boolean.
 	 * @param bool $expectOne If true and more then one column or row are
 	 * selected by the query, throw an exception.
 	 * @return bool|null Null on error.

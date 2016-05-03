@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-use Squid\MySql\IMySqlCommand;
-
-
 /**
  * Create a delete from a single table
  */

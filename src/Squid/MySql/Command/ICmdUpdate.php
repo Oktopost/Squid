@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-use Squid\MySql\IMySqlCommand;
-
-
 /**
  * Create a new update query.
  */

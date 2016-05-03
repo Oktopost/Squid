@@ -2,11 +2,11 @@
 namespace Squid\MySql\Impl\Command;
 
 
-use Squid\Common;
 use Squid\MySql\Command\ICmdDB;
 
 
-class CmdDB extends AbstractCommand implements ICmdDB {
+class CmdDB extends AbstractCommand implements ICmdDB 
+{
 	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	
@@ -18,14 +18,16 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	/**
 	 * @return string
 	 */
-	public function assemble() {
+	public function assemble() 
+	{
 		return $this->command;
 	}
 	
 	/**
 	 * @return array 
 	 */
-	public function bind() {
+	public function bind()
+	{
 		return $this->bind;
 	}
 	
@@ -34,7 +36,8 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @see http://dev.mysql.com/doc/refman/5.7/en/show-tables.html
 	 * @return array Array of all tables in DB.
 	 */
-	public function listTables() {
+	public function listTables()
+	{
 		$this->setCommand('SHOW TABLES');
 		return $this->queryColumn(true);
 	}
@@ -45,18 +48,19 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @param bool $withForeignKeyCheck If false, set foreign_key_checks to 0.
 	 * @return bool
 	 */
-	public function dropTable($table, $withForeignKeyCheck = true) {
-		$table = '`' . implode('`, `', Common::toArray($table)) . '`';
+	public function dropTable($table, $withForeignKeyCheck = true)
+	{
+		if (!is_array($table)) $table = [$table];
 		
-		if (!$withForeignKeyCheck && !$this->setForeignKeyCheck(false)) {
+		$table = '`' . implode('`, `', $table) . '`';
+		
+		if (!$withForeignKeyCheck && !$this->setForeignKeyCheck(false))
 			return false;
-		}
 		
 		$result = $this->executeDmlCommand("DROP TABLE $table");
 		
-		if (!$withForeignKeyCheck) {
+		if (!$withForeignKeyCheck) 
 			$this->setForeignKeyCheck(true);
-		}
 		
 		return $result;
 	}
@@ -66,11 +70,10 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @param string $table
 	 * @return string|bool
 	 */
-	public function showCreateTable($table) {
+	public function showCreateTable($table)
+	{
 		$this->setCommand("SHOW CREATE TABLE `$table`");
-		
 		$data = $this->queryRow(true);
-		
 		return ($data ? $data['Create Table'] : false);
 	}
 	
@@ -78,7 +81,8 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @see http://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_database
 	 * @return string Name of the current database.
 	 */
-	public function getDatabaseName() {
+	public function getDatabaseName()
+	{
 		$this->setCommand('SELECT DATABASE()');
 		return $this->queryScalar();
 	}
@@ -89,9 +93,9 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @param bool $value
 	 * @return bool
 	 */
-	private function setForeignKeyCheck($value) {
+	private function setForeignKeyCheck($value)
+	{
 		$value = ($value ? '1' : '0');
-		
 		return $this->executeDmlCommand("SET foreign_key_checks = $value");
 	}
 	
@@ -100,7 +104,8 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @param array $bind
 	 * @return bool 
 	 */
-	private function executeDmlCommand($cmd, array $bind = array()) {
+	private function executeDmlCommand($cmd, array $bind = array())
+	{
 		$this->setCommand($cmd, $bind);
 		return $this->executeDml();
 	}
@@ -109,7 +114,8 @@ class CmdDB extends AbstractCommand implements ICmdDB {
 	 * @param string $cmd
 	 * @param array $bind
 	 */
-	private function setCommand($cmd, array $bind = array()) {
+	private function setCommand($cmd, array $bind = array())
+	{
 		$this->command = $cmd;
 		$this->bind = $bind;
 	}

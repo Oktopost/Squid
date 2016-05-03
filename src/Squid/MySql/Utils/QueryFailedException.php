@@ -2,4 +2,7 @@
 namespace Squid\MySql\Utils;
 
 
-class QueryFailedException extends \Exception {}
+use Squid\Exceptions\SquidException;
+
+
+class QueryFailedException extends SquidException {}

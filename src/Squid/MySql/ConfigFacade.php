@@ -2,11 +2,11 @@
 namespace Squid\MySql;
 
 
-use Squid\MySql\Config\ConfigLoadersCollection;
-use Squid\MySql\Config\ConfigCollection;
 use Squid\MySql\Config\IConfigLoader;
-use Squid\MySql\Config\MySqlConnectionConfig;
 use Squid\MySql\Config\ConfigParser;
+use Squid\MySql\Config\ConfigCollection;
+use Squid\MySql\Config\ConfigLoadersCollection;
+use Squid\MySql\Config\MySqlConnectionConfig;
 
 
 class ConfigFacade
@@ -55,5 +55,14 @@ class ConfigFacade
 	{
 		$this->connectionLoader->add($loader);
 		return $this;
+	}
+	
+	/**
+	 * @param string $name
+	 * @return MySqlConnectionConfig
+	 */
+	public function getConfig($name)
+	{
+		return $this->collection->get($name);
 	}
 }

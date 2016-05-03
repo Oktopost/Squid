@@ -5,7 +5,8 @@ namespace Squid\MySql\Impl\Command;
 use Squid\MySql\Command\ICmdController;
 
 
-class CmdController extends AbstractCommand implements ICmdController {
+class CmdController extends AbstractCommand implements ICmdController 
+{
 	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	
@@ -17,11 +18,13 @@ class CmdController extends AbstractCommand implements ICmdController {
 	private $isInTransaction = false;
 	
 	
-	public function assemble() {
+	public function assemble() 
+	{
 		return $this->command;
 	}
 	
-	public function bind() {
+	public function bind() 
+	{
 		return $this->bind;
 	}
 	
@@ -29,7 +32,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * Get the last inserted ID.
 	 * @return mixed Last inserted auto increment ID.
 	 */
-	public function lastId() {
+	public function lastId()
+	{
 		$this->command	= 'SELECT LAST_INSERT_ID()';
 		$this->bind		= array();
 		
@@ -41,7 +45,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/commit.html
 	 * @return bool True on success; otherwise false.
 	 */
-	public function startTransaction() {
+	public function startTransaction()
+	{
 		// TODO: Start transaction
 		$this->isInTransaction = true;
 		
@@ -53,7 +58,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/commit.html
 	 * @return bool True on success; otherwise false.
 	 */
-	public function commit() {
+	public function commit()
+	{
 		// TODO: End transaction
 		$this->isInTransaction = false;
 		
@@ -65,7 +71,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/commit.html
 	 * @return bool True on success; otherwise false.
 	 */
-	public function rollback() {
+	public function rollback() 
+	{
 		// TODO: Rollback
 		$this->isInTransaction = false;
 		
@@ -76,7 +83,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * Is there a pending transaction right now, waiting to be commited.
 	 * @return bool Is there a transaction pending.
 	 */
-	public function isInTransaction() {
+	public function isInTransaction() 
+	{
 		return $this->isInTransaction;
 	}
 	
@@ -84,7 +92,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * @param string $tableName
 	 * @return array|bool
 	 */
-	public function describe($tableName) {
+	public function describe($tableName) 
+	{
 		$this->command	= 'DESCRIBE ' . $tableName;
 		$this->bind		= array();
 		
@@ -95,7 +104,8 @@ class CmdController extends AbstractCommand implements ICmdController {
 	 * @param array $tables Assoc array of tables, were key is old name and value is new name
 	 * @return bool
 	 */
-	public function rename($tables) {
+	public function rename($tables)
+	{
 		$this->command	= 'RENAME TABLE ';
 		$this->bind		= array();
 		

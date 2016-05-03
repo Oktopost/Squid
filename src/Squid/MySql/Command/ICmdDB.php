@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-use Squid\MySql\IMySqlCommand;
-
-
 /**
  * Controller on a DB level.
  */

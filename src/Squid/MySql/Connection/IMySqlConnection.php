@@ -13,7 +13,7 @@ interface IMySqlConnection
 	 * @param string $pass
 	 * @param string $host
 	 */
-	public function connect($db, $user = null, $pass = null, $host = null);
+	public function setConfig($db, $user = null, $pass = null, $host = null);
 	
 	/**
 	 * Close this connection. Do nothing if the connection is already closed.

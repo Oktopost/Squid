@@ -5,10 +5,11 @@ namespace Squid\MySql\Impl\Command;
 use Squid\MySql\Command\ICmdDelete;
 
 
-class CmdDelete extends PartsCommand implements ICmdDelete {
-	use Squid\MySql\Traits\CmdTraits\TDml;
-	use Squid\MySql\Traits\CmdTraits\TWithWhere;
-	use Squid\MySql\Traits\CmdTraits\TWithLimit;
+class CmdDelete extends PartsCommand implements ICmdDelete 
+{
+	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 	
 	
 	const PART_FROM		= 0;

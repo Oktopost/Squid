@@ -2,18 +2,12 @@
 namespace Squid\MySql\Impl\Command;
 
 
-use Squid\Common;
 use Squid\MySql\Command\ICmdUpsert;
 
 
-class CmdUpsert extends CmdInsert implements ICmdUpsert {
-	use Squid\MySql\Traits\CmdTraits\TWithSet;
-	
-	
-	/**
-	 * @var int Index of the where clause.
-	 */
-	public static $PART_SET;
+class CmdUpsert extends CmdInsert implements ICmdUpsert 
+{
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithSet;
 	
 	
 	/**
@@ -21,20 +15,28 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert {
 	 */
 	private static $DEFAULT;
 	
+	/**
+	 * @var int Index of the where clause.
+	 */
+	private static $PART_SET;
+	
 	
 	/**
 	 * Use the new values of the fields that have duplicate error.
 	 * This function fill generate: fieldA = VALUES(fieldA) sub queries for all
-	 * the fields spesified in the array, or all the insert fields minus $fields 
+	 * the fields specified in the array, or all the insert fields minus $fields
 	 * if $negate is true (default behavior).
-	 * @param string|array $fields single field, or array of fields that should 
-	 * be ignored or used (depending on the value if $negate) to set them to the new 
+	 * @param string|array $fields single field, or array of fields that should
+	 * be ignored or used (depending on the value if $negate) to set them to the new
 	 * values used in insert.
+	 * @return static
 	 */
-	public function setUseNewValues($fields) {
-		Common::toArray($fields);
+	public function setUseNewValues($fields) 
+	{
+		if (!is_array($fields)) $fields = [$fields];
 		
-		foreach ($fields as $field) {
+		foreach ($fields as $field) 
+		{
 			$this->setExp("`$field`", "VALUES(`$field`)");
 		}
 		
@@ -48,8 +50,13 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert {
 	 * unique/primary key on the table. On Duplicate all fields but thouse are used in the set cluster.
 	 * @return ICmdUpsert
 	 */
-	public function setDuplicateKeys($fields) {
-		return $this->setUseNewValues(array_diff($this->getFields(), Common::toArray($fields)));
+	public function setDuplicateKeys($fields) 
+	{
+		return $this->setUseNewValues(
+			array_diff(
+				$this->getFields(), 
+				(is_array($fields) ? $fields : [$fields])
+			));
 	}
 	
 	/**
@@ -58,17 +65,20 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert {
 	 * @param mixed $bind Bind params, if any.
 	 * @return mixed Always returns self.
 	 */
-	public function _set($exp, $bind = false) {
+	public function _set($exp, $bind = false) 
+	{
 		return $this->appendPart(CmdUpsert::$PART_SET, $exp, $bind); 
 	}
 	
 	
 	/**
 	 * Get the parts this query can have.
-	 * @return array Array contianing only the part as keys and values set to false.
+	 * @return array Array containing only the part as keys and values set to false.
 	 */
-	protected function getDefaultParts() {
-		if (!isset(CmdUpsert::$DEFAULT)) {
+	protected function getDefaultParts() 
+	{
+		if (!isset(CmdUpsert::$DEFAULT)) 
+		{
 			CmdUpsert::$DEFAULT		= parent::getDefaultParts();
 			CmdUpsert::$PART_SET	= count(CmdUpsert::$DEFAULT);
 			
@@ -82,7 +92,8 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert {
 	 * Commbine all the parts into one sql.
 	 * @return string Created query.
 	 */
-	protected function generate() {
+	protected function generate() 
+	{
 		return 
 			parent::generate() . 
 			Assembly::append(

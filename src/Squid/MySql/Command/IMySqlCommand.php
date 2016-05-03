@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql;
+namespace Squid\MySql\Command;
 
 
 use Squid\MySql\Connection\IMySqlConnection;

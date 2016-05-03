@@ -4,15 +4,16 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 /**
  * Implementation for the IDml methods.
- * This trait uses the execute() command.
+ * @method \PDOStatement execute()
+ * @see \Squid\MySql\Command\IDml
  */
-trait TDml {
-	
+trait TDml
+{
 	/**
-	 * @param bool $returnCount
-	 * @return int|bool Number of affected rows if $returnCount is true.
+	 * @inheritdoc
 	 */
-	public function executeDml($returnCount = false) {
+	public function executeDml($returnCount = false) 
+	{
 		$result	= $this->execute();
 		
 		if (!$result) {

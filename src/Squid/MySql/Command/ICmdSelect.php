@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-use Squid\MySql\IMySqlCommand;
-
-
 /**
  * @see https://dev.mysql.com/doc/refman/5.7/en/select.html
  */

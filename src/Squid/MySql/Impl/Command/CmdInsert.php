@@ -45,9 +45,10 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	
 	/**
 	 * Get the parts this query can have.
-	 * @return array Array contianing only the part as keys and values set to false.
+	 * @return array Array containing only the part as keys and values set to false.
 	 */
-	protected function getDefaultParts() {
+	protected function getDefaultParts() 
+	{
 		return CmdInsert::$DEFAULT;
 	}
 	
@@ -55,7 +56,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * Commbine all the parts into one sql.
 	 * @return string Created query.
 	 */
-	protected function generate() {
+	protected function generate()
+	{
 		$command =  'INSERT ' . 
 			($this->getPart(CmdInsert::PART_IGNORE) ? 'IGNORE ' : '') . 
 			'INTO `' . $this->getPart(CmdInsert::PART_INTO) . '` ';
@@ -90,7 +92,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * if set later using values with assoc array.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function into($table, array $fields = null) {
+	public function into($table, array $fields = null)
+	{
 		$this->setPart(CmdInsert::PART_INTO, $table);
 		
 		if (!is_null($fields)) {
@@ -107,7 +110,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * the default value to use.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function defaultValues(array $default) {
+	public function defaultValues(array $default)
+	{
 		$this->default = $default;
 		return $this;
 	}
@@ -119,14 +123,15 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * (if fields where set earlier) will be checked to have a default value.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function values($values) {
-		if (isset($values[0])) {
+	public function values($values) 
+	{
+		if (isset($values[0]))
 			return $this->appendByPosition($values);
-		}
 		
 		$this->fixDefaultValues($values);
 		
-		if (!$this->fields) {
+		if (!$this->fields) 
+		{
 			$this->placeholder = false;
 			$this->fields = array_keys($values);
 			return $this->appendByPosition(array_values($values));
@@ -142,7 +147,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * $values parameter in values function, must applay on each value in the $valuesSet array.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function valuesBulk($valuesSet) {
+	public function valuesBulk($valuesSet)
+	{
 		foreach ($valuesSet as $row) {
 			$this->appendByPosition($row);
 		}
@@ -159,7 +165,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * @param mixed|array $bind Single bind param or array of bind params.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function valuesExp($expression, $bind = false) {
+	public function valuesExp($expression, $bind = false)
+	{
 		return $this->appendPart(
 			CmdInsert::PART_VALUES, 
 			$expression,
@@ -173,7 +180,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * @param ICmdSelect $select Select sub query used to retrive the insert values.
 	 * @return ICmdInsert Always returns self.
 	 */
-	public function asSelect(ICmdSelect $select) {
+	public function asSelect(ICmdSelect $select)
+	{
 		$this->setPart(CmdInsert::PART_VALUES, false);
 		
 		return $this->setPart(CmdInsert::PART_AS, $select->assemble(), $select->bind());
@@ -184,7 +192,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * Get the fields set for this insert.
 	 * @return array Array of fields.
 	 */
-	public function getFields() {
+	public function getFields()
+	{
 		return $this->fields;
 	}
 	
@@ -194,10 +203,10 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * should be appended to the given value set.
 	 * @param array $values Array of values for a single row to modify.
 	 */
-	private function fixDefaultValues(&$values) {
-		if (!$this->default) {
+	private function fixDefaultValues(&$values)
+	{
+		if (!$this->default) 
 			return;
-		}
 		
 		$values = array_merge($this->default, $values);
 	}
@@ -208,10 +217,12 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * the value to insert.
 	 * @return ICmdInsert Always returns self.
 	 */
-	private function appendByField($values) {
+	private function appendByField($values)
+	{
 		$fixed = array();
 		
-		foreach ($this->fields as $field) {
+		foreach ($this->fields as $field) 
+		{
 			$fixed[] = $values[$field];
 		}
 		
@@ -224,12 +235,12 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * position of it's filed in $fields private data member.
 	 * @return ICmdInsert Always returns self.
 	 */
-	private function appendByPosition($values) {
+	private function appendByPosition($values)
+	{
 		$this->setPart(CmdInsert::PART_AS, false);
 		
-		if (!$this->placeholder) {
+		if (!$this->placeholder)
 			$this->placeholder = Assembly::placeholder(count($values), true);
-		}
 
 		return $this->appendPart(
 			CmdInsert::PART_VALUES, 

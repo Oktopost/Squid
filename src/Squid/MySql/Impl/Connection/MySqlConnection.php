@@ -33,11 +33,11 @@ class MySqlConnection implements IMySqlConnection
 	
 	/**
 	 * @param MySqlConnectionConfig|string $db
-	 * @param string $user
-	 * @param string $pass
-	 * @param string $host
+	 * @param string|null $user
+	 * @param string|null $pass
+	 * @param string|null $host
 	 */
-	public function connect($db, $user = null, $pass = null, $host = null)
+	public function setConfig($db, $user = null, $pass = null, $host = null)
 	{
 		if ($db instanceof MySqlConnectionConfig) 
 		{
@@ -46,7 +46,8 @@ class MySqlConnection implements IMySqlConnection
 		}
 		
 		$this->config = new MySqlConnectionConfig();
-		$this->config->DB = $db;
+		
+		$this->config->DB	= $db;
 		$this->config->User = $user;
 		$this->config->Pass = $pass;
 		$this->config->Host = $host;

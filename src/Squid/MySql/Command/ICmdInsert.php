@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-use Squid\MySql\IMySqlCommand;
-
-
 interface ICmdInsert extends IDml, IMySqlCommand 
 {	
 	/**

@@ -11,28 +11,38 @@ use Squid\OrderBy;
  * 
  * @method mixed limit(int $from, int $count)
  * @method mixed _orderBy(array $expressions)
+ * @see \Squid\MySql\Command\IWithLimit
  */
-trait TWithLimit {
-	
-	public function limitBy($count) {
+trait TWithLimit 
+{
+	/**
+	 * @inheritdoc
+	 */
+	public function limitBy($count) 
+	{
 		return $this->limit(0, $count);
 	}
 	
-	public function page($page, $pageSize) {
+	/**
+	 * @inheritdoc
+	 */
+	public function page($page, $pageSize) 
+	{
 		return $this->limit($page * $pageSize, $pageSize);
 	}
 	
 	/**
-	 * Add order by fields.
-	 * @param string|array $column Single column, expression or array of columns.
-	 * @param int $type Order type. Use OrderBy consts. Either single value, or array of 
-	 * values. In the later, $column must be of same size.
+	 * @inheritdoc
 	 */
-	public function orderBy($column, $type = OrderBy::ASC) {
-		if ($type == OrderBy::DESC) {
+	public function orderBy($column, $type = OrderBy::ASC) 
+	{
+		if ($type == OrderBy::DESC) 
+		{
 			$this->appendDesc($column);
-		} else if (!is_array($column)) {
-			$column = array($column);
+		} 
+		else if (!is_array($column)) 
+		{
+			$column = [$column];
 		}
 		
 		return $this->_orderBy($column);
@@ -41,15 +51,20 @@ trait TWithLimit {
 	
 	/**
 	 * Append the DESC keyword to all requested keywords or expressions.
-	 * @param string|array $column Single column, expression or array of columns.
+	 * @param string|array $column
 	 */
-	private function appendDesc(&$column) {
-		if (is_array($column)) {
-			foreach ($column as &$col) {
+	private function appendDesc(&$column) 
+	{
+		if (is_array($column)) 
+		{
+			foreach ($column as &$col) 
+			{
 				$col = "$col DESC";
 			}
-		} else {
-			$column = array("$column DESC");
+		}
+		else 
+		{
+			$column = ["$column DESC"];
 		}
 	}
 }

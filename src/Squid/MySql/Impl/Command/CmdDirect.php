@@ -6,8 +6,8 @@ use Squid\MySql\Command\ICmdDirect;
 
 
 class CmdDirect extends AbstractCommand implements ICmdDirect {
-	use Squid\MySql\Traits\CmdTraits\TDml;
-	use Squid\MySql\Traits\CmdTraits\TQuery;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	
 	
 	/**
@@ -70,7 +70,8 @@ class CmdDirect extends AbstractCommand implements ICmdDirect {
 	 * Execute count select for this query. Note that columns set will remain as was before.
 	 * @return int|bool Number of rows or false on error.
 	 */
-	public function queryCount() {
+	public function queryCount() 
+	{
 		return $this->asScalarSubQuery(function($sql) { 
 			return "SELECT COUNT(*) FROM ($sql) as _sub_";
 		});

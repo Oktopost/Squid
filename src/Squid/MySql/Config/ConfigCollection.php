@@ -25,7 +25,7 @@ class ConfigCollection
 		$config = $this->configLoader->getConfig($name);
 		
 		$conn = new MySqlConnection();
-		$conn->connect($config);
+		$conn->setConfig($config);
 		
 		return $conn;
 	}

@@ -2,6 +2,9 @@
 namespace Squid\MySql\Impl\Command;
 
 
+use Squid\Exceptions\SquidException;
+
+
 class Assembly 
 {
 	use \Objection\TStaticClass;
@@ -11,12 +14,12 @@ class Assembly
 	 * @param array $values Expressions of the where clause
 	 * @param bool $forceExist If true, $values must have at least one value
 	 * @return string
-	 * @throws \Exception
+	 * @throws SquidException
 	 */
 	public static function appendWhere($values, $forceExist = false) 
 	{
 		if ($forceExist && !$values)
-			throw new \Exception('WHERE clause must be present for this type of command!');
+			throw new SquidException('WHERE clause must be present for this type of command!');
 		
 		return Assembly::append('WHERE', $values, ' AND ');
 	}
@@ -35,12 +38,12 @@ class Assembly
 	 * @param array $values Expressions of the set clause
 	 * @param bool $forceExist If true, $values must have at least one value
 	 * @return string
-	 * @throws \Exception
+	 * @throws SquidException
 	 */
 	public static function appendSet($values, $forceExist = false)
 	{
 		if ($forceExist && !$values)
-			throw new \Exception('SET clause must be present for this type of command!');
+			throw new SquidException('SET clause must be present for this type of command!');
 		
 		return Assembly::append('SET', $values, ', ');
 	}

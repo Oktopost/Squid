@@ -50,5 +50,15 @@ interface IConnector
 	/**
 	 * @return Command\ICmdDB
 	 */
-	public function db();	
+	public function db();
+	
+	/**
+	 * Close the used connection if open
+	 */
+	public function close();
+	
+	/**
+	 * @return string
+	 */
+	public function name();
 }

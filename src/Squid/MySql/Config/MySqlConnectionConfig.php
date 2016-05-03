@@ -21,11 +21,11 @@ class MySqlConnectionConfig extends LiteObject
 	protected function _setup() 
 	{
 		return [
-			'DB'	=> LiteSetup::createString(''),
+			'DB'	=> LiteSetup::createString(),
 			'Host'	=> LiteSetup::createString('localhost'),
 			'Port'	=> LiteSetup::createInt(3306),
-			'User'	=> LiteSetup::createString(''),
-			'Pass'	=> LiteSetup::createString('')
+			'User'	=> LiteSetup::createString(),
+			'Pass'	=> LiteSetup::createString()
 		];
 	}
 	

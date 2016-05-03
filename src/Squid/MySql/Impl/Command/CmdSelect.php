@@ -6,10 +6,11 @@ use Squid\Common;
 use Squid\MySql\Command\ICmdSelect;
 
 
-class CmdSelect extends PartsCommand implements ICmdSelect {
-	use Squid\MySql\Traits\CmdTraits\TQuery;
-	use Squid\MySql\Traits\CmdTraits\TWithWhere;
-	use Squid\MySql\Traits\CmdTraits\TWithLimit;
+class CmdSelect extends PartsCommand implements ICmdSelect 
+{
+	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 	
 	
 	const PART_DISTINCT		= 0;

@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c2761e91c478c2bfc7e623c72df7518b",
-    "content-hash": "dc22439ab4d1fc6cd241fd4bebed35e6",
+    "hash": "7e8eb9ac043fb424861210cffb135a8d",
+    "content-hash": "5ff7265f287b86a12d3d8372a027206b",
     "packages": [
         {
             "name": "oktopost/objection",
-            "version": "1.0.0-RC",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Objection.git",
@@ -49,9 +49,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "oktopost/objection": 5
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -3,7 +3,6 @@ namespace Squid\Object;
 
 
 use Objection\LiteObject;
-use Squid\MySql\IMySqlConnector;
 
 
 interface IObjectConnector
@@ -16,13 +15,88 @@ interface IObjectConnector
 	
 	/**
 	 * @param LiteObject $object
+	 * @param array $excludeFields
+	 * @return bool|int
+	 */
+	public function insert(LiteObject $object, array $excludeFields = []);
+	
+	/**
+	 * @param LiteObject[] $objects
+	 * @param array $excludeFields
 	 * @return int|bool
 	 */
-	public function insert(LiteObject $object);
+	public function insertAll(array $objects, array $excludeFields = []);
+	
+	/**
+	 * @param string $field
+	 * @param mixed $value
+	 * @param array $orderFields
+	 * @return LiteObject|null
+	 */
+	public function loadOneByField($field, $value, array $orderFields = []);
+	
+	/**
+	 * @param array $byFields
+	 * @param array $orderFields
+	 * @return LiteObject|null
+	 */
+	public function loadOneByFields(array $byFields, array $orderFields = []);
+	
+	/**
+	 * @param string $field
+	 * @param mixed $value
+	 * @param array $orderFields
+	 * @param int $limit
+	 * @return null|LiteObject
+	 */
+	public function loadAllByField($field, $value, array $orderFields = [], $limit = 32);
+	
+	/**
+	 * @param array $byFields
+	 * @param array $orderFields
+	 * @param int $limit
+	 * @return null|LiteObject
+	 */
+	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32);
+	
+	/**
+	 * @param array $set
+	 * @param array $byFields
+	 * @return int|null
+	 */
+	public function updateByFields(array $set, array $byFields);
 	
 	/**
 	 * @param LiteObject $object
-	 * @return int|bool
+	 * @param array $keyFields
+	 * @return bool
 	 */
-	public function loadOne(array $byFields, array $orderFields = []);
+	public function updateObjectByFields(LiteObject $object, array $keyFields);
+	
+	/**
+	 * @param LiteObject $object
+	 * @param array $keyFields
+	 * @return bool
+	 */
+	public function upsert(LiteObject $object, array $keyFields);
+	
+	/**
+	 * @param LiteObject[] $objects
+	 * @param array $keyFields
+	 * @return bool
+	 */
+	public function upsertAll(array $objects, array $keyFields);
+	
+	/**
+	 * @param string $field
+	 * @param string $value
+	 * @return bool
+	 */
+	public function deleteByField($field, $value);
+	
+	/**
+	 * @param array $fields
+	 * @return bool
+	 */
+	public function deleteByFields(array $fields);
 }

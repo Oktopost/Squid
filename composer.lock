@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ebe5bf2eb13b27653bd58d839b1ebfa5",
-    "content-hash": "96ba3d5aac3eb702d7a5c88f5dc0033c",
+    "hash": "c2761e91c478c2bfc7e623c72df7518b",
+    "content-hash": "dc22439ab4d1fc6cd241fd4bebed35e6",
     "packages": [
         {
             "name": "oktopost/objection",
@@ -44,58 +44,18 @@
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
             "time": "2016-04-07 07:58:15"
-        },
-        {
-            "name": "oktopost/skeleton",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Oktopost/Skeleton.git",
-                "reference": "e7b2308dba1aeae9e168d6efc2bca91f3dd2c1f8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Skeleton/zipball/e7b2308dba1aeae9e168d6efc2bca91f3dd2c1f8",
-                "reference": "e7b2308dba1aeae9e168d6efc2bca91f3dd2c1f8",
-                "shasum": ""
-            },
-            "require": {
-                "oktopost/objection": "^1.0@RC",
-                "php": ">=5.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Skeleton": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Puchkov",
-                    "email": "alexey@oktopost.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Inversion of Control library",
-            "homepage": "https://github.com/Oktopost/Skeleton",
-            "time": "2016-04-20 08:40:26"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "oktopost/objection": 5,
-        "oktopost/skeleton": 20
+        "oktopost/objection": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5"
+        "php": ">=5.5-stable"
     },
     "platform-dev": []
 }

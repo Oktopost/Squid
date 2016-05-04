@@ -13,12 +13,11 @@
         }
     ],
 	
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
 	
     "require": {
-		"php" : ">=5.5",
-        "oktopost/objection": "~1.0.0@RC",
-        "oktopost/skeleton": "dev-master"
+		"php" : ">=5.5-stable",
+        "oktopost/objection": "~1.0.0@RC"
 	},
 	
 	"autoload": {

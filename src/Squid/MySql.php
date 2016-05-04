@@ -2,12 +2,12 @@
 namespace Squid;
 
 
-use Squid\MySql\IConnector;
+use Squid\MySql\IMySqlConnector;
 use Squid\MySql\ConfigFacade;
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Connection\IConnectionBuilder;
 
-use Squid\MySql\Impl\Connector;
+use Squid\MySql\Impl\MySqlConnector;
 use Squid\MySql\Impl\Connection\DefaultBuilder;
 
 
@@ -16,7 +16,7 @@ class MySql
 	/** @var ConfigFacade */
 	private $configFacade;
 	
-	/** @var Connector[] */
+	/** @var MySqlConnector[] */
 	private $sharedConnectors;
 	
 	/** @var IConnectionBuilder */
@@ -62,7 +62,7 @@ class MySql
 	
 	/** 
 	 * @param string $name
-	 * @return IConnector
+	 * @return IMySqlConnector
 	 */
 	public function getConnector($name) 
 	{
@@ -78,11 +78,11 @@ class MySql
 	 * Always return a connector using a new connection. 
 	 * Note that closeAll will not affect connectors returned by this method.
 	 * @param string $name
-	 * @return IConnector
+	 * @return IMySqlConnector
 	 */
 	public function createConnector($name)
 	{
-		$connector = new Connector($name);
+		$connector = new MySqlConnector($name);
 		$connector->setConnection($this->getNewConnection($name));
 		return $connector;
 	}

@@ -3,14 +3,14 @@ namespace Squid\MySql\Impl;
 
 
 use Squid\MySql\Command;
-use Squid\MySql\IConnector;
+use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\IMySqlCommand;
 use Squid\MySql\Connection\IMySqlConnection;
 
 use Squid\MySql\Impl;
 
 
-class Connector implements IConnector 
+class MySqlConnector implements IMySqlConnector 
 {
 	private $connectionName;
 	

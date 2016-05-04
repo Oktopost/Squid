@@ -5,7 +5,7 @@ namespace Squid\MySql;
 use Squid\MySql\Command;
 
 
-interface IConnector 
+interface IMySqlConnector 
 {
 	/**
 	 * @return Command\ICmdController

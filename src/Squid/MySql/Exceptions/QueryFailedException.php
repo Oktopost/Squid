@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Utils;
+namespace Squid\MySql\Exceptions;
 
 
 use Squid\Exceptions\SquidException;

@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-use Squid\MySql\Utils\QueryFailedException;
+use Squid\MySql\Exceptions\QueryFailedException;
 
 
 interface IQuery

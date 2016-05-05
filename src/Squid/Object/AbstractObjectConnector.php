@@ -7,6 +7,43 @@ use Objection\LiteObject;
 
 abstract class AbstractObjectConnector implements IObjectConnector
 {
+	private $className;
+
+	
+	/**
+	 * @return string
+	 */
+	protected function getDomain() { return $this->className; }
+
+	/**
+	 * @param array|bool $data
+	 * @return LiteObject
+	 */
+	protected function createInstance($data = false) 
+	{ 
+		/** @var LiteObject $instance */
+		$instance = new $this->className;
+		
+		if ($data)
+		{
+			$instance->fromArray($data);
+		}
+		
+		return $instance;
+	}
+
+
+	/**
+	 * @param string $className
+	 * @return static
+	 */
+	public function setDomain($className)
+	{
+		$this->className = $className;
+		return $this;
+	}
+
+
 	/**
 	 * @inheritdoc
 	 */

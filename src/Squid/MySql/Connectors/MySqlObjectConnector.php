@@ -3,19 +3,19 @@ namespace Squid\MySql\Connectors;
 
 
 use Squid\MySql\IMySqlConnector;
-use Squid\MySql\Utils\QueryFailedException;
+use Squid\MySql\Utils\ClassName;
 use Squid\MySql\Command\IWithWhere;
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Exceptions\QueryFailedException;
 
 use Squid\Object\AbstractObjectConnector;
 
 use Objection\LiteObject;
 
 
-class ObjectConnector extends AbstractObjectConnector
+class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObjectConnector
 {
 	private $tableName;
-	private $className;
 	
 	/** @var IMySqlConnector */
 	private $connector;
@@ -70,29 +70,38 @@ class ObjectConnector extends AbstractObjectConnector
 	
 	
 	/**
-	 * @param string $tableName
-	 * @param IMySqlConnector $connector
+	 * @inheritdoc
 	 */
-	public function __construct($tableName, IMySqlConnector $connector)
-	{
-		$this->tableName = $tableName;
+	public function setConnector(IMySqlConnector $connector) 
+	{ 
 		$this->connector = $connector;
+		return $this; 
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setTable($tableName) 
+	{ 
+		$this->tableName = $tableName;
+		return $this;
 	}
 	
-	
 	/**
-	 * @param string $className
-	 * @return static
+	 * @inheritdoc
 	 */
 	public function setDomain($className)
 	{
-		$this->className = $className;
+		parent::setDomain($className);
+		
+		if (!$this->tableName)
+		{
+			$this->tableName = ClassName::getClassNameOnly($className);
+		}
 	}
 	
 	/**
-	 * @param LiteObject[] $objects
-	 * @param array $excludeFields
-	 * @return int|bool
+	 * @inheritdoc
 	 */
 	public function insertAll(array $objects, array $excludeFields = [])
 	{
@@ -117,20 +126,11 @@ class ObjectConnector extends AbstractObjectConnector
 			->createQuery($byFields)
 			->queryRow(true, true);
 		
-		if (!$data) return $data;
-		
-		/** @var LiteObject $object */
-		$object = new $this->className;
-		$object->fromArray($data);
-		
-		return $object;
+		return (!$data ? $data : $this->createInstance($data));
 	}
 	
 	/**
-	 * @param array $byFields
-	 * @param array $orderFields
-	 * @param int $limit
-	 * @return null|LiteObject
+	 * @inheritdoc
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
@@ -141,7 +141,7 @@ class ObjectConnector extends AbstractObjectConnector
 		{
 			foreach ($query->queryIterator() as $item) 
 			{
-				$data[] = new $this->className($item);
+				$data[] = $this->createInstance($item);
 			}
 		}
 		catch (QueryFailedException $e) 
@@ -153,9 +153,7 @@ class ObjectConnector extends AbstractObjectConnector
 	}
 	
 	/**
-	 * @param array $set
-	 * @param array $byFields
-	 * @return int|null
+	 * @inheritdoc
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
@@ -163,9 +161,7 @@ class ObjectConnector extends AbstractObjectConnector
 	}
 	
 	/**
-	 * @param LiteObject[] $objects
-	 * @param array $keyFields
-	 * @return bool
+	 * @inheritdoc
 	 */
 	public function upsertAll(array $objects, array $keyFields)
 	{
@@ -173,11 +169,12 @@ class ObjectConnector extends AbstractObjectConnector
 	}
 	
 	/**
-	 * @param array $fields
-	 * @return bool
+	 * @inheritdoc
 	 */
 	public function deleteByFields(array $fields)
 	{
-		// TODO: Implement deleteByFields() method.
+		$delete = $this->connector->delete();
+		$this->createFilter($delete, $fields);
+		return $delete->executeDml();
 	}
 }

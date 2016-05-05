@@ -2,7 +2,7 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
-use Squid\MySql\Utils\QueryFailedException;
+use Squid\MySql\Exceptions\QueryFailedException;
 use Squid\Exceptions\SquidException;
 
 

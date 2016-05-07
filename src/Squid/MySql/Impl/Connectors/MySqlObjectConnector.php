@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Connectors;
+namespace Squid\MySql\Impl\Connectors;
 
 
 use Squid\MySql\IMySqlConnector;
@@ -7,6 +7,7 @@ use Squid\MySql\Utils\ClassName;
 use Squid\MySql\Command\IWithWhere;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Exceptions\QueryFailedException;
+use Squid\MySql\Connectors\IMySqlObjectConnector;
 
 use Squid\Object\AbstractObjectConnector;
 
@@ -157,15 +158,32 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
-		// TODO: Implement updateByFields() method.
+		$update = $this->connector->update()
+			->table($this->tableName)
+			->set($set);
+		
+		$this->createFilter($update, $byFields);
+		
+		return $update->executeDml();
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param LiteObject[] $objects
+	 * @param array $keyFields
+	 * @return bool
 	 */
 	public function upsertAll(array $objects, array $keyFields)
 	{
-		// TODO: Implement upsertAll() method.
+		$upsert = $this->connector->upsert()
+			->into($this->tableName)
+			->setDuplicateKeys($keyFields);
+		
+		foreach ($objects as $object)
+		{
+			$upsert->values($object->toArray());
+		}
+		
+		return $upsert->executeDml();
 	}
 	
 	/**

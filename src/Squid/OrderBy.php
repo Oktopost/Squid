@@ -2,7 +2,8 @@
 namespace Squid;
 
 
-class OrderBy {
+class OrderBy 
+{
 	use \Objection\TConstsClass;
 	
 	

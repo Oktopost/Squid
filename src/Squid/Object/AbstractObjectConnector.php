@@ -82,7 +82,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	/**
 	 * @inheritdoc
 	 */
-	public function upsert(LiteObject $object, array $keyFields)
+	public function upsertByFields(LiteObject $object, array $keyFields)
 	{
 		return $this->upsertAll([$object], $keyFields);
 	}

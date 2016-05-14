@@ -71,6 +71,14 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	
 	
 	/**
+	 * @return IMySqlConnector
+	 */
+	public function getConnector()
+	{
+		return $this->connector;
+	}
+	
+	/**
 	 * @inheritdoc
 	 */
 	public function setConnector(IMySqlConnector $connector) 

@@ -78,7 +78,7 @@ interface IObjectConnector
 	 * @param array $keyFields
 	 * @return bool
 	 */
-	public function upsert(LiteObject $object, array $keyFields);
+	public function upsertByFields(LiteObject $object, array $keyFields);
 	
 	/**
 	 * @param LiteObject[] $objects

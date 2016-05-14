@@ -2,8 +2,8 @@
 namespace Squid;
 
 
-use Squid\MySql\IMySqlConnector;
 use Squid\MySql\ConfigFacade;
+use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Connection\IConnectionBuilder;
 

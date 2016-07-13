@@ -159,7 +159,14 @@ class ObjectConnector extends AbstractObjectConnector
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
-		// TODO: Implement updateByFields() method.
+		$update = $this->connector
+			->update()
+			->table($this->tableName)
+			->set($set);
+		
+		$this->createFilter($update, $byFields);
+		
+		return $update->executeDml(true);
 	}
 	
 	/**
@@ -169,7 +176,18 @@ class ObjectConnector extends AbstractObjectConnector
 	 */
 	public function upsertAll(array $objects, array $keyFields)
 	{
-		// TODO: Implement upsertAll() method.
+		$upsert = $this->connector
+			->upsert()
+			->into($this->tableName);
+		
+		foreach ($objects as $object)
+		{
+			$upsert->values($object->toArray());
+		}
+		
+		return $upsert
+			->setDuplicateKeys($keyFields)
+			->executeDml(true);
 	}
 	
 	/**
@@ -178,6 +196,12 @@ class ObjectConnector extends AbstractObjectConnector
 	 */
 	public function deleteByFields(array $fields)
 	{
-		// TODO: Implement deleteByFields() method.
+		$delete = $this->connector
+			->delete()
+			->from($this->tableName);
+		
+		$this->createFilter($delete, $fields);
+		
+		return $delete->executeDml();
 	}
 }

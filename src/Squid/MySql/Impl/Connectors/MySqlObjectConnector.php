@@ -166,22 +166,13 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
-<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
-		$update = $this->connector
-			->update()
-=======
 		$update = $this->connector->update()
->>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 			->table($this->tableName)
 			->set($set);
 		
 		$this->createFilter($update, $byFields);
 		
-<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		return $update->executeDml(true);
-=======
-		return $update->executeDml();
->>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 	}
 	
 	/**
@@ -191,28 +182,18 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function upsertAll(array $objects, array $keyFields)
 	{
-<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		$upsert = $this->connector
 			->upsert()
 			->into($this->tableName);
-=======
-		$upsert = $this->connector->upsert()
-			->into($this->tableName)
-			->setDuplicateKeys($keyFields);
->>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 		
 		foreach ($objects as $object)
 		{
 			$upsert->values($object->toArray());
 		}
 		
-<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		return $upsert
 			->setDuplicateKeys($keyFields)
 			->executeDml(true);
-=======
-		return $upsert->executeDml();
->>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 	}
 	
 	/**
@@ -220,17 +201,12 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function deleteByFields(array $fields)
 	{
-<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		$delete = $this->connector
 			->delete()
 			->from($this->tableName);
 		
 		$this->createFilter($delete, $fields);
 		
-=======
-		$delete = $this->connector->delete();
-		$this->createFilter($delete, $fields);
->>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 		return $delete->executeDml();
 	}
 }

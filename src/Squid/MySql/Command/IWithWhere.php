@@ -5,8 +5,8 @@ namespace Squid\MySql\Command;
 /**
  * Set of functions used for any creator that have a where clause.
  */
-interface IWithWhere {
-	
+interface IWithWhere 
+{
 	/**
 	 * Append section comparing field named 'Id' to given value.
 	 * @param mixed $value Value to compare to Id.

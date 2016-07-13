@@ -6,7 +6,7 @@ namespace Squid\MySql\Command;
  * Other none Dml/Query operations.
  */
 interface ICmdController extends IMySqlCommand 
-{	
+{
 	/**
 	 * Get the last inserted ID.
 	 * @see http://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_last-insert-id

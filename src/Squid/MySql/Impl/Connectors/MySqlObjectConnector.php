@@ -1,21 +1,22 @@
 <?php
-namespace Squid\MySql\Connectors;
+namespace Squid\MySql\Impl\Connectors;
 
 
 use Squid\MySql\IMySqlConnector;
-use Squid\MySql\Utils\QueryFailedException;
+use Squid\MySql\Utils\ClassName;
 use Squid\MySql\Command\IWithWhere;
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Exceptions\QueryFailedException;
+use Squid\MySql\Connectors\IMySqlObjectConnector;
 
 use Squid\Object\AbstractObjectConnector;
 
 use Objection\LiteObject;
 
 
-class ObjectConnector extends AbstractObjectConnector
+class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObjectConnector
 {
 	private $tableName;
-	private $className;
 	
 	/** @var IMySqlConnector */
 	private $connector;
@@ -70,29 +71,46 @@ class ObjectConnector extends AbstractObjectConnector
 	
 	
 	/**
-	 * @param string $tableName
-	 * @param IMySqlConnector $connector
+	 * @return IMySqlConnector
 	 */
-	public function __construct($tableName, IMySqlConnector $connector)
+	public function getConnector()
 	{
-		$this->tableName = $tableName;
-		$this->connector = $connector;
+		return $this->connector;
 	}
 	
+	/**
+	 * @inheritdoc
+	 */
+	public function setConnector(IMySqlConnector $connector) 
+	{ 
+		$this->connector = $connector;
+		return $this; 
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setTable($tableName) 
+	{ 
+		$this->tableName = $tableName;
+		return $this;
+	}
 	
 	/**
-	 * @param string $className
-	 * @return static
+	 * @inheritdoc
 	 */
 	public function setDomain($className)
 	{
-		$this->className = $className;
+		parent::setDomain($className);
+		
+		if (!$this->tableName)
+		{
+			$this->tableName = ClassName::getClassNameOnly($className);
+		}
 	}
 	
 	/**
-	 * @param LiteObject[] $objects
-	 * @param array $excludeFields
-	 * @return int|bool
+	 * @inheritdoc
 	 */
 	public function insertAll(array $objects, array $excludeFields = [])
 	{
@@ -117,20 +135,11 @@ class ObjectConnector extends AbstractObjectConnector
 			->createQuery($byFields)
 			->queryRow(true, true);
 		
-		if (!$data) return $data;
-		
-		/** @var LiteObject $object */
-		$object = new $this->className;
-		$object->fromArray($data);
-		
-		return $object;
+		return (!$data ? $data : $this->createInstance($data));
 	}
 	
 	/**
-	 * @param array $byFields
-	 * @param array $orderFields
-	 * @param int $limit
-	 * @return null|LiteObject
+	 * @inheritdoc
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
@@ -141,7 +150,7 @@ class ObjectConnector extends AbstractObjectConnector
 		{
 			foreach ($query->queryIterator() as $item) 
 			{
-				$data[] = new $this->className($item);
+				$data[] = $this->createInstance($item);
 			}
 		}
 		catch (QueryFailedException $e) 
@@ -153,20 +162,26 @@ class ObjectConnector extends AbstractObjectConnector
 	}
 	
 	/**
-	 * @param array $set
-	 * @param array $byFields
-	 * @return int|null
+	 * @inheritdoc
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
+<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		$update = $this->connector
 			->update()
+=======
+		$update = $this->connector->update()
+>>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 			->table($this->tableName)
 			->set($set);
 		
 		$this->createFilter($update, $byFields);
 		
+<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		return $update->executeDml(true);
+=======
+		return $update->executeDml();
+>>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 	}
 	
 	/**
@@ -176,32 +191,46 @@ class ObjectConnector extends AbstractObjectConnector
 	 */
 	public function upsertAll(array $objects, array $keyFields)
 	{
+<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		$upsert = $this->connector
 			->upsert()
 			->into($this->tableName);
+=======
+		$upsert = $this->connector->upsert()
+			->into($this->tableName)
+			->setDuplicateKeys($keyFields);
+>>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 		
 		foreach ($objects as $object)
 		{
 			$upsert->values($object->toArray());
 		}
 		
+<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		return $upsert
 			->setDuplicateKeys($keyFields)
 			->executeDml(true);
+=======
+		return $upsert->executeDml();
+>>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 	}
 	
 	/**
-	 * @param array $fields
-	 * @return bool
+	 * @inheritdoc
 	 */
 	public function deleteByFields(array $fields)
 	{
+<<<<<<< HEAD:src/Squid/MySql/Connectors/ObjectConnector.php
 		$delete = $this->connector
 			->delete()
 			->from($this->tableName);
 		
 		$this->createFilter($delete, $fields);
 		
+=======
+		$delete = $this->connector->delete();
+		$this->createFilter($delete, $fields);
+>>>>>>> dev:src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php
 		return $delete->executeDml();
 	}
 }

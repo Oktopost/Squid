@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b91e932c6b56e9a45c06c6e502075f5",
-    "content-hash": "96ba3d5aac3eb702d7a5c88f5dc0033c",
+    "hash": "7e8eb9ac043fb424861210cffb135a8d",
+    "content-hash": "5ff7265f287b86a12d3d8372a027206b",
     "packages": [
         {
             "name": "oktopost/objection",
@@ -44,45 +44,6 @@
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
             "time": "2016-04-07 07:58:15"
-        },
-        {
-            "name": "oktopost/skeleton",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Oktopost/Skeleton.git",
-                "reference": "8d3865919b98cfcd3fc59f4d1dc83df25fb316ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Skeleton/zipball/8d3865919b98cfcd3fc59f4d1dc83df25fb316ed",
-                "reference": "8d3865919b98cfcd3fc59f4d1dc83df25fb316ed",
-                "shasum": ""
-            },
-            "require": {
-                "oktopost/objection": "^1.0@RC",
-                "php": ">=5.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Skeleton": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Puchkov",
-                    "email": "alexey@oktopost.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Inversion of Control library",
-            "homepage": "https://github.com/Oktopost/Skeleton",
-            "time": "2016-05-14 16:44:37"
         }
     ],
     "packages-dev": [],

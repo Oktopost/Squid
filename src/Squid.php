@@ -4,7 +4,6 @@ use Squid\MySql;
 use Skeleton\Type;
 use Skeleton\Skeleton;
 use Skeleton\ConfigLoader\PrefixDirectoryConfigLoader;
-use Skeleton\ImplementersMap\LazyLoadMap;
 
 
 /**
@@ -28,7 +27,7 @@ class Squid
 	{
 		self::$skeleton = new Skeleton();
 		
-		self::$skeleton->setMap(new LazyLoadMap());
+		self::$skeleton->enableKnot();
 		self::$skeleton->setConfigLoader(new PrefixDirectoryConfigLoader('Squid', __DIR__ . '/../skeleton'));
 		
 		self::defaultSetup();

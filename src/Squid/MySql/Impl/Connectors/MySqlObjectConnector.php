@@ -107,6 +107,8 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 		{
 			$this->tableName = ClassName::getClassNameOnly($className);
 		}
+		
+		return $this;
 	}
 	
 	/**

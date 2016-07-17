@@ -47,7 +47,7 @@ interface IObjectConnector
 	 * @param mixed $value
 	 * @param array $orderFields
 	 * @param int $limit
-	 * @return null|LiteObject
+	 * @return LiteObject|null
 	 */
 	public function loadAllByField($field, $value, array $orderFields = [], $limit = 32);
 	
@@ -55,7 +55,7 @@ interface IObjectConnector
 	 * @param array $byFields
 	 * @param array $orderFields
 	 * @param int $limit
-	 * @return null|LiteObject
+	 * @return LiteObject|null
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32);
 	

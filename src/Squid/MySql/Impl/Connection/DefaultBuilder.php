@@ -1,5 +1,4 @@
 <?php
-
 namespace Squid\MySql\Impl\Connection;
 
 
@@ -10,7 +9,6 @@ use Squid\MySql\Connection\IMySqlConnection;
 
 class DefaultBuilder implements IConnectionBuilder
 {
-	
 	/**
 	 * @param MySqlConnectionConfig $config
 	 * @return IMySqlConnection

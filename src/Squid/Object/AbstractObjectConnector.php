@@ -92,6 +92,6 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	 */
 	public function deleteByField($field, $value)
 	{
-		return $this->deleteByFields([$field, $value]);
+		return $this->deleteByFields([$field => $value]);
 	}
 }

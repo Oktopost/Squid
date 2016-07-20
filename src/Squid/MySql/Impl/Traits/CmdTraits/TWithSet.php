@@ -51,6 +51,7 @@ trait TWithSet
 		else
 		{
 			$exp = '?';
+			$value = [$value];
 		}
 		
 		return $this->_set("$field=$exp", $value);

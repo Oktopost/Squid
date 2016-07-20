@@ -2,9 +2,6 @@
 namespace Squid\MySql\Config;
 
 
-use Squid\MySql\Config\MySqlConnectionConfig;
-
-
 interface IConfigLoader 
 {
 	/**

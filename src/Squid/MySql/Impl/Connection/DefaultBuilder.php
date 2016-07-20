@@ -3,8 +3,8 @@ namespace Squid\MySql\Impl\Connection;
 
 
 use Squid\MySql\Config\MySqlConnectionConfig;
-use Squid\MySql\Connection\IConnectionBuilder;
 use Squid\MySql\Connection\IMySqlConnection;
+use Squid\MySql\Connection\IConnectionBuilder;
 
 
 class DefaultBuilder implements IConnectionBuilder

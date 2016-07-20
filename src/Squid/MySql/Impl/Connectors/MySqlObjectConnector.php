@@ -91,7 +91,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 * @inheritdoc
 	 */
 	public function setTable($tableName) 
-	{ 
+	{
 		$this->tableName = $tableName;
 		return $this;
 	}

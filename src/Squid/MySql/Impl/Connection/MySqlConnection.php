@@ -72,7 +72,7 @@ class MySqlConnection implements IMySqlConnection
 	 * @param string $cmd Sql SAFE query to execute.
 	 * @param array $bind Array of parameters to bind.
 	 * @throws \PDOException
-	 * @return \PDOStatement|false
+	 * @return \PDOStatement
 	 */
 	public function execute($cmd, array $bind = []) 
 	{
@@ -80,7 +80,8 @@ class MySqlConnection implements IMySqlConnection
 			$this->openConnection();
 		
 		$statement = $this->pdo->prepare($cmd);
+		$statement->execute($bind);
 		
-		return ($statement->execute($bind) ? $statement : false);
+		return $statement;
 	}
 }

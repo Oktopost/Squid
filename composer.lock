@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ac879dc289445463c48219beeead0b0",
-    "content-hash": "cc83cdae3c7e4349c0114c43db329abe",
+    "hash": "b8845db0cd54117d233dd8d8cab6dcb8",
+    "content-hash": "7832ecbfa4eda121bd405072132a7eee",
     "packages": [
         {
             "name": "oktopost/objection",
-            "version": "1.0.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Objection.git",
-                "reference": "5f96c1f0dce49fb5ec004e01d165965c457ca429"
+                "reference": "7f2d060969287fb8721e9b9392d8259cbe3ea22b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/5f96c1f0dce49fb5ec004e01d165965c457ca429",
-                "reference": "5f96c1f0dce49fb5ec004e01d165965c457ca429",
+                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/7f2d060969287fb8721e9b9392d8259cbe3ea22b",
+                "reference": "7f2d060969287fb8721e9b9392d8259cbe3ea22b",
                 "shasum": ""
             },
             "require": {
@@ -39,11 +39,16 @@
                     "name": "Alexey Puchkov",
                     "email": "alexey@oktopost.com",
                     "role": "Developer"
+                },
+                {
+                    "name": "Marina Sherstuk",
+                    "email": "marinashers@gmail.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
-            "time": "2016-04-07 07:58:15"
+            "time": "2016-07-18 13:57:44"
         },
         {
             "name": "oktopost/skeleton",

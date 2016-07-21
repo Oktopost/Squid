@@ -112,20 +112,17 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param LiteObject[] $objects
+	 * @param array $excludeFields
+	 * @return int|bool
 	 */
 	public function insertAll(array $objects, array $excludeFields = [])
 	{
-		$insert = $this->connector
+		return $this->connector
 			->insert()
-			->into($this->tableName);
-		
-		foreach ($objects as $object) 
-		{
-			$insert->values($object->toArray($excludeFields));
-		}
-		
-		return $insert->executeDml(true);
+			->into($this->tableName)
+			->values(LiteObject::allToArray($objects, [], $excludeFields))
+			->executeDml(true);
 	}
 	
 	/**

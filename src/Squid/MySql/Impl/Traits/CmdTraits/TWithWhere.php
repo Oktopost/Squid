@@ -9,10 +9,40 @@ use Squid\Exceptions\SquidException;
 /**
  * Implements calculation behavior for the IWithWhere interface. Only method that is not implemented, 
  * is where. Where must be implemented by the using class.
- * @method mixed where(string $exp, $bind = false)
+ * @method static where(string $exp, $bind = false)
  * @see \Squid\MySql\Command\IWithSet
  */
-trait TWithWhere {
+trait TWithWhere
+{
+	/**
+	 * @inheritdoc
+	 */
+	private function byFieldsNum($fields, $values)
+	{
+		$fieldsCount = count($fields);
+		
+		for ($i = 0; $i < $fieldsCount; $i++)
+		{
+			$this->byField($fields[$i], $values[$i]);
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	private function byFieldsAssoc($fields)
+	{
+		foreach ($fields as $field => $value)
+		{
+			$self = $this->byField($field, $value);
+		}
+		
+		/** @noinspection PhpUndefinedVariableInspection */
+		return $self;
+	}
+	
 	
 	/**
 	 * @inheritdoc
@@ -23,11 +53,14 @@ trait TWithWhere {
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param string $field
+	 * @param array|string $value If array, IN used instead
+	 * @return static
 	 */
 	public function byField($field, $value) 
 	{
 		if (is_null($value)) return $this->where("ISNULL($field)");
+		else if (is_array($value)) return $this->whereIn($field, $value);
 		
 		return $this->where("$field=?", $value);
 	}
@@ -58,7 +91,7 @@ trait TWithWhere {
 		}
 		else 
 		{
-			$in = implode(',', array_pad(array(), count($values), '?'));
+			$in = implode(',', array_pad([], count($values), '?'));
 		}
 		
 		$statement = ($negate ? 'NOT IN' : 'IN');
@@ -91,36 +124,5 @@ trait TWithWhere {
 	public function whereNotExists(ICmdSelect $select) 
 	{
 		return $this->whereExists($select, true);
-	}
-	
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function byFieldsNum($fields, $values) 
-	{
-		$fieldsCount = count($fields);
-		
-		for ($i = 0; $i < $fieldsCount; $i++) 
-		{
-			$self = $this->byField($fields[$i], $values[$i]);
-		}
-		
-		/** @noinspection PhpUndefinedVariableInspection */
-		return $self;
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function byFieldsAssoc($fields) 
-	{
-		foreach ($fields as $field => $value) 
-		{
-			$self = $this->byField($field, $value);
-		}
-		
-		/** @noinspection PhpUndefinedVariableInspection */
-		return $self;
 	}
 }

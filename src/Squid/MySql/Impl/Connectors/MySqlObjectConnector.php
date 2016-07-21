@@ -6,7 +6,6 @@ use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Utils\ClassName;
 use Squid\MySql\Command\IWithWhere;
 use Squid\MySql\Command\ICmdSelect;
-use Squid\MySql\Exceptions\QueryFailedException;
 use Squid\MySql\Connectors\IMySqlObjectConnector;
 
 use Squid\Object\AbstractObjectConnector;
@@ -131,7 +130,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	public function loadOneByFields(array $byFields, array $orderFields = [])
 	{
 		$data = $this
-			->createQuery($byFields)
+			->createQuery($byFields, $orderFields)
 			->queryRow(true, true);
 		
 		return (!$data ? $data : $this->createInstance($data));
@@ -142,22 +141,8 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
-		$data = [];
-		$query = $this->createQuery($byFields);
-		
-		try 
-		{
-			foreach ($query->queryIterator() as $item) 
-			{
-				$data[] = $this->createInstance($item);
-			}
-		}
-		catch (QueryFailedException $e) 
-		{
-			return false;
-		}
-		
-		return $data;
+		$query = $this->createQuery($byFields, $orderFields);
+		return $this->createAllInstances($query->limitBy($limit)->queryAll());
 	}
 	
 	/**
@@ -181,16 +166,10 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function upsertAll(array $objects, array $keyFields)
 	{
-		$upsert = $this->connector
+		return $this->connector
 			->upsert()
-			->into($this->tableName);
-		
-		foreach ($objects as $object)
-		{
-			$upsert->values($object->toArray());
-		}
-		
-		return $upsert
+			->into($this->tableName)
+			->values(LiteObject::allFromArray($objects))
 			->setDuplicateKeys($keyFields)
 			->executeDml(true);
 	}

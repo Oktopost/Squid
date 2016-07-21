@@ -13,7 +13,10 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	/**
 	 * @return string
 	 */
-	protected function getDomain() { return $this->className; }
+	protected function getDomain()
+	{
+		return $this->className;
+	}
 
 	/**
 	 * @param array|bool $data
@@ -30,6 +33,17 @@ abstract class AbstractObjectConnector implements IObjectConnector
 		}
 		
 		return $instance;
+	}
+	
+	/**
+	 * @param array $data
+	 * @return LiteObject
+	 */
+	protected function createAllInstances(array $data)
+	{
+		/** @var LiteObject $className */
+		$className = $this->className;
+		return $className::allFromArray($data);
 	}
 
 

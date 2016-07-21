@@ -2,12 +2,12 @@
 namespace Squid\MySql\Impl;
 
 
+use Squid\MySql\Impl;
 use Squid\MySql\Command;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\IMySqlCommand;
 use Squid\MySql\Connection\IMySqlConnection;
 
-use Squid\MySql\Impl;
 
 
 class MySqlConnector implements IMySqlConnector 

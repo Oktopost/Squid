@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Set of functions used for any creator that have a where clause.
- */
 interface IWithWhere 
 {
 	/**
@@ -15,9 +12,8 @@ interface IWithWhere
 	public function byId($value);
 	
 	/**
-	 * Append section comparing field $field to value $value.
-	 * @param string $field Name of the field to compare.
-	 * @param string $value Value to compare to.
+	 * @param string $field
+	 * @param array|string $value If array, IN used instead
 	 * @return static
 	 */
 	public function byField($field, $value);
@@ -68,8 +64,7 @@ interface IWithWhere
 	public function whereExists(ICmdSelect $select, $negate = false);
 	
 	/**
-	 * Same as whereExists but always with NOT EXISTS expression.
-	 * @param ICmdSelect $select Select to insert into the exist sub query.
+	 * @param ICmdSelect $select
 	 * @return static
 	 */
 	public function whereNotExists(ICmdSelect $select);

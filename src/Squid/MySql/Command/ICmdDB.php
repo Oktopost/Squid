@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Controller on a DB level.
- */
 interface ICmdDB extends IMySqlCommand 
 {	
 	/**

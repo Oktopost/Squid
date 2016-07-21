@@ -5,9 +5,6 @@ namespace Squid\MySql\Command;
 use Squid\OrderBy;
 
 
-/**
- * Queries that have the limit option.
- */
 interface IWithLimit
 {
 	/**

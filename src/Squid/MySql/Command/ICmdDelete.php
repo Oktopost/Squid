@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Create a delete from a single table
- */
 interface ICmdDelete extends IDml, IMySqlCommand, IWithWhere, IWithLimit 
 {	
 	/**

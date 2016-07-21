@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Data Manipulation Language command.
- */
 interface IDml
 {
 	/**

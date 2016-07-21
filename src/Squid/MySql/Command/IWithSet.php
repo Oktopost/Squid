@@ -2,10 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Set of functions used for any creator that have a set clause.
- * Used by Update and Upsert
- */
 interface IWithSet 
 {
 	/**

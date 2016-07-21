@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Other none Dml/Query operations.
- */
 interface ICmdController extends IMySqlCommand 
 {
 	/**

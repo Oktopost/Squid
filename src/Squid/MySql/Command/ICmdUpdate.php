@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Create a new update query.
- */
 interface ICmdUpdate extends IDml, IMySqlCommand, IWithWhere, IWithSet, IWithLimit
 {
 	/**

@@ -4,9 +4,9 @@ namespace Squid;
 
 class OrderBy 
 {
-	use \Objection\TConstsClass;
+	use \Objection\TEnum;
 	
 	
-	const	DESC	= 0;
-	const	ASC		= 1;
+	const DESC	= 0;
+	const ASC	= 1;
 }

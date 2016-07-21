@@ -2,9 +2,6 @@
 namespace Squid\MySql\Command;
 
 
-/**
- * Used to execute complex queries
- */
 interface ICmdDirect extends IQuery, IDml, IMySqlCommand 
 {	
 	/**

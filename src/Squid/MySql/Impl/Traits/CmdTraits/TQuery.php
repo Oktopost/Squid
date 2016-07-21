@@ -16,6 +16,18 @@ trait TQuery
 	/**
 	 * @inheritdoc
 	 */
+	private function resolveFetchMode($fetchMode)
+	{
+		if ($fetchMode === true) return \PDO::FETCH_ASSOC;
+		else if ($fetchMode === false) return \PDO::FETCH_NUM;
+		
+		return $fetchMode;
+	}
+	
+	
+	/**
+	 * @inheritdoc
+	 */
 	public function queryAll($isAssoc = false) 
 	{
 		$result = $this->execute();
@@ -157,17 +169,5 @@ trait TQuery
 		{
 			$result->closeCursor();
 		}
-	}
-	
-	
-	/**
-	 * @inheritdoc
-	 */
-	private function resolveFetchMode($fetchMode) 
-	{
-		if ($fetchMode === true)		return \PDO::FETCH_ASSOC; 
-		else if ($fetchMode === false)	return \PDO::FETCH_NUM;
-		
-		return $fetchMode;
 	}
 }

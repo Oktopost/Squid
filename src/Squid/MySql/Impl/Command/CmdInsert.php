@@ -197,7 +197,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	{
 		foreach ($valuesSet as $row) 
 		{
-			$this->appendByPosition($row);
+			$this->values($row);
 		}
 		
 		return $this;

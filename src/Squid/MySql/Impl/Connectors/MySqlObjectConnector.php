@@ -120,7 +120,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 		return $this->connector
 			->insert()
 			->into($this->tableName)
-			->values(LiteObject::allToArray($objects, [], $excludeFields))
+			->valuesBulk(LiteObject::allToArray($objects, [], $excludeFields))
 			->executeDml(true);
 	}
 	

@@ -142,7 +142,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
 		$query = $this->createQuery($byFields, $orderFields);
-		return $this->createAllInstances($query->limitBy($limit)->queryAll());
+		return $this->createAllInstances($query->limitBy($limit)->queryAll(true));
 	}
 	
 	/**

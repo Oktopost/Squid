@@ -36,11 +36,26 @@ interface IObjectConnector
 	public function loadOneByField($field, $value, array $orderFields = []);
 	
 	/**
+	 * @param string $field
+	 * @param mixed $value
+	 * @param array $orderFields
+	 * @return LiteObject|null
+	 */
+	public function loadFirstByField($field, $value, array $orderFields = []);
+	
+	/**
 	 * @param array $byFields
 	 * @param array $orderFields
 	 * @return LiteObject|null
 	 */
 	public function loadOneByFields(array $byFields, array $orderFields = []);
+	
+	/**
+	 * @param array $byFields
+	 * @param array $orderFields
+	 * @return LiteObject|null
+	 */
+	public function loadFirstByFields(array $byFields, array $orderFields = []);
 	
 	/**
 	 * @param string $field

@@ -28,7 +28,7 @@ interface IMySqlConnection
 	/**
 	 * @param string $cmd
 	 * @param array $bind
-	 * @return \mixed
+	 * @return \PDOStatement
 	 */
 	public function execute($cmd, array $bind = []);
 }

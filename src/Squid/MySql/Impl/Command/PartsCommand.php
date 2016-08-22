@@ -36,6 +36,23 @@ abstract class PartsCommand extends AbstractCommand {
 		return $this;
 	}
 	
+	/**
+	 * @param array $finalParams
+	 * @param array $singlePartParams
+	 * @return array
+	 */
+	private function combineBindParams($finalParams, $singlePartParams)
+	{
+		foreach ($singlePartParams as &$param)
+		{
+			if ($param instanceof \DateTime)
+			{
+				$param = $param->format('Y-m-d H:i:s');
+			}
+		}
+		
+		return array_merge($finalParams, $singlePartParams);
+	}
 	
 	
 	/**
@@ -129,7 +146,7 @@ abstract class PartsCommand extends AbstractCommand {
 		{
 			if ($partParams) 
 			{
-				$bindParams = array_merge($bindParams, $partParams);
+				$bindParams = $this->combineBindParams($bindParams, $partParams);
 			}
 		}
 		

@@ -56,10 +56,12 @@ abstract class AbstractObjectConnector implements IObjectConnector
 		$this->className = $className;
 		return $this;
 	}
-
-
+	
+	
 	/**
-	 * @inheritdoc
+	 * @param LiteObject $object
+	 * @param array $excludeFields
+	 * @return bool|int
 	 */
 	public function insert(LiteObject $object, array $excludeFields = [])
 	{
@@ -67,7 +69,10 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param string $field
+	 * @param mixed $value
+	 * @param array $orderFields
+	 * @return LiteObject|null
 	 */
 	public function loadOneByField($field, $value, array $orderFields = []) 
 	{
@@ -75,7 +80,22 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param string $field
+	 * @param mixed $value
+	 * @param array $orderFields
+	 * @return LiteObject|null
+	 */
+	public function loadFirstByField($field, $value, array $orderFields = [])
+	{
+		return $this->loadFirstByFields([$field => $value], $orderFields);
+	}
+	
+	/**
+	 * @param string $field
+	 * @param mixed $value
+	 * @param array $orderFields
+	 * @param int $limit
+	 * @return LiteObject|null
 	 */
 	public function loadAllByField($field, $value, array $orderFields = [], $limit = 32)
 	{
@@ -83,7 +103,9 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param LiteObject $object
+	 * @param array $keyFields
+	 * @return bool
 	 */
 	public function updateObjectByFields(LiteObject $object, array $keyFields)
 	{
@@ -94,7 +116,9 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param LiteObject $object
+	 * @param array $keyFields
+	 * @return bool
 	 */
 	public function upsertByFields(LiteObject $object, array $keyFields)
 	{
@@ -102,7 +126,9 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param string $field
+	 * @param string $value
+	 * @return bool
 	 */
 	public function deleteByField($field, $value)
 	{

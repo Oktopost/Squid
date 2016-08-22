@@ -41,7 +41,8 @@ trait TQuery
 	 * @inheritdoc
 	 * @throws SquidException
 	 */
-	public function queryRow($isAssoc = false, $oneOrNone = true) {
+	public function queryRow($isAssoc = false, $oneOrNone = true)
+	{
 		$result = $this->execute();
 		
 		if (!$result)

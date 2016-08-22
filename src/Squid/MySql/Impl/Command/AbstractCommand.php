@@ -10,7 +10,7 @@ use Squid\Exceptions\SquidException;
 abstract class AbstractCommand implements IMySqlCommand
 {
 	/** @var IMySqlConnection */
-	private $conn	= null;
+	private $conn = null;
 	
 	
 	/**

@@ -137,7 +137,25 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param array $byFields
+	 * @param array $orderFields
+	 * @return LiteObject|null
+	 */
+	public function loadFirstByFields(array $byFields, array $orderFields = [])
+	{
+		$data = $this
+			->createQuery($byFields, $orderFields)
+			->limitBy(1)
+			->queryRow(true, true);
+		
+		return (!$data ? $data : $this->createInstance($data));
+	}
+	
+	/**
+	 * @param array $byFields
+	 * @param array $orderFields
+	 * @param int $limit
+	 * @return LiteObject|null
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
@@ -146,7 +164,9 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param array $set
+	 * @param array $byFields
+	 * @return int|null
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
@@ -175,7 +195,8 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	}
 	
 	/**
-	 * @inheritdoc
+	 * @param array $fields
+	 * @return bool
 	 */
 	public function deleteByFields(array $fields)
 	{

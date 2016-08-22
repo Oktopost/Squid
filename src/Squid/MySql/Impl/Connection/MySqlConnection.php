@@ -21,6 +21,8 @@ class MySqlConnection implements IMySqlConnection
 			$this->config->getPDOConnectionString(), 
 			$this->config->User,
 			$this->config->Pass);
+		
+		$this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 	}
 	
 	

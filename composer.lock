@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "oktopost/objection",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Objection.git",
-                "reference": "238ba1b3236d7612b56f6514ead8c723076ec877"
+                "reference": "3428d5706601588d89431150c2508c17a93a78d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/238ba1b3236d7612b56f6514ead8c723076ec877",
-                "reference": "238ba1b3236d7612b56f6514ead8c723076ec877",
+                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/3428d5706601588d89431150c2508c17a93a78d3",
+                "reference": "3428d5706601588d89431150c2508c17a93a78d3",
                 "shasum": ""
             },
             "require": {
@@ -44,11 +44,16 @@
                     "name": "Marina Sherstuk",
                     "email": "marinashers@gmail.com",
                     "role": "Developer"
+                },
+                {
+                    "name": "Daniel Podrabinek",
+                    "email": "dpodrabinek@oktopost.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
-            "time": "2016-07-20 07:10:42"
+            "time": "2016-08-15 13:51:56"
         },
         {
             "name": "oktopost/skeleton",

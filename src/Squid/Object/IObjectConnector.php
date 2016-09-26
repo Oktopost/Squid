@@ -2,6 +2,7 @@
 namespace Squid\Object;
 
 
+use Objection\Mapper;
 use Objection\LiteObject;
 
 
@@ -91,16 +92,18 @@ interface IObjectConnector
 	/**
 	 * @param LiteObject $object
 	 * @param array $keyFields
+	 * @param array $excludeFields
 	 * @return bool
 	 */
-	public function upsertByFields(LiteObject $object, array $keyFields);
+	public function upsertByFields(LiteObject $object, array $keyFields, array $excludeFields = []);
 	
 	/**
 	 * @param LiteObject[] $objects
 	 * @param array $keyFields
+	 * @param array $excludeFields
 	 * @return bool
 	 */
-	public function upsertAll(array $objects, array $keyFields);
+	public function upsertAll(array $objects, array $keyFields, array $excludeFields = []);
 	
 	/**
 	 * @param string $field
@@ -114,4 +117,20 @@ interface IObjectConnector
 	 * @return bool
 	 */
 	public function deleteByFields(array $fields);
+	
+	/**
+	 * @return bool
+	 */
+	public function hasMapper();
+	
+	/**
+	 * @param Mapper $mapper
+	 * @return Mapper
+	 */
+	public function setMapper(Mapper $mapper);
+	
+	/**
+	 * @return Mapper Creates a default one if none defined.
+	 */
+	public function getMapper();
 }

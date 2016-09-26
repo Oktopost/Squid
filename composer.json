@@ -17,7 +17,7 @@
 	
     "require": {
 		"php" : ">=5.5-stable",
-        "oktopost/objection": "^1.0.0",
+        "oktopost/objection": "^1.0.7",
         "oktopost/skeleton": "^1.0.0"
 	},
 	

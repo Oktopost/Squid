@@ -22,6 +22,31 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	
 	
 	/**
+	 * @param LiteObject[] $objects
+	 * @param array $excludeFields
+	 * @return array
+	 */
+	private function objectsToData(array $objects, $excludeFields = [])
+	{
+		if ($this->hasMapper())
+		{
+			$data = $this->getMapper()->getArray($objects);
+			
+			if ($excludeFields)
+			{
+				$data = array_diff_key($data, array_flip($excludeFields));
+			}
+		}
+		else
+		{
+			$data = LiteObject::allToArray($objects, [], $excludeFields);
+		}
+		
+		return $data;
+	}
+	
+	
+	/**
 	 * @param IWithWhere $query
 	 * @param array $where
 	 */
@@ -117,10 +142,12 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function insertAll(array $objects, array $excludeFields = [])
 	{
+		$data = $this->objectsToData($objects, $excludeFields);
+		
 		return $this->connector
 			->insert()
 			->into($this->tableName)
-			->valuesBulk(LiteObject::allToArray($objects, [], $excludeFields))
+			->valuesBulk($data)
 			->executeDml(true);
 	}
 	
@@ -137,25 +164,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	}
 	
 	/**
-	 * @param array $byFields
-	 * @param array $orderFields
-	 * @return LiteObject|null
-	 */
-	public function loadFirstByFields(array $byFields, array $orderFields = [])
-	{
-		$data = $this
-			->createQuery($byFields, $orderFields)
-			->limitBy(1)
-			->queryRow(true, true);
-		
-		return (!$data ? $data : $this->createInstance($data));
-	}
-	
-	/**
-	 * @param array $byFields
-	 * @param array $orderFields
-	 * @param int $limit
-	 * @return LiteObject|null
+	 * @inheritdoc
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
@@ -164,9 +173,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	}
 	
 	/**
-	 * @param array $set
-	 * @param array $byFields
-	 * @return int|null
+	 * @inheritdoc
 	 */
 	public function updateByFields(array $set, array $byFields)
 	{
@@ -182,21 +189,26 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	/**
 	 * @param LiteObject[] $objects
 	 * @param array $keyFields
+	 * @param array $excludeFields
 	 * @return bool
 	 */
-	public function upsertAll(array $objects, array $keyFields)
+	public function upsertAll(array $objects, array $keyFields, array $excludeFields = [])
 	{
+		if (!$objects) return true;
+		
+		$fields = array_diff($objects[0]->getPropertyNames(), $excludeFields);
+		$data = $this->objectsToData($objects, $excludeFields);
+		
 		return $this->connector
 			->upsert()
-			->into($this->tableName)
-			->values(LiteObject::allFromArray($objects))
+			->into($this->tableName, $fields)
+			->valuesBulk($data)
 			->setDuplicateKeys($keyFields)
 			->executeDml(true);
 	}
 	
 	/**
-	 * @param array $fields
-	 * @return bool
+	 * @inheritdoc
 	 */
 	public function deleteByFields(array $fields)
 	{

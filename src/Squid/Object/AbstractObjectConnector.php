@@ -2,12 +2,16 @@
 namespace Squid\Object;
 
 
+use Objection\Mapper;
 use Objection\LiteObject;
 
 
 abstract class AbstractObjectConnector implements IObjectConnector
 {
 	private $className;
+	
+	/** @var Mapper */
+	private $mapper = null;
 
 	
 	/**
@@ -17,22 +21,29 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	{
 		return $this->className;
 	}
-
+	
 	/**
 	 * @param array|bool $data
 	 * @return LiteObject
 	 */
-	protected function createInstance($data = false) 
-	{ 
-		/** @var LiteObject $instance */
-		$instance = new $this->className;
-		
-		if ($data)
+	protected function createInstance($data = false)
+	{
+		if ($this->mapper)
 		{
-			$instance->fromArray($data);
+			return $this->mapper->getObject($data);
 		}
-		
-		return $instance;
+		else
+		{
+			/** @var LiteObject $instance */
+			$instance = new $this->className;
+			
+			if ($data)
+			{
+				$instance->fromArray($data);
+			}
+			
+			return $instance;
+		}
 	}
 	
 	/**
@@ -41,9 +52,16 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	 */
 	protected function createAllInstances(array $data)
 	{
-		/** @var LiteObject $className */
-		$className = $this->className;
-		return $className::allFromArray($data);
+		if ($this->mapper)
+		{
+			return $this->mapper->getObjects($data);
+		}
+		else
+		{
+			/** @var LiteObject $className */
+			$className = $this->className;
+			return $className::allFromArray($data);
+		}
 	}
 
 
@@ -118,11 +136,12 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	/**
 	 * @param LiteObject $object
 	 * @param array $keyFields
+	 * @param array $excludeFields
 	 * @return bool
 	 */
-	public function upsertByFields(LiteObject $object, array $keyFields)
+	public function upsertByFields(LiteObject $object, array $keyFields, array $excludeFields = [])
 	{
-		return $this->upsertAll([$object], $keyFields);
+		return $this->upsertAll([$object], $keyFields, $excludeFields);
 	}
 	
 	/**
@@ -133,5 +152,40 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	public function deleteByField($field, $value)
 	{
 		return $this->deleteByFields([$field => $value]);
+	}
+	
+	/**
+	 * @return bool
+	 */
+	public function hasMapper()
+	{
+		return ($this->mapper != null);
+	}
+	
+	/**
+	 * @param Mapper $mapper
+	 * @return Mapper
+	 */
+	public function setMapper(Mapper $mapper)
+	{
+		if (!$mapper->getDefaultClassName())
+			$mapper->setDefaultClassName($this->className);
+		
+		$this->mapper = $mapper;
+		
+		return $mapper;
+	}
+	
+	/**
+	 * @return Mapper Creates a default one if none defined.
+	 */
+	public function getMapper()
+	{
+		if (!$this->mapper)
+		{
+			$this->mapper = Mapper::createFor($this->className, new Mapper\Mappers\DummyMapper());
+		}
+		
+		return $this->mapper;
 	}
 }

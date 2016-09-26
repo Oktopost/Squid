@@ -125,7 +125,7 @@ interface IObjectConnector
 	
 	/**
 	 * @param Mapper $mapper
-	 * @return Mapper
+	 * @return static
 	 */
 	public function setMapper(Mapper $mapper);
 	

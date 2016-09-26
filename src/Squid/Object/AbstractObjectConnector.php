@@ -164,7 +164,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	
 	/**
 	 * @param Mapper $mapper
-	 * @return Mapper
+	 * @return static
 	 */
 	public function setMapper(Mapper $mapper)
 	{
@@ -173,7 +173,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 		
 		$this->mapper = $mapper;
 		
-		return $mapper;
+		return $this;
 	}
 	
 	/**

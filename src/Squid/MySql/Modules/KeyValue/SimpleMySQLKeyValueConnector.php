@@ -48,8 +48,9 @@ class SimpleMySQLKeyValueConnector implements IKeyValueConnector
 	{
 		return $this->connector
 			->select()
+			->columns('Data')
 			->from($this->tableName)
-			->byField('Data', $key)
+			->byField('ID', $key)
 			->queryScalar(null, false);
 	}
 	
@@ -62,6 +63,7 @@ class SimpleMySQLKeyValueConnector implements IKeyValueConnector
 	{
 		return $this->connector
 			->upsert()
+			->into($this->tableName)
 			->values([
 				'ID'		=> $key,
 				'Data'		=> $value
@@ -76,6 +78,7 @@ class SimpleMySQLKeyValueConnector implements IKeyValueConnector
 	{
 		$this->connector
 			->delete()
+			->from($this->tableName)
 			->byField('ID', $key)
 			->executeDml();
 	}

@@ -4,9 +4,11 @@ namespace Squid\MySql\Impl\Command;
 
 use Squid\MySql\Command\ICmdInsert;
 use Squid\MySql\Command\ICmdSelect;
+use Squid\Exceptions\SquidException;
 
 
-class CmdInsert extends PartsCommand implements ICmdInsert {
+class CmdInsert extends PartsCommand implements ICmdInsert
+{
 	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
 	
 	
@@ -104,17 +106,23 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 */
 	protected function generate()
 	{
+		if (!$this->getPart(CmdInsert::PART_INTO))
+			throw new SquidException('Target table must be defined for Insert command. ' .
+				'into() was not called or called with empty value');
+		
 		$command =  'INSERT ' . 
 			($this->getPart(CmdInsert::PART_IGNORE) ? 'IGNORE ' : '') . 
 			'INTO `' . $this->getPart(CmdInsert::PART_INTO) . '` ';
 		
-		if ($this->fields) {
+		if ($this->fields)
+		{
 			$command .= '(`' . implode('`,`', $this->fields) . '`) ';
 		}
 		
 		$as = $this->getPart(CmdInsert::PART_AS);
 		
-		if ($as) {
+		if ($as)
+		{
 			return $command . $as;
 		}
 		
@@ -127,7 +135,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
 	 * @return static
 	 */
-	public function ignore($ignore = true) {
+	public function ignore($ignore = true)
+	{
 		return $this->setPart(CmdInsert::PART_IGNORE, $ignore);
 	}
 	
@@ -142,7 +151,8 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	{
 		$this->setPart(CmdInsert::PART_INTO, $table);
 		
-		if (!is_null($fields)) {
+		if (!is_null($fields))
+		{
 			$this->placeholder = false;
 			$this->fields = $fields;
 		}
@@ -230,7 +240,6 @@ class CmdInsert extends PartsCommand implements ICmdInsert {
 	public function asSelect(ICmdSelect $select)
 	{
 		$this->setPart(CmdInsert::PART_VALUES, false);
-		
 		return $this->setPart(CmdInsert::PART_AS, $select->assemble(), $select->bind());
 	}
 	

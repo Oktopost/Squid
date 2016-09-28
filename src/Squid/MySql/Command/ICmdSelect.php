@@ -14,6 +14,12 @@ interface ICmdSelect extends IQuery, IMySqlCommand, IWithWhere, IWithLimit {
 	public function distinct($distinct = true);
 	
 	/**
+	 * @param array $columns
+	 * @return static
+	 */
+	public function column(...$columns);
+	
+	/**
 	 * @param string|array $columns
 	 * @param string|bool $table
 	 * @return static

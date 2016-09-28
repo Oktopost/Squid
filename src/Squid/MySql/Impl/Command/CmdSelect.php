@@ -151,6 +151,15 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
+	 * @param array $columns
+	 * @return static
+	 */
+	public function column(...$columns)
+	{
+		return $this->columns($columns);
+	}
+	
+	/**
 	 * @param string|array $columns
 	 * @param string|bool $table
 	 * @return ICmdSelect

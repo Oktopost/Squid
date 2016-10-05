@@ -67,8 +67,15 @@ class MySqlAutoIncrementConnector extends MySqlObjectConnector implements IMySql
 	 */
 	public function update(LiteObject $object)
 	{
+		$data = $this->getMapper()->getArray($object);
+		
+		foreach ($this->idFieldArray as $idField)
+		{
+			unset($data[$idField]);
+		}
+		
 		return $this->updateByFields(
-			$object->toArray([], $this->idFieldArray), 
+			$data,
 			[ $this->idField => $object->{$this->idField} ]);
 	}
 	

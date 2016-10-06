@@ -34,7 +34,10 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 			
 			if ($excludeFields)
 			{
-				$data = array_diff_key($data, array_flip($excludeFields));
+				foreach($data as $key => $object)
+				{
+					$data[$key] = array_diff_key($object, array_flip($excludeFields));
+				}
 			}
 		}
 		else

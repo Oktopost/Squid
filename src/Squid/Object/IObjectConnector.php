@@ -133,4 +133,21 @@ interface IObjectConnector
 	 * @return Mapper Creates a default one if none defined.
 	 */
 	public function getMapper();
+	
+	/**
+	 * @param array $ignoreFields
+	 * @return static
+	 */
+	public function setIgnoreFields(array $ignoreFields);
+	
+	/**
+	 * @param array $ignoreFields
+	 * @return static
+	 */
+	public function addIgnoreFields(array $ignoreFields);
+	
+	/**
+	 * @return array
+	 */
+	public function getIgnoreFields();
 }

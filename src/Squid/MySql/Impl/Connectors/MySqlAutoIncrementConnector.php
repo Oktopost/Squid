@@ -19,7 +19,9 @@ class MySqlAutoIncrementConnector extends MySqlObjectConnector implements IMySql
 	 */
 	private function insertNewObject(LiteObject $object)
 	{
-		if (!$this->insert($object, [$this->idField]))
+		$this->addIgnoreFields([$this->idField]);
+		
+		if (!$this->insert($object))
 			return false;
 		
 		$lastId = $this->getConnector()->controller()->lastId();
@@ -67,7 +69,7 @@ class MySqlAutoIncrementConnector extends MySqlObjectConnector implements IMySql
 	 */
 	public function update(LiteObject $object)
 	{
-		$data = $this->getMapper()->getArray($object);
+		$data = $this->objectsToData([$object])[0];
 		
 		foreach ($this->idFieldArray as $idField)
 		{
@@ -75,7 +77,7 @@ class MySqlAutoIncrementConnector extends MySqlObjectConnector implements IMySql
 		}
 		
 		return $this->updateByFields(
-			$data,
+			$data, 
 			[ $this->idField => $object->{$this->idField} ]);
 	}
 	

@@ -12,7 +12,9 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	
 	/** @var Mapper */
 	private $mapper = null;
-
+	
+	private $ignoreFields = [];
+	
 	
 	/**
 	 * @return string
@@ -48,7 +50,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	
 	/**
 	 * @param array $data
-	 * @return LiteObject
+	 * @return LiteObject[]
 	 */
 	protected function createAllInstances(array $data)
 	{
@@ -83,7 +85,12 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	 */
 	public function insert(LiteObject $object, array $excludeFields = [])
 	{
-		return $this->insertAll([$object], $excludeFields);
+		if ($excludeFields)
+		{
+			$this->addIgnoreFields($excludeFields);
+		}
+		
+		return $this->insertAll([$object]);
 	}
 	
 	/**
@@ -141,7 +148,12 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	 */
 	public function upsertByFields(LiteObject $object, array $keyFields, array $excludeFields = [])
 	{
-		return $this->upsertAll([$object], $keyFields, $excludeFields);
+		if ($excludeFields)
+		{
+			$this->addIgnoreFields($excludeFields);
+		}
+		
+		return $this->upsertAll([$object], $keyFields);
 	}
 	
 	/**
@@ -187,5 +199,39 @@ abstract class AbstractObjectConnector implements IObjectConnector
 		}
 		
 		return $this->mapper;
+	}
+	
+	/**
+	 * @param array $ignoreFields
+	 * @return static
+	 */
+	public function setIgnoreFields(array $ignoreFields)
+	{
+		$this->ignoreFields = $ignoreFields;
+		return $this;
+	}
+	
+	/**
+	 * @param array $ignoreFields
+	 * @return static
+	 */
+	public function addIgnoreFields(array $ignoreFields)
+	{
+		$newFields = array_diff($ignoreFields, $this->ignoreFields);
+		
+		foreach($newFields as $field)
+		{
+			$this->ignoreFields[] = $field;
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getIgnoreFields()
+	{
+		return $this->ignoreFields;
 	}
 }

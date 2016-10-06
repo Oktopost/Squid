@@ -23,26 +23,22 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	
 	/**
 	 * @param LiteObject[] $objects
-	 * @param array $excludeFields
 	 * @return array
 	 */
-	private function objectsToData(array $objects, $excludeFields = [])
+	protected function objectsToData(array $objects)
 	{
 		if ($this->hasMapper())
 		{
 			$data = $this->getMapper()->getArray($objects);
 			
-			if ($excludeFields)
+			foreach($data as $key => $object)
 			{
-				foreach($data as $key => $object)
-				{
-					$data[$key] = array_diff_key($object, array_flip($excludeFields));
-				}
+				$data[$key] = array_diff_key($object, array_flip($this->getIgnoreFields()));
 			}
 		}
 		else
 		{
-			$data = LiteObject::allToArray($objects, [], $excludeFields);
+			$data = LiteObject::allToArray($objects, [], $this->getIgnoreFields());
 		}
 		
 		return $data;
@@ -145,7 +141,12 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 */
 	public function insertAll(array $objects, array $excludeFields = [])
 	{
-		$data = $this->objectsToData($objects, $excludeFields);
+		if ($excludeFields)
+		{
+			$this->addIgnoreFields($excludeFields);
+		}
+		
+		$data = $this->objectsToData($objects);
 		
 		return $this->connector
 			->insert()
@@ -185,7 +186,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	 * @param array $byFields
 	 * @param array $orderFields
 	 * @param int $limit
-	 * @return LiteObject|null
+	 * @return LiteObject[]|null
 	 */
 	public function loadAllByFields(array $byFields, array $orderFields = [], $limit = 32)
 	{
@@ -217,8 +218,13 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	{
 		if (!$objects) return true;
 		
-		$fields = array_diff($objects[0]->getPropertyNames(), $excludeFields);
-		$data = $this->objectsToData($objects, $excludeFields);
+		if($excludeFields)
+		{
+			$this->addIgnoreFields($excludeFields);
+		}
+		
+		$fields = array_diff($objects[0]->getPropertyNames(), $this->getIgnoreFields());
+		$data = $this->objectsToData($objects);
 		
 		return $this->connector
 			->upsert()

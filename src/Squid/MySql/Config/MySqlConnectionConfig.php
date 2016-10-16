@@ -12,6 +12,7 @@ use Objection\LiteObject;
  * @property int	$Port
  * @property string	$User
  * @property string	$Pass
+ * @property array	$PDOFlags
  */
 class MySqlConnectionConfig extends LiteObject 
 {
@@ -21,11 +22,12 @@ class MySqlConnectionConfig extends LiteObject
 	protected function _setup() 
 	{
 		return [
-			'DB'	=> LiteSetup::createString(),
-			'Host'	=> LiteSetup::createString('localhost'),
-			'Port'	=> LiteSetup::createInt(3306),
-			'User'	=> LiteSetup::createString(),
-			'Pass'	=> LiteSetup::createString()
+			'DB'		=> LiteSetup::createString(),
+			'Host'		=> LiteSetup::createString('localhost'),
+			'Port'		=> LiteSetup::createInt(3306),
+			'User'		=> LiteSetup::createString(),
+			'Pass'		=> LiteSetup::createString(),
+			'PDOFlags'	=> LiteSetup::createArray()
 		];
 	}
 	
@@ -33,7 +35,8 @@ class MySqlConnectionConfig extends LiteObject
 	/**
 	 * @return string
 	 */
-	public function getPDOConnectionString() {
+	public function getPDOConnectionString()
+	{
 		$connString = "mysql:host={$this->Host};port={$this->Port}";
 		
 		if ($this->DB) {

@@ -6,21 +6,15 @@ use Skeleton\Skeleton;
 use Skeleton\ConfigLoader\PrefixDirectoryConfigLoader;
 
 
-/**
- * @method static MySql MySql()
- */
 class Squid
 {
-	use \Skeleton\TStaticModule;
-	
-	
 	/** @var Skeleton */
 	private static $skeleton = null;
 	
 	
 	private static function defaultSetup()
 	{
-		self::$skeleton->set(MySql::class, MySql::class, Type::Singleton);
+		
 	}
 	
 	private static function setUp()
@@ -32,9 +26,17 @@ class Squid
 			->registerGlobalFor('Squid')
 			->setConfigLoader(new PrefixDirectoryConfigLoader('Squid', __DIR__ . '/../skeleton'));
 		
-		self::defaultSetup();
+		self::$skeleton->set(MySql::class, MySql::class);
 	}
-	
+
+
+	/**
+	 * @return MySql
+	 */
+	public static function MySql()
+	{
+		return self::skeleton(MySql::class);
+	}
 	
 	/**
 	 * @param string $item

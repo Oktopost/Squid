@@ -5,10 +5,9 @@ namespace Squid;
 use Squid\MySql\ConfigFacade;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Connection\IMySqlConnection;
-use Squid\MySql\Connection\IConnectionBuilder;
 
 use Squid\MySql\Impl\MySqlConnector;
-use Squid\MySql\Impl\Connection\DefaultBuilder;
+use Squid\MySql\Impl\Connection\ConnectionBuilder;
 
 
 class MySql
@@ -19,7 +18,7 @@ class MySql
 	/** @var MySqlConnector[] */
 	private $sharedConnectors;
 	
-	/** @var IConnectionBuilder */
+	/** @var ConnectionBuilder */
 	private $connectionBuilder = null;
 	
 	
@@ -38,7 +37,10 @@ class MySql
 		$config = $this->configFacade->getConfig($name);
 		
 		if (!$this->connectionBuilder)
-			$this->connectionBuilder = new DefaultBuilder();
+		{
+			$this->connectionBuilder = new ConnectionBuilder();
+			$this->connectionBuilder->setDecorators($this->configFacade->getDecorators());
+		}
 		
 		return $this->connectionBuilder->create($config);
 	}
@@ -50,14 +52,6 @@ class MySql
 	public function config() 
 	{
 		return $this->configFacade;
-	}
-	
-	/**
-	 * @param IConnectionBuilder $builder
-	 */
-	public function setBuilder(IConnectionBuilder $builder)
-	{
-		$this->connectionBuilder = $builder; 
 	}
 	
 	/** 

@@ -13,7 +13,8 @@ class ConfigParser
 		'host'	=> ['host'],
 		'pass'	=> ['pass', 'password', 'pwd'],
 		'user'	=> ['user', 'username'],
-		'port'	=> ['port']
+		'port'	=> ['port'],
+		'flags'	=> ['flags', 'attribute']
 	];
 	
 	
@@ -27,7 +28,7 @@ class ConfigParser
 	{
 		foreach (self::$MAP[$sectionName] as $options)
 		{
-			if (isset($config[$options]) && is_string($config[$options])) 
+			if (isset($config[$options])) 
 				return $config[$options];
 		}
 		
@@ -44,11 +45,12 @@ class ConfigParser
 		$config = array_change_key_case($config, CASE_LOWER);
 		$object = new MySqlConnectionConfig();
 		
-		$object->DB		= self::getValue('', 'db', $config);
-		$object->Host	= self::getValue('', 'host', $config);
-		$object->Port	= (int)self::getValue(3306, 'port', $config);
-		$object->Pass	= self::getValue('', 'pass', $config);
-		$object->User	= self::getValue('', 'user', $config);
+		$object->DB			= self::getValue('', 'db', $config);
+		$object->Host		= self::getValue('', 'host', $config);
+		$object->Port		= (int)self::getValue(3306, 'port', $config);
+		$object->Pass		= self::getValue('', 'pass', $config);
+		$object->User		= self::getValue('', 'user', $config);
+		$object->PDOFlags	= self::getValue('', 'flags', $config);
 		
 		return $object;
 	}

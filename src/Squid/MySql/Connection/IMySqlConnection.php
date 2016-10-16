@@ -5,7 +5,7 @@ namespace Squid\MySql\Connection;
 use Squid\MySql\Config\MySqlConnectionConfig;
 
 
-interface IMySqlConnection 
+interface IMySqlConnection extends IMySqlExecutor
 {
 	/**
 	 * @param MySqlConnectionConfig|string $db

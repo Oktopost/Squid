@@ -2,8 +2,9 @@
 namespace Squid\MySql\Impl\Connection;
 
 
-use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Config\MySqlConnectionConfig;
+use Squid\MySql\Connection\IMySqlExecutor;
+use Squid\MySql\Connection\IMySqlConnection;
 
 
 class MySqlConnection implements IMySqlConnection 
@@ -18,11 +19,14 @@ class MySqlConnection implements IMySqlConnection
 	private function openConnection() 
 	{
 		$this->pdo = new \PDO(
-			$this->config->getPDOConnectionString(), 
+			$this->config->getPDOConnectionString(),
 			$this->config->User,
 			$this->config->Pass);
 		
-		$this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+		foreach ($this->config->PDOFlags as $flag => $value)
+		{
+			$this->pdo->setAttribute($flag, $value);
+		}
 	}
 	
 	
@@ -82,7 +86,23 @@ class MySqlConnection implements IMySqlConnection
 			$this->openConnection();
 		
 		$statement = $this->pdo->prepare($cmd);
+		
+		if (!$statement) 
+		{
+			var_dump($this->pdo->errorCode());
+			var_dump($this->pdo->errorInfo());
+			die;
+		}
+		
+		
 		$statement->execute($bind);
+		
+		if (!$statement) 
+		{
+			var_dump($this->pdo->errorCode());
+			var_dump($this->pdo->errorInfo());
+			die;
+		}
 		
 		return $statement;
 	}

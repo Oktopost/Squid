@@ -2,11 +2,12 @@
 namespace Squid\MySql;
 
 
-use Squid\MySql\Config\IConfigLoader;
 use Squid\MySql\Config\ConfigParser;
+use Squid\MySql\Config\IConfigLoader;
 use Squid\MySql\Config\ConfigCollection;
 use Squid\MySql\Config\MySqlConnectionConfig;
 use Squid\MySql\Config\ConfigLoadersCollection;
+use Squid\MySql\Connection\IMySqlExecuteDecorator;
 
 
 class ConfigFacade
@@ -16,6 +17,9 @@ class ConfigFacade
 	
 	/** @var ConfigLoadersCollection */
 	private $connectionLoader;
+	
+	/** @var IMySqlExecuteDecorator[] */
+	private $executeDecorators = [];
 	
 	
 	public function __construct()
@@ -56,6 +60,14 @@ class ConfigFacade
 		$this->connectionLoader->add($loader);
 		return $this;
 	}
+
+	/**
+	 * @param IMySqlExecuteDecorator[] $decorators
+	 */
+	public function addExecuteDecorator(...$decorators)
+	{
+		$this->executeDecorators = array_merge($this->executeDecorators, $decorators);
+	}
 	
 	/**
 	 * @param string $name
@@ -64,5 +76,13 @@ class ConfigFacade
 	public function getConfig($name)
 	{
 		return $this->collection->get($name);
+	}
+
+	/**
+	 * @return Connection\IMySqlExecuteDecorator[]
+	 */
+	public function getDecorators()
+	{
+		return $this->executeDecorators;
 	}
 }

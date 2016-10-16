@@ -27,8 +27,10 @@ class Squid
 	{
 		self::$skeleton = new Skeleton();
 		
-		self::$skeleton->enableKnot();
-		self::$skeleton->setConfigLoader(new PrefixDirectoryConfigLoader('Squid', __DIR__ . '/../skeleton'));
+		self::$skeleton
+			->enableKnot()
+			->registerGlobalFor('Squid')
+			->setConfigLoader(new PrefixDirectoryConfigLoader('Squid', __DIR__ . '/../skeleton'));
 		
 		self::defaultSetup();
 	}

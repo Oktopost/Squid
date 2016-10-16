@@ -57,16 +57,16 @@
         },
         {
             "name": "oktopost/skeleton",
-            "version": "1.0.2",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Skeleton.git",
-                "reference": "67432782fd975dce7f7b33559381d5b35b70e34a"
+                "reference": "b3a74a3b9649498d3a08d7f1d29d74d3f64bf26c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Skeleton/zipball/67432782fd975dce7f7b33559381d5b35b70e34a",
-                "reference": "67432782fd975dce7f7b33559381d5b35b70e34a",
+                "url": "https://api.github.com/repos/Oktopost/Skeleton/zipball/b3a74a3b9649498d3a08d7f1d29d74d3f64bf26c",
+                "reference": "b3a74a3b9649498d3a08d7f1d29d74d3f64bf26c",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,7 @@
             ],
             "description": "Inversion of Control library",
             "homepage": "https://github.com/Oktopost/Skeleton",
-            "time": "2016-07-20 07:08:58"
+            "time": "2016-10-05 10:34:55"
         }
     ],
     "packages-dev": [],

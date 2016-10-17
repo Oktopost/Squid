@@ -1,7 +1,6 @@
 <?php
 use Squid\MySql;
 
-use Skeleton\Type;
 use Skeleton\Skeleton;
 use Skeleton\ConfigLoader\PrefixDirectoryConfigLoader;
 
@@ -12,15 +11,12 @@ class Squid
 	private static $skeleton = null;
 	
 	
-	private static function defaultSetup()
-	{
-		
-	}
-	
 	private static function setUp()
 	{
-		self::$skeleton = new Skeleton();
+		if (self::$skeleton) 
+			return;
 		
+		self::$skeleton = new Skeleton();
 		self::$skeleton
 			->enableKnot()
 			->registerGlobalFor('Squid')

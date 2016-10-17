@@ -19,8 +19,8 @@ class MySqlException extends SquidException
 	{
 		parent::__construct($message, $code, $previous);
 	}
-
-
+	
+	
 	/**
 	 * @return int|null
 	 */
@@ -28,8 +28,8 @@ class MySqlException extends SquidException
 	{
 		return $this->sqlErrorCode;
 	}
-
-
+	
+	
 	/**
 	 * @param \PDOException $exception
 	 * @return MySqlException

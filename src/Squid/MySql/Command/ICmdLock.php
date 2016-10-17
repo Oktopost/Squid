@@ -12,6 +12,7 @@ interface ICmdLock extends IMySqlCommand
 	public function lock($key, $timeout = 5);
 	
 	/**
+	 * If no lock held, no operation is executed.
 	 * @param string $key
 	 */
 	public function unlock($key);

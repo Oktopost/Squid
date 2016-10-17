@@ -32,6 +32,6 @@ abstract class AbstractMySqlExecuteDecorator implements IMySqlExecuteDecorator
 	 */
 	public function execute($cmd, array $bind = [])
 	{
-		$this->child->execute($cmd, $bind);
+		return $this->child->execute($cmd, $bind);
 	}
 }

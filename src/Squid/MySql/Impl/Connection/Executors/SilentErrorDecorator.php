@@ -8,7 +8,10 @@ use Squid\MySql\Connection\AbstractMySqlExecuteDecorator;
 class SilentErrorDecorator extends AbstractMySqlExecuteDecorator
 {
 	private $result = false;
-
+	
+	/** @var callable|null */
+	private $callback;
+	
 
 	/**
 	 * @param bool $result
@@ -17,7 +20,17 @@ class SilentErrorDecorator extends AbstractMySqlExecuteDecorator
 	{
 		$this->result = $result;
 	}
-	
+
+
+	/**
+	 * @param callable $callback
+	 * @return static
+	 */
+	public function setCallback($callback)
+	{
+		$this->callback = $callback;
+		return $this;
+	}
 	
 	/**
 	 * @param string $cmd
@@ -32,6 +45,12 @@ class SilentErrorDecorator extends AbstractMySqlExecuteDecorator
 		}
 		catch (\Exception $e)
 		{
+			if ($this->callback)
+			{
+				$callback = $this->callback;
+				$callback($cmd, $bind, $e);
+			}
+			
 			return $this->result;
 		}
 		

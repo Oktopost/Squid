@@ -78,4 +78,12 @@ interface IQuery
 	 * @throws QueryFailedException
 	 */
 	public function queryIterator($isAssoc = true);
+	
+	/**
+	 * Return an array where the result of one column is the index and the second is value.
+	 * @param int|string $key Name of the key column.
+	 * @param int|string $value Name of the value column
+	 * @return array|false
+	 */
+	public function queryMap($key = 0, $value = 1);
 }

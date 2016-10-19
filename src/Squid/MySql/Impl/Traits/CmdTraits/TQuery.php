@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
+use Squid\MySql\Exceptions\MySqlException;
 use Squid\MySql\Exceptions\QueryFailedException;
 use Squid\Exceptions\SquidException;
 
@@ -155,9 +156,6 @@ trait TQuery
 		$fetchMode = $this->resolveFetchMode($isAssoc);
 		$result = $this->execute();
 		
-		if (!$result)
-			throw new QueryFailedException();
-		
 		try 
 		{
 			while ($row = $result->fetch($fetchMode)) 
@@ -170,5 +168,39 @@ trait TQuery
 		{
 			$result->closeCursor();
 		}
+	}
+	
+	
+	/**
+	 * Return an array where the result of one column is the index and the second is value.
+	 * @param int|string $key Name of the key column.
+	 * @param int|string $value Name of the value column
+	 * @return array|false
+	 */
+	public function queryMap($key = 0, $value = 1)
+	{
+		$fetchMode = $this->resolveFetchMode(is_string($key) || is_string($value));
+		$result = $this->execute();
+		$map = [];
+		
+		try
+		{
+			while ($row = $result->fetch($fetchMode))
+			{
+				if (!isset($row[$key]) || !key_exists($value, $row)) 
+					throw new MySqlException(
+						"Key '$key' or Value '$value' columns not found in the query result: " . 
+						implode(array_keys($row)));
+				
+				$map[$row[$key]] = $row[$value];
+			}
+		}
+		// Free resources when generator released before reaching the end of the iteration.
+		finally
+		{
+			$result->closeCursor();
+		}
+		
+		return $map;
 	}
 }

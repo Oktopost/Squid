@@ -126,10 +126,8 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 			Assembly::append('GROUP BY', $this->getPart(CmdSelect::PART_GROUP_BY)) . 
 			($this->getPart(CmdSelect::PART_WITH_ROLL_UP) ? 'WITH ROLLUP ' : '') . 
 			Assembly::append('HAVING', $this->getPart(CmdSelect::PART_HAVING)) . 
-			Assembly::append('ORDER BY', $this->getPart(CmdSelect::PART_ORDER_BY)) . 
-			Assembly::appendLimit(
-					$this->getPart(CmdSelect::PART_LIMIT), 
-					$this->getBind(CmdSelect::PART_LIMIT));
+			Assembly::append('ORDER BY', $this->getPart(CmdSelect::PART_ORDER_BY)) .
+			Assembly::append('LIMIT', $this->getPart(CmdSelect::PART_LIMIT));
 		
 		if ($union) 
 		{
@@ -368,7 +366,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	public function limit($from, $count)
 	{
-		return $this->setPart(CmdSelect::PART_LIMIT, true, ($from ? array($from, $count) : $count));
+		return $this->setPart(CmdSelect::PART_LIMIT, [(int)$from, (int)$count], []);
 	}
 	
 	/**

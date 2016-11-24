@@ -62,7 +62,11 @@ class ConfigFacade
 	}
 
 	/**
-	 * @param IMySqlExecuteDecorator[] $decorators
+	 * @param IMySqlExecuteDecorator[] $decorators The last decorator passed to this most top decorator in
+	 * the stuck, meaning - last decorator called first and the first decorator is the decorator to call original
+	 * mysql connector's execute function directly.
+	 * Calling addExecuteDecorator($a, $b) will result in $connector::$execute invoking $a::execute 
+	 * calling $b::execute invoking $connection::$execute
 	 */
 	public function addExecuteDecorator(...$decorators)
 	{

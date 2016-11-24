@@ -44,7 +44,7 @@ class UniqueJoin extends AbstractQueryEnrichment
 		$ids = array_keys($keysMap);
 		$query = clone $this->subQuery;
 		
-		$query->whereIn($this->targetColumn, $ids)->limitBy(1);
+		$query->whereIn($this->targetColumn, $ids);
 		
 		$query->queryWithCallback(
 			function($row)

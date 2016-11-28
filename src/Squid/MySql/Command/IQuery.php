@@ -82,4 +82,12 @@ interface IQuery
 	 * @return array|false
 	 */
 	public function queryMap($key = 0, $value = 1);
+	
+	/**
+	 * Return an array where the result of one column is the index and the remaining data is value.
+	 * @param int|string $key Name of the key column.
+	 * @param bool $removeColumnFromRow Should remove the key column from values.
+	 * @return array|false
+	 */
+	public function queryMapRow($key = 0, $removeColumnFromRow = false);
 }

@@ -203,4 +203,45 @@ trait TQuery
 		
 		return $map;
 	}
+	
+	/**
+	 * Return an array where the result of one column is the index and the remaining data is value.
+	 * @param int|string $key Name of the key column.
+	 * @param bool $removeColumnFromRow Should remove the key column from values.
+	 * @return array|false
+	 */
+	public function queryMapRow($key = 0, $removeColumnFromRow = false)
+	{
+		$fetchMode = $this->resolveFetchMode(is_string($key));
+		$result = $this->execute();
+		$map = [];
+		
+		try
+		{
+			while ($row = $result->fetch($fetchMode))
+			{
+				if (!isset($row[$key]))
+					throw new MySqlException(
+						"Key '$key' column not found in the query result: " .
+						implode(array_keys($row)));
+				
+				if ($removeColumnFromRow)
+				{
+					$map[$row[$key]] = $row;
+					unset($map[$row[$key]][$key]);
+				}
+				else
+				{
+					$map[$row[$key]] = $row;
+				}
+			}
+		}
+			// Free resources when generator released before reaching the end of the iteration.
+		finally
+		{
+			$result->closeCursor();
+		}
+		
+		return $map;
+	}
 }

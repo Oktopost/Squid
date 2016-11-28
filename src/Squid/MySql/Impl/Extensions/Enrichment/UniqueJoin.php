@@ -41,6 +41,9 @@ class UniqueJoin extends AbstractQueryEnrichment
 			$row[$this->asColumn] = [];
 		}
 		
+		if (!$keysMap)
+			return [];
+		
 		$ids = array_keys($keysMap);
 		$query = clone $this->subQuery;
 		

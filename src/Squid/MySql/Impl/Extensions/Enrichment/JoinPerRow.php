@@ -42,6 +42,9 @@ class JoinPerRow extends AbstractQueryEnrichment
 			$row[$this->asColumn] = [];
 		}
 		
+		if (!$data)
+			return $data;
+		
 		$ids = array_keys($keysMap);
 		$query = clone $this->subQuery;
 		

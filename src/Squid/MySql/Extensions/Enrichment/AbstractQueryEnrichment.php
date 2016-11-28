@@ -142,4 +142,15 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	{
 		return $this->source->queryMap($key, $value);
 	}
+	
+	/**
+	 * Return an array where the result of one column is the index and the remaining data is value.
+	 * @param int|string $key Name of the key column.
+	 * @param bool $removeColumnFromRow Should remove the key column from values.
+	 * @return array|false
+	 */
+	public function queryMapRow($key = 0, $removeColumnFromRow = false)
+	{
+		return $this->source->queryMapRow($key, $removeColumnFromRow);
+	}
 }

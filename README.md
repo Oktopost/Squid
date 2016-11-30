@@ -33,8 +33,44 @@ _Example:_
 $select1->from('Table');
 $select2->from('Table', 'a');
 ```
-Will result approprietly in:
+Will result respectively in:
 ```sql
 SELECT * FROM Table
 SELECT * FROM Table a
+```
+
+## Column
+```php
+public function column(...$columns)
+```
+
+Set the columns to select.
+
+_Example:_
+```php
+$select1->column('a', 'NOW()');
+$select2->column('a.a', 'a.b');
+```
+Will result respectively in:
+```sql
+SELECT a, NOW()
+SELECT a.a, a.b
+```
+
+## Columns
+### Columns
+```php
+public function columns($columns, $table = false)
+```
+Set the columns to select using an array variable.
+
+_Example:_
+```php
+$select1->columns(['a', 'NOW()']);
+$select2->columns(['a', 'b'], 'a');
+```
+Will result respectively in:
+```sql
+SELECT a, NOW()
+SELECT a.a, a.b
 ```

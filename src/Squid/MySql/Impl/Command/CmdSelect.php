@@ -48,7 +48,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $alias
 	 * @param string $condition
 	 * @param string $join
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	private function fromSubQuery(ICmdSelect $from, $alias, $condition = '', $join = '')
 	{
@@ -77,7 +77,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $condition
 	 * @param array|bool $bind
 	 * @param string $join
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	private function joinWith($joinWith, $alias, $condition, $bind, $join)
 	{
@@ -141,7 +141,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	/**
 	 * @param bool $distinct
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function distinct($distinct = true) 
 	{
@@ -160,7 +160,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string|array $columns
 	 * @param string|bool $table
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function columns($columns, $table = false) {
 		if (!is_array($columns)) $columns = [$columns];
@@ -179,7 +179,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string|array $columns
 	 * @param bool|array $bind
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function columnsExp($columns, $bind = false) 
 	{
@@ -202,7 +202,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $column
 	 * @param string $alias
 	 * @param array|bool $bind
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function columnAsExp($column, $alias, $bind = false) 
 	{
@@ -212,7 +212,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string $table
 	 * @param bool|string $alias
-	 * @return ICmdSelect
+	 * @return static
 	 * @internal param $ string|ICmdSelect
 	 */
 	public function from($table, $alias = false) 
@@ -236,7 +236,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function join($table, $alias, $condition, $bind = false) 
 	{
@@ -249,7 +249,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $condition
 	 * @param mixed|array $bind
 	 * @param bool $outer
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function leftJoin($table, $alias, $condition, $bind = false, $outer = false) 
 	{
@@ -264,7 +264,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $condition
 	 * @param mixed|array $bind
 	 * @param bool $outer
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function rightJoin($table, $alias, $condition, $bind = false, $outer = false) 
 	{
@@ -277,7 +277,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string|array $column
 	 * @param array|bool $bind
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function groupBy($column, $bind = false) 
 	{
@@ -289,7 +289,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string $exp
 	 * @param mixed|array|bool $bind
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function having($exp, $bind = false) 
 	{
@@ -307,7 +307,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	/**
 	 * @param bool $withRollup
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function withRollup($withRollup = true)
 	{
@@ -317,7 +317,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param ICmdSelect $select
 	 * @param bool $all
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function union(ICmdSelect $select, $all = false)
 	{
@@ -331,7 +331,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	/**
 	 * @param bool $forUpdate
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function forUpdate($forUpdate = true)
 	{
@@ -341,7 +341,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	/**
 	 * @param bool $lockInShareMode
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function lockInShareMode($lockInShareMode = true)
 	{
@@ -352,7 +352,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string $exp
 	 * @param mixed|array|null $bind
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function where($exp, $bind = false)
 	{
@@ -362,7 +362,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param int $from
 	 * @param int $count
-	 * @return ICmdSelect
+	 * @return static
 	 */
 	public function limit($from, $count)
 	{

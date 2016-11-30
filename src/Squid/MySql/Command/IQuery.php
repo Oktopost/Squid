@@ -5,8 +5,14 @@ namespace Squid\MySql\Command;
 interface IQuery
 {
 	/**
-	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
+	 * Identical to queryAll(true);
 	 * @return array
+	 */
+	public function query();
+	
+	/**
+	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
+	 * @return array|false
 	 */
 	public function queryAll($isAssoc = false);
 	

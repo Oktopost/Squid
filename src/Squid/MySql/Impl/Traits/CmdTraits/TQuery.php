@@ -8,7 +8,7 @@ use Squid\Exceptions\SquidException;
 
 
 /**
- * @method \PDOStatement execute()
+ * @method \PDOStatement|mixed execute()
  * @method string __toString()
  * @see \Squid\MySql\Command\IQuery
  */
@@ -24,16 +24,26 @@ trait TQuery
 		
 		return $fetchMode;
 	}
-	
-	
+
+
 	/**
-	 * @inheritdoc
+	 * Identical to queryAll(true);
+	 * @return array
+	 */
+	public function query()
+	{
+		return $this->queryAll(true);
+	}
+
+	/**
+	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
+	 * @return array|bool
 	 */
 	public function queryAll($isAssoc = false) 
 	{
 		$result = $this->execute();
 		
-		if (!$result) return false;
+		if (!$result) return $result;
 		
 		return $result->fetchAll($this->resolveFetchMode($isAssoc));
 	}
@@ -48,7 +58,7 @@ trait TQuery
 		
 		if (!$result)
 		{
-			return false;
+			return $result;
 		}
 		else if ($oneOrNone && $result->rowCount() > 1)
 		{
@@ -69,7 +79,7 @@ trait TQuery
 		
 		if (!$result) 
 		{
-			return false;
+			return $result;
 		}
 		else if ($oneOrNone && $result->columnCount() > 1)
 		{
@@ -135,7 +145,7 @@ trait TQuery
 		$result = $this->execute();
 		
 		if (!$result)
-			return false;
+			return $result;
 		
 		while ($row = $result->fetch($fetchMode)) 
 		{

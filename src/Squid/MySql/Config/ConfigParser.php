@@ -50,7 +50,7 @@ class ConfigParser
 		$object->Port		= (int)self::getValue(3306, 'port', $config);
 		$object->Pass		= self::getValue('', 'pass', $config);
 		$object->User		= self::getValue('', 'user', $config);
-		$object->PDOFlags	= self::getValue('', 'flags', $config);
+		$object->PDOFlags	= self::getValue([], 'flags', $config);
 		
 		return $object;
 	}

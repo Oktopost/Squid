@@ -44,7 +44,7 @@ $delete = $connector->delete();
 # Select
 ## Columns
 
-### Column
+### column method
 ```php
 public function column(...$columns)
 ```
@@ -62,7 +62,7 @@ SELECT a, NOW()
 SELECT a.a, a.b
 ```
 
-### Columns
+### columns method
 ```php
 public function columns($columns, $table = false)
 ```
@@ -81,6 +81,7 @@ SELECT a.a, a.b
 
 
 ## From
+### from method
 **NOTE:** A select can have only one main table. Calling this method a second time on the same select object will replace
 previous table selection.
 

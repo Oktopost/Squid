@@ -105,6 +105,15 @@ class JoinPerRow extends AbstractQueryEnrichment
 	
 	
 	/**
+	 * Identical to queryAll(true);
+	 * @return array
+	 */
+	public function query()
+	{
+		return $this->queryAll(true);
+	}
+	
+	/**
 	 * @param bool $isAssoc
 	 * @return array
 	 */

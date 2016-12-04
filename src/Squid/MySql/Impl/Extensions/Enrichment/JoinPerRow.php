@@ -2,7 +2,6 @@
 namespace Squid\MySql\Impl\Extensions\Enrichment;
 
 
-use Squid\Exceptions\SquidException;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Extensions\Enrichment\AbstractQueryEnrichment;
 
@@ -103,15 +102,6 @@ class JoinPerRow extends AbstractQueryEnrichment
 		return $this;
 	}
 	
-	
-	/**
-	 * Identical to queryAll(true);
-	 * @return array
-	 */
-	public function query()
-	{
-		return $this->queryAll(true);
-	}
 	
 	/**
 	 * @param bool $isAssoc

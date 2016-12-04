@@ -58,7 +58,7 @@ class MySql
 	 * @param string $name
 	 * @return IMySqlConnector
 	 */
-	public function getConnector($name) 
+	public function getConnector($name = 'main') 
 	{
 		if (!isset($this->sharedConnectors[$name]))
 		{

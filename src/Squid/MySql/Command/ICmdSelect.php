@@ -113,6 +113,12 @@ interface ICmdSelect extends IQuery, IMySqlCommand, IWithWhere, IWithLimit
 	public function union(ICmdSelect $select, $all = false);
 	
 	/**
+	 * @param ICmdSelect $select
+	 * @return static
+	 */
+	public function unionAll(ICmdSelect $select);
+	
+	/**
 	 * @param bool $forUpdate
 	 * @return static
 	 */

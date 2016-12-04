@@ -30,11 +30,21 @@ class ConfigFacade
 
 
 	/**
-	 * @param string $name
+	 * Equal to calling addConfig('main', $config)
 	 * @param array $config
 	 * @return static
 	 */
-	public function addConfig($name, array $config) 
+	public function setConfig(array $config = []) 
+	{ 
+		return $this->addConfig('main', $config);
+	}
+	
+	/**
+	 * @param string|array $name 
+	 * @param array $config
+	 * @return static
+	 */
+	public function addConfig($name, array $config = []) 
 	{
 		$this->addConfigObject($name, ConfigParser::parse($config)); 
 		return $this;

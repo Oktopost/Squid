@@ -32,6 +32,15 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	
 	
 	/**
+	 * Identical to queryAll(true);
+	 * @return array
+	 */
+	public function query()
+	{
+		return $this->queryAll(true);
+	}
+	
+	/**
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
 	 * @return array
 	 */

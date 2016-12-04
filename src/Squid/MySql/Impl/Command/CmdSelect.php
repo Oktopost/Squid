@@ -330,6 +330,15 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
+	 * @param ICmdSelect $select
+	 * @return static
+	 */
+	public function unionAll(ICmdSelect $select)
+	{
+		return $this->union($select, true);
+	}
+	
+	/**
 	 * @param bool $forUpdate
 	 * @return static
 	 */
@@ -391,10 +400,24 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	public function queryCount() 
 	{
-		$select = clone $this;
+		$union			= $this->getPart(CmdSelect::PART_UNION);
 		
 		$groupBy		= $this->getPart(CmdSelect::PART_GROUP_BY);
 		$groupByBinds	= $this->getBind(CmdSelect::PART_GROUP_BY);
+		
+		$columns		= $this->getPart(CmdSelect::PART_COLUMNS);
+		$columnsBinds	= $this->getBind(CmdSelect::PART_COLUMNS);
+		$distinct		= $this->getPart(CmdSelect::PART_DISTINCT);
+		
+		if ($union || ($groupBy && $distinct))
+		{
+			$countSelect = new CmdSelect();
+			$countSelect->setConnection($this->getConn());
+			$countSelect->columnsExp('COUNT(*)')->from($this, 'a');
+			return $countSelect->queryInt();
+		}
+		
+		$select = clone $this;
 		
 		if ($groupBy) 
 		{
@@ -403,6 +426,12 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 			$select->setPart(CmdSelect::PART_COLUMNS, array("COUNT(DISTINCT $groupByQuery)"), $groupByBinds);
 			$select->setPart(CmdSelect::PART_GROUP_BY, false);
 		} 
+		else if ($distinct)
+		{
+			$columnsQuery = implode(',', $columns);
+			$select->setPart(CmdSelect::PART_COLUMNS, array("COUNT(DISTINCT $columnsQuery)"), $columnsBinds);
+			$select->setPart(CmdSelect::PART_DISTINCT, false);
+		}
 		else
 		{
 			$select->setPart(CmdSelect::PART_COLUMNS, array('COUNT(*)'));

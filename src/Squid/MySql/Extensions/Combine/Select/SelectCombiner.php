@@ -166,6 +166,7 @@ class SelectCombiner implements ICmdSelect
 	public function queryIterator($isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMap($key = 0, $value = 1) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMapRow($key = 0, $removeColumnFromRow = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryCount() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	
 	
 	/**
@@ -187,27 +188,6 @@ class SelectCombiner implements ICmdSelect
 		return false;
 	}
 	
-	/**
-	 * Execute SELECT COUNT(*). If the query is a group by query, number of distinct values is returned.
-	 * @return int|bool
-	 */
-	public function queryCount()
-	{
-		return array_walk(
-			$this->selects,
-			function($select, $array, $count)
-			{
-				if ($count === false) return false;
-
-				/** @var ICmdSelect $select */
-				$currCount = $select->queryCount();
-
-				if (!is_numeric($currCount)) return false;
-
-				return $currCount + $count;
-			});
-	}
-	
 	
 	/**
 	 * For debug only
@@ -215,7 +195,7 @@ class SelectCombiner implements ICmdSelect
 	 */
 	public function __toString()
 	{
-		$result = "";
+		$result = 'Union of: ';
 
 		foreach ($this->selects as $key => $select)
 		{

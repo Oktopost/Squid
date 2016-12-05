@@ -2,6 +2,7 @@
 namespace Squid\MySql;
 
 
+use Squid\Exceptions\SquidException;
 use Squid\MySql\Config\ConfigParser;
 use Squid\MySql\Config\IConfigLoader;
 use Squid\MySql\Config\ConfigCollection;
@@ -46,6 +47,9 @@ class ConfigFacade
 	 */
 	public function addConfig($name, array $config = []) 
 	{
+		if (!is_string($name))
+			throw new SquidException('Connection name must be a string!');
+		
 		$this->addConfigObject($name, ConfigParser::parse($config)); 
 		return $this;
 	}

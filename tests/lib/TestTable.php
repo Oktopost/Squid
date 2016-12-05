@@ -9,6 +9,7 @@ class TestTable
 {
 	private $name;
 	private $columns;
+	private $data = [];
 	
 	/** @var IMySqlConnector */
 	private $connector;
@@ -59,17 +60,42 @@ class TestTable
 		if ($isOneRow)
 		{
 			$insert->values($data);
+			$newRows = [$data];
 		}
 		else 
 		{
 			$insert->valuesBulk($data);
+			$newRows = $data;
 		}
 		
 		if (!$insert->executeDml())
 		{
 			throw new \Exception('Failed to save data! Table: ' . $this->name . ' data: ' . json_encode($data));
 		}
+		else
+		{
+			$this->data = array_merge($this->data, $newRows);
+		}
 		
 		return $this;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->name();
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function __debugInfo()
+	{
+		return [
+			'Name'	=> $this->name,
+			'Data'	=> $this->data
+		];
 	}
 }

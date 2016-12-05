@@ -9,7 +9,7 @@ class Config
 		return [
 			'db'		=> '_squid_test_',
 			'user'		=> 'root',
-			'passowrd'	=> 'root',
+			'passowrd'	=> '',
 			'host'		=> 'localhost'
 		];
 	}

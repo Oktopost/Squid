@@ -52,6 +52,9 @@ class DataSet
 		
 		$name = '';
 		
+		if (strlen($prefix) > 50)
+			$prefix = substr($prefix, strlen($prefix) - 50);
+		
 		while (!$name || isset(self::$tables[$name]))
 		{
 			$name = self::TABLE_PREFIX . $prefix . rand(0, 1000000);
@@ -79,6 +82,14 @@ class DataSet
 			$table->data($data);
 		
 		return $table;
+	}
+	
+	/**
+	 * @return MySql\IMySqlConnector
+	 */
+	public static function connector()
+	{
+		return self::$mysql->getConnector();
 	}
 	
 	public static function clearDB()

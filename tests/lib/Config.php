@@ -8,8 +8,8 @@ class Config
 	{
 		return [
 			'db'		=> '_squid_test_',
-			'user'		=> 'root',
-			'passowrd'	=> '',
+			'user'		=> '_squid_test_u_',
+			'password'	=> '_squid_test_pass_',
 			'host'		=> 'localhost'
 		];
 	}

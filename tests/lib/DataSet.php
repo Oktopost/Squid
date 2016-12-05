@@ -70,7 +70,7 @@ class DataSet
 	 * @param array $data
 	 * @return TestTable
 	 */
-	public static function table($prefix, array $columns, array $data = [])
+	public static function tableAs($prefix, array $columns, array $data = [])
 	{
 		$name = self::getRandomName($prefix);
 		
@@ -82,6 +82,16 @@ class DataSet
 			$table->data($data);
 		
 		return $table;
+	}
+	
+	/**
+	 * @param array $columns
+	 * @param array $data
+	 * @return TestTable
+	 */
+	public static function table(array $columns, array $data = [])
+	{
+		return self::tableAs('', $columns, $data);
 	}
 	
 	/**

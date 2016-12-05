@@ -27,7 +27,7 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_column_OneColumnPassed()
 	{
-		$table = DataSet::table(__FUNCTION__, ['a', 'b', 'c'], [
+		$table = DataSet::table(['a', 'b', 'c'], [
 			[1, 2, 3],
 			[4, 5, 6]
 		]);
@@ -39,7 +39,7 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_column_ColumnPassedNumberOfTimes()
 	{
-		$table = DataSet::table(__FUNCTION__, ['a', 'b', 'c'], [
+		$table = DataSet::table(['a', 'b', 'c'], [
 			[1, 2, 3],
 			[4, 5, 6]
 		]);
@@ -51,7 +51,7 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_column_NumberOfColumnsPassed()
 	{
-		$table = DataSet::table(__FUNCTION__, ['a', 'b', 'c'], [
+		$table = DataSet::table(['a', 'b', 'c'], [
 			[1, 2, 3],
 			[4, 5, 6]
 		]);
@@ -64,7 +64,7 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_columns_OneColumnPassed()
 	{
-		$table = DataSet::table(__FUNCTION__, ['a', 'b'], [1, 2]);
+		$table = DataSet::table(['a', 'b'], [1, 2]);
 		
 		$result = $this->select($table)->columns(['a'])->queryAll();
 		
@@ -73,7 +73,7 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_columns_OneColumnPassedAsSingleString()
 	{
-		$table = DataSet::table(__FUNCTION__, ['a', 'b'], [1, 2]);
+		$table = DataSet::table(['a', 'b'], [1, 2]);
 		
 		$result = $this->select($table)->columns('a')->queryAll();
 		
@@ -82,7 +82,7 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_columns_NumberOfColumnsPassed()
 	{
-		$table = DataSet::table(__FUNCTION__, ['a', 'b'], [1, 2]);
+		$table = DataSet::table(['a', 'b'], [1, 2]);
 		
 		$result = $this->select($table)->columns(['a', 'b'])->queryAll();
 		
@@ -91,8 +91,8 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_columns_TableNamePrefixUsed()
 	{
-		$tableA = DataSet::table(__FUNCTION__, ['ID', 'col'], [1, 2]);
-		$tableB = DataSet::table(__FUNCTION__, ['ID', 'col'], [1, 3]);
+		$tableA = DataSet::table(['ID', 'col'], [1, 2]);
+		$tableB = DataSet::table(['ID', 'col'], [1, 3]);
 		
 		$result = $this->select()
 			->columns(['col'], 'a')
@@ -105,8 +105,8 @@ class CmdSelectTest extends \PHPUnit_Framework_TestCase
 	
 	public function test_columns_TableNamePrefixWithStringColumn()
 	{
-		$tableA = DataSet::table(__FUNCTION__, ['ID', 'col'], [1, 2]);
-		$tableB = DataSet::table(__FUNCTION__, ['ID', 'col'], [1, 3]);
+		$tableA = DataSet::table(['ID', 'col'], [1, 2]);
+		$tableB = DataSet::table(['ID', 'col'], [1, 3]);
 		
 		$result = $this->select()
 			->columns('col', 'a')

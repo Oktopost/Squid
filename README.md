@@ -101,3 +101,45 @@ Will result respectively in:
 SELECT * FROM Table
 SELECT * FROM Table a
 ```
+
+# Where Clause
+The where clause commands are available in select, insert, update, upsert and delete commands.
+
+## where method
+```php
+public function where($exp, $bind = false)
+```
+
+Provide any costume where expression with optional bind parameters.
+
+_Example:_
+```php
+$select1->where('1 + 1 = ?', 2);
+$select2->where('Table.SomeFieldName = ? - ?', [3, 1]);
+$delete->where('NOW() > DATE(NOW())');
+```
+Will result respectively in:
+```sql
+SELECT * WHERE 1 + 1 = 2
+SELECT * WHERE Table.SomeFieldName = 3 - 1
+DELETE * WHERE NOW() > DATE(NOW())
+```
+
+## byField method
+```php
+public function byField($field, $value) 
+```
+Search for field = value or, if value is an array, where field IN (values)
+
+_Example:_
+```php
+$select1->byField('Name', ['Jhon']);
+$select1->byField('ROUND(Price)', [23]);
+$select1->byField('ID', [2, 3]);
+```
+Will result respectively in:
+```sql
+SELECT * WHERE Name = 'Jhon'
+SELECT * WHERE ROUND(Price) = 23
+SELECT * WHERE ID IN (2, 3)
+```

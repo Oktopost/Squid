@@ -6,6 +6,8 @@ use Squid\MySql\Config\MySqlConnectionConfig;
 use Squid\MySql\Exceptions\MySqlException;
 use Squid\MySql\Connection\IMySqlConnection;
 
+use Squid\Exceptions\SquidException;
+
 
 class MySqlConnection implements IMySqlConnection 
 {
@@ -33,6 +35,30 @@ class MySqlConnection implements IMySqlConnection
 		foreach ($this->config->PDOFlags as $flag => $value)
 		{
 			$this->pdo->setAttribute($flag, $value);
+		}
+	}
+	
+	/**
+	 * @param \PDOStatement $statement
+	 * @param array $params
+	 */
+	private function bindParams(\PDOStatement $statement, array $params)
+	{
+		foreach ($params as $index => $value)
+		{
+			$value = $params[$index];
+			
+			if (is_array($value)) 
+			{
+				if (count($value) != 2)
+					throw new SquidException('Invalid bind value: ' . json_encode($value));
+				
+				$statement->bindValue($index + 1, $value[0], $value[1]);
+			}
+			else 
+			{
+				$statement->bindValue($index + 1, $value);
+			}
 		}
 	}
 	
@@ -97,7 +123,8 @@ class MySqlConnection implements IMySqlConnection
 		if (!$statement) 
 			throw MySqlException::create($this->pdo->errorInfo());
 		
-		$result = $statement->execute($bind);
+		$this->bindParams($statement, $bind);
+		$result = $statement->execute();
 		
 		if (!$result)
 			throw MySqlException::create($statement->errorInfo());

@@ -135,7 +135,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 	public function updateObjectByFields(LiteObject $object, array $keyFields)
 	{
 		return (bool)$this->updateByFields(
-			$object->toArray([], $keyFields),
+			$object->toArray([], array_merge($keyFields, $this->getIgnoreFields())),
 			$object->toArray($keyFields)
 		);
 	}

@@ -2,8 +2,8 @@
 namespace Squid\MySql\Connectors\Abstraction;
 
 
-use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Generic\ITableNameConnector;
+use Squid\Exceptions\SquidException;
 
 
 class TableNameConnector implements ITableNameConnector

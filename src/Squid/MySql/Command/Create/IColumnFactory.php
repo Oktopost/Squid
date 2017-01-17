@@ -49,6 +49,22 @@ interface IColumnFactory
 	 * @return IColumn
 	 */
 	public function bigint($length = 1);
+
+	/**
+	 * @see https://dev.mysql.com/doc/refman/5.7/en/precision-math-decimal-characteristics.html
+	 * @param int $precision
+	 * @param int $scale
+	 * @return IColumn
+	 */
+	public function decimal($precision, $scale);
+	
+	/**
+	 * Equivalent to decimal($intDigits + $fractionDigits, $fractionDigits);
+	 * @param int $intDigits
+	 * @param int $fractionDigits
+	 * @return IColumn
+	 */
+	public function createDecimal($intDigits, $fractionDigits);
 	
 	/**
 	 * @return IColumn

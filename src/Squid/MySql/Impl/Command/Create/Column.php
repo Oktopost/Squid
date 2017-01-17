@@ -53,7 +53,7 @@ class Column implements IColumn
 	
 	/**
 	 * @param string $type
-	 * @param string|null $length
+	 * @param int|string|null $length
 	 * @return static
 	 */
 	public function type($type, $length = null)

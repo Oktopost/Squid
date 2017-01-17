@@ -4,13 +4,14 @@ namespace Squid\MySql\Impl\Command\Create;
 
 use Squid\MySql\Command\Create\IColumn;
 use Squid\MySql\Command\Create\IColumnFactory;
+use Squid\Exceptions\SquidException;
 
 
 class ColumnFactory implements IColumnFactory
 {
 	/**
 	 * @param string $type
-	 * @param int|null $length
+	 * @param int|string|null $length
 	 * @return IColumn
 	 */
 	private function create($type, $length = null)
@@ -19,98 +20,37 @@ class ColumnFactory implements IColumnFactory
 	}
 	
 	
-	/**
-	 * Create new CHAR column
-	 * @param int $length
-	 * @return IColumn
-	 */
 	public function char($length) { return $this->create('CHAR', $length); }
-	
-	/**
-	 * @param int $length
-	 * @return IColumn
-	 */
 	public function varchar($length) { return $this->create('VARCHAR', $length); }
 	
-	/**
-	 * @param int $length
-	 * @return IColumn
-	 */
-	public function tinyint($length = 1) { return $this->create('TINYINT', $length); }
-	
-	/**
-	 * @param int $length
-	 * @return IColumn
-	 */
-	public function smallint($length = 1) { return $this->create('SMALLINT', $length); }
-	
-	/**
-	 * @param int $length
-	 * @return IColumn
-	 */
-	public function mediumint($length = 1) { return $this->create('MEDIUMINT', $length); }
-	
-	/**
-	 * @param int $length
-	 * @return IColumn
-	 */
+	public function tinyint($length = 4) { return $this->create('TINYINT', $length); }
+	public function smallint($length = 6) { return $this->create('SMALLINT', $length); }
+	public function mediumint($length = 9) { return $this->create('MEDIUMINT', $length); }
 	public function int($length = 11) { return $this->create('INT', $length); }
+	public function bigint($length = 20) { return $this->create('BIGINT', $length); }
 	
-	/**
-	 * @param int $length
-	 * @return IColumn
-	 */
-	public function bigint($length = 1) { return $this->create('BIGINT', $length); }
-	
-	/**
-	 * @return IColumn
-	 */
-	public function date() { return $this->create('DATE'); } 
-	
-	/**
-	 * @return IColumn
-	 */
-	public function time() { return $this->create('TIME'); } 
-	
-	/**
-	 * @return IColumn
-	 */
-	public function year() { return $this->create('YEAR'); } 
-	
-	/**
-	 * @return IColumn
-	 */
-	public function dateTime() { return $this->create('DATETIME'); } 
-	
-	/**
-	 * @return IColumn
-	 */
-	public function timeStamp() { return $this->create('TIMESTAMP'); } 
-	
-	/**
-	 * @return IColumn
-	 */
-	public function text() { return $this->create('TEXT'); } 
-	
-	/**
-	 * @param array $values
-	 * @return IColumn
-	 */
+	public function date() { return $this->create('DATE'); }
+	public function time() { return $this->create('TIME'); }
+	public function year() { return $this->create('YEAR'); }
+	public function dateTime() { return $this->create('DATETIME'); }
+	public function timeStamp() { return $this->create('TIMESTAMP'); }
+	public function text() { return $this->create('TEXT'); }
 	public function enum(array $values) { return $this->create("ENUM('" . implode("','", $values) . "')"); }
-	
-	/**
-	 * @param array $values
-	 * @return IColumn
-	 */
 	public function set(array $values) { return $this->create("SET('" . implode("','", $values) . "')"); }
-	
-	/**
-	 * @return IColumn
-	 */
 	public function json() { return $this->create('JSON'); }
-	
-	/**
-	 * @return IColumn
-	 */
 	public function bool() { return $this->tinyint(1); }
+	
+	
+	public function decimal($precision, $scale)
+	{
+		if ($scale > $precision) 
+			throw new SquidException('Scale must not be greater then precision!');
+		
+		return $this->create('DECIMAL', "$precision,$scale");
+	}
+	
+	public function createDecimal($intDigits, $fractionDigits)
+	{
+		return $this->decimal($intDigits + $fractionDigits, $fractionDigits);
+	}
 }

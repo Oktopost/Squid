@@ -9,6 +9,9 @@ use Squid\Exceptions\SquidException;
 
 class ColumnFactory implements IColumnFactory
 {
+	private $name;
+	
+	
 	/**
 	 * @param string $type
 	 * @param int|string|null $length
@@ -16,7 +19,16 @@ class ColumnFactory implements IColumnFactory
 	 */
 	private function create($type, $length = null)
 	{
-		return (new Column())->type($type, $length);
+		return (new Column($this->name))->type($type, $length);
+	}
+	
+	
+	/**
+	 * @param string $name
+	 */
+	public function __construct($name)
+	{
+		$this->name = $name;
 	}
 	
 	

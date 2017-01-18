@@ -2,12 +2,12 @@
 namespace Squid\MySql\Command;
 
 
+use Squid\MySql\Command\Create\IIndexable;
 use Squid\MySql\Command\Create\IForeignKey;
-use Squid\MySql\Command\Create\IColumnFactory;
 use Squid\MySql\Command\Create\IColumnsSource;
 
 
-interface ICmdCreate extends IColumnsSource 
+interface ICmdCreate extends IColumnsSource, IIndexable 
 {
 	/**
 	 * @return string
@@ -25,30 +25,12 @@ interface ICmdCreate extends IColumnsSource
 	 * @return static
 	 */
 	public function table($name);
-
-	/**
-	 * @param string $name
-	 * @return IColumnFactory
-	 */
-	public function column($name);
 	
 	/**
 	 * @param string[] ...$columns
 	 * @return static
 	 */
 	public function primary(...$columns);
-	
-	/**
-	 * @param string[] ...$columns
-	 * @return static
-	 */
-	public function index(...$columns);
-	
-	/**
-	 * @param string[] ...$columns
-	 * @return static
-	 */
-	public function unique(...$columns);
 	
 	/**
 	 * @param string|null $name

@@ -5,7 +5,8 @@ namespace Squid\MySql\Command\Create;
 interface IColumnsSource
 {
 	/**
-	 * @param IColumn $column
+	 * @param string $name
+	 * @return IColumnFactory
 	 */
-	public function add(IColumn $column);
+	public function column($name);
 }

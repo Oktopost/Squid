@@ -2,8 +2,8 @@
 namespace Squid\MySql\Impl\Command\Create;
 
 
-use Squid\MySql\Command\Create\IForeignKey;
 use Squid\MySql\ForeignKeyBehavior;
+use Squid\MySql\Command\Create\IForeignKey;
 
 
 class ForeignKey implements IForeignKey
@@ -18,6 +18,39 @@ class ForeignKey implements IForeignKey
 	
 	
 	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getTargetTable()
+	{
+		return $this->onTable;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getTargetColumn()
+	{
+		return $this->onColumn;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getSourceColumn()
+	{
+		return $this->column;
+	}
+	
+	
+	/**
 	 * @param string $name
 	 * @return static
 	 */
@@ -25,14 +58,6 @@ class ForeignKey implements IForeignKey
 	{
 		$this->name = $name;
 		return $this;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
 	}
 	
 	/**

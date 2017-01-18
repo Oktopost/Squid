@@ -11,6 +11,9 @@ class ColumnFactory implements IColumnFactory
 {
 	private $name;
 	
+	/** @var IColumnsTarget */
+	private $target;
+	
 	
 	/**
 	 * @param string $type
@@ -19,16 +22,20 @@ class ColumnFactory implements IColumnFactory
 	 */
 	private function create($type, $length = null)
 	{
-		return (new Column($this->name))->type($type, $length);
+		$column = (new Column($this->name))->type($type, $length);
+		$this->target->add($column);
+		return $column;
 	}
 	
 	
 	/**
+	 * @param IColumnsTarget $target
 	 * @param string $name
 	 */
-	public function __construct($name)
+	public function __construct(IColumnsTarget $target, $name)
 	{
 		$this->name = $name;
+		$this->target = $target;
 	}
 	
 	

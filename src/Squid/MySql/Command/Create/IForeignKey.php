@@ -5,15 +5,30 @@ namespace Squid\MySql\Command\Create;
 interface IForeignKey
 {
 	/**
-	 * @param string $name
-	 * @return static
+	 * @return string
 	 */
-	public function name($name);
+	public function getName();
 	
 	/**
 	 * @return string
 	 */
-	public function getName();
+	public function getTargetTable();
+	
+	/**
+	 * @return string
+	 */
+	public function getTargetColumn();
+	
+	/**
+	 * @return string
+	 */
+	public function getSourceColumn();
+	
+	/**
+	 * @param string $name
+	 * @return static
+	 */
+	public function name($name);
 	
 	/**
 	 * @param string $table

@@ -237,7 +237,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 	/**
 	 * @inheritdoc
 	 */
-	public function deleteByFields(array $fields, $returnCount = false)
+	public function deleteByFields(array $fields)
 	{
 		$delete = $this->connector
 			->delete()
@@ -245,6 +245,6 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 		
 		$this->createFilter($delete, $fields);
 		
-		return $delete->executeDml($returnCount);
+		return $delete->executeDml();
 	}
 }

@@ -114,10 +114,9 @@ interface IObjectConnector
 	
 	/**
 	 * @param array $fields
-	 * @param bool $returnCount
 	 * @return bool
 	 */
-	public function deleteByFields(array $fields, $returnCount = false);
+	public function deleteByFields(array $fields);
 	
 	/**
 	 * @return bool

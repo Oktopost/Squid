@@ -6,7 +6,7 @@ use Squid\MySql\Command\ICmdDelete;
 use Squid\Exceptions\SquidException;
 
 
-class CmdDelete extends PartsCommand implements ICmdDelete 
+class CmdDelete extends PartsCommand implements ICmdDelete
 {
 	use \Squid\MySql\Impl\Traits\CmdTraits\TDml;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
@@ -34,7 +34,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	 * Get the parts this query can have.
 	 * @return array Array containing only the part as keys and values set to false.
 	 */
-	protected function getDefaultParts() 
+	protected function getDefaultParts()
 	{
 		return CmdDelete::$DEFAULT;
 	}
@@ -43,15 +43,13 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	 * Combine all the parts into one sql.
 	 * @return string Created query.
 	 */
-	protected function generate() 
+	protected function generate()
 	{
-		return 
-			'DELETE FROM ' . $this->getPart(CmdDelete::PART_FROM) . ' ' . 
-				Assembly::appendWhere($this->getPart(CmdDelete::PART_WHERE), true) . 
-				Assembly::appendOrderBy($this->getPart(CmdDelete::PART_ORDER_BY)) . 
-				Assembly::appendLimit(
-					$this->getPart(CmdDelete::PART_LIMIT), 
-					$this->getBind(CmdDelete::PART_LIMIT));
+		return
+			'DELETE FROM ' . $this->getPart(CmdDelete::PART_FROM) . ' ' .
+			Assembly::appendWhere($this->getPart(CmdDelete::PART_WHERE), true) .
+			Assembly::appendOrderBy($this->getPart(CmdDelete::PART_ORDER_BY)) .
+			Assembly::append('LIMIT', $this->getPart(CmdDelete::PART_LIMIT));
 	}
 	
 	
@@ -73,7 +71,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	 */
 	public function where($exp, $bind = false)
 	{
-		return $this->appendPart(CmdDelete::PART_WHERE, $exp, $bind); 
+		return $this->appendPart(CmdDelete::PART_WHERE, $exp, $bind);
 	}
 	
 	/**
@@ -97,6 +95,6 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 		if ($from)
 			throw new SquidException('MySQL DELETE query supports only LIMIT [count] and not LIMIT [from], [count]');
 		
-		return $this->setPart(CmdDelete::PART_LIMIT, true, $count);
+		return $this->setPart(CmdDelete::PART_LIMIT, [$count], []);
 	}
 }

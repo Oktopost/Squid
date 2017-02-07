@@ -2,8 +2,8 @@
 namespace Squid\MySql\Impl\Command;
 
 
-use Squid\MySql\Command\Create\IColumn;
 use Squid\MySql\Command\ICmdCreate;
+use Squid\MySql\Command\Create\IColumn;
 use Squid\MySql\Command\Create\IForeignKey;
 use Squid\MySql\Command\Create\IColumnFactory;
 use Squid\MySql\Impl\Command\Create\ColumnFactory;

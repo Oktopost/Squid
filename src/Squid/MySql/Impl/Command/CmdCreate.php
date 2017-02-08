@@ -7,14 +7,21 @@ use Squid\MySql\Command\Create\IColumn;
 use Squid\MySql\Command\Create\IForeignKey;
 use Squid\MySql\Command\Create\IColumnFactory;
 use Squid\MySql\Impl\Command\Create\ColumnFactory;
-use Squid\MySql\Impl\Command\Create\ForeignKey;
 use Squid\MySql\Impl\Command\Create\IColumnsTarget;
+use Squid\MySql\Impl\Command\Create\KeysCollection;
 
 
 class CmdCreate implements ICmdCreate, IColumnsTarget  
 {
+	/** @var KeysCollection */
+	private $indexes; 
 	
 	
+	public function __construct()
+	{
+		$this->indexes = new KeysCollection();
+	}
+
 	// CREATE TABLE `okt`.`sad` ( `a` INT NOT NULL ) ENGINE = InnoDB CHARSET=binary COMMENT = 'asdasd';
 	
 	
@@ -64,7 +71,8 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function primary(...$columns)
 	{
-		// TODO: Implement primary() method.
+		$this->indexes->primary(...$columns);
+		return $this;
 	}
 	
 	/**
@@ -74,7 +82,8 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function index($name, ...$columns)
 	{
-		// TODO: Implement index() method.
+		$this->indexes->index($name, ...$columns);
+		return $this;
 	}
 	
 	/**
@@ -84,7 +93,8 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function unique($name, ...$columns)
 	{
-		// TODO: Implement unique() method.
+		$this->indexes->unique($name, ...$columns);
+		return $this;
 	}
 	
 	/**
@@ -93,12 +103,15 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function foreignKey($name = null)
 	{
-		$key = new ForeignKey();
-		// TODO: This add key.
-		
-		if ($name)
-			$key->name($name);
-		
-		return $key;
+		return $this->indexes->foreignKey($name);
+	}
+
+	/**
+	 * @param string $comment
+	 * @return static
+	 */
+	public function comment($comment)
+	{
+		return $this;
 	}
 }

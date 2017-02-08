@@ -2,6 +2,9 @@
 namespace Squid\MySql\Impl\Command\Create;
 
 
+use Squid\Exceptions\SquidException;
+
+
 class KeysCollection
 {
 	private $primary = null;
@@ -49,6 +52,9 @@ class KeysCollection
 	 */
 	public function primary(...$columns)
 	{
+		if ($this->primary)
+			throw new SquidException('Primary key can not be redefined');
+		
 		$this->primary = $columns;
 	}
 	

@@ -37,4 +37,10 @@ interface ICmdCreate extends IColumnsSource, IIndexable
 	 * @return IForeignKey
 	 */
 	public function foreignKey($name = null);
+
+	/**
+	 * @param string $comment
+	 * @return static
+	 */
+	public function comment($comment);
 }

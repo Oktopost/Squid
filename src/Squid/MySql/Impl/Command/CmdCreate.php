@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdCreate;
+use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Impl\Command\Create\KeysCollection;
 use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 
@@ -13,24 +14,30 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithColumns;
 	
 	
-	const PART_TEMP     = 0;
-	const PART_DB		= 1;
-	const PART_NAME		= 2;
-	const PART_ENGINE	= 3;
-	const PART_CHARSET	= 4;
-	const PART_COMMENT  = 5;
+	const PART_TEMP			= 0;
+	const PART_IF_NOT_EXIST	= 1;
+	const PART_DB			= 2;
+	const PART_NAME			= 3;
+	const PART_ENGINE		= 4;
+	const PART_CHARSET		= 5;
+	const PART_COMMENT 		= 6;
+	const PART_LIKE			= 7;
+	const PART_AS			= 8;
 	
 	
 	/**
 	 * @var array Collection of default values.
 	 */
 	private static $DEFAULT = array(
-		CmdCreate::PART_TEMP    => false,
-		CmdCreate::PART_DB		=> '',
-		CmdCreate::PART_NAME    => false,
-		CmdCreate::PART_ENGINE  => false,
-		CmdCreate::PART_CHARSET => false,
-		CmdCreate::PART_COMMENT => false
+		CmdCreate::PART_TEMP 			=> false,
+		CmdCreate::PART_IF_NOT_EXIST	=> false,
+		CmdCreate::PART_DB				=> '',
+		CmdCreate::PART_NAME			=> false,
+		CmdCreate::PART_ENGINE			=> false,
+		CmdCreate::PART_CHARSET 		=> false,
+		CmdCreate::PART_COMMENT 		=> false,
+		CmdCreate::PART_LIKE			=> false,
+		CmdCreate::PART_AS				=> false
 	);
 
 
@@ -154,7 +161,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 */
 	public function assemble()
 	{
-		$command =  
+		$command = 
 			'CREATE ' . 
 				$this->getPartIfSet(self::PART_TEMP) .
 			'TABLE ' . 
@@ -168,5 +175,26 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 			$this->getPartIfSet(self::PART_COMMENT, 'COMMENT=');
 		
 		return $command;
+	}
+
+	/**
+	 * @param string $name Database name, or table name if second parameter is omitted.
+	 * @param string|bool $tableName
+	 * @return static
+	 */
+	public function like($name, $tableName = false)
+	{
+		$this->parts[self::PART_LIKE] = ($tableName ? "`$name`.`$tableName`" : "`$name`");
+		return $this;
+	}
+
+	/**
+	 * @param ICmdSelect|string $query
+	 * @return static
+	 */
+	public function asQuery($query)
+	{
+		$this->parts[self::PART_AS] = $query;
+		return $this;
 	}
 }

@@ -67,4 +67,17 @@ interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable
 	 * @return static
 	 */
 	public function comment($comment);
+	
+	/**
+	 * @param string $name Database name, or table name if second parameter is omitted. 
+	 * @param string|bool $tableName
+	 * @return static
+	 */
+	public function like($name, $tableName = false);
+	
+	/**
+	 * @param ICmdSelect|string $query
+	 * @return static
+	 */
+	public function asQuery($query);
 }

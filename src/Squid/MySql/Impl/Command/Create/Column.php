@@ -89,7 +89,7 @@ class Column implements IColumn
 	 */
 	public function defaultValue($value)
 	{
-		$this->parts[self::PART_DEFAULT] = $value;
+		$this->parts[self::PART_DEFAULT] = "DEFAULT $value";
 		return $this;
 	}
 	
@@ -119,7 +119,7 @@ class Column implements IColumn
 	 */
 	public function onUpdateCurrentTimestampExpression()
 	{
-		$this->attributesExpression('on update CURRENT_TIMESTAMP');
+		$this->attributesExpression('ON UPDATE CURRENT_TIMESTAMP');
 		return $this;
 	}
 	
@@ -137,7 +137,7 @@ class Column implements IColumn
 	/**
 	 * @return string
 	 */
-	public function generate()
+	public function assemble()
 	{
 		$values = array_filter($this->parts);
 		return implode(' ', $values);

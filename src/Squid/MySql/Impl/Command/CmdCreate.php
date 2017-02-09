@@ -3,7 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdCreate;
-use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Command\IMySqlCommand;
 use Squid\MySql\Impl\Command\Create\KeysCollection;
 use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 
@@ -43,6 +43,18 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 
 	/** @var array */
 	private $parts;
+	
+	
+	/**
+	 * @param int $part
+	 * @param string $prefix
+	 * @param string $suffix
+	 * @return string
+	 */
+	private function getPartIfSet($part, $prefix = '', $suffix = '')
+	{
+		return ($this->parts[$part] ? $prefix . $this->parts[$part] . $suffix . ' ' : '');
+	}
 	
 	
 	public function __construct()
@@ -149,18 +161,8 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 */
 	public function bind()
 	{
-		return [];
-	}
-
-	/**
-	 * @param int $part
-	 * @param string $prefix
-	 * @param string $suffix
-	 * @return string
-	 */
-	private function getPartIfSet($part, $prefix = '', $suffix = '')
-	{
-		return ($this->parts[$part] ? $prefix . $this->parts[$part] . $suffix . ' ' : '');
+		$as = $this->parts[self::PART_AS];
+		return ($as instanceof IMySqlCommand ? $as->bind() : []);
 	}
 	
 	/**
@@ -176,16 +178,47 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 				$this->getPartIfSet(self::PART_IF_NOT_EXIST) .
 				$this->parts[self::PART_DB] . $this->parts[self::PART_NAME];
 		
-		$command .= "(\n";
+		if ($this->parts[self::PART_LIKE])
+		{
+			return $command . ' ' . $this->parts[self::PART_LIKE];
+		}
 		
-		$command .= ') ' . 
-			$this->getPartIfSet(self::PART_ENGINE, 'ENGINE=') .
-			$this->getPartIfSet(self::PART_CHARSET, 'CHARSET=') .
-			$this->getPartIfSet(self::PART_COMMENT, 'COMMENT=');
+		if (!$this->columnsList->isEmpty())
+		{
+			$command .= '(';
+			
+			$columns = $this->columnsList->assemble();
+			$keys = $this->indexes->assemble();
+			$combined = array_merge($columns, $keys);
+			$command .= implode(',', $combined);
+			
+			$command .= ') ' . 
+				$this->getPartIfSet(self::PART_ENGINE, 'ENGINE=') .
+				$this->getPartIfSet(self::PART_CHARSET, 'CHARSET=') .
+				$this->getPartIfSet(self::PART_COMMENT, 'COMMENT=');
+		}
+		
+		if ($this->parts[self::PART_AS]) 
+		{
+			$command .= " {$this->getAsExpression()}";
+		}
 		
 		return $command;
 	}
 
+	/**
+	 * @return string
+	 */
+	private function getAsExpression()
+	{
+		$data = $this->parts[self::PART_AS];
+		
+		if ($data instanceof IMySqlCommand)
+			return $data->assemble();
+		
+		return $data;
+	}
+	
 	/**
 	 * @param string $name Database name, or table name if second parameter is omitted.
 	 * @param string|bool $tableName
@@ -193,12 +226,12 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 */
 	public function like($name, $tableName = false)
 	{
-		$this->parts[self::PART_LIKE] = ($tableName ? "`$name`.`$tableName`" : "`$name`");
+		$this->parts[self::PART_LIKE] = ($tableName ? "LIKE `$name`.`$tableName`" : "LIKE `$name`");
 		return $this;
 	}
 
 	/**
-	 * @param ICmdSelect|string $query
+	 * @param IMySqlCommand|string $query
 	 * @return static
 	 */
 	public function asQuery($query)

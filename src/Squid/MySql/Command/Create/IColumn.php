@@ -60,5 +60,5 @@ interface IColumn
 	/**
 	 * @return string
 	 */
-	public function generate();
+	public function assemble();
 }

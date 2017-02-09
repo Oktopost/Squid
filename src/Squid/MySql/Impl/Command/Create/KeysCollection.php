@@ -60,10 +60,10 @@ class KeysCollection
 	
 	
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function build()
+	public function assemble()
 	{
-		
+		return [];
 	}
 }

@@ -81,7 +81,7 @@ interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable
 	public function like($name, $tableName = false);
 	
 	/**
-	 * @param ICmdSelect|string $query
+	 * @param IMySqlCommand|string $query
 	 * @return static
 	 */
 	public function asQuery($query);

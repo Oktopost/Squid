@@ -21,10 +21,33 @@ interface ICmdCreate extends IColumnsSource, IIndexable
 	public function temporary();
 	
 	/**
+	 * @param string $db
+	 * @return static
+	 */
+	public function db($db);
+	
+	/**
 	 * @param string $name
 	 * @return static
 	 */
 	public function table($name);
+	
+	/**
+	 * @param string $engine
+	 * @return static
+	 */
+	public function engine($engine);
+	
+	/**
+	 * @return static
+	 */
+	public function innoDB();
+	
+	/**
+	 * @param string $charset
+	 * @return static
+	 */
+	public function charset($charset);
 	
 	/**
 	 * @param string[] ...$columns

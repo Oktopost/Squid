@@ -3,31 +3,51 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdCreate;
-use Squid\MySql\Command\Create\IColumn;
 use Squid\MySql\Command\Create\IForeignKey;
 use Squid\MySql\Command\Create\IColumnFactory;
 use Squid\MySql\Impl\Command\Create\ColumnFactory;
-use Squid\MySql\Impl\Command\Create\IColumnsTarget;
 use Squid\MySql\Impl\Command\Create\KeysCollection;
+use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 
 
-class CmdCreate implements ICmdCreate, IColumnsTarget  
+class CmdCreate implements ICmdCreate
 {
+	
+	// CREATE TABLE `okt`.`sad` ( `a` INT NOT NULL ) ENGINE = InnoDB CHARSET=binary COMMENT = 'asdasd';
+	
+	
+	const PART_TEMP     = 0;
+	const PART_DB		= 1;
+	const PART_NAME		= 2;
+	const PART_ENGINE	= 3;
+	const PART_CHARSET	= 4;
+	const PART_COMMENT  = 5;
+	
+	
+	/**
+	 * @var array Collection of default values.
+	 */
+	private static $DEFAULT = array(
+		CmdCreate::PART_TEMP    => false,
+		CmdCreate::PART_DB		=> false,
+		CmdCreate::PART_NAME    => false,
+		CmdCreate::PART_ENGINE  => false,
+		CmdCreate::PART_CHARSET => false,
+		CmdCreate::PART_COMMENT => false
+	);
+	
+	
 	/** @var KeysCollection */
 	private $indexes; 
+	
+	/** @var ColumnsCollection */
+	private $columnsList;
 	
 	
 	public function __construct()
 	{
 		$this->indexes = new KeysCollection();
-	}
-
-	// CREATE TABLE `okt`.`sad` ( `a` INT NOT NULL ) ENGINE = InnoDB CHARSET=binary COMMENT = 'asdasd';
-	
-	
-	public function add(IColumn $column)
-	{
-		// TODO: Implement add() method.
+		$this->columnsList = new ColumnsCollection();
 	}
 	
 	
@@ -36,7 +56,7 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function getName()
 	{
-		// TODO: Implement getName() method.
+		return self::$DEFAULT[self::PART_NAME];
 	}
 	
 	/**
@@ -44,7 +64,18 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function temporary()
 	{
-		// TODO: Implement temporary() method.
+		self::$DEFAULT[self::PART_TEMP] = 'TEMPORARY';
+		return $this;
+	}
+	
+	/**
+	 * @param string $db
+	 * @return static
+	 */
+	public function db($db)
+	{
+		self::$DEFAULT[self::PART_DB] = "$db.";
+		return $this;
 	}
 	
 	/**
@@ -53,7 +84,37 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function table($name)
 	{
-		// TODO: Implement table() method.
+		self::$DEFAULT[self::PART_NAME] = $name;
+		return $this;
+	}
+	
+	
+	/**
+	 * @param string $engine
+	 * @return static
+	 */
+	public function engine($engine)
+	{
+		self::$DEFAULT[self::PART_ENGINE] = $engine;
+		return $this;
+	}
+	
+	/**
+	 * @return static
+	 */
+	public function innoDB()
+	{
+		return $this->engine('InnoDB');
+	}
+	
+	/**
+	 * @param string $charset
+	 * @return static
+	 */
+	public function charset($charset)
+	{
+		self::$DEFAULT[self::PART_CHARSET] = $charset;
+		return $this;
 	}
 	
 	/**
@@ -62,7 +123,7 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function column($name)
 	{
-		return new ColumnFactory($this, $name);
+		return new ColumnFactory($this->columnsList, $name);
 	}
 	
 	/**
@@ -112,6 +173,7 @@ class CmdCreate implements ICmdCreate, IColumnsTarget
 	 */
 	public function comment($comment)
 	{
+		self::$DEFAULT[self::PART_COMMENT] = $comment;
 		return $this;
 	}
 }

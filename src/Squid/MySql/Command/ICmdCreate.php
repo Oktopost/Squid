@@ -7,7 +7,7 @@ use Squid\MySql\Command\Create\IForeignKey;
 use Squid\MySql\Command\Create\IColumnsSource;
 
 
-interface ICmdCreate extends IColumnsSource, IIndexable 
+interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable 
 {
 	/**
 	 * @return string
@@ -27,10 +27,11 @@ interface ICmdCreate extends IColumnsSource, IIndexable
 	public function db($db);
 	
 	/**
-	 * @param string $name
+	 * @param string $name Database name, or table name if second parameter is omitted. 
+	 * @param string|bool $tableName
 	 * @return static
 	 */
-	public function table($name);
+	public function table($name, $tableName = false);
 	
 	/**
 	 * @param string $engine

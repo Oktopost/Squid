@@ -3,17 +3,14 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdCreate;
-use Squid\MySql\Command\Create\IForeignKey;
-use Squid\MySql\Command\Create\IColumnFactory;
-use Squid\MySql\Impl\Command\Create\ColumnFactory;
 use Squid\MySql\Impl\Command\Create\KeysCollection;
 use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 
 
-class CmdCreate implements ICmdCreate
+class CmdCreate extends AbstractCommand implements ICmdCreate
 {
-	
-	// CREATE TABLE `okt`.`sad` ( `a` INT NOT NULL ) ENGINE = InnoDB CHARSET=binary COMMENT = 'asdasd';
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithIndex;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithColumns;
 	
 	
 	const PART_TEMP     = 0;
@@ -29,25 +26,23 @@ class CmdCreate implements ICmdCreate
 	 */
 	private static $DEFAULT = array(
 		CmdCreate::PART_TEMP    => false,
-		CmdCreate::PART_DB		=> false,
+		CmdCreate::PART_DB		=> '',
 		CmdCreate::PART_NAME    => false,
 		CmdCreate::PART_ENGINE  => false,
 		CmdCreate::PART_CHARSET => false,
 		CmdCreate::PART_COMMENT => false
 	);
-	
-	
-	/** @var KeysCollection */
-	private $indexes; 
-	
-	/** @var ColumnsCollection */
-	private $columnsList;
+
+
+	/** @var array */
+	private $parts;
 	
 	
 	public function __construct()
 	{
 		$this->indexes = new KeysCollection();
 		$this->columnsList = new ColumnsCollection();
+		$this->parts = self::$DEFAULT;
 	}
 	
 	
@@ -56,7 +51,7 @@ class CmdCreate implements ICmdCreate
 	 */
 	public function getName()
 	{
-		return self::$DEFAULT[self::PART_NAME];
+		return $this->parts[self::PART_NAME];
 	}
 	
 	/**
@@ -64,7 +59,7 @@ class CmdCreate implements ICmdCreate
 	 */
 	public function temporary()
 	{
-		self::$DEFAULT[self::PART_TEMP] = 'TEMPORARY';
+		$this->parts[self::PART_TEMP] = 'TEMPORARY';
 		return $this;
 	}
 	
@@ -74,17 +69,24 @@ class CmdCreate implements ICmdCreate
 	 */
 	public function db($db)
 	{
-		self::$DEFAULT[self::PART_DB] = "$db.";
+		$this->parts[self::PART_DB] = ($db ? "`$db`." : '');
 		return $this;
 	}
 	
 	/**
-	 * @param string $name
+	 * @param string $name Database name, or table name if second parameter is omitted. 
+	 * @param string|bool $tableName
 	 * @return static
 	 */
-	public function table($name)
+	public function table($name, $tableName = false)
 	{
-		self::$DEFAULT[self::PART_NAME] = $name;
+		if ($tableName) 
+		{
+			$this->db($name);
+			$name = $tableName;
+		}
+		
+		$this->parts[self::PART_NAME] = "`$name`";
 		return $this;
 	}
 	
@@ -95,7 +97,7 @@ class CmdCreate implements ICmdCreate
 	 */
 	public function engine($engine)
 	{
-		self::$DEFAULT[self::PART_ENGINE] = $engine;
+		$this->parts[self::PART_ENGINE] = $engine;
 		return $this;
 	}
 	
@@ -113,67 +115,58 @@ class CmdCreate implements ICmdCreate
 	 */
 	public function charset($charset)
 	{
-		self::$DEFAULT[self::PART_CHARSET] = $charset;
+		$this->parts[self::PART_CHARSET] = $charset;
 		return $this;
 	}
 	
-	/**
-	 * @param string $name
-	 * @return IColumnFactory
-	 */
-	public function column($name)
-	{
-		return new ColumnFactory($this->columnsList, $name);
-	}
-	
-	/**
-	 * @param string[] ...$columns
-	 * @return static
-	 */
-	public function primary(...$columns)
-	{
-		$this->indexes->primary(...$columns);
-		return $this;
-	}
-	
-	/**
-	 * @param string|null $name
-	 * @param string[] ...$columns
-	 * @return static
-	 */
-	public function index($name, ...$columns)
-	{
-		$this->indexes->index($name, ...$columns);
-		return $this;
-	}
-	
-	/**
-	 * @param string|null $name
-	 * @param string[] ...$columns
-	 * @return static
-	 */
-	public function unique($name, ...$columns)
-	{
-		$this->indexes->unique($name, ...$columns);
-		return $this;
-	}
-	
-	/**
-	 * @param string|null $name
-	 * @return IForeignKey
-	 */
-	public function foreignKey($name = null)
-	{
-		return $this->indexes->foreignKey($name);
-	}
-
 	/**
 	 * @param string $comment
 	 * @return static
 	 */
 	public function comment($comment)
 	{
-		self::$DEFAULT[self::PART_COMMENT] = $comment;
+		$this->parts[self::PART_COMMENT] = $comment;
 		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function bind()
+	{
+		return [];
+	}
+
+	/**
+	 * @param int $part
+	 * @param string $prefix
+	 * @param string $suffix
+	 * @return string
+	 */
+	private function getPartIfSet($part, $prefix = '', $suffix = '')
+	{
+		return ($this->parts[$part] ? $prefix . $this->parts[$part] . $suffix . ' ' : '');
+	}
+	
+	/**
+	 * Generate the query string.
+	 * @return string Currently set query.
+	 */
+	public function assemble()
+	{
+		$command =  
+			'CREATE ' . 
+				$this->getPartIfSet(self::PART_TEMP) .
+			'TABLE ' . 
+				$this->parts[self::PART_DB] . $this->parts[self::PART_NAME];
+		
+		$command .= "(\n";
+		
+		$command .= ') ' . 
+			$this->getPartIfSet(self::PART_ENGINE, 'ENGINE=') .
+			$this->getPartIfSet(self::PART_CHARSET, 'CHARSET=') .
+			$this->getPartIfSet(self::PART_COMMENT, 'COMMENT=');
+		
+		return $command;
 	}
 }

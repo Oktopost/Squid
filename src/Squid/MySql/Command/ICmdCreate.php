@@ -32,6 +32,11 @@ interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable
 	 * @return static
 	 */
 	public function table($name, $tableName = false);
+
+	/**
+	 * @return static
+	 */
+	public function ifNotExists();
 	
 	/**
 	 * @param string $engine

@@ -96,7 +96,15 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 		$this->parts[self::PART_NAME] = "`$name`";
 		return $this;
 	}
-	
+
+	/**
+	 * @return static
+	 */
+	public function ifNotExists()
+	{
+		$this->parts[self::PART_IF_NOT_EXIST] = 'IF NOT EXISTS';
+		return $this;
+	}
 	
 	/**
 	 * @param string $engine
@@ -165,6 +173,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 			'CREATE ' . 
 				$this->getPartIfSet(self::PART_TEMP) .
 			'TABLE ' . 
+				$this->getPartIfSet(self::PART_IF_NOT_EXIST) .
 				$this->parts[self::PART_DB] . $this->parts[self::PART_NAME];
 		
 		$command .= "(\n";

@@ -20,9 +20,10 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	const PART_NAME			= 3;
 	const PART_ENGINE		= 4;
 	const PART_CHARSET		= 5;
-	const PART_COMMENT 		= 6;
-	const PART_LIKE			= 7;
-	const PART_AS			= 8;
+	const PART_AUTO_INC     = 6;
+	const PART_COMMENT 		= 7;
+	const PART_LIKE			= 8;
+	const PART_AS			= 9;
 	
 	
 	/**
@@ -35,6 +36,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 		CmdCreate::PART_NAME			=> false,
 		CmdCreate::PART_ENGINE			=> false,
 		CmdCreate::PART_CHARSET 		=> false,
+		CmdCreate::PART_AUTO_INC 		=> false,
 		CmdCreate::PART_COMMENT 		=> false,
 		CmdCreate::PART_LIKE			=> false,
 		CmdCreate::PART_AS				=> false
@@ -53,7 +55,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 */
 	private function getPartIfSet($part, $prefix = '', $suffix = '')
 	{
-		return ($this->parts[$part] ? $prefix . $this->parts[$part] . $suffix . ' ' : '');
+		return ($this->parts[$part] !== false ? $prefix . $this->parts[$part] . $suffix . ' ' : '');
 	}
 	
 	
@@ -195,6 +197,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 			$command .= ') ' . 
 				$this->getPartIfSet(self::PART_ENGINE, 'ENGINE=') .
 				$this->getPartIfSet(self::PART_CHARSET, 'CHARSET=') .
+				$this->getPartIfSet(self::PART_CHARSET, 'AUTO_INCREMENT=') .
 				$this->getPartIfSet(self::PART_COMMENT, 'COMMENT=');
 		}
 		
@@ -237,6 +240,16 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	public function asQuery($query)
 	{
 		$this->parts[self::PART_AS] = $query;
+		return $this;
+	}
+	
+	/**
+	 * @param int $value
+	 * @return static
+	 */
+	public function autoIncrement($value)
+	{
+		$this->parts[self::PART_AUTO_INC] = $value;
 		return $this;
 	}
 }

@@ -9,7 +9,6 @@ use Squid\MySql\Command\IMySqlCommand;
 use Squid\MySql\Connection\IMySqlConnection;
 
 
-
 class MySqlConnector implements IMySqlConnector 
 {
 	private $connectionName;
@@ -116,6 +115,14 @@ class MySqlConnector implements IMySqlConnector
 	public function db()
 	{
 		return $this->initialize(new Impl\Command\CmdDB());
+	}
+	
+	/**
+	 * @return Command\ICmdCreate
+	 */
+	public function create()
+	{
+		return $this->initialize(new Impl\Command\CmdCreate());
 	}
 	
 	public function close()

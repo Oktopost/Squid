@@ -90,5 +90,5 @@ interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable
 	 * @param int $value
 	 * @return static
 	 */
-	public function autoIncrement($value);
+	public function autoIncrement($value = 1);
 }

@@ -9,6 +9,8 @@ class KeysCollection
 {
 	private $primary = null;
 	private $indexes = [];
+	
+	/** @var ForeignKey[] */
 	private $foreign = [];
 	
 	
@@ -64,6 +66,23 @@ class KeysCollection
 	 */
 	public function assemble()
 	{
-		return [];
+		$result = [];
+		
+		// Add primary.
+		if ($this->primary)
+		{
+			$result = ['PRIMARY KEY (`' . implode('`, `', $this->primary) . '`)'];
+		}
+		
+		// Add keys.
+		$result = array_merge($result, $this->indexes);
+		
+		// Add foreign indexes.
+		foreach ($this->foreign as $item) 
+		{
+			$result[] = $item->assemble();
+		}
+		
+		return $result;
 	}
 }

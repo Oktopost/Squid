@@ -48,6 +48,19 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	
 	
 	/**
+	 * @return string
+	 */
+	private function getAsExpression()
+	{
+		$data = $this->parts[self::PART_AS];
+		
+		if ($data instanceof IMySqlCommand)
+			return $data->assemble();
+		
+		return $data;
+	}
+	
+	/**
 	 * @param int $part
 	 * @param string $prefix
 	 * @param string $suffix
@@ -208,19 +221,6 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 		
 		return $command;
 	}
-
-	/**
-	 * @return string
-	 */
-	private function getAsExpression()
-	{
-		$data = $this->parts[self::PART_AS];
-		
-		if ($data instanceof IMySqlCommand)
-			return $data->assemble();
-		
-		return $data;
-	}
 	
 	/**
 	 * @param string $name Database name, or table name if second parameter is omitted.
@@ -247,7 +247,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 * @param int $value
 	 * @return static
 	 */
-	public function autoIncrement($value)
+	public function autoIncrement($value = 1)
 	{
 		$this->parts[self::PART_AUTO_INC] = $value;
 		return $this;

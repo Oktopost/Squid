@@ -31,6 +31,12 @@ interface IForeignKey
 	public function name($name);
 	
 	/**
+	 * @param string $column
+	 * @return static
+	 */
+	public function column($column);
+	
+	/**
 	 * @param string $table
 	 * @param string $column
 	 * @return static
@@ -82,5 +88,5 @@ interface IForeignKey
 	/**
 	 * @return string
 	 */
-	public function generate();
+	public function assemble();
 }

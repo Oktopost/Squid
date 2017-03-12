@@ -88,4 +88,11 @@ class MySql
 			$connector->close();
 		}
 	}
+	
+	public static function staticConnector(array $config)
+	{
+		$mysql = new MySql();
+		$mysql->config()->addConfig('main', $config);
+		return $mysql->getConnector('main');
+	}
 }

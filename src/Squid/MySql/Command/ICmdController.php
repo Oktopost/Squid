@@ -50,4 +50,12 @@ interface ICmdController extends IMySqlCommand
 	 * @return bool
 	 */
 	public function rename($tables);
+
+	/**
+	 * Rename tableA to tableB and tableB to tableA.
+	 * @param string $tableA Name of the first table.
+	 * @param string $tableB Name of the second table.
+	 * @return mixed
+	 */
+	public function rotate($tableA, $tableB);
 }

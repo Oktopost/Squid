@@ -119,4 +119,21 @@ class CmdController extends AbstractCommand implements ICmdController
 		
 		return $this->executeDml();
 	}
+	
+	/**
+	 * Rename tableA to tableB and tableB to tableA.
+	 * @param string $tableA Name of the first table.
+	 * @param string $tableB Name of the second table.
+	 * @return mixed
+	 */
+	public function rotate($tableA, $tableB)
+	{
+		$tableT = $tableA . '_' . time() . '_' . rand(0, 1000000);
+		
+		return $this->rename([
+			$tableB => $tableT,
+			$tableA => $tableB,
+			$tableT => $tableA
+		]);
+	}
 }

@@ -16,6 +16,17 @@ use Objection\LiteObject;
  */
 class MySqlConnectionConfig extends LiteObject 
 {
+	public function __debugInfo()
+	{
+		$info = parent::__debugInfo();
+		
+		if ($info['Pass'])
+			$info['Pass'] = '***';
+		
+		return $info;
+	}
+	
+	
 	/**
 	 * @return array
 	 */

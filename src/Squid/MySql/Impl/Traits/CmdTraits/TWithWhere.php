@@ -9,7 +9,7 @@ use Squid\Exceptions\SquidException;
 /**
  * Implements calculation behavior for the IWithWhere interface. Only method that is not implemented, 
  * is where. Where must be implemented by the using class.
- * @method static where(string $exp, $bind = false)
+ * @method where(string $exp, $bind = false)
  * @see \Squid\MySql\Command\IWithSet
  */
 trait TWithWhere

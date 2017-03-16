@@ -3,8 +3,8 @@ namespace Squid\MySql\Impl\Command;
 
 
 
-abstract class PartsCommand extends AbstractCommand {
-	
+abstract class PartsCommand extends AbstractCommand
+{
 	/** @var array */
 	private $parts	= [];
 	

@@ -47,6 +47,12 @@ class ConfigFacade
 	 */
 	public function addConfig($name, array $config = []) 
 	{
+		if (is_array($name))
+		{
+			$config = $name;
+			$name = 'main';
+		}
+			
 		if (!is_string($name))
 			throw new SquidException('Connection name must be a string!');
 		

@@ -53,6 +53,16 @@ interface IMySqlConnector
 	public function db();
 	
 	/**
+	 * @return Command\ICmdCreate
+	 */
+	public function create();
+	
+	/**
+	 * @return Command\ICmdMultiQuery
+	 */
+	public function set();
+	
+	/**
 	 * Close the used connection if open
 	 */
 	public function close();

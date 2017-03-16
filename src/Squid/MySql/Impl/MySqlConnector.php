@@ -125,6 +125,14 @@ class MySqlConnector implements IMySqlConnector
 		return $this->initialize(new Impl\Command\CmdCreate());
 	}
 	
+	/**
+	 * @return Command\ICmdMultiQuery
+	 */
+	public function set()
+	{
+		return $this->initialize(new Impl\Command\CmdMultiQuery());
+	}
+	
 	public function close()
 	{
 		$this->connection->close();

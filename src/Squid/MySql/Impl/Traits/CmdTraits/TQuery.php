@@ -3,7 +3,6 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
 use Squid\MySql\Exceptions\MySqlException;
-use Squid\MySql\Exceptions\QueryFailedException;
 use Squid\Exceptions\SquidException;
 
 
@@ -246,7 +245,7 @@ trait TQuery
 				}
 			}
 		}
-			// Free resources when generator released before reaching the end of the iteration.
+		// Free resources when generator released before reaching the end of the iteration.
 		finally
 		{
 			$result->closeCursor();

@@ -65,10 +65,10 @@ class MySqlException extends SquidException
 	public static function create($source)
 	{
 		if ($source instanceof \PDOException)
-			return self::createFromPDOException($source);
+			throw self::createFromPDOException($source);
 		
 		if (is_array($source))
-			return self::createFromPDOInfo($source);
+			throw self::createFromPDOInfo($source);
 		
 		throw new \Exception('Invalid source!');
 	}

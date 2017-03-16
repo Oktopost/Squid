@@ -128,7 +128,7 @@ class MySqlConnector implements IMySqlConnector
 	/**
 	 * @return Command\ICmdMultiQuery
 	 */
-	public function set()
+	public function bulk()
 	{
 		return $this->initialize(new Impl\Command\CmdMultiQuery());
 	}

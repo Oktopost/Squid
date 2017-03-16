@@ -60,7 +60,7 @@ interface IMySqlConnector
 	/**
 	 * @return Command\ICmdMultiQuery
 	 */
-	public function set();
+	public function bulk();
 	
 	/**
 	 * Close the used connection if open

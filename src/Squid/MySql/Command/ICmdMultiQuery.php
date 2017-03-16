@@ -3,7 +3,6 @@ namespace Squid\MySql\Command;
 
 
 use Squid\MySql\Command\MultiQuery\IStatementResult;
-use Squid\MySql\Impl\Command\MultiQuery\StatementResult;
 
 
 interface ICmdMultiQuery extends IMySqlCommand

@@ -56,4 +56,10 @@ interface IColumn
 	 * @return static
 	 */
 	public function comment($comment);
+
+	/**
+	 * Mark this field as AUTO_INCREMENT
+	 * @return static
+	 */
+	public function autoIncrement();
 }

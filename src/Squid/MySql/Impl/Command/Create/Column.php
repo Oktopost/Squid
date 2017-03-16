@@ -131,7 +131,7 @@ class Column implements ITableColumn
 	 */
 	public function comment($comment)
 	{
-		$this->parts[self::PART_COMMENT] = $comment;
+		$this->parts[self::PART_COMMENT] = 'COMMENT "' . $comment . '"';
 		return $this;
 	}
 

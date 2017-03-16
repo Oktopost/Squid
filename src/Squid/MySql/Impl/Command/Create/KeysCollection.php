@@ -30,21 +30,43 @@ class KeysCollection
 	}
 	
 	/**
-	 * @param string $name
+	 * @param string|string[] $name
 	 * @param string[] ...$columns
 	 */
-	public function index($name, ...$columns)
+	public function index($name, array $columns = [])
 	{
+		if (is_array($name))
+		{
+			$columns = $name;
+			$name = null;
+		}
+		
+		if (!$name)
+		{
+			$name = 'i_' . implode('_', $columns);
+		}
+		
 		$this->indexes[] = 
 			"INDEX $name (`" . implode('`,`', $columns) . '`)';
 	}
 	
 	/**
-	 * @param string $name
-	 * @param string[] ...$columns
+	 * @param string|string[] $name
+	 * @param string[] $columns
 	 */
-	public function unique($name, ...$columns)
+	public function unique($name, array $columns = [])
 	{
+		if (is_array($name))
+		{
+			$columns = $name;
+			$name = null;
+		}
+		
+		if (!$name)
+		{
+			$name = 'u_' . implode('_', $columns);
+		}
+		
 		$this->indexes[] = 
 			"UNIQUE $name (`" . implode('`,`', $columns) . '`)';
 	}

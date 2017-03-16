@@ -167,7 +167,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 */
 	public function comment($comment)
 	{
-		$this->parts[self::PART_COMMENT] = $comment;
+		$this->parts[self::PART_COMMENT] = '"' . $comment . '"';
 		return $this;
 	}
 

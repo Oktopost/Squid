@@ -23,24 +23,24 @@ trait TWithIndex
 	}
 	
 	/**
-	 * @param string|null $name
-	 * @param string[] ...$columns
+	 * @param string|string[] $name
+	 * @param string[] $columns
 	 * @return static
 	 */
-	public function index($name, ...$columns)
+	public function index($name, array $columns = [])
 	{
-		$this->indexes->index($name, ...$columns);
+		$this->indexes->index($name, $columns);
 		return $this;
 	}
 	
 	/**
-	 * @param string|null $name
-	 * @param string[] ...$columns
+	 * @param string|string[] $name
+	 * @param string[] $columns
 	 * @return static
 	 */
-	public function unique($name, ...$columns)
+	public function unique($name, array $columns = [])
 	{
-		$this->indexes->unique($name, ...$columns);
+		$this->indexes->unique($name, $columns);
 		return $this;
 	}
 	

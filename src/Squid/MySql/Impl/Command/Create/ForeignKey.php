@@ -10,8 +10,8 @@ class ForeignKey implements IForeignKey
 {
 	private $name = '';
 	
-	private $column     = null;
-	private $onTable    = null;
+	private $column		= null;
+	private $onTable	= null;
 	private $onColumn   = null;
 	private $onUpdate   = null;
 	private $onDelete   = null;

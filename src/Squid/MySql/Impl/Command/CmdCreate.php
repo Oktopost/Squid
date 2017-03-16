@@ -20,7 +20,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	const PART_NAME			= 3;
 	const PART_ENGINE		= 4;
 	const PART_CHARSET		= 5;
-	const PART_AUTO_INC     = 6;
+	const PART_AUTO_INC		= 6;
 	const PART_COMMENT 		= 7;
 	const PART_LIKE			= 8;
 	const PART_AS			= 9;

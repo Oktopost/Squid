@@ -2,10 +2,10 @@
 namespace Squid\MySql\Impl\Command\Create;
 
 
-use Squid\MySql\Command\Create\IColumn;
+use Squid\MySql\Command\Create\ITableColumn;
 
 
-class Column implements IColumn
+class Column implements ITableColumn
 {
 	const PART_NAME			= 0;
 	const PART_TYPE			= 1;

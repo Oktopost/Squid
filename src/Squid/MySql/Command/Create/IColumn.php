@@ -56,9 +56,4 @@ interface IColumn
 	 * @return static
 	 */
 	public function comment($comment);
-	
-	/**
-	 * @return string
-	 */
-	public function assemble();
 }

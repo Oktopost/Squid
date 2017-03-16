@@ -2,10 +2,10 @@
 namespace Squid\MySql\Impl\Command\Create;
 
 
-use Squid\MySql\Command\Create\IColumn;
+use Squid\MySql\Command\Create\ITablePart;
 
 
 interface IColumnsTarget
 {
-	public function add(IColumn $column);
+	public function add(ITablePart $column);
 }

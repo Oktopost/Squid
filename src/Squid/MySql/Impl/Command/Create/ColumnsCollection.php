@@ -2,19 +2,19 @@
 namespace Squid\MySql\Impl\Command\Create;
 
 
-use Squid\MySql\Command\Create\IColumn;
+use Squid\MySql\Command\Create\ITablePart;
 
 
 class ColumnsCollection implements IColumnsTarget 
 {
-	/** @var IColumn[] */
+	/** @var ITablePart[] */
 	private $columns = [];
 	
 	
 	/**
-	 * @param IColumn $column
+	 * @param ITablePart $column
 	 */
-	public function add(IColumn $column)
+	public function add(ITablePart $column)
 	{
 		$this->columns[] = $column;
 	}

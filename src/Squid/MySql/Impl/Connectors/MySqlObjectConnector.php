@@ -177,7 +177,7 @@ class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObje
 		$data = $this
 			->createQuery($byFields, $orderFields)
 			->limitBy(1)
-			->queryRow(true, true);
+			->queryRow(true, false);
 		
 		return (!$data ? $data : $this->createInstance($data));
 	}

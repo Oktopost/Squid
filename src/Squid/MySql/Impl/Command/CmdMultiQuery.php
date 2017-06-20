@@ -3,8 +3,8 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Impl\Command\MultiQuery\StatementResult;
-use Squid\MySql\Command\IMySqlCommand;
 use Squid\MySql\Command\ICmdMultiQuery;
+use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Command\MultiQuery\IStatementResult;
 use Squid\MySql\Exceptions\MySqlException;
 
@@ -16,7 +16,7 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 	
 	
 	/**
-	 * @param string|IMySqlCommand|array $query
+	 * @param string|IMySqlCommandConstructor|array $query
 	 * @param array $bind
 	 * @return ICmdMultiQuery
 	 */
@@ -31,7 +31,7 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 			
 			return $this;
 		}
-		else if ($query instanceof IMySqlCommand)
+		else if ($query instanceof IMySqlCommandConstructor)
 		{
 			$bind = ($bind ?: $query->bind());
 			$query = $query->assemble() . ';';

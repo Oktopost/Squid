@@ -99,17 +99,14 @@ class SelectCombiner implements ICmdSelect
 		return isset($this->selects[$key]);
 	}
 	
-	/**
-	 * @return ICmdSelect
-	 */
-	public function unionAll()
+	public function unionCommands(): ?ICmdSelect
 	{
-		/** @var ICmdSelect $main */
+		/** @var ICmdSelect|null $main */
 		$main = null;
 
 		foreach ($this->selects as $select)
 		{
-			if (!$main != null) $main = $select;
+			if (is_null($main)) $main = $select;
 			else $main->union($select);
 		}
 
@@ -133,6 +130,7 @@ class SelectCombiner implements ICmdSelect
 	public function having($exp, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function withRollup($withRollup = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function union(ICmdSelect $select, $all = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function unionAll(ICmdSelect $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function forUpdate($forUpdate = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function lockInShareMode($lockInShareMode = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function setConnection(IMySqlConnection $conn) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdLock extends IMySqlCommand
+interface ICmdLock extends IMySqlCommandConstructor
 {
 	/**
 	 * @param string $key

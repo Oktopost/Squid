@@ -12,24 +12,6 @@ interface IMySqlCommand
 	 */
 	public function setConnection(IMySqlConnection $conn);
 	
-	/**
-	 * @return array
-	 */
-	public function bind();
-	
-	/**
-	 * Generate the query string.
-	 * @return string Currently set query.
-	 */
-	public function assemble();
-	
-	/**
-	 * Execute the generated query.
-	 * @throws \PDOException
-	 * @return \PDOStatement
-	 */
-	public function execute();
-	
 	
 	/**
 	 * For debug only

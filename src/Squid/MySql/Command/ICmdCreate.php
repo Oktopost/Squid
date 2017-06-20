@@ -7,7 +7,7 @@ use Squid\MySql\Command\Create\IForeignKey;
 use Squid\MySql\Command\Create\IColumnsSource;
 
 
-interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable 
+interface ICmdCreate extends IMySqlCommandConstructor, IColumnsSource, IIndexable 
 {
 	/**
 	 * @return string
@@ -81,7 +81,7 @@ interface ICmdCreate extends IMySqlCommand, IColumnsSource, IIndexable
 	public function like($name, $tableName = false);
 	
 	/**
-	 * @param IMySqlCommand|string $query
+	 * @param IMySqlCommandConstructor|string $query
 	 * @return static
 	 */
 	public function asQuery($query);

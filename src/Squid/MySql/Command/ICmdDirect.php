@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdDirect extends IQuery, IDml, IMySqlCommand 
+interface ICmdDirect extends IQuery, IDml, IMySqlCommandConstructor 
 {	
 	/**
 	 * @param string $sql Sql command to execute (Must be safe!!!)

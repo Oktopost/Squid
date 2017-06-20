@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdInsert extends IDml, IMySqlCommand 
+interface ICmdInsert extends IDml, IMySqlCommandConstructor 
 {	
 	/**
 	 * Set the status of the ignore flag.

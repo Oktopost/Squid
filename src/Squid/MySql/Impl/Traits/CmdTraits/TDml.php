@@ -16,9 +16,8 @@ trait TDml
 	{
 		$result	= $this->execute();
 		
-		if (!$result) {
+		if (!$result)
 			return false;
-		}
 		
 		return ($returnCount ? $result->rowCount() : true);
 	}

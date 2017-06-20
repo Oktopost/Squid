@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdDB extends IMySqlCommand 
+interface ICmdDB extends IMySqlCommandConstructor 
 {	
 	/**
 	 * @return array Array of all tables in DB.

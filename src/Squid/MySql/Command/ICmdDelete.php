@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdDelete extends IDml, IMySqlCommand, IWithWhere, IWithLimit 
+interface ICmdDelete extends IDml, IMySqlCommandConstructor, IWithWhere, IWithLimit 
 {	
 	/**
 	 * @param string $table

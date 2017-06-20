@@ -1,0 +1,2440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1497944952">
+  <project timestamp="1497944952">
+    <file name="/home/alexey/Dev/Squid/src/Squid.php">
+      <class name="Squid" namespace="global">
+        <metrics complexity="6" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="18" coveredelements="0"/>
+      </class>
+      <line num="14" type="method" name="setUp" visibility="private" complexity="2" crap="6" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="25" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="32" type="method" name="MySql" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="41" type="method" name="skeleton" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <metrics loc="50" ncloc="42" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="18" coveredelements="0"/>
+    </file>
+    <package name="Squid\Exceptions">
+      <file name="/home/alexey/Dev/Squid/src/Squid/Exceptions/AlreadyInTransactionException.php">
+        <class name="AlreadyInTransactionException" namespace="Squid\Exceptions">
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="7" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="9" type="stmt" count="2"/>
+        <line num="10" type="stmt" count="2"/>
+        <metrics loc="10" ncloc="10" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/Exceptions/NotInTransactionException.php">
+        <class name="NotInTransactionException" namespace="Squid\Exceptions">
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="7" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="9" type="stmt" count="1"/>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="10" ncloc="10" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/Exceptions/SquidException.php">
+        <class name="SquidException" namespace="Squid\Exceptions">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="4" ncloc="4" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/KeyValue/IKeyValueConnector.php">
+      <metrics loc="29" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/KeyValue/IKeyValueProvider.php">
+      <metrics loc="12" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\KeyValue">
+      <file name="/home/alexey/Dev/Squid/src/Squid/KeyValue/KeyValueProvider.php">
+        <class name="KeyValueProvider" namespace="Squid\KeyValue">
+          <metrics complexity="8" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
+        </class>
+        <line num="18" type="method" name="getCallback" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="37" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="46" type="method" name="setDefaultCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="56" type="method" name="get" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <metrics loc="72" ncloc="55" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql.php">
+        <class name="MySql" namespace="Squid">
+          <metrics complexity="10" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="27" coveredelements="0"/>
+        </class>
+        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="35" type="method" name="getNewConnection" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="52" type="method" name="config" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="61" type="method" name="getConnector" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="77" type="method" name="createConnector" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="84" type="method" name="closeAll" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="92" type="method" name="staticConnector" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <metrics loc="97" ncloc="77" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="27" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/OrderBy.php">
+        <class name="OrderBy" namespace="Squid">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/IColumn.php">
+      <metrics loc="64" ncloc="25" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/IColumnFactory.php">
+      <metrics loc="120" ncloc="43" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/IColumnsSource.php">
+      <metrics loc="11" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/IForeignKey.php">
+      <metrics loc="91" ncloc="37" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/IIndexable.php">
+      <metrics loc="19" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/ITableColumn.php">
+      <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/Create/ITablePart.php">
+      <metrics loc="10" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdController.php">
+      <metrics loc="60" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdCreate.php">
+      <metrics loc="93" ncloc="39" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdDB.php">
+      <metrics loc="30" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdDelete.php">
+      <metrics loc="11" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdDirect.php">
+      <metrics loc="12" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdInsert.php">
+      <metrics loc="64" ncloc="19" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdLock.php">
+      <metrics loc="26" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdMultiQuery.php">
+      <metrics loc="32" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdSelect.php">
+      <metrics loc="131" ncloc="40" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdTransaction.php">
+      <metrics loc="40" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdUpdate.php">
+      <metrics loc="19" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/ICmdUpsert.php">
+      <metrics loc="25" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IDml.php">
+      <metrics loc="12" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IMySqlCommand.php">
+      <metrics loc="20" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IMySqlCommandConstructor.php">
+      <metrics loc="23" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IQuery.php">
+      <metrics loc="98" ncloc="31" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IWithLimit.php">
+      <metrics loc="39" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IWithSet.php">
+      <metrics loc="41" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/IWithWhere.php">
+      <metrics loc="70" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Command/MultiQuery/IStatementResult.php">
+      <metrics loc="13" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql\Config">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Config/ConfigCollection.php">
+        <class name="ConfigCollection" namespace="Squid\MySql\Config">
+          <metrics complexity="9" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="21" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="load" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="37" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="46" type="method" name="getAllConnections" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="56" type="method" name="add" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="68" type="method" name="get" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="80" type="method" name="has" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <metrics loc="83" ncloc="57" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="21" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Config/ConfigLoadersCollection.php">
+        <class name="ConfigLoadersCollection" namespace="Squid\MySql\Config">
+          <metrics complexity="7" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="28" type="method" name="getConfig" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="45" type="method" name="hasConfig" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <metrics loc="56" ncloc="43" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Config/ConfigParser.php">
+        <class name="ConfigParser" namespace="Squid\MySql\Config">
+          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
+        </class>
+        <line num="27" type="method" name="getValue" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="43" type="method" name="parse" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <metrics loc="56" ncloc="46" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Config/MySqlConnectionConfig.php">
+        <class name="MySqlConnectionConfig" namespace="Squid\MySql\Config">
+          <metrics complexity="5" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="17" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="__debugInfo" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="33" type="method" name="_setup" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="49" type="method" name="getPDOConnectionString" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <metrics loc="58" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="17" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Config/IConfigLoader.php">
+      <metrics loc="17" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/ConfigFacade.php">
+        <class name="ConfigFacade" namespace="Squid\MySql">
+          <metrics complexity="10" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="27" coveredelements="0"/>
+        </class>
+        <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="38" type="method" name="setConfig" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="48" type="method" name="addConfig" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="68" type="method" name="addConfigObject" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="78" type="method" name="addLoader" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="91" type="method" name="addExecuteDecorator" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="100" type="method" name="getConfig" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="108" type="method" name="getDecorators" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <metrics loc="111" ncloc="75" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="27" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/ForeignKeyBehavior.php">
+        <class name="ForeignKeyBehavior" namespace="Squid\MySql">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="28" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <metrics loc="31" ncloc="27" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Connection">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connection/AbstractMySqlExecuteDecorator.php">
+        <class name="AbstractMySqlExecuteDecorator" namespace="Squid\MySql\Connection">
+          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="child" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="23" type="method" name="init" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="33" type="method" name="execute" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <metrics loc="36" ncloc="24" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connection/IMySqlConnection.php">
+      <metrics loc="33" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connection/IMySqlExecuteDecorator.php">
+      <metrics loc="10" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connection/IMySqlExecutor.php">
+      <metrics loc="12" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql\Connectors\Abstraction">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/Abstraction/TableColumnsConnector.php">
+        <class name="TableColumnsConnector" namespace="Squid\MySql\Connectors\Abstraction">
+          <metrics complexity="6" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="setColumns" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="40" type="method" name="getColumns" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <metrics loc="46" ncloc="39" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/Abstraction/TableNameConnector.php">
+        <class name="TableNameConnector" namespace="Squid\MySql\Connectors\Abstraction">
+          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
+        </class>
+        <line num="18" type="method" name="setTable" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="30" type="method" name="getTable" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <metrics loc="36" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/Generic/ITableColumnsConnector.php">
+      <metrics loc="16" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/Generic/ITableNameConnector.php">
+      <metrics loc="16" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/IMySqlAutoIncrementConnector.php">
+      <metrics loc="38" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/IMySqlObjectConnector.php">
+      <metrics loc="22" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/ITableCRUDConnector.php">
+      <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Connectors/ITableConnector.php">
+      <metrics loc="58" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql\Exceptions">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Exceptions/MySqlException.php">
+        <class name="MySqlException" namespace="Squid\MySql\Exceptions">
+          <metrics complexity="8" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="21" coveredelements="0"/>
+        </class>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="27" type="method" name="getSqlCode" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="37" type="method" name="createFromPDOException" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="54" type="method" name="createFromPDOInfo" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="65" type="method" name="create" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <metrics loc="74" ncloc="54" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="21" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Extensions\Combine\Select">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Extensions/Combine/Select/SelectCombiner.php">
+        <class name="SelectCombiner" namespace="Squid\MySql\Impl\Extensions\Combine\Select">
+          <metrics complexity="66" methods="11" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="46" coveredelements="0"/>
+        </class>
+        <line num="22" type="method" name="invokeOnAll" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="37" type="method" name="invokeOnUnion" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="44" type="method" name="__clone" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="59" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="68" type="method" name="addByKey" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="77" type="method" name="getByKey" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="86" type="method" name="removeByKey" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="97" type="method" name="has" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="102" type="method" name="unionCommands" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="174" type="method" name="queryExists" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="176" type="stmt" count="0"/>
+        <line num="178" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="182" type="stmt" count="0"/>
+        <line num="186" type="stmt" count="0"/>
+        <line num="194" type="method" name="__toString" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="196" type="stmt" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="200" type="stmt" count="0"/>
+        <line num="201" type="stmt" count="0"/>
+        <line num="203" type="stmt" count="0"/>
+        <line num="206" type="stmt" count="0"/>
+        <metrics loc="207" ncloc="164" classes="1" methods="11" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="46" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Extensions\Enrichment">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Extensions/Enrichment/AbstractQueryEnrichment.php">
+        <class name="AbstractQueryEnrichment" namespace="Squid\MySql\Extensions\Enrichment">
+          <metrics complexity="15" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="31" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="getSource" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="27" type="method" name="setSource" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="38" type="method" name="query" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="47" type="method" name="queryAll" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="57" type="method" name="queryRow" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="66" type="method" name="queryColumn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="77" type="method" name="queryScalar" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="87" type="method" name="queryInt" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="97" type="method" name="queryBool" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="106" type="method" name="queryExists" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="115" type="method" name="queryCount" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="128" type="method" name="queryWithCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="139" type="method" name="queryIterator" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="141" type="stmt" count="0"/>
+        <line num="150" type="method" name="queryMap" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="161" type="method" name="queryMapRow" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="163" type="stmt" count="0"/>
+        <metrics loc="164" ncloc="89" classes="1" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="31" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Extensions/Enrichment/IQueryEnrichment.php">
+      <metrics loc="14" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/IMySqlConnector.php">
+      <metrics loc="77" ncloc="36" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql\Impl\Command">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/AbstractCommand.php">
+        <class name="AbstractCommand" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="5" methods="4" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="6" elements="14" coveredelements="7"/>
+        </class>
+        <line num="19" type="method" name="getConn" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="29" type="method" name="setConnection" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="31" type="stmt" count="13"/>
+        <line num="32" type="stmt" count="13"/>
+        <line num="39" type="method" name="execute" visibility="public" complexity="2" crap="2.03" count="13"/>
+        <line num="41" type="stmt" count="13"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="13"/>
+        <line num="45" type="stmt" count="13"/>
+        <line num="47" type="stmt" count="13"/>
+        <line num="53" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <metrics loc="57" ncloc="41" classes="1" methods="4" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="6" elements="14" coveredelements="7"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Assembly.php">
+        <class name="Assembly" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="17" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="20" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="appendWhere" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="31" type="method" name="appendOrderBy" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="43" type="method" name="appendSet" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="56" type="method" name="appendLimit" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="69" type="method" name="append" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="79" type="method" name="appendDirectly" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="90" type="method" name="placeholder" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <metrics loc="94" ncloc="55" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="20" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdController.php">
+        <class name="CmdController" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="11" methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="37" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="assemble" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="26" type="method" name="bind" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="35" type="method" name="lastId" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="48" type="method" name="startTransaction" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="61" type="method" name="commit" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="74" type="method" name="rollback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="86" type="method" name="isInTransaction" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="95" type="method" name="describe" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="107" type="method" name="rename" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="129" type="method" name="rotate" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="131" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="136" type="stmt" count="0"/>
+        <metrics loc="138" ncloc="94" classes="1" methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="37" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdCreate.php">
+        <class name="CmdCreate" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="26" methods="17" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="0" elements="72" coveredelements="0"/>
+        </class>
+        <line num="53" type="method" name="getAsExpression" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="69" type="method" name="getPartIfSet" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="75" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="86" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="94" type="method" name="temporary" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="104" type="method" name="db" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="115" type="method" name="table" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="130" type="method" name="ifNotExists" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="140" type="method" name="engine" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="142" type="stmt" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="149" type="method" name="innoDB" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="158" type="method" name="charset" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="161" type="stmt" count="0"/>
+        <line num="168" type="method" name="comment" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="170" type="stmt" count="0"/>
+        <line num="171" type="stmt" count="0"/>
+        <line num="177" type="method" name="bind" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="179" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="187" type="method" name="assemble" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="191" type="stmt" count="0"/>
+        <line num="192" type="stmt" count="0"/>
+        <line num="193" type="stmt" count="0"/>
+        <line num="194" type="stmt" count="0"/>
+        <line num="196" type="stmt" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="201" type="stmt" count="0"/>
+        <line num="203" type="stmt" count="0"/>
+        <line num="205" type="stmt" count="0"/>
+        <line num="206" type="stmt" count="0"/>
+        <line num="207" type="stmt" count="0"/>
+        <line num="208" type="stmt" count="0"/>
+        <line num="211" type="stmt" count="0"/>
+        <line num="212" type="stmt" count="0"/>
+        <line num="213" type="stmt" count="0"/>
+        <line num="214" type="stmt" count="0"/>
+        <line num="217" type="stmt" count="0"/>
+        <line num="219" type="stmt" count="0"/>
+        <line num="222" type="stmt" count="0"/>
+        <line num="230" type="method" name="like" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="232" type="stmt" count="0"/>
+        <line num="233" type="stmt" count="0"/>
+        <line num="240" type="method" name="asQuery" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="242" type="stmt" count="0"/>
+        <line num="243" type="stmt" count="0"/>
+        <line num="250" type="method" name="autoIncrement" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="252" type="stmt" count="0"/>
+        <line num="253" type="stmt" count="0"/>
+        <metrics loc="254" ncloc="188" classes="1" methods="17" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="0" elements="72" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdDB.php">
+        <class name="CmdDB" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="15" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="33" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="setForeignKeyCheck" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="34" type="method" name="executeDmlCommand" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="44" type="method" name="setCommand" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="54" type="method" name="assemble" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="62" type="method" name="bind" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="72" type="method" name="listTables" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="84" type="method" name="dropTable" visibility="public" complexity="5" crap="30" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="106" type="method" name="showCreateTable" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="117" type="method" name="getDatabaseName" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <metrics loc="121" ncloc="82" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="33" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdDelete.php">
+        <class name="CmdDelete" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="7" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="17" coveredelements="0"/>
+        </class>
+        <line num="37" type="method" name="getDefaultParts" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="46" type="method" name="generate" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="61" type="method" name="from" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="72" type="method" name="where" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="82" type="method" name="_orderBy" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="93" type="method" name="limit" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <metrics loc="99" ncloc="66" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="17" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdDirect.php">
+        <class name="CmdDirect" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="9" methods="7" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="5" elements="25" coveredelements="8"/>
+        </class>
+        <line num="28" type="method" name="asScalarSubQuery" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="43" type="method" name="bind" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="45" type="stmt" count="13"/>
+        <line num="51" type="method" name="assemble" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="53" type="stmt" count="13"/>
+        <line num="60" type="method" name="command" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="62" type="stmt" count="13"/>
+        <line num="63" type="stmt" count="13"/>
+        <line num="65" type="stmt" count="13"/>
+        <line num="72" type="method" name="queryExists" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="86" type="method" name="queryCount" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="89" type="method" name="anonymous function" complexity="1" crap="2" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <metrics loc="93" ncloc="69" classes="1" methods="7" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="5" elements="25" coveredelements="8"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdInsert.php">
+        <class name="CmdInsert" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="24" methods="13" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="52" coveredstatements="0" elements="65" coveredelements="0"/>
+        </class>
+        <line num="49" type="method" name="fixDefaultValues" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="61" type="method" name="appendByField" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="79" type="method" name="appendByPosition" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="98" type="method" name="getDefaultParts" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="107" type="method" name="generate" visibility="protected" complexity="5" crap="30" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="111" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="122" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="138" type="method" name="ignore" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="140" type="stmt" count="0"/>
+        <line num="150" type="method" name="into" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <line num="157" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="169" type="method" name="defaultValues" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="171" type="stmt" count="0"/>
+        <line num="172" type="stmt" count="0"/>
+        <line num="182" type="method" name="values" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="184" type="stmt" count="0"/>
+        <line num="185" type="stmt" count="0"/>
+        <line num="187" type="stmt" count="0"/>
+        <line num="189" type="stmt" count="0"/>
+        <line num="191" type="stmt" count="0"/>
+        <line num="192" type="stmt" count="0"/>
+        <line num="193" type="stmt" count="0"/>
+        <line num="196" type="stmt" count="0"/>
+        <line num="206" type="method" name="valuesBulk" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="208" type="stmt" count="0"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="213" type="stmt" count="0"/>
+        <line num="225" type="method" name="valuesExp" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="227" type="stmt" count="0"/>
+        <line num="228" type="stmt" count="0"/>
+        <line num="229" type="stmt" count="0"/>
+        <line num="230" type="stmt" count="0"/>
+        <line num="240" type="method" name="asSelect" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="242" type="stmt" count="0"/>
+        <line num="243" type="stmt" count="0"/>
+        <line num="250" type="method" name="getFields" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="252" type="stmt" count="0"/>
+        <metrics loc="253" ncloc="171" classes="1" methods="13" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="52" coveredstatements="0" elements="65" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdLock.php">
+        <class name="CmdLock" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="12" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="24" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="bind" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="28" type="method" name="assemble" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="38" type="method" name="lock" visibility="public" complexity="6" crap="42" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="57" type="method" name="unlock" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="67" type="method" name="safe" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="85" type="method" name="execute" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <metrics loc="88" ncloc="67" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="24" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdMultiQuery.php">
+        <class name="CmdMultiQuery" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="19" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="0" elements="40" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="add" visibility="public" complexity="5" crap="30" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="49" type="method" name="executeAll" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="61" type="method" name="checkForError" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="71" type="method" name="executeIterator" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="94" type="method" name="executeWithCallback" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="110" type="method" name="bind" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="119" type="method" name="assemble" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="121" type="stmt" count="0"/>
+        <metrics loc="122" ncloc="99" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="0" elements="40" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdSelect.php">
+        <class name="CmdSelect" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="53" methods="26" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="0" elements="131" coveredelements="0"/>
+        </class>
+        <line num="53" type="method" name="fromSubQuery" visibility="private" complexity="4" crap="20" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="82" type="method" name="joinWith" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="98" type="method" name="getDefaultParts" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="106" type="method" name="generate" visibility="protected" complexity="8" crap="72" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="111" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="121" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="127" type="stmt" count="0"/>
+        <line num="128" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="138" type="stmt" count="0"/>
+        <line num="146" type="method" name="distinct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="155" type="method" name="column" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="157" type="stmt" count="0"/>
+        <line num="165" type="method" name="columns" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="168" type="stmt" count="0"/>
+        <line num="170" type="stmt" count="0"/>
+        <line num="172" type="stmt" count="0"/>
+        <line num="176" type="stmt" count="0"/>
+        <line num="184" type="method" name="columnsExp" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="186" type="stmt" count="0"/>
+        <line num="188" type="stmt" count="0"/>
+        <line num="196" type="method" name="columnAs" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="207" type="method" name="columnAsExp" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="209" type="stmt" count="0"/>
+        <line num="218" type="method" name="from" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="220" type="stmt" count="0"/>
+        <line num="222" type="stmt" count="0"/>
+        <line num="223" type="stmt" count="0"/>
+        <line num="226" type="stmt" count="0"/>
+        <line num="228" type="stmt" count="0"/>
+        <line num="231" type="stmt" count="0"/>
+        <line num="241" type="method" name="join" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="243" type="stmt" count="0"/>
+        <line num="254" type="method" name="leftJoin" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="256" type="stmt" count="0"/>
+        <line num="257" type="stmt" count="0"/>
+        <line num="258" type="stmt" count="0"/>
+        <line num="269" type="method" name="rightJoin" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="271" type="stmt" count="0"/>
+        <line num="272" type="stmt" count="0"/>
+        <line num="273" type="stmt" count="0"/>
+        <line num="282" type="method" name="groupBy" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="284" type="stmt" count="0"/>
+        <line num="286" type="stmt" count="0"/>
+        <line num="294" type="method" name="having" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="296" type="stmt" count="0"/>
+        <line num="303" type="method" name="_orderBy" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="305" type="stmt" count="0"/>
+        <line num="312" type="method" name="withRollup" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="314" type="stmt" count="0"/>
+        <line num="322" type="method" name="union" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="324" type="stmt" count="0"/>
+        <line num="326" type="stmt" count="0"/>
+        <line num="327" type="stmt" count="0"/>
+        <line num="328" type="stmt" count="0"/>
+        <line num="329" type="stmt" count="0"/>
+        <line num="336" type="method" name="unionAll" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="338" type="stmt" count="0"/>
+        <line num="345" type="method" name="forUpdate" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="347" type="stmt" count="0"/>
+        <line num="348" type="stmt" count="0"/>
+        <line num="355" type="method" name="lockInShareMode" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="357" type="stmt" count="0"/>
+        <line num="358" type="stmt" count="0"/>
+        <line num="366" type="method" name="where" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="368" type="stmt" count="0"/>
+        <line num="376" type="method" name="limit" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="378" type="stmt" count="0"/>
+        <line num="384" type="method" name="queryExists" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="386" type="stmt" count="0"/>
+        <line num="387" type="stmt" count="0"/>
+        <line num="388" type="stmt" count="0"/>
+        <line num="389" type="stmt" count="0"/>
+        <line num="390" type="stmt" count="0"/>
+        <line num="391" type="stmt" count="0"/>
+        <line num="393" type="stmt" count="0"/>
+        <line num="395" type="stmt" count="0"/>
+        <line num="401" type="method" name="queryCount" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="403" type="stmt" count="0"/>
+        <line num="404" type="stmt" count="0"/>
+        <line num="406" type="stmt" count="0"/>
+        <line num="408" type="stmt" count="0"/>
+        <line num="409" type="stmt" count="0"/>
+        <line num="410" type="stmt" count="0"/>
+        <line num="411" type="stmt" count="0"/>
+        <line num="414" type="stmt" count="0"/>
+        <line num="416" type="stmt" count="0"/>
+        <line num="417" type="stmt" count="0"/>
+        <line num="419" type="stmt" count="0"/>
+        <line num="421" type="stmt" count="0"/>
+        <line num="423" type="stmt" count="0"/>
+        <line num="424" type="stmt" count="0"/>
+        <line num="428" type="stmt" count="0"/>
+        <line num="431" type="stmt" count="0"/>
+        <line num="432" type="stmt" count="0"/>
+        <line num="433" type="stmt" count="0"/>
+        <line num="434" type="stmt" count="0"/>
+        <line num="436" type="stmt" count="0"/>
+        <metrics loc="437" ncloc="304" classes="1" methods="26" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="0" elements="131" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdTransaction.php">
+        <class name="CmdTransaction" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="23" methods="10" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="16" elements="51" coveredelements="21"/>
+        </class>
+        <line num="28" type="method" name="executeDirect" visibility="private" complexity="1" crap="1" count="13"/>
+        <line num="30" type="stmt" count="13"/>
+        <line num="31" type="stmt" count="13"/>
+        <line num="32" type="stmt" count="13"/>
+        <line num="33" type="stmt" count="13"/>
+        <line num="37" type="method" name="executeCommandConstructorSafe" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="52" type="method" name="anonymous function" complexity="3" crap="12" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="72" type="method" name="executeCallbackSafe" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="102" type="method" name="startTransaction" visibility="public" complexity="2" crap="2" count="10"/>
+        <line num="104" type="stmt" count="10"/>
+        <line num="105" type="stmt" count="2"/>
+        <line num="107" type="stmt" count="10"/>
+        <line num="108" type="stmt" count="10"/>
+        <line num="116" type="method" name="commit" visibility="public" complexity="2" crap="2" count="4"/>
+        <line num="118" type="stmt" count="4"/>
+        <line num="119" type="stmt" count="1"/>
+        <line num="121" type="stmt" count="3"/>
+        <line num="122" type="stmt" count="3"/>
+        <line num="130" type="method" name="rollback" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="132" type="stmt" count="6"/>
+        <line num="133" type="stmt" count="6"/>
+        <line num="134" type="stmt" count="5"/>
+        <line num="141" type="method" name="isInTransaction" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="143" type="stmt" count="7"/>
+        <line num="150" type="method" name="executeInTransaction" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <line num="158" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="162" type="stmt" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="167" type="stmt" count="0"/>
+        <line num="176" type="method" name="__toString" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="178" type="stmt" count="0"/>
+        <metrics loc="179" ncloc="138" classes="1" methods="10" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="16" elements="51" coveredelements="21"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdUpdate.php">
+        <class name="CmdUpdate" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="10" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="23" coveredelements="0"/>
+        </class>
+        <line num="40" type="method" name="getDefaultParts" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="49" type="method" name="generate" visibility="protected" complexity="2" crap="6" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="69" type="method" name="ignore" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="79" type="method" name="table" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="91" type="method" name="where" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="101" type="method" name="_orderBy" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="103" type="stmt" count="0"/>
+        <line num="112" type="method" name="limit" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="124" type="method" name="_set" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <metrics loc="127" ncloc="83" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="23" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/CmdUpsert.php">
+        <class name="CmdUpsert" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="9" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="24" coveredelements="0"/>
+        </class>
+        <line num="28" type="method" name="getDefaultParts" visibility="protected" complexity="2" crap="6" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="45" type="method" name="generate" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="59" type="method" name="setUseNewValues" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="74" type="method" name="setDuplicateKeys" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="86" type="method" name="_set" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <metrics loc="89" ncloc="66" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="24" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/PartsCommand.php">
+        <class name="PartsCommand" namespace="Squid\MySql\Impl\Command">
+          <metrics complexity="22" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="40" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="appendBind" visibility="private" complexity="4" crap="20" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="44" type="method" name="combineBindParams" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="65" type="method" name="appendPart" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="89" type="method" name="setPart" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="104" type="method" name="getPart" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="113" type="method" name="getBind" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="131" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="141" type="method" name="bind" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="159" type="method" name="assemble" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="161" type="stmt" count="0"/>
+        <metrics loc="162" ncloc="112" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="40" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Command\Create">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Create/Column.php">
+        <class name="Column" namespace="Squid\MySql\Impl\Command\Create">
+          <metrics complexity="14" methods="12" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="39" coveredelements="0"/>
+        </class>
+        <line num="38" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="50" type="method" name="name" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="61" type="method" name="type" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="73" type="method" name="null" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="82" type="method" name="notNull" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="92" type="method" name="defaultValue" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="103" type="method" name="collation" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="113" type="method" name="attributesExpression" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="122" type="method" name="onUpdateCurrentTimestampExpression" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="132" type="method" name="comment" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="142" type="method" name="autoIncrement" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="144" type="stmt" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="152" type="method" name="assemble" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <metrics loc="156" ncloc="108" classes="1" methods="12" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="39" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Create/ColumnFactory.php">
+        <class name="ColumnFactory" namespace="Squid\MySql\Impl\Command\Create">
+          <metrics complexity="22" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="14" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="create" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="63" type="method" name="decimal" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="71" type="method" name="createDecimal" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <metrics loc="74" ncloc="64" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="14" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Create/ColumnsCollection.php">
+        <class name="ColumnsCollection" namespace="Squid\MySql\Impl\Command\Create">
+          <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="10" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="25" type="method" name="isEmpty" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="33" type="method" name="assemble" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="43" ncloc="33" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="10" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Create/ForeignKey.php">
+        <class name="ForeignKey" namespace="Squid\MySql\Impl\Command\Create">
+          <metrics complexity="18" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="0" elements="45" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="31" type="method" name="getTargetTable" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="39" type="method" name="getTargetColumn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="47" type="method" name="getSourceColumn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="57" type="method" name="name" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="67" type="method" name="column" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="78" type="method" name="on" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="89" type="method" name="onUpdate" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="98" type="method" name="onUpdateCascade" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="106" type="method" name="onUpdateRestrict" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="114" type="method" name="onUpdateSetNull" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="123" type="method" name="onDelete" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="132" type="method" name="onDeleteCascade" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="140" type="method" name="onDeleteRestrict" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="142" type="stmt" count="0"/>
+        <line num="148" type="method" name="onDeleteSetNull" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="150" type="stmt" count="0"/>
+        <line num="156" type="method" name="assemble" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="161" type="stmt" count="0"/>
+        <line num="163" type="stmt" count="0"/>
+        <line num="164" type="stmt" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="167" type="stmt" count="0"/>
+        <line num="169" type="stmt" count="0"/>
+        <metrics loc="170" ncloc="116" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="0" elements="45" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Create/KeysCollection.php">
+        <class name="KeysCollection" namespace="Squid\MySql\Impl\Command\Create">
+          <metrics complexity="13" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="0" elements="37" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="foreignKey" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="36" type="method" name="index" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="57" type="method" name="unique" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="77" type="method" name="primary" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="89" type="method" name="assemble" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="103" type="stmt" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <metrics loc="109" ncloc="84" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="0" elements="37" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/Create/IColumnsTarget.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql\Impl\Command\MultiQuery">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Command/MultiQuery/StatementResult.php">
+        <class name="StatementResult" namespace="Squid\MySql\Impl\Command\MultiQuery">
+          <metrics complexity="15" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="30" coveredelements="0"/>
+        </class>
+        <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="19" type="method" name="query" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="28" type="method" name="queryAll" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="38" type="method" name="queryRow" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="47" type="method" name="queryColumn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="58" type="method" name="queryScalar" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="68" type="method" name="queryInt" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="78" type="method" name="queryBool" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="87" type="method" name="queryExists" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="96" type="method" name="queryCount" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="109" type="method" name="queryWithCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="120" type="method" name="queryIterator" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="131" type="method" name="queryMap" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="142" type="method" name="queryMapRow" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="150" type="method" name="rowsCount" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <metrics loc="153" ncloc="55" classes="1" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="30" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Connection">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/ConnectionBuilder.php">
+        <class name="ConnectionBuilder" namespace="Squid\MySql\Impl\Connection">
+          <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="getExecutors" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="39" type="method" name="setDecorators" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="48" type="method" name="create" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <metrics loc="56" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/MySqlConnection.php">
+        <class name="MySqlConnection" namespace="Squid\MySql\Impl\Connection">
+          <metrics complexity="16" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="48" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="openConnection" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="45" type="method" name="bindParams" visibility="private" complexity="4" crap="20" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="66" type="method" name="__destruct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="78" type="method" name="setConfig" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="97" type="method" name="close" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="105" type="method" name="isOpen" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="116" type="method" name="execute" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="121" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="127" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <metrics loc="133" ncloc="109" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="48" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/MySqlConnectionDecorator.php">
+        <class name="MySqlConnectionDecorator" namespace="Squid\MySql\Impl\Connection">
+          <metrics complexity="5" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="15" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="36" type="method" name="setConfig" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="44" type="method" name="close" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="52" type="method" name="isOpen" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="62" type="method" name="execute" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <metrics loc="65" ncloc="42" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="15" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Connection\Executors">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/CallbackDecorator.php">
+        <class name="CallbackDecorator" namespace="Squid\MySql\Impl\Connection\Executors">
+          <metrics complexity="6" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="19" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="32" type="method" name="setPreExecuteCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="42" type="method" name="setPostExecuteCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="54" type="method" name="execute" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <metrics loc="71" ncloc="52" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="19" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/RetryOnErrorDecorator.php">
+        <class name="RetryOnErrorDecorator" namespace="Squid\MySql\Impl\Connection\Executors">
+          <metrics complexity="13" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="32" coveredelements="0"/>
+        </class>
+        <line num="22" type="method" name="getConfig" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="38" type="method" name="retry" visibility="private" complexity="4" crap="20" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="65" type="method" name="isSameError" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="76" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="87" type="method" name="addValidators" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="98" type="method" name="execute" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="114" type="method" name="createSuggested" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <metrics loc="120" ncloc="89" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="32" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/SilentErrorDecorator.php">
+        <class name="SilentErrorDecorator" namespace="Squid\MySql\Impl\Connection\Executors">
+          <metrics complexity="5" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="29" type="method" name="setCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="40" type="method" name="execute" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <metrics loc="58" ncloc="45" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/TimerDecorator.php">
+        <class name="TimerDecorator" namespace="Squid\MySql\Impl\Connection\Executors">
+          <metrics complexity="5" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="18" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="measure" visibility="protected" complexity="2" crap="6" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="38" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="48" type="method" name="setCallback" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="59" type="method" name="execute" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <metrics loc="66" ncloc="47" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="18" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Connection\Executors\RetryOnError\Base">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/RetryOnError/Base/AbstractErrorValidator.php">
+        <class name="AbstractErrorValidator" namespace="Squid\MySql\Impl\Connection\Executors\RetryOnError\Base">
+          <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="9" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="isMessageMatch" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="27" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="39" type="method" name="config" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <metrics loc="49" ncloc="31" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="9" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/RetryOnError/Base/IErrorValidator.php">
+      <metrics loc="16" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Squid\MySql\Impl\Connection\Executors\RetryOnError\Validators">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/RetryOnError/Validators/ConnectionFailed.php">
+        <class name="ConnectionFailed" namespace="Squid\MySql\Impl\Connection\Executors\RetryOnError\Validators">
+          <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="24" type="method" name="isHandled" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <metrics loc="29" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/RetryOnError/Validators/DeadlockFound.php">
+        <class name="DeadlockFound" namespace="Squid\MySql\Impl\Connection\Executors\RetryOnError\Validators">
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="24" type="method" name="isHandled" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <metrics loc="29" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Connection\Executors\RetryOnError">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connection/Executors/RetryOnError/ValidatorsSet.php">
+        <class name="ValidatorsSet" namespace="Squid\MySql\Impl\Connection\Executors\RetryOnError">
+          <metrics complexity="5" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="add" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="27" type="method" name="getConfigFor" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="43" ncloc="35" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Connectors">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connectors/FileConnector.php">
+        <class name="FileConnector" namespace="Squid\MySql\Impl\Connectors">
+          <metrics complexity="6" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="26" type="method" name="setConnector" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="37" type="method" name="execute" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <metrics loc="50" ncloc="40" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="16" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connectors/MySqlAutoIncrementConnector.php">
+        <class name="MySqlAutoIncrementConnector" namespace="Squid\MySql\Impl\Connectors">
+          <metrics complexity="10" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="28" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="insertNewObject" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="43" type="method" name="setIdField" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="54" type="method" name="save" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="70" type="method" name="update" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="88" type="method" name="load" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="97" type="method" name="delete" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <metrics loc="100" ncloc="76" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="28" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Connectors/MySqlObjectConnector.php">
+        <class name="MySqlObjectConnector" namespace="Squid\MySql\Impl\Connectors">
+          <metrics complexity="28" methods="14" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="0" elements="82" coveredelements="0"/>
+        </class>
+        <line num="28" type="method" name="objectsToData" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="52" type="method" name="createFilter" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="72" type="method" name="createQuery" visibility="protected" complexity="4" crap="20" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="99" type="method" name="getConnector" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="101" type="stmt" count="0"/>
+        <line num="107" type="method" name="setConnector" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="116" type="method" name="setTable" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="125" type="method" name="setDomain" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="127" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="131" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="142" type="method" name="insertAll" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="144" type="stmt" count="0"/>
+        <line num="146" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <line num="161" type="method" name="loadOneByFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="164" type="stmt" count="0"/>
+        <line num="165" type="stmt" count="0"/>
+        <line num="167" type="stmt" count="0"/>
+        <line num="175" type="method" name="loadFirstByFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="178" type="stmt" count="0"/>
+        <line num="179" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="182" type="stmt" count="0"/>
+        <line num="191" type="method" name="loadAllByFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="193" type="stmt" count="0"/>
+        <line num="194" type="stmt" count="0"/>
+        <line num="200" type="method" name="updateByFields" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="202" type="stmt" count="0"/>
+        <line num="203" type="stmt" count="0"/>
+        <line num="204" type="stmt" count="0"/>
+        <line num="206" type="stmt" count="0"/>
+        <line num="208" type="stmt" count="0"/>
+        <line num="217" type="method" name="upsertAll" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="219" type="stmt" count="0"/>
+        <line num="221" type="stmt" count="0"/>
+        <line num="223" type="stmt" count="0"/>
+        <line num="226" type="stmt" count="0"/>
+        <line num="227" type="stmt" count="0"/>
+        <line num="229" type="stmt" count="0"/>
+        <line num="230" type="stmt" count="0"/>
+        <line num="231" type="stmt" count="0"/>
+        <line num="232" type="stmt" count="0"/>
+        <line num="233" type="stmt" count="0"/>
+        <line num="234" type="stmt" count="0"/>
+        <line num="240" type="method" name="deleteByFields" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="242" type="stmt" count="0"/>
+        <line num="243" type="stmt" count="0"/>
+        <line num="244" type="stmt" count="0"/>
+        <line num="246" type="stmt" count="0"/>
+        <line num="248" type="stmt" count="0"/>
+        <metrics loc="249" ncloc="192" classes="1" methods="14" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="0" elements="82" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Extensions\Enrichment">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Extensions/Enrichment/JoinPerRow.php">
+        <class name="JoinPerRow" namespace="Squid\MySql\Impl\Extensions\Enrichment">
+          <metrics complexity="17" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="0" elements="43" coveredelements="0"/>
+        </class>
+        <line num="24" type="method" name="enrichData" visibility="private" complexity="6" crap="42" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="method" name="anonymous function" complexity="3" crap="12" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="77" type="method" name="setSubQuery" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="88" type="method" name="on" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="99" type="method" name="asColumn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="101" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="110" type="method" name="queryAll" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="127" type="method" name="queryRow" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="131" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="137" type="stmt" count="0"/>
+        <line num="141" type="stmt" count="0"/>
+        <metrics loc="142" ncloc="114" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="45" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Extensions/Enrichment/UniqueJoin.php">
+        <class name="UniqueJoin" namespace="Squid\MySql\Impl\Extensions\Enrichment">
+          <metrics complexity="19" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="45" coveredelements="0"/>
+        </class>
+        <line num="24" type="method" name="enrichData" visibility="private" complexity="7" crap="56" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="method" name="anonymous function" complexity="4" crap="20" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="81" type="method" name="setSubQuery" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="92" type="method" name="on" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="103" type="method" name="asColumn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="114" type="method" name="queryAll" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="131" type="method" name="queryRow" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="137" type="stmt" count="0"/>
+        <line num="139" type="stmt" count="0"/>
+        <line num="141" type="stmt" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <metrics loc="146" ncloc="118" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="40" coveredstatements="0" elements="47" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/MySqlConnector.php">
+        <class name="MySqlConnector" namespace="Squid\MySql\Impl">
+          <metrics complexity="19" methods="17" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="39" coveredelements="0"/>
+        </class>
+        <line num="24" type="method" name="initialize" visibility="private" complexity="1" crap="2" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="43" type="method" name="setConnection" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="51" type="method" name="controller" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="60" type="method" name="delete" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="71" type="method" name="direct" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="81" type="method" name="insert" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="90" type="method" name="lock" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="99" type="method" name="select" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="108" type="method" name="update" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="111" type="stmt" count="0"/>
+        <line num="117" type="method" name="upsert" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="123" type="method" name="transaction" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="132" type="method" name="db" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="141" type="method" name="create" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="144" type="stmt" count="0"/>
+        <line num="150" type="method" name="bulk" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="156" type="method" name="close" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="158" type="stmt" count="0"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="164" type="method" name="name" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <metrics loc="167" ncloc="106" classes="1" methods="17" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="39" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Traits\CmdTraits">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TDml.php">
+        <class name="TDml" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+        </class>
+        <line num="15" type="method" name="executeDml" visibility="public" complexity="3" crap="3" count="13"/>
+        <line num="17" type="stmt" count="13"/>
+        <line num="19" type="stmt" count="13"/>
+        <line num="20" type="stmt" count="3"/>
+        <line num="22" type="stmt" count="11"/>
+        <metrics loc="23" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TQuery.php">
+        <class name="TQuery" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="41" methods="12" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="0" elements="89" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="resolveFetchMode" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="32" type="method" name="query" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="41" type="method" name="queryAll" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="54" type="method" name="queryRow" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="74" type="method" name="queryColumn" visibility="public" complexity="5" crap="30" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="100" type="method" name="queryScalar" visibility="public" complexity="6" crap="42" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="123" type="method" name="queryInt" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="132" type="method" name="queryBool" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="141" type="method" name="queryWithCallback" visibility="public" complexity="5" crap="30" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="144" type="stmt" count="0"/>
+        <line num="146" type="stmt" count="0"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="157" type="stmt" count="0"/>
+        <line num="163" type="method" name="queryIterator" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="165" type="stmt" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="170" type="stmt" count="0"/>
+        <line num="172" type="stmt" count="0"/>
+        <line num="177" type="stmt" count="0"/>
+        <line num="178" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="189" type="method" name="queryMap" visibility="public" complexity="5" crap="30" count="0"/>
+        <line num="191" type="stmt" count="0"/>
+        <line num="192" type="stmt" count="0"/>
+        <line num="193" type="stmt" count="0"/>
+        <line num="197" type="stmt" count="0"/>
+        <line num="199" type="stmt" count="0"/>
+        <line num="200" type="stmt" count="0"/>
+        <line num="201" type="stmt" count="0"/>
+        <line num="202" type="stmt" count="0"/>
+        <line num="204" type="stmt" count="0"/>
+        <line num="209" type="stmt" count="0"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="213" type="stmt" count="0"/>
+        <line num="222" type="method" name="queryMapRow" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="224" type="stmt" count="0"/>
+        <line num="225" type="stmt" count="0"/>
+        <line num="226" type="stmt" count="0"/>
+        <line num="230" type="stmt" count="0"/>
+        <line num="232" type="stmt" count="0"/>
+        <line num="233" type="stmt" count="0"/>
+        <line num="234" type="stmt" count="0"/>
+        <line num="235" type="stmt" count="0"/>
+        <line num="237" type="stmt" count="0"/>
+        <line num="239" type="stmt" count="0"/>
+        <line num="240" type="stmt" count="0"/>
+        <line num="244" type="stmt" count="0"/>
+        <line num="250" type="stmt" count="0"/>
+        <line num="251" type="stmt" count="0"/>
+        <line num="254" type="stmt" count="0"/>
+        <metrics loc="255" ncloc="197" classes="1" methods="12" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="0" elements="89" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TWithColumns.php">
+        <class name="TWithColumns" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="column" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <metrics loc="23" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TWithIndex.php">
+        <class name="TWithIndex" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="11" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="primary" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="30" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="41" type="method" name="unique" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="51" type="method" name="foreignKey" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <metrics loc="54" ncloc="35" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="11" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TWithLimit.php">
+        <class name="TWithLimit" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="8" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="16" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="limitBy" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="29" type="method" name="page" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="37" type="method" name="orderBy" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="56" type="method" name="appendDesc" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <metrics loc="69" ncloc="48" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="16" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TWithSet.php">
+        <class name="TWithSet" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="23" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="51" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="setFields" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="31" type="method" name="setFieldsAssoc" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="44" type="method" name="setField" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="63" type="method" name="setExpressionFields" visibility="private" complexity="3" crap="12" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="79" type="method" name="setExpressionFieldsAssoc" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="94" type="method" name="set" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="109" type="method" name="setExp" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="111" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="122" type="method" name="setCase" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="127" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="136" type="stmt" count="0"/>
+        <line num="139" type="stmt" count="0"/>
+        <line num="146" type="method" name="setCaseExp" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <line num="158" type="stmt" count="0"/>
+        <metrics loc="159" ncloc="118" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="51" coveredelements="0"/>
+      </file>
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/CmdTraits/TWithWhere.php">
+        <class name="TWithWhere" namespace="Squid\MySql\Impl\Traits\CmdTraits">
+          <metrics complexity="18" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="0" elements="35" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="byFieldsNum" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="35" type="method" name="byFieldsAssoc" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="50" type="method" name="byId" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="60" type="method" name="byField" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="71" type="method" name="byFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="82" type="method" name="whereIn" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="105" type="method" name="whereNotIn" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="113" type="method" name="whereExists" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="124" type="method" name="whereNotExists" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <metrics loc="127" ncloc="90" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="0" elements="35" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Impl\Traits">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Impl/Traits/TMysqlCommand.php">
+        <class name="TMysqlCommand" namespace="Squid\MySql\Impl\Traits">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+        </class>
+        <line num="14" type="method" name="connection" visibility="private" complexity="1" crap="1" count="13"/>
+        <line num="16" type="stmt" count="13"/>
+        <line num="23" type="method" name="setConnection" visibility="public" complexity="1" crap="1" count="15"/>
+        <line num="25" type="stmt" count="15"/>
+        <line num="26" type="stmt" count="15"/>
+        <metrics loc="26" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Modules\KeyValue">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Modules/KeyValue/SimpleMySQLKeyValueConnector.php">
+        <class name="SimpleMySQLKeyValueConnector" namespace="Squid\MySql\Modules\KeyValue">
+          <metrics complexity="6" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="0" elements="33" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="34" type="method" name="has" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="47" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="62" type="method" name="set" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="77" type="method" name="delete" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <metrics loc="84" ncloc="63" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="0" elements="33" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\MySql\Utils">
+      <file name="/home/alexey/Dev/Squid/src/Squid/MySql/Utils/ClassName.php">
+        <class name="ClassName" namespace="Squid\MySql\Utils">
+          <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="getClassNameOnly" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <metrics loc="26" ncloc="22" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Squid\Object">
+      <file name="/home/alexey/Dev/Squid/src/Squid/Object/AbstractObjectConnector.php">
+        <class name="AbstractObjectConnector" namespace="Squid\Object">
+          <metrics complexity="25" methods="17" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="58" coveredelements="0"/>
+        </class>
+        <line num="22" type="method" name="getDomain" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="31" type="method" name="createInstance" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="55" type="method" name="createAllInstances" visibility="protected" complexity="2" crap="6" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="74" type="method" name="setDomain" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="86" type="method" name="insert" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="102" type="method" name="loadOneByField" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="113" type="method" name="loadFirstByField" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="125" type="method" name="loadAllByField" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="127" type="stmt" count="0"/>
+        <line num="135" type="method" name="updateObjectByFields" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="137" type="stmt" count="0"/>
+        <line num="138" type="stmt" count="0"/>
+        <line num="139" type="stmt" count="0"/>
+        <line num="149" type="method" name="upsertByFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <line num="164" type="method" name="deleteByField" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="172" type="method" name="hasMapper" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="174" type="stmt" count="0"/>
+        <line num="181" type="method" name="setMapper" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="183" type="stmt" count="0"/>
+        <line num="184" type="stmt" count="0"/>
+        <line num="186" type="stmt" count="0"/>
+        <line num="188" type="stmt" count="0"/>
+        <line num="194" type="method" name="getMapper" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="196" type="stmt" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="201" type="stmt" count="0"/>
+        <line num="208" type="method" name="setIgnoreFields" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="211" type="stmt" count="0"/>
+        <line num="218" type="method" name="addIgnoreFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="220" type="stmt" count="0"/>
+        <line num="222" type="stmt" count="0"/>
+        <line num="224" type="stmt" count="0"/>
+        <line num="227" type="stmt" count="0"/>
+        <line num="233" type="method" name="getIgnoreFields" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="235" type="stmt" count="0"/>
+        <metrics loc="236" ncloc="157" classes="1" methods="17" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="0" elements="58" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/alexey/Dev/Squid/src/Squid/Object/IObjectConnector.php">
+      <metrics loc="152" ncloc="51" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <metrics files="112" loc="8605" ncloc="5678" classes="66" methods="437" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="1405" coveredstatements="38" elements="1842" coveredelements="52"/>
+  </project>
+</coverage>

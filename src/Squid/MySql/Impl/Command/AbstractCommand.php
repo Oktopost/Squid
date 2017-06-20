@@ -2,12 +2,12 @@
 namespace Squid\MySql\Impl\Command;
 
 
-use Squid\MySql\Command\IMySqlCommand;
+use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\Exceptions\SquidException;
 
 
-abstract class AbstractCommand implements IMySqlCommand
+abstract class AbstractCommand implements IMySqlCommandConstructor
 {
 	/** @var IMySqlConnection */
 	private $conn = null;

@@ -5,7 +5,7 @@ namespace Squid\MySql\Command;
 /**
  * @see https://dev.mysql.com/doc/refman/5.7/en/select.html
  */
-interface ICmdSelect extends IQuery, IMySqlCommand, IWithWhere, IWithLimit
+interface ICmdSelect extends IQuery, IMySqlCommandConstructor, IWithWhere, IWithLimit
 {
 	/**
 	 * @param bool $distinct 

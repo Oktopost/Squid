@@ -50,6 +50,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function controller() 
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdController());
 	}
 	
@@ -58,15 +59,20 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function delete() 
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdDelete());
 	}
 	
 	/**
-	 * @return Command\ICmdDirect New direct object.
+	 * @param string|null $command Optional command to execute.
+	 * @param array $bind Optional bind params.
+	 * @return Command\ICmdDirect
 	 */
-	public function direct() 
+	public function direct(?string $command = null, array $bind = [])
 	{
-		return $this->initialize(new Impl\Command\CmdDirect());
+		/** @var Impl\Command\CmdDirect $cmd */
+		$cmd = $this->initialize(new Impl\Command\CmdDirect());
+		return ($command ? $cmd->command($command, $bind) : $cmd);
 	}
 	
 	/**
@@ -74,6 +80,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function insert() 
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdInsert());
 	}
 	
@@ -82,6 +89,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function lock() 
 	{ 
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdLock()); 
 	}
 	
@@ -90,6 +98,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function select() 
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdSelect());
 	}
 	
@@ -98,6 +107,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function update()
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdUpdate());
 	}
 	
@@ -106,7 +116,14 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function upsert()
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdUpsert());
+	}
+	
+	public function transaction(): Command\ICmdTransaction
+	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
+		return $this->initialize(new Impl\Command\CmdTransaction());
 	}
 	
 	/**
@@ -114,6 +131,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function db()
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdDB());
 	}
 	
@@ -122,6 +140,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function create()
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdCreate());
 	}
 	
@@ -130,6 +149,7 @@ class MySqlConnector implements IMySqlConnector
 	 */
 	public function bulk()
 	{
+		/** @noinspection PhpIncompatibleReturnTypeInspection */
 		return $this->initialize(new Impl\Command\CmdMultiQuery());
 	}
 	

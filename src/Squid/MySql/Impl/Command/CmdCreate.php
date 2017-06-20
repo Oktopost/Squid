@@ -3,7 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdCreate;
-use Squid\MySql\Command\IMySqlCommand;
+use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Impl\Command\Create\KeysCollection;
 use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 
@@ -54,7 +54,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	{
 		$data = $this->parts[self::PART_AS];
 		
-		if ($data instanceof IMySqlCommand)
+		if ($data instanceof IMySqlCommandConstructor)
 			return $data->assemble();
 		
 		return $data;
@@ -177,7 +177,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	public function bind()
 	{
 		$as = $this->parts[self::PART_AS];
-		return ($as instanceof IMySqlCommand ? $as->bind() : []);
+		return ($as instanceof IMySqlCommandConstructor ? $as->bind() : []);
 	}
 	
 	/**
@@ -234,7 +234,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	}
 
 	/**
-	 * @param IMySqlCommand|string $query
+	 * @param IMySqlCommandConstructor|string $query
 	 * @return static
 	 */
 	public function asQuery($query)

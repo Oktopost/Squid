@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdUpdate extends IDml, IMySqlCommand, IWithWhere, IWithSet, IWithLimit
+interface ICmdUpdate extends IDml, IMySqlCommandConstructor, IWithWhere, IWithSet, IWithLimit
 {
 	/**
 	 * Set the status of the ignore flag.

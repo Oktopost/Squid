@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ICmdController extends IMySqlCommand 
+interface ICmdController extends IMySqlCommandConstructor
 {
 	/**
 	 * Get the last inserted ID.

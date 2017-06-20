@@ -5,10 +5,10 @@ namespace Squid\MySql\Command;
 use Squid\MySql\Command\MultiQuery\IStatementResult;
 
 
-interface ICmdMultiQuery extends IMySqlCommand
+interface ICmdMultiQuery extends IMySqlCommandConstructor
 {
 	/**
-	 * @param string|IMySqlCommand|array $query
+	 * @param string|IMySqlCommandConstructor|array $query
 	 * @param array $bind
 	 * @return ICmdMultiQuery
 	 */

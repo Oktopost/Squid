@@ -16,11 +16,13 @@ interface IMySqlConnector
 	 * @return Command\ICmdDelete
 	 */
 	public function delete();
-	
+
 	/**
+	 * @param string|null $command Optional command to execute.
+	 * @param array $bind Optional bind params.
 	 * @return Command\ICmdDirect
 	 */
-	public function direct();
+	public function direct(?string $command = null, array $bind = []);
 	
 	/**
 	 * @return Command\ICmdInsert
@@ -46,6 +48,8 @@ interface IMySqlConnector
 	 * @return Command\ICmdUpsert
 	 */
 	public function upsert();
+	
+	public function transaction(): Command\ICmdTransaction;
 	
 	/**
 	 * @return Command\ICmdDB

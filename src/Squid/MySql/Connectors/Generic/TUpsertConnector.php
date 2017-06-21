@@ -12,9 +12,9 @@ trait TUpsertConnector
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function upsertByKeys(array $row, $keys)
+	public function byKeys(array $row, $keys)
 	{
-		return $this->upsertAllByKeys([$row], $keys);
+		return $this->allByKeys([$row], $keys);
 	}
 
 	/**
@@ -22,8 +22,8 @@ trait TUpsertConnector
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function upsertByValues(array $row, $valueFields)
+	public function byValues(array $row, $valueFields)
 	{
-		return $this->upsertAllByValues([$row], $valueFields);
+		return $this->allByValues([$row], $valueFields);
 	}
 }

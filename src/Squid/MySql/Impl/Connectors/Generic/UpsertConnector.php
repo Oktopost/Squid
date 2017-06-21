@@ -22,7 +22,7 @@ class UpsertConnector implements IUpsertConnector, IGenericConnector, ISingleTab
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function upsertAllByKeys(array $rows, $keys)
+	public function allByKeys(array $rows, $keys)
 	{
 		return $this->getTable()
 			->upsert()
@@ -36,7 +36,7 @@ class UpsertConnector implements IUpsertConnector, IGenericConnector, ISingleTab
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function upsertAllByValues(array $rows, $valueFields)
+	public function allByValues(array $rows, $valueFields)
 	{
 		return $this->getTable()
 			->upsert()

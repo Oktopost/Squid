@@ -9,14 +9,14 @@ interface IUpsertConnector
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function upsertByKeys(array $row, $keys);
+	public function byKeys(array $row, $keys);
 
 	/**
 	 * @param array $rows
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function upsertAllByKeys(array $rows, $keys);
+	public function allByKeys(array $rows, $keys);
 	
 	
 	/**
@@ -24,12 +24,12 @@ interface IUpsertConnector
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function upsertByValues(array $row, $valueFields);
+	public function byValues(array $row, $valueFields);
 
 	/**
 	 * @param array $rows
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function upsertAllByValues(array $rows, $valueFields);
+	public function allByValues(array $rows, $valueFields);
 }

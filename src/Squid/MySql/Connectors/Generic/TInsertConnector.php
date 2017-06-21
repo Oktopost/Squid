@@ -12,8 +12,8 @@ trait TInsertConnector
 	 * @param bool $ignore
 	 * @return int|null Number of affected rows
 	 */
-	public function insert(array $row, bool $ignore = false): ?int
+	public function row(array $row, bool $ignore = false): ?int
 	{
-		return $this->insertAll([$row], $ignore);
+		return $this->all([$row], $ignore);
 	}
 }

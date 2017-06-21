@@ -33,7 +33,7 @@ class InsertConnector implements IInsertConnector, IGenericConnector, ISingleTab
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function insertAll(array $rows, bool $ignore = false)
+	public function all(array $rows, bool $ignore = false)
 	{
 		return $this->doInsert($rows, $ignore, null);
 	}
@@ -44,7 +44,7 @@ class InsertConnector implements IInsertConnector, IGenericConnector, ISingleTab
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function insertAllIntoFields(array $fields, array $rows, bool $ignore = false)
+	public function allIntoFields(array $fields, array $rows, bool $ignore = false)
 	{
 		return $this->doInsert($rows, $ignore, $fields);
 	}

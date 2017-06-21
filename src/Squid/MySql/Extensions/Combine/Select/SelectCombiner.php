@@ -36,7 +36,7 @@ class SelectCombiner implements ICmdSelect
 	 */
 	private function invokeOnUnion($function, ...$args)
 	{
-		$all = $this->unionAll();
+		$all = $this->unionCommands();
 		return call_user_func([$all, $function], ...$args);
 	}
 	
@@ -106,7 +106,7 @@ class SelectCombiner implements ICmdSelect
 
 		foreach ($this->selects as $select)
 		{
-			if (is_null($main)) $main = $select;
+			if (is_null($main)) $main = clone $select;
 			else $main->union($select);
 		}
 

@@ -15,7 +15,7 @@ interface IMySqlCommand
 	
 	/**
 	 * For debug only
-	 * @return string Return string in format: "Query string : {json bind params}"
+	 * @return string For debugging
 	 */
 	public function __toString();
 }

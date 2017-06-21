@@ -13,7 +13,7 @@ trait TUpdateConnector
 	 * @param array $row
 	 * @return int|null
 	 */
-	public function updateByFields(array $fields, array $row): ?int
+	public function byFields(array $fields, array $row): ?int
 	{
 		$where = [];
 		
@@ -23,6 +23,6 @@ trait TUpdateConnector
 			unset($row[$field]);
 		}
 		
-		return $this->update($fields, $row);
+		return $this->where($fields, $row);
 	}
 }

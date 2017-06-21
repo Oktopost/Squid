@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Object\Query;
+namespace Squid\MySql\Impl\Connectors\Object;
 
 
 use Squid\MySql\Command\ICmdSelect;
@@ -11,50 +11,33 @@ use Squid\Exceptions\SquidException;
 
 use Objection\Mapper;
 use Objection\Mappers;
-use Objection\LiteObject;
 
 
-class LiteObjectQuerySelector implements IQuerySelector
+class ObjectQuerySelector implements IQuerySelector
 {
-	private $domain;
-	
 	/** @var IRowMap */
 	private $mapper;
 	
 	
 	private function toObject(array $row)
 	{
-		return $this->getMapper()->toObject($row);
+		return $this->mapper->toObject($row);
 	}
 	
 	private function toObjects(array $rows)
 	{
-		return $this->getMapper()->toObjects($rows);
-	}
-	
-	private function getMapper(): IRowMap
-	{
-		if (!$this->mapper)
-			$this->mapper = MapFactory::create(Mappers::simple());
-		
-		return $this->mapper;
+		return $this->mapper->toObjects($rows);
 	}
 	
 	
 	/**
-	 * @param LiteObject|string $className
+	 * @param Mapper|IRowMap|string $mapper
 	 */
-	public function setDomain($className)
+	public function __construct($mapper)
 	{
-		$this->domain = $className;
-	}
-
-
-	/**
-	 * @param Mapper|IRowMap $mapper
-	 */
-	public function setMapper($mapper)
-	{
+		if (is_string($mapper))
+			$mapper = Mappers::simple()->setDefaultClassName($mapper);
+			
 		$this->mapper = MapFactory::create($mapper);
 	}
 	
@@ -101,12 +84,26 @@ class LiteObjectQuerySelector implements IQuerySelector
 	 */
 	public function first(ICmdSelect $select)
 	{
-		return $this->one($select->limitBy(1));
+		$object = null;
+		
+		$res = $this->withCallback(
+			$select, 
+			function ($result)
+				use (&$object)
+			{
+				$object = $result;
+				return 0;
+			});
+		
+		return ($res ? $object : false);
 	}
 
 	/**
 	 * @param ICmdSelect $select
-	 * @param callable $callback
+	 * @param callable $callback Called for each selected object. 
+	 * If callback returns false, queryWithCallback will abort and return false.
+	 * If callback returns 0, queryWithCallback will abort and return true.
+	 * For any other value, callback will continue to the next row.
 	 * @return bool
 	 */
 	public function withCallback(ICmdSelect $select, callable $callback): bool

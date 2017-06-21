@@ -18,15 +18,15 @@ class UpdateConnector implements IUpdateConnector, IGenericConnector, ISingleTab
 	
 	
 	/**
-	 * @param array $fields
+	 * @param array $where
 	 * @param array $row
 	 * @return int|false
 	 */
-	public function update(array $fields, array $row)
+	public function where(array $where, array $row)
 	{
 		return $this->getTable()
 			->update()
-			->byFields($fields)
+			->byFields($where)
 			->set($row)->executeDml(true);
 	}
 }

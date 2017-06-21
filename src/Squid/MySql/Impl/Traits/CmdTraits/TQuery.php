@@ -9,7 +9,7 @@ use Squid\Exceptions\SquidException;
 /**
  * @method \PDOStatement|mixed execute()
  * @method string __toString()
- * @see \Squid\MySql\Command\IQuery
+ * @mixin \Squid\MySql\Command\IQuery 
  */
 trait TQuery 
 {

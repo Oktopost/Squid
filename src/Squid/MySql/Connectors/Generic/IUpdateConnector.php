@@ -10,12 +10,12 @@ interface IUpdateConnector
 	 * @param array $row
 	 * @return int|false
 	 */
-	public function updateByFields(array $fields, array $row);
+	public function byFields(array $fields, array $row);
 	
 	/**
-	 * @param array $fields
+	 * @param array $where
 	 * @param array $row
 	 * @return int|false
 	 */
-	public function update(array $fields, array $row);
+	public function where(array $where, array $row);
 }

@@ -57,7 +57,7 @@ interface ISelectConnector
 	 * @return array|false
 	 */
 	public function nByFields(array $fields, int $limit);
-
+	
 	/**
 	 * @return array|false
 	 */

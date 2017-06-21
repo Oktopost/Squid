@@ -2,6 +2,9 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
+/**
+ * @mixin \Squid\MySql\Command\IWithColumns
+ */
 trait TWithColumn
 {
 	/**
@@ -22,9 +25,12 @@ trait TWithColumn
 	{
 		if (!is_array($columns)) $columns = [$columns];
 		
-		foreach ($columns as &$column) 
+		if ($table)
 		{
-			$column = "`$table`.`$column`";
+			foreach ($columns as &$column) 
+			{
+				$column = "`$table`.`$column`";
+			}
 		}
 		
 		return $this->addColumn($columns, false);
@@ -60,6 +66,6 @@ trait TWithColumn
 	 */
 	public function columnAsExp($column, $alias, $bind = false) 
 	{
-		return $this->addColumn(["$column as $alias"], []);
+		return $this->addColumn(["$column as $alias"], $bind);
 	}
 }

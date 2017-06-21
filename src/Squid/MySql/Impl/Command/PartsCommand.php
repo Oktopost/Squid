@@ -22,7 +22,7 @@ abstract class PartsCommand extends AbstractCommand
 	{
 		if ($bind === false) return $this;
 		
-		if (!is_array($bind)) $bind = [$bind];
+		if (!is_array($bind)) $bind = [$bind]; 
 		
 		if (!$this->bind[$part]) 
 		{

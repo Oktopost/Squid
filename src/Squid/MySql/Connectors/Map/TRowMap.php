@@ -2,7 +2,10 @@
 namespace Squid\MySql\Connectors\Map;
 
 
-abstract class AbstractRowMap implements IRowMap
+/**
+ * @mixin IRowMap
+ */
+trait TRowMap
 {
 	/**
 	 * @param array $objects

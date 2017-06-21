@@ -10,6 +10,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
 	
 	
 	const PART_DISTINCT		= 0;
@@ -90,6 +91,17 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 			$bind
 		);
 	}
+
+	/**
+	 * @param string[] $columns
+	 * @param array|false $bind
+	 * @return static
+	 */
+	private function addColumn(array $columns, $bind)
+	{
+		$this->appendPart(CmdSelect::PART_COLUMNS, $columns, $bind);
+		return $this;
+	}
 	
 	
 	/**
@@ -146,67 +158,6 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	public function distinct($distinct = true) 
 	{
 		return $this->setPart(CmdSelect::PART_DISTINCT, $distinct);
-	}
-	
-	/**
-	 * @param array $columns
-	 * @return static
-	 */
-	public function column(...$columns)
-	{
-		return $this->columns($columns);
-	}
-	
-	/**
-	 * @param string|array $columns
-	 * @param string|bool $table
-	 * @return static
-	 */
-	public function columns($columns, $table = false) {
-		if (!is_array($columns)) $columns = [$columns];
-		
-		if ($table) 
-		{
-			foreach ($columns as &$column) 
-			{
-				$column = "`$table`.`$column`";
-			}
-		}
-		
-		return $this->appendPart(CmdSelect::PART_COLUMNS, $columns);
-	}
-	
-	/**
-	 * @param string|array $columns
-	 * @param bool|array $bind
-	 * @return static
-	 */
-	public function columnsExp($columns, $bind = false) 
-	{
-		if (!is_array($columns)) $columns = [$columns];
-		
-		return $this->appendPart(CmdSelect::PART_COLUMNS, $columns, $bind);
-	}
-	
-	/**
-	 * @param string $column
-	 * @param string $alias
-	 * @return static
-	 */
-	public function columnAs($column, $alias) 
-	{
-		return $this->appendPart(CmdSelect::PART_COLUMNS, "$column as $alias");
-	}
-	
-	/**
-	 * @param string $column
-	 * @param string $alias
-	 * @param array|bool $bind
-	 * @return static
-	 */
-	public function columnAsExp($column, $alias, $bind = false) 
-	{
-		return $this->appendPart(CmdSelect::PART_COLUMNS,"$column as $alias", $bind);
 	}
 	
 	/**

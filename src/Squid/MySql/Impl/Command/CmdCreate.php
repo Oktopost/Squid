@@ -11,7 +11,7 @@ use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 class CmdCreate extends AbstractCommand implements ICmdCreate
 {
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithIndex;
-	use \Squid\MySql\Impl\Traits\CmdTraits\TWithColumns;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithCreateColumns;
 	
 	
 	const PART_TEMP			= 0;

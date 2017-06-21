@@ -7,7 +7,7 @@ use Squid\MySql\Impl\Command\Create\ColumnFactory;
 use Squid\MySql\Impl\Command\Create\ColumnsCollection;
 
 
-trait TWithColumns
+trait TWithCreateColumns
 {
 	/** @var ColumnsCollection */
 	private $columnsList;

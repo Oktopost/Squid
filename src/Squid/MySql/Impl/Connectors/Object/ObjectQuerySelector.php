@@ -4,13 +4,10 @@ namespace Squid\MySql\Impl\Connectors\Object;
 
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Map\IRowMap;
-use Squid\MySql\Connectors\Object\IQuerySelector;
+use Squid\MySql\Connectors\Object\Selector\IQuerySelector;
 use Squid\MySql\Impl\Connectors\Map\MapFactory;
 
 use Squid\Exceptions\SquidException;
-
-use Objection\Mapper;
-use Objection\Mappers;
 
 
 class ObjectQuerySelector implements IQuerySelector
@@ -31,14 +28,18 @@ class ObjectQuerySelector implements IQuerySelector
 	
 	
 	/**
-	 * @param Mapper|IRowMap|string $mapper
+	 * @param mixed|IORMConnector $mapper
 	 */
 	public function __construct($mapper)
 	{
-		if (is_string($mapper))
-			$mapper = Mappers::simple()->setDefaultClassName($mapper);
-			
-		$this->mapper = MapFactory::create($mapper);
+		if ($mapper instanceof IORMConnector)
+		{
+			$this->mapper = $mapper->getMapper();
+		}
+		else
+		{
+			$this->mapper = MapFactory::create($mapper);
+		}
 	}
 	
 

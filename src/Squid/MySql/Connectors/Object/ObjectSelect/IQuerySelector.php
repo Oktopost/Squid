@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Connectors\Object;
+namespace Squid\MySql\Connectors\Object\Selector;
 
 
 use Squid\MySql\Command\ICmdSelect;

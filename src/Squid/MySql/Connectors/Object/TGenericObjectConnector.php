@@ -3,9 +3,9 @@ namespace Squid\MySql\Connectors\Object;
 
 
 /**
- * @mixin IGenericObjectCRUD
+ * @mixin IGenericObjectConnector
  */
-trait TGenericObjectCRUD
+trait TGenericObjectConnector
 {
 	/**
 	 * @param array $fields

@@ -7,13 +7,10 @@ use Squid\MySql\Connectors\Table\ITableNameConnector;
 use Squid\MySql\Impl\Connectors\Table\TableNameConnector;
 
 
-/**
- * @mixin ISingleTableConnector
- */
-trait TSingleTableConnector
+class SingleTableConnector extends Connector implements ISingleTableConnector
 {
 	/** @var ITableNameConnector */
-	private $_table;
+	private $table;
 	
 	
 	public function getTable(): ITableNameConnector
@@ -27,13 +24,24 @@ trait TSingleTableConnector
 	}
 	
 	
+	public function __construct(ISingleTableConnector $connector = null)
+	{
+		parent::__construct($connector);
+		
+		if ($connector)
+		{
+			$this->table = $connector->getTable();
+		}
+	}
+
+
 	/**
 	 * @param string|ITableNameConnector $table
 	 * @return ISingleTableConnector|static
 	 */
 	public function setTable($table): ISingleTableConnector
 	{
-		$this->_table = new TableNameConnector($table);
+		$this->table = new TableNameConnector($table);
 		return $this;
 	}
 }

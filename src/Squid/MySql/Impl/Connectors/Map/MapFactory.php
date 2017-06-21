@@ -2,13 +2,14 @@
 namespace Squid\MySql\Impl\Connectors\Map;
 
 
-use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\MySql\Impl\Connectors\Map\Maps\ArrayMapper;
 use Squid\MySql\Impl\Connectors\Map\Maps\DummyMapper;
 use Squid\MySql\Impl\Connectors\Map\Maps\LiteObjectMapper;
+use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\Exceptions\SquidException;
 
 use Objection\Mapper;
+use Objection\Mappers;
 
 
 class MapFactory
@@ -22,6 +23,10 @@ class MapFactory
 		else if ($data instanceof IRowMap)
 		{
 			return $data;
+		}
+		else if (is_string($data))
+		{
+			return new LiteObjectMapper(Mappers::simple()->setDefaultClassName($data));
 		}
 		else if (is_array($data))
 		{

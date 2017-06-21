@@ -1,14 +1,11 @@
 <?php
-
-namespace Squid\MySql\Connectors\Object;
+namespace Squid\MySql\Connectors\Object\Selector;
 
 
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\IWithWhere;
 use Squid\MySql\Command\IWithColumns;
-
-use Squid\MySql\Connectors\Object\ObjectSelect\IObjectQuery;
 
 
 interface ICmdObjectSelect extends IObjectQuery, IWithWhere, IWithLimit, IWithColumns

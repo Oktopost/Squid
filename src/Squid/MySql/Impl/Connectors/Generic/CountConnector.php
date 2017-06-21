@@ -4,16 +4,16 @@ namespace Squid\MySql\Impl\Connectors\Generic;
 
 use Squid\MySql\Connectors\Generic\ICountConnector;
 use Squid\MySql\Connectors\Generic\TCountConnector;
-use Squid\MySql\Connectors\IGenericConnector;
+use Squid\MySql\Connectors\IConnector;
 use Squid\MySql\Connectors\ISingleTableConnector;
-use Squid\MySql\Impl\Connectors\TGenericConnector;
+use Squid\MySql\Impl\Connectors\Connector;
 use Squid\MySql\Impl\Connectors\TSingleTableConnector;
 
 
-class CountConnector implements ICountConnector, IGenericConnector, ISingleTableConnector 
+class CountConnector implements ICountConnector, IConnector, ISingleTableConnector 
 {
 	use TCountConnector;
-	use TGenericConnector;
+	use Connector;
 	use TSingleTableConnector;
 	
 	

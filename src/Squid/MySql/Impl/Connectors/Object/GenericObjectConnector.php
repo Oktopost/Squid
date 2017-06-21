@@ -2,28 +2,19 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
-use Squid\MySql\Connectors\IGenericConnector;
-use Squid\MySql\Connectors\ISingleTableConnector;
 use Squid\MySql\Connectors\IGenericCRUDConnector;
 use Squid\MySql\Connectors\Map\IRowMap;
-use Squid\MySql\Connectors\Object\ICmdObjectSelect;
-use Squid\MySql\Connectors\Object\IGenericObjectCRUD;
-use Squid\MySql\Connectors\Object\TGenericObjectCRUD;
+use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+use Squid\MySql\Connectors\Object\IGenericObjectConnector;
+use Squid\MySql\Connectors\Object\TGenericObjectConnector;
 
-use Squid\MySql\Impl\Connectors\TGenericConnector;
-use Squid\MySql\Impl\Connectors\GenericCRUDConnector;
-use Squid\MySql\Impl\Connectors\TSingleTableConnector;
+use Squid\MySql\Impl\Connectors\GenericConnector;
 use Squid\MySql\Impl\Connectors\Map\MapFactory;
 
-use Objection\Mapper;
-use Objection\Mappers;
 
-
-class GenericObjectCRUD implements IGenericConnector, IGenericObjectCRUD, ISingleTableConnector
+class GenericObjectConnector extends ORMConnector implements IGenericObjectConnector
 {
-	use TGenericConnector;
-	use TGenericObjectCRUD;
-	use TSingleTableConnector;
+	use TGenericObjectConnector;
 	
 	
 	/** @var IRowMap */
@@ -37,10 +28,7 @@ class GenericObjectCRUD implements IGenericConnector, IGenericObjectCRUD, ISingl
 	{
 		if (!$this->genericCRUD)
 		{
-			$this->genericCRUD = new GenericCRUDConnector();
-			$this->genericCRUD
-				->setConnector($this->getConnector())
-				->setTable($this->getTable());
+			$this->genericCRUD = new GenericConnector($this);
 		}
 		
 		return $this->genericCRUD;
@@ -48,13 +36,11 @@ class GenericObjectCRUD implements IGenericConnector, IGenericObjectCRUD, ISingl
 	
 	
 	/**
-	 * @param Mapper|IRowMap|string $mapper
+	 * @param mixed $mapper
 	 */
 	public function __construct($mapper)
 	{
-		if (is_string($mapper))
-			$mapper = Mappers::simple()->setDefaultClassName($mapper);
-		
+		parent::__construct();
 		$this->mapper = MapFactory::create($mapper);
 	}
 	

@@ -2,15 +2,13 @@
 namespace Squid\MySql\Connectors\Object;
 
 
-interface IGenericObjectCRUD
+use Squid\MySql\Connectors\Object\CRUD\IObjectInsert;
+use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+
+
+interface IGenericObjectConnector extends 
+	IObjectInsert
 {
-	/**
-	 * @param mixed|array $object
-	 * @param bool $ignore
-	 * @return int|false Number of affected rows
-	 */
-	public function insert($object, bool $ignore = false);
-	
 	/**
 	 * @param mixed $object
 	 * @param string[] $byFields

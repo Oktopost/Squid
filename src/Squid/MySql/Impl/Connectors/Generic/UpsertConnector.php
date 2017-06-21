@@ -2,18 +2,18 @@
 namespace Squid\MySql\Impl\Connectors\Generic;
 
 
-use Squid\MySql\Connectors\IGenericConnector;
+use Squid\MySql\Connectors\IConnector;
 use Squid\MySql\Connectors\ISingleTableConnector;
 use Squid\MySql\Connectors\Generic\IUpsertConnector;
 use Squid\MySql\Connectors\Generic\TUpsertConnector;
-use Squid\MySql\Impl\Connectors\TGenericConnector;
+use Squid\MySql\Impl\Connectors\Connector;
 use Squid\MySql\Impl\Connectors\TSingleTableConnector;
 
 
-class UpsertConnector implements IUpsertConnector, IGenericConnector, ISingleTableConnector
+class UpsertConnector implements IUpsertConnector, IConnector, ISingleTableConnector
 {
 	use TUpsertConnector;
-	use TGenericConnector;
+	use Connector;
 	use TSingleTableConnector;
 
 

@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Connectors\Object\ObjectSelect;
+namespace Squid\MySql\Connectors\Object\Selector;
 
 
 interface IObjectQuery

@@ -4,19 +4,16 @@ namespace Squid\MySql\Impl\Connectors\Object;
 
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\ICmdSelect;
-use Squid\MySql\Connectors\IGenericConnector;
-use Squid\MySql\Connectors\Map\IRowMap;
-use Squid\MySql\Connectors\Object\IQuerySelector;
-use Squid\MySql\Connectors\Object\ICmdObjectSelect;
+use Squid\MySql\Connectors\IConnector;
+use Squid\MySql\Connectors\Object\Selector\IQuerySelector;
+use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
-
-use Objection\Mapper;
-use Objection\Mappers;
+use Squid\MySql\Impl\Connectors\Connector;
 
 
-class CmdObjectSelect implements ICmdObjectSelect, IGenericConnector
+class CmdObjectSelect implements ICmdObjectSelect
 {
 	use TWithWhere;
 	use TWithLimit;
@@ -30,30 +27,29 @@ class CmdObjectSelect implements ICmdObjectSelect, IGenericConnector
 	private $selector;
 	
 	
+	private function addColumn($columns, $bind) { $this->select->columnsExp($columns, $bind); return $this; }
+	private function _orderBy(array $expressions) { $this->select->orderBy($expressions); return $this; }
+	
+	
 	/**
-	 * @param Mapper|IRowMap|string $mapper
+	 * @param mixed $mapper
 	 */
 	public function __construct($mapper)
 	{
-		if (is_string($mapper))
-			$mapper = Mappers::simple()->setDefaultClassName($mapper);
-		
 		$this->selector = new ObjectQuerySelector($mapper);
 	}
 	
 	
 	/**
 	 * @param IMySqlConnector $connector
-	 * @return IGenericConnector|static
+	 * @return IConnector|static
 	 */
-	public function setConnector(IMySqlConnector $connector): IGenericConnector
+	public function setConnector(IMySqlConnector $connector): IConnector
 	{
 		$this->select = $connector->select();
 		return $this;
 	}
 	
-	private function addColumn($columns, $bind) { $this->select->columnsExp($columns, $bind); return $this; }
-	private function _orderBy(array $expressions) { $this->select->orderBy($expressions); return $this; }
 	
 	public function distinct($distinct = true) { $this->select->distinct($distinct); return $this; }
 	public function from($table, $alias = false) { $this->select->from($table, $alias); return $this; }

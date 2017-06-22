@@ -13,4 +13,5 @@ interface ITableNameConnector
 	public function delete(): Command\ICmdDelete;
 	public function upsert(): Command\ICmdUpsert;
 	public function name(): string;
+	public function __toString();
 }

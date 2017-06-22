@@ -1,20 +1,21 @@
 <?php
-namespace Squid\MySql\Impl\Connectors;
+namespace Squid\MySql\Impl\Connectors\Table;
 
 
 use Squid\MySql\Connectors\Generic;
-use Squid\MySql\Connectors\IConnector;
-use Squid\MySql\Connectors\ISingleTableConnector;
 use Squid\MySql\Connectors\IGenericCRUDConnector;
-use Squid\MySql\Impl\Connectors\Generic\CountConnector;
-use Squid\MySql\Impl\Connectors\Generic\DeleteConnector;
-use Squid\MySql\Impl\Connectors\Generic\InsertConnector;
-use Squid\MySql\Impl\Connectors\Generic\SelectConnector;
-use Squid\MySql\Impl\Connectors\Generic\UpdateConnector;
-use Squid\MySql\Impl\Connectors\Generic\UpsertConnector;
+use Squid\MySql\Connectors\Table\ISingleTableConnector;
+
+use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
+use Squid\MySql\Impl\Connectors\Internal\Generic\CountConnector;
+use Squid\MySql\Impl\Connectors\Internal\Generic\DeleteConnector;
+use Squid\MySql\Impl\Connectors\Internal\Generic\InsertConnector;
+use Squid\MySql\Impl\Connectors\Internal\Generic\SelectConnector;
+use Squid\MySql\Impl\Connectors\Internal\Generic\UpdateConnector;
+use Squid\MySql\Impl\Connectors\Internal\Generic\UpsertConnector;
 
 
-class GenericConnector extends SingleTableConnector implements IGenericCRUDConnector
+class AbstractGenericConnector extends AbstractSingleTableConnector implements IGenericCRUDConnector
 {
 	/** @var Generic\ISelectConnector */
 	private $select;
@@ -36,10 +37,10 @@ class GenericConnector extends SingleTableConnector implements IGenericCRUDConne
 
 
 	/**
-	 * @param IConnector|ISingleTableConnector $item
+	 * @param ISingleTableConnector $item
 	 * @return mixed
 	 */
-	private function setup($item)
+	private function setup(ISingleTableConnector $item)
 	{
 		return $item
 			->setConnector($this->getConnector())

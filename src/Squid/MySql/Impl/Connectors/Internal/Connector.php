@@ -1,21 +1,18 @@
 <?php
-namespace Squid\MySql\Impl\Connectors;
+namespace Squid\MySql\Impl\Connectors\Internal;
 
 
-use Squid\MySql\Connectors\IConnector;
 use Squid\MySql\IMySqlConnector;
+use Squid\MySql\Connectors\IConnector;
 
 
-/**
- * @mixin IConnector
- */
-class Connector implements IConnector
+abstract class Connector implements IConnector
 {
 	/** @var IMySqlConnector */
 	private $connector;
 	
 	
-	public function __construct(IConnector $connector = null)
+	public function __construct(Connector $connector = null)
 	{
 		if ($connector)
 		{
@@ -38,15 +35,7 @@ class Connector implements IConnector
 	 */
 	public function setConnector(IMySqlConnector $connector): IConnector
 	{
-		if ($connector instanceof IConnector)
-		{
-			$this->setConnector($connector->getConnector());
-		}
-		else
-		{
-			$this->connector = $connector;
-		}
-		
+		$this->connector = $connector;
 		return $this;
 	}
 }

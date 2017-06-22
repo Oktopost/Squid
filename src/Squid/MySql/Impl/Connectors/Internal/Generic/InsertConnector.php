@@ -1,20 +1,15 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Generic;
+namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
-use Squid\MySql\Connectors\IConnector;
-use Squid\MySql\Connectors\ISingleTableConnector;
 use Squid\MySql\Connectors\Generic\TInsertConnector;
 use Squid\MySql\Connectors\Generic\IInsertConnector;
-use Squid\MySql\Impl\Connectors\Connector;
-use Squid\MySql\Impl\Connectors\TSingleTableConnector;
+use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
-class InsertConnector implements IInsertConnector, IConnector, ISingleTableConnector 
+class InsertConnector extends AbstractSingleTableConnector implements IInsertConnector 
 {
 	use TInsertConnector;
-	use Connector;
-	use TSingleTableConnector;
 	
 	
 	private function doInsert(array $data, bool $ignore, ?array $fields = null)

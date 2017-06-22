@@ -7,13 +7,14 @@ use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\IConnector;
 use Squid\MySql\Connectors\Object\Selector\IQuerySelector;
 use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
-use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
+
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
-use Squid\MySql\Impl\Connectors\Connector;
+use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
+use Squid\MySql\Impl\Connectors\Internal\Connector;
 
 
-class CmdObjectSelect implements ICmdObjectSelect
+class CmdObjectSelect extends Connector implements ICmdObjectSelect
 {
 	use TWithWhere;
 	use TWithLimit;
@@ -36,6 +37,7 @@ class CmdObjectSelect implements ICmdObjectSelect
 	 */
 	public function __construct($mapper)
 	{
+		parent::__construct();
 		$this->selector = new ObjectQuerySelector($mapper);
 	}
 	

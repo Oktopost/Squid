@@ -5,6 +5,9 @@ namespace Squid\MySql\Connectors;
 use Objection\LiteObject;
 
 
+/**
+ * @deprecated 
+ */
 interface IMySqlAutoIncrementConnector extends IMySqlObjectConnector
 {
 	/**

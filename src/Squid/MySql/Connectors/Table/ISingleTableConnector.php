@@ -1,8 +1,8 @@
 <?php
-namespace Squid\MySql\Connectors;
+namespace Squid\MySql\Connectors\Table;
 
 
-use Squid\MySql\Connectors\Table\ITableNameConnector;
+use Squid\MySql\Connectors\IConnector;
 
 
 interface ISingleTableConnector extends IConnector
@@ -12,9 +12,4 @@ interface ISingleTableConnector extends IConnector
 	 * @return ISingleTableConnector|static
 	 */
 	public function setTable($table): ISingleTableConnector;
-
-	/**
-	 * @return ITableNameConnector
-	 */
-	public function getTable(): ITableNameConnector;
 }

@@ -6,6 +6,9 @@ use Squid\MySql\IMySqlConnector;
 use Squid\Object\IObjectConnector;
 
 
+/**
+ * @deprecated 
+ */
 interface IMySqlObjectConnector extends IObjectConnector
 {
 	/**

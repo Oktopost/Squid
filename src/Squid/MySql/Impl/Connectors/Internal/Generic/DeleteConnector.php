@@ -1,20 +1,15 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Generic;
+namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
-use Squid\MySql\Connectors\IConnector;
-use Squid\MySql\Connectors\ISingleTableConnector;
 use Squid\MySql\Connectors\Generic\TDeleteConnector;
 use Squid\MySql\Connectors\Generic\IDeleteConnector;
-use Squid\MySql\Impl\Connectors\Connector;
-use Squid\MySql\Impl\Connectors\TSingleTableConnector;
+use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
-class DeleteConnector implements IDeleteConnector, IConnector, ISingleTableConnector
+class DeleteConnector extends AbstractSingleTableConnector implements IDeleteConnector
 {
 	use TDeleteConnector;
-	use Connector;
-	use TSingleTableConnector;
 	
 	
 	/**

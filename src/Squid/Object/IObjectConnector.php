@@ -6,6 +6,9 @@ use Objection\Mapper;
 use Objection\LiteObject;
 
 
+/**
+ * @deprecated 
+ */
 interface IObjectConnector
 {
 	/**

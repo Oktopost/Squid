@@ -12,9 +12,4 @@ interface IConnector
 	 * @return IConnector|static
 	 */
 	public function setConnector(IMySqlConnector $connector): IConnector;
-
-	/**
-	 * @return IMySqlConnector
-	 */
-	public function getConnector(): IMySqlConnector;
 }

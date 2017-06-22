@@ -13,6 +13,9 @@ use Squid\Object\AbstractObjectConnector;
 use Objection\LiteObject;
 
 
+/**
+ * @deprecated 
+ */
 class MySqlObjectConnector extends AbstractObjectConnector implements IMySqlObjectConnector
 {
 	private $tableName;

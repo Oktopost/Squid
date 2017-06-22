@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Map\Maps;
+namespace Squid\MySql\Impl\Connectors\Internal\Map\Maps;
 
 
 use Squid\MySql\Connectors\Map\IRowMap;

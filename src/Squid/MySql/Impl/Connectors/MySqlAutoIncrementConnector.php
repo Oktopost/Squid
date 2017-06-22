@@ -7,6 +7,9 @@ use Squid\MySql\Connectors\IMySqlAutoIncrementConnector;
 use Objection\LiteObject;
 
 
+/**
+ * @deprecated 
+ */
 class MySqlAutoIncrementConnector extends MySqlObjectConnector implements IMySqlAutoIncrementConnector
 {
 	private $idField = 'Id';

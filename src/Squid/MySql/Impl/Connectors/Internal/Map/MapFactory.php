@@ -1,10 +1,10 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Map;
+namespace Squid\MySql\Impl\Connectors\Internal\Map;
 
 
-use Squid\MySql\Impl\Connectors\Map\Maps\ArrayMapper;
-use Squid\MySql\Impl\Connectors\Map\Maps\DummyMapper;
-use Squid\MySql\Impl\Connectors\Map\Maps\LiteObjectMapper;
+use Squid\MySql\Impl\Connectors\Internal\Map\Maps\ArrayMapper;
+use Squid\MySql\Impl\Connectors\Internal\Map\Maps\DummyMapper;
+use Squid\MySql\Impl\Connectors\Internal\Map\Maps\LiteObjectMapper;
 use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\Exceptions\SquidException;
 

@@ -4,8 +4,9 @@ namespace Squid\MySql\Impl\Connectors\Object;
 
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Map\IRowMap;
+use Squid\MySql\Connectors\Object\IORMConnector;
 use Squid\MySql\Connectors\Object\Selector\IQuerySelector;
-use Squid\MySql\Impl\Connectors\Map\MapFactory;
+use Squid\MySql\Impl\Connectors\Internal\Map\MapFactory;
 
 use Squid\Exceptions\SquidException;
 

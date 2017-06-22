@@ -6,6 +6,9 @@ use Objection\Mapper;
 use Objection\LiteObject;
 
 
+/**
+ * @deprecated 
+ */
 abstract class AbstractObjectConnector implements IObjectConnector
 {
 	private $className;

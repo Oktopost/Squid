@@ -1,68 +1,60 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Object\CRUD;
+namespace Squid\MySql\Impl\Connectors\Object;
 
 
-use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
 use Squid\MySql\Connectors\Object\IGenericObjectConnector;
-use Squid\MySql\Impl\Connectors\Object\GenericObjectConnector;
-use Squid\MySql\Impl\Connectors\Object\IORMConnector;
-use Squid\MySql\Impl\Connectors\Object\ORMConnector;
+use Squid\MySql\Connectors\Object\ID\IIDGenerator;
+use Squid\MySql\Connectors\Object\CRUD\IObjectInsert;
+use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
+use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
+use Squid\MySql\Impl\Connectors\Internal\Object\IdentityInsert\GeneratorIDInsert;
+use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\AutoincrementInsert;
 
 
-abstract class AbstractIdentityObjectConnector extends ORMConnector implements IIdentifiedObjectConnector
+class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedObjectConnector
 {
 	private $idFiled;
 	private $idProperty;
 	
 	/** @var IGenericObjectConnector */
 	private $objectConnector;
-
-
-	protected function getIDField(): string
-	{
-		return $this->idFiled;
-	}
 	
-	protected function getIDProperty(): string
-	{
-		return $this->idProperty;
-	}
-	
-	protected function getGenericConnector(): IGenericObjectConnector
-	{
-		if (!$this->objectConnector)
-			$this->objectConnector = new GenericObjectConnector($this);
-		
-		return $this->objectConnector; 
-	}
-	
-	
-	/**
-	 * @param IORMConnector|null $parent
-	 */
-	public function __construct(IORMConnector $parent = null)
-	{
-		parent::__construct($parent);
-	}
-	
-
-	/**
-	 * @param mixed|array $object
-	 * @param bool $ignore
-	 * @return false|int
-	 */
-	public abstract function insert($object, bool $ignore = false);
+	/** @var IObjectInsert */
+	private $insertHandler;
 
 
 	/**
-	 * @param string $field
-	 * @param null|string $property
-	 * @return AbstractIdentityObjectConnector
+	 * @param string $name
+	 * @param string|null $fieldName
+	 * @return static
 	 */
-	public function setIdField(string $field, ?string $property = null): AbstractIdentityObjectConnector
+	public function setIDProperty(string $name, ?string $fieldName = null)
 	{
-		$this->idFiled = $field;
-		$this->idProperty = ($property ?: $field);
+		$this->idFiled = ($fieldName ?: $name);
+		$this->idProperty = $name;
+		return $this;
+	}
+
+	/**
+	 * @param string $name
+	 * @param string|null $fieldName
+	 * @return static
+	 */
+	public function setAutoincrementID(string $name, ?string $fieldName = null)
+	{
+		$this->setIDProperty($name, $fieldName);
+		$this->insertHandler = new AutoincrementInsert($this, $name);
+		return $this;
+	}
+
+	/**
+	 * @param IIDGenerator $generator
+	 * @return static
+	 */
+	public function setIDGenerator(IIDGenerator $generator)
+	{
+		$this->insertHandler = new GeneratorIDInsert($this, $generator);
 		return $this;
 	}
 	
@@ -74,6 +66,16 @@ abstract class AbstractIdentityObjectConnector extends ORMConnector implements I
 	public function delete($object)
 	{
 		return $this->deleteById($object->{$this->idProperty});
+	}
+
+	/**
+	 * @param mixed|array $object
+	 * @param bool $ignore
+	 * @return false|int
+	 */
+	public function insert($object, bool $ignore = false)
+	{
+		return $this->insertHandler->insert($object, $ignore);
 	}
 
 	/**
@@ -111,7 +113,7 @@ abstract class AbstractIdentityObjectConnector extends ORMConnector implements I
 			return $this->getGenericConnector()->selectOneByFields($where);
 		}
 	}
-
+	
 	/**
 	 * @param mixed|array $object
 	 * @return int|false
@@ -161,7 +163,7 @@ abstract class AbstractIdentityObjectConnector extends ORMConnector implements I
 			return $this->update($object);
 		}
 	}
-
+	
 	/**
 	 * @param mixed $id
 	 * @return mixed|false
@@ -172,5 +174,25 @@ abstract class AbstractIdentityObjectConnector extends ORMConnector implements I
 			->delete()
 			->byField($this->idFiled, $id)
 			->executeDml();
+	}
+	
+	/**
+	 * @return IGenericObjectConnector
+	 */
+	public function getGenericConnector(): IGenericObjectConnector
+	{
+		if (!$this->objectConnector)
+			$this->objectConnector = new GenericObjectConnector($this);
+		
+		return $this->objectConnector; 
+	}
+	
+	/**
+	 * @return ICmdObjectSelect
+	 */
+	public function query(): ICmdObjectSelect
+	{
+		$query = new CmdObjectSelect($this->getObjectMap());
+		return $query->setConnector($this->getConnector());
 	}
 }

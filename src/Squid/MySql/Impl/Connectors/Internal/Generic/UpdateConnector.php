@@ -1,20 +1,15 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Generic;
+namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
-use Squid\MySql\Connectors\IConnector;
-use Squid\MySql\Connectors\ISingleTableConnector;
 use Squid\MySql\Connectors\Generic\IUpdateConnector;
 use Squid\MySql\Connectors\Generic\TUpdateConnector;
-use Squid\MySql\Impl\Connectors\Connector;
-use Squid\MySql\Impl\Connectors\TSingleTableConnector;
+use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
-class UpdateConnector implements IUpdateConnector, IConnector, ISingleTableConnector
+class UpdateConnector extends AbstractSingleTableConnector implements IUpdateConnector
 {
 	use TUpdateConnector;
-	use Connector;
-	use TSingleTableConnector;
 	
 	
 	/**

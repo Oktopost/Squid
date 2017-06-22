@@ -6,7 +6,7 @@ use Squid\MySql\Connectors\Object\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\ID\IIDGenerator;
 use Squid\MySql\Connectors\Object\CRUD\IObjectInsert;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
-use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\IdentityInsert\GeneratorIDInsert;
 use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\AutoincrementInsert;

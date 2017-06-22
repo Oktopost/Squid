@@ -6,7 +6,7 @@ use Squid\MySql\Connectors\IGenericCRUDConnector;
 use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\MySql\Connectors\Object\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\TGenericObjectConnector;
-use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 
 use Squid\MySql\Impl\Connectors\Table\AbstractGenericConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;

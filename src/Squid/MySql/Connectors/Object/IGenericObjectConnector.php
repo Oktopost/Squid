@@ -3,7 +3,7 @@ namespace Squid\MySql\Connectors\Object;
 
 
 use Squid\MySql\Connectors\Object\CRUD\IObjectInsert;
-use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 
 
 interface IGenericObjectConnector extends 

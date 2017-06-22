@@ -5,8 +5,8 @@ namespace Squid\MySql\Impl\Connectors\Object;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\IConnector;
-use Squid\MySql\Connectors\Object\Selector\IQuerySelector;
-use Squid\MySql\Connectors\Object\Selector\ICmdObjectSelect;
+use Squid\MySql\Connectors\Object\ObjectSelect\IQuerySelector;
+use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;

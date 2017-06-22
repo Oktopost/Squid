@@ -182,7 +182,9 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	public function getGenericConnector(): IGenericObjectConnector
 	{
 		if (!$this->objectConnector)
+		{
 			$this->objectConnector = new GenericObjectConnector($this);
+		}
 		
 		return $this->objectConnector; 
 	}
@@ -193,6 +195,6 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	public function query(): ICmdObjectSelect
 	{
 		$query = new CmdObjectSelect($this->getObjectMap());
-		return $query->setConnector($this->getConnector());
+		return $query->setConnector($this->getConnector())->from($this->getTableName());
 	}
 }

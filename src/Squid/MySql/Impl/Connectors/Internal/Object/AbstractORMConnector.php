@@ -4,8 +4,8 @@ namespace Squid\MySql\Impl\Connectors\Internal\Object;
 
 use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\MySql\Connectors\Object\IORMConnector;
-use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 use Squid\MySql\Impl\Connectors\Internal\Map\MapFactory;
+use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
 abstract class AbstractORMConnector extends AbstractSingleTableConnector implements IORMConnector
@@ -40,10 +40,12 @@ abstract class AbstractORMConnector extends AbstractSingleTableConnector impleme
 
 	/**
 	 * @param mixed $mapper
+	 * @return static
 	 */
 	public function setObjectMap($mapper)
 	{
 		$this->map = MapFactory::create($mapper);
+		return $this;
 	}
 
 	/**

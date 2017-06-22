@@ -40,7 +40,7 @@ abstract class AbstractSingleTableConnector extends Connector implements ISingle
 
 	/**
 	 * @param IMySqlConnector $connector
-	 * @return IConnector
+	 * @return static|IConnector
 	 */
 	public function setConnector(IMySqlConnector $connector): IConnector
 	{
@@ -56,7 +56,7 @@ abstract class AbstractSingleTableConnector extends Connector implements ISingle
 
 	/**
 	 * @param string|ITableNameConnector $table
-	 * @return ISingleTableConnector|static
+	 * @return static|ISingleTableConnector
 	 */
 	public function setTable($table): ISingleTableConnector
 	{

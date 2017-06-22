@@ -74,7 +74,7 @@ class ObjectQuerySelector implements IQuerySelector
 		}
 		else if (count($data) == 1)
 		{
-			return $this->toObject($data[0]);
+			return $data[0];
 		}
 		
 		throw new SquidException('More then one row selected!');

@@ -3,7 +3,6 @@ namespace Squid\MySql\Impl\Connectors\Object;
 
 
 use Squid\MySql\Connectors\IGenericCRUDConnector;
-use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\MySql\Connectors\Object\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\TGenericObjectConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
@@ -16,9 +15,6 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 {
 	use TGenericObjectConnector;
 	
-	
-	/** @var IRowMap */
-	private $map;
 	
 	/** @var IGenericCRUDConnector */
 	private $genericCRUD;
@@ -42,7 +38,10 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	 */
 	public function insert($object, bool $ignore = false)
 	{
-		return $this->getGenericCRUD()->insert()->row($this->map->toRow($object), $ignore);
+		if (!is_array($object))
+			$object = [$object];
+		
+		return $this->getGenericCRUD()->insert()->all($this->getObjectMap()->toRows($object), $ignore);
 	}
 
 	/**
@@ -52,7 +51,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	 */
 	public function update($object, array $byFields)
 	{		
-		return $this->getGenericCRUD()->update()->byFields($byFields, $this->map->toRow($object));
+		return $this->getGenericCRUD()->update()->byFields($byFields, $this->getObjectMap()->toRow($object));
 	}
 
 	/**
@@ -62,7 +61,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	 */
 	public function upsertByKeys($object, array $keys)
 	{
-		return $this->getGenericCRUD()->upsert()->byKeys($this->map->toRow($object), $keys);
+		return $this->getGenericCRUD()->upsert()->byKeys($this->getObjectMap()->toRow($object), $keys);
 	}
 
 	/**
@@ -72,7 +71,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	 */
 	public function upsertValues($object, array $valueFields)
 	{
-		return $this->getGenericCRUD()->upsert()->byValues($this->map->toRow($object), $valueFields);
+		return $this->getGenericCRUD()->upsert()->byValues($this->getObjectMap()->toRow($object), $valueFields);
 	}
 
 	/**
@@ -80,7 +79,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	 */
 	public function query(): ICmdObjectSelect
 	{
-		$query = new CmdObjectSelect($this->map);
+		$query = new CmdObjectSelect($this->getObjectMap());
 		$query
 			->setConnector($this->getConnector())
 			->from($this->getTableName());

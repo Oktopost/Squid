@@ -273,7 +273,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $all
 	 * @return static
 	 */
-	public function union(ICmdSelect $select, $all = false)
+	public function union(IMySqlCommandConstructor $select, $all = false)
 	{
 		$union = 'UNION ' . ($all ? 'ALL ' : '');
 		
@@ -287,7 +287,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param ICmdSelect $select
 	 * @return static
 	 */
-	public function unionAll(ICmdSelect $select)
+	public function unionAll(IMySqlCommandConstructor $select)
 	{
 		return $this->union($select, true);
 	}
@@ -370,7 +370,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		$groupBy		= $this->getPart(CmdSelect::PART_GROUP_BY);
 		$groupByBinds	= $this->getBind(CmdSelect::PART_GROUP_BY);
 		
-		if ($groupBy) 
+		if ($groupBy)
 		{
 			$groupByQuery = implode(',', $groupBy);
 			
@@ -389,4 +389,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		
 		return $select->queryInt();
 	}
+	
+	
+	public function __clone() {}
 }

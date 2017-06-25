@@ -15,7 +15,7 @@ use Squid\MySql\Impl\Connectors\Internal\Generic\UpdateConnector;
 use Squid\MySql\Impl\Connectors\Internal\Generic\UpsertConnector;
 
 
-class AbstractGenericConnector extends AbstractSingleTableConnector implements IGenericCRUDConnector
+class GenericConnector extends AbstractSingleTableConnector implements IGenericCRUDConnector
 {
 	/** @var Generic\ISelectConnector */
 	private $select;

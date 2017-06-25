@@ -7,7 +7,7 @@ use Squid\MySql\Connectors\Object\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\TGenericObjectConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 
-use Squid\MySql\Impl\Connectors\Table\AbstractGenericConnector;
+use Squid\MySql\Impl\Connectors\Table\GenericConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
@@ -24,7 +24,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	{
 		if (!$this->genericCRUD)
 		{
-			$this->genericCRUD = new AbstractGenericConnector($this);
+			$this->genericCRUD = new GenericConnector($this);
 		}
 		
 		return $this->genericCRUD;

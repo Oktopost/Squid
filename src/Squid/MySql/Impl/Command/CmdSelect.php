@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Command\IMySqlCommandConstructor;
 
 
 class CmdSelect extends PartsCommand implements ICmdSelect 
@@ -45,13 +46,13 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	
 	/**
-	 * @param ICmdSelect $from
+	 * @param IMySqlCommandConstructor $from
 	 * @param string $alias
 	 * @param string $condition
 	 * @param string $join
 	 * @return static
 	 */
-	private function fromSubQuery(ICmdSelect $from, $alias, $condition = '', $join = '')
+	private function fromSubQuery(IMySqlCommandConstructor $from, $alias, $condition = '', $join = '')
 	{
 		if ($join) $join .= ' ';
 		
@@ -73,7 +74,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @param string|ICmdSelect $joinWith
+	 * @param string|IMySqlCommandConstructor $joinWith
 	 * @param string $alias
 	 * @param string $condition
 	 * @param array|bool $bind
@@ -82,7 +83,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	private function joinWith($joinWith, $alias, $condition, $bind, $join)
 	{
-		if ($joinWith instanceof ICmdSelect)
+		if ($joinWith instanceof IMySqlCommandConstructor)
 			return $this->fromSubQuery($joinWith, $alias, $condition, $join);
 		
 		return $this->appendPart(
@@ -93,6 +94,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 
 	/**
+	 * @see \Squid\MySql\Impl\Traits\CmdTraits\TWithColumn
 	 * @param string[] $columns
 	 * @param array|false $bind
 	 * @return static
@@ -105,7 +107,8 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	
 	/**
-	 * @inheritdoc
+	 * Get the parts this query can have.
+	 * @return array Array containing only the part as keys and values set to false.
 	 */
 	protected function getDefaultParts() 
 	{
@@ -113,7 +116,8 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @inheritdoc
+	 * Combine all the parts into one sql.
+	 * @return string Sql query
 	 */
 	protected function generate() 
 	{
@@ -161,14 +165,13 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @param string $table
+	 * @param string|IMySqlCommandConstructor $table
 	 * @param bool|string $alias
 	 * @return static
-	 * @internal param $ string|ICmdSelect
 	 */
 	public function from($table, $alias = false) 
 	{
-		if ($table instanceof ICmdSelect) 
+		if ($table instanceof IMySqlCommandConstructor) 
 		{
 			$this->setPart(CmdSelect::PART_FROM, false);			
 			return $this->fromSubQuery($table, $alias);
@@ -183,7 +186,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @param string|ICmdSelect $table
+	 * @param string|IMySqlCommandConstructor $table
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind
@@ -195,7 +198,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @param string|ICmdSelect $table
+	 * @param string|IMySqlCommandConstructor $table
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind
@@ -210,7 +213,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @param string|ICmdSelect $table
+	 * @param string|IMySqlCommandConstructor $table
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind

@@ -2,34 +2,24 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
-use Squid\MySql\IMySqlConnector;
-use Squid\MySql\Command\ICmdSelect;
-use Squid\MySql\Connectors\IConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\IQuerySelector;
 use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
-use Squid\MySql\Impl\Connectors\Internal\Connector;
+use Squid\MySql\Impl\Connectors\Extensions\Select\SelectDecorator;
 
 
-class CmdObjectSelect extends Connector implements ICmdObjectSelect
+class CmdObjectSelect extends SelectDecorator implements ICmdObjectSelect
 {
 	use TWithWhere;
 	use TWithLimit;
 	use TWithColumn;
 	
 	
-	/** @var ICmdSelect */
-	private $select;
-	
 	/** @var IQuerySelector */
 	private $selector;
-	
-	
-	private function addColumn($columns, $bind) { $this->select->columnsExp($columns, $bind); return $this; }
-	private function _orderBy(array $expressions) { $this->select->orderBy($expressions); return $this; }
 	
 	
 	/**
@@ -40,38 +30,14 @@ class CmdObjectSelect extends Connector implements ICmdObjectSelect
 		parent::__construct();
 		$this->selector = new ObjectQuerySelector($mapper);
 	}
-	
-	
-	/**
-	 * @param IMySqlConnector $connector
-	 * @return IConnector|static
-	 */
-	public function setConnector(IMySqlConnector $connector): IConnector
-	{
-		$this->select = $connector->select();
-		return $this;
-	}
-	
-	
-	public function distinct($distinct = true) { $this->select->distinct($distinct); return $this; }
-	public function from($table, $alias = false) { $this->select->from($table, $alias); return $this; }
-	public function join($table, $alias, $condition, $bind = false) { $this->select->join($table, $alias, $condition, $bind); return $this; }
-	public function leftJoin($table, $alias, $condition, $bind = false, $outer = false) { $this->select->leftJoin($table, $alias, $condition, $bind, $outer); return $this; }
-	public function rightJoin($table, $alias, $condition, $bind = false, $outer = false) { $this->select->rightJoin($table, $alias, $condition, $bind, $outer); return $this; }
-	public function groupBy($column, $bind = false) { $this->select->groupBy($column, $bind); return $this; }
-	public function having($exp, $bind = false) { $this->select->having($exp, $bind); return $this; }
-	public function union(ICmdSelect $select, $all = false) { $this->select->union($select, $all); return $this; }
-	public function unionAll(ICmdSelect $select) { $this->select->unionAll($select); return $this; }
-	
-	public function where($exp, $bind = false) { $this->select->where($exp, $bind); return $this; }
-	public function limit($from, $count) { $this->select->limit($from, $count); return $this; }
+
 	
 	/**
 	 * @return mixed
 	 */
 	public function queryAll()
 	{
-		return $this->selector->all($this->select);
+		return $this->selector->all($this->getSelect());
 	}
 
 	/**
@@ -79,7 +45,7 @@ class CmdObjectSelect extends Connector implements ICmdObjectSelect
 	 */
 	public function queryFirst()
 	{
-		return $this->selector->first($this->select);
+		return $this->selector->first($this->getSelect());
 	}
 
 	/**
@@ -87,7 +53,7 @@ class CmdObjectSelect extends Connector implements ICmdObjectSelect
 	 */
 	public function queryOne()
 	{
-		return $this->selector->one($this->select);
+		return $this->selector->one($this->getSelect());
 	}
 
 	/**
@@ -99,7 +65,7 @@ class CmdObjectSelect extends Connector implements ICmdObjectSelect
 	 */
 	public function queryWithCallback($callback)
 	{
-		return $this->selector->withCallback($this->select, $callback);
+		return $this->selector->withCallback($this->getSelect(), $callback);
 	}
 
 	/**
@@ -108,7 +74,7 @@ class CmdObjectSelect extends Connector implements ICmdObjectSelect
 	 */
 	public function queryIterator(): iterable
 	{
-		return $this->selector->iterator($this->select);
+		return $this->selector->iterator($this->getSelect());
 	}
 
 	/**
@@ -119,17 +85,13 @@ class CmdObjectSelect extends Connector implements ICmdObjectSelect
 	 */
 	public function queryMapRow(string $key, $removeColumnFromRow = false)
 	{
-		return $this->selector->iterator($this->select);
+		return $this->selector->iterator($this->getSelect());
 	}
 	
 	
 	public function __clone()
 	{
-		$this->select = clone $this->select;
-	}
-	
-	public function __toString()
-	{
-		return (string)$this->select;
+		parent::__clone();
+		$this->selector = clone $this->selector;
 	}
 }

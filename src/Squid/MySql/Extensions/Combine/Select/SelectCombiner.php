@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Extensions\Combine\Select;
 
 
+use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\OrderBy;
 
 use Squid\MySql\Command\ICmdSelect;
@@ -129,8 +130,8 @@ class SelectCombiner implements ICmdSelect
 	public function groupBy($column, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function having($exp, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function withRollup($withRollup = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function union(ICmdSelect $select, $all = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function unionAll(ICmdSelect $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function union(IMySqlCommandConstructor $select, $all = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function unionAll(IMySqlCommandConstructor $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function forUpdate($forUpdate = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function lockInShareMode($lockInShareMode = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function setConnection(IMySqlConnection $conn) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

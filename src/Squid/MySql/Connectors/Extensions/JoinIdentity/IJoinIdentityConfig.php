@@ -31,14 +31,12 @@ interface IJoinIdentityConfig
 	/**
 	 * @param mixed $object
 	 * @param mixed $data
-	 * @return mixed
 	 */
 	public function combine($object, $data);
 
 	/**
 	 * @param array $objects
 	 * @param array $data
-	 * @return array
 	 */
-	public function combineAll(array $objects, array $data): array;
+	public function combineAll(array $objects, array $data);
 }

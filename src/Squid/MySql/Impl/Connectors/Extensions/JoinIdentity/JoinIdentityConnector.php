@@ -2,8 +2,9 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity;
 
 
-use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
+use Squid\MySql\Connectors\Object\ObjectSelect\IObjectQuery;
+use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
 
 class JoinIdentityConnector implements IIdentifiedObjectConnector
@@ -16,6 +17,25 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	
 	/** @var IJoinIdentityConfig */
 	private $config;
+	
+	
+	private function invokeSaveMethod($object, callable $method)
+	{
+		$res = $this->objectConnector->$method($object);
+		
+		if ($res !== false)
+		{
+			$this->config->beforeDataSave($object);
+			$data = $this->config->getData($object);
+			
+			if ($data)
+			{
+				$res = $this->dataConnector->$method($data);
+			}
+		}
+		
+		return $res;
+	}
 	
 	
 	public function setObjectConnector(IIdentifiedObjectConnector $connector): JoinIdentityConnector
@@ -43,7 +63,29 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	 */
 	public function load($id)
 	{
+		$object = $this->objectConnector->load($id);
 		
+		if ($object !== false)
+		{
+			$identifier = $this->config->getDataIdentifier($object);
+			$data = $this->dataConnector->load($identifier);
+			
+			if ($data === false)
+			{
+				return false;
+			}
+			
+			if (is_array($id))
+			{
+				$this->config->combineAll($object, $data);
+			}
+			else
+			{
+				$this->config->combine($object, $data);
+			}
+		}
+		
+		return $object;
 	}
 
 	/**
@@ -69,12 +111,17 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	{
 		$res = $this->objectConnector->delete($object);
 		
-		if ($res !== false)
+		if ($res !== false && $this->config->onDeleteObjectCascadeData())
 		{
+			$data = $this->config->getData($object);
 			
+			if ($data)
+			{
+				$res = $this->dataConnector->delete($data);
+			}
 		}
 		
-		return false;
+		return $res;
 	}
 
 	/**
@@ -84,7 +131,20 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	 */
 	public function insert($object, bool $ignore = false)
 	{
-		// TODO: Implement insert() method.
+		$res = $this->objectConnector->insert($object, $ignore);
+		
+		if ($res !== false)
+		{
+			$this->config->beforeDataSave($object);
+			$data = $this->config->getData($object);
+			
+			if ($data)
+			{
+				$res = $this->dataConnector->insert($data, $ignore);
+			}
+		}
+		
+		return $res;
 	}
 
 	/**
@@ -93,7 +153,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	 */
 	public function save($object)
 	{
-		// TODO: Implement save() method.
+		return $this->invokeSaveMethod($object, __FUNCTION__);
 	}
 
 	/**
@@ -102,7 +162,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	 */
 	public function update($object)
 	{
-		// TODO: Implement update() method.
+		return $this->invokeSaveMethod($object, __FUNCTION__);
 	}
 
 	/**
@@ -111,6 +171,12 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	 */
 	public function upsert($object)
 	{
-		// TODO: Implement upsert() method.
+		return $this->invokeSaveMethod($object, __FUNCTION__);
+	}
+	
+	
+	public function query(): IObjectQuery
+	{
+		
 	}
 }

@@ -64,13 +64,45 @@ abstract class AbstractJoinConfigByFields implements IJoinIdentityConfig
 		$object->{$this->dataProperty} = $data;
 		return $object;
 	}
+	
+	/**
+	 * @return bool If true, after deleting the object entity, should the data entity also be deleted? If the
+	 * deletion is handled by the database itself (for example a foreign key constraint), this should return 
+	 * false.
+	 */
+	public function onDeleteObjectCascadeData(): bool
+	{
+		return false;
+	}
+
+	/**
+	 * @param mixed|array $object
+	 */
+	public function beforeDataSave($object)
+	{
+		$ref	= $this->reference;
+		$id		= $this->id;
+		$prop	= $this->dataProperty;
+		
+		if (!is_array($object))
+			$object = [$object];
+		
+		foreach ($object as $item)
+		{
+			$data = $item->{$prop};
+		
+			if ($data)
+			{
+				$data->{$ref} = $item->{$id};
+			}
+		}
+	}
 
 	/**
 	 * @param array $objects
 	 * @param array $data
-	 * @return array
 	 */
-	public function combineAll(array $objects, array $data): array
+	public function combineAll(array $objects, array $data)
 	{
 		$map = [];
 		
@@ -85,18 +117,16 @@ abstract class AbstractJoinConfigByFields implements IJoinIdentityConfig
 		
 		foreach ($objects as $object)
 		{
-			$currId = $objects->$id;
+			$currId = $object->$id;
 			
 			if (isset($map[$currId]))
 			{
-				$objects->$prop = $map[$currId];
+				$object->$prop = $map[$currId];
 			}
 			else
 			{
-				$objects->$prop = null;
+				$object->$prop = null;
 			}
 		}
-		
-		return $objects;
 	}
 }

@@ -2,7 +2,6 @@
 namespace Squid\MySql\Impl\Extensions\Combine\Select;
 
 
-use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\OrderBy;
 
 use Squid\MySql\Command\ICmdSelect;

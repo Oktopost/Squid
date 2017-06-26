@@ -65,7 +65,19 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	 */
 	public function delete($object)
 	{
-		return $this->deleteById($object->{$this->idProperty});
+		$idProp = $this->idProperty;
+		
+		if (!is_array($object))
+			return $this->deleteById($object->$idProp);
+		
+		$ids = [];
+		
+		foreach ($object as $item)
+		{
+			$ids[] = $item->$idProp;
+		}
+		
+		return $this->deleteById($ids);
 	}
 
 	/**
@@ -84,7 +96,7 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	 */
 	public function update($object)
 	{
-		return $this->getGenericConnector()->upsertByKeys($object, [$this->idFiled]);
+		return $this->getGenericConnector()->update($object, [$this->idFiled]);
 	}
 
 	/**
@@ -173,7 +185,7 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 		return $this->getTable()
 			->delete()
 			->byField($this->idFiled, $id)
-			->executeDml();
+			->executeDml(true);
 	}
 	
 	/**

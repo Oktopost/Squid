@@ -21,7 +21,7 @@ class UpsertConnector extends AbstractSingleTableConnector implements IUpsertCon
 	{
 		return $this->getTable()
 			->upsert()
-			->values($rows)
+			->valuesBulk($rows)
 			->setDuplicateKeys($keys)
 			->executeDml(true);
 	}
@@ -35,7 +35,7 @@ class UpsertConnector extends AbstractSingleTableConnector implements IUpsertCon
 	{
 		return $this->getTable()
 			->upsert()
-			->values($rows)
+			->valuesBulk($rows)
 			->setUseNewValues($valueFields)
 			->executeDml(true);
 	}

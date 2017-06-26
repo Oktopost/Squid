@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\PolymorphicIdentity;
 
 
+use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Extensions\PolymorphicIdentity\IPolymorphicIdentityConfig;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
 
@@ -16,7 +17,8 @@ abstract class AbstractPolymorphicIdentityConfig implements IPolymorphicIdentity
 		{
 			$type = $callback($item);
 			
-			if (!$type) continue;
+			if (!$type) 
+				throw new SquidException('Connector for requested object not found!');
 			
 			if (!isset($map[$type]))
 			{

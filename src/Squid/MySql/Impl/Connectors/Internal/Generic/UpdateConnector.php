@@ -22,6 +22,7 @@ class UpdateConnector extends AbstractSingleTableConnector implements IUpdateCon
 		return $this->getTable()
 			->update()
 			->byFields($where)
-			->set($row)->executeDml(true);
+			->set($row)
+			->executeDml(true);
 	}
 }

@@ -6,10 +6,9 @@ namespace Squid\MySql\Impl\Connectors\Extensions\PolymorphicIdentity;
 use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
 use Squid\MySql\Connectors\Extensions\PolymorphicIdentity\IPolymorphicIdentityConfig;
-use Squid\MySql\Impl\Connectors\Internal\Connector;
 
 
-class PolymorphicIdentityConnector extends Connector implements IIdentifiedObjectConnector
+class PolymorphicIdentityConnector implements IIdentifiedObjectConnector
 {
 	/** @var IPolymorphicIdentityConfig */
 	private $config;
@@ -27,7 +26,7 @@ class PolymorphicIdentityConnector extends Connector implements IIdentifiedObjec
 	
 	private function getConnectorById($id): IIdentifiedObjectConnector
 	{
-		$conn = $this->config->getConnectorByObject($id);
+		$conn = $this->config->getConnectorByIdentity($id);
 		
 		if (!$conn)
 			throw new SquidException('Connector for identifier not found!');
@@ -60,7 +59,6 @@ class PolymorphicIdentityConnector extends Connector implements IIdentifiedObjec
 	
 	public function __construct(IPolymorphicIdentityConfig $config)
 	{
-		parent::__construct();
 		$this->config = $config;
 	}
 	
@@ -91,7 +89,7 @@ class PolymorphicIdentityConnector extends Connector implements IIdentifiedObjec
 			}
 		}
 		
-		return array_merge($allItems);
+		return ($allItems ? array_merge(...$allItems) : []);
 	}
 	
 	/**
@@ -121,7 +119,7 @@ class PolymorphicIdentityConnector extends Connector implements IIdentifiedObjec
 		
 		foreach ($types as $type => $typeIds)
 		{
-			$result = $this->config->getConnector($type)->delete($typeIds);
+			$result = $this->config->getConnector($type)->deleteById($typeIds);
 			
 			if ($result === false)
 				return false;

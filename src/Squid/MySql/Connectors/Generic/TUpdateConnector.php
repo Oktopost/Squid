@@ -23,6 +23,6 @@ trait TUpdateConnector
 			unset($row[$field]);
 		}
 		
-		return $this->where($fields, $row);
+		return $this->where($where, $row);
 	}
 }

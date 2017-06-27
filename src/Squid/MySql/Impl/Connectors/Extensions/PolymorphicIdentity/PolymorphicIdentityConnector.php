@@ -153,7 +153,7 @@ class PolymorphicIdentityConnector implements IIdentifiedObjectConnector
 		if (!is_array($object))
 			return $this->getConnectorByObject($object)->insert($object, $ignore);
 		
-		$types = $this->config->getTypeByIdentities($object);
+		$types = $this->config->getTypeByObjects($object);
 		$totalResult = 0;
 		
 		foreach ($types as $type => $typeObjects)

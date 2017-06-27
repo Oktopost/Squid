@@ -8,8 +8,11 @@ use Squid\MySql\Connectors\Object\CRUD\IObjectInsert;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
-use Squid\MySql\Impl\Connectors\Internal\Object\IdentityInsert\GeneratorIDInsert;
+use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\SimpleInsert;
+use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\GeneratorIDInsert;
 use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\AutoincrementInsert;
+
+use Squid\Exceptions\SquidException;
 
 
 class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedObjectConnector
@@ -24,6 +27,13 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	private $insertHandler;
 
 
+	private function setID(string $name, ?string $fieldName = null)
+	{
+		$this->idFiled = ($fieldName ?: $name);
+		$this->idProperty = $name;
+	}
+	
+	
 	/**
 	 * @param string $name
 	 * @param string|null $fieldName
@@ -31,8 +41,8 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	 */
 	public function setIDProperty(string $name, ?string $fieldName = null)
 	{
-		$this->idFiled = ($fieldName ?: $name);
-		$this->idProperty = $name;
+		$this->setID($name, $fieldName);
+		$this->insertHandler = new SimpleInsert($this);
 		return $this;
 	}
 
@@ -87,6 +97,9 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	 */
 	public function insert($object, bool $ignore = false)
 	{
+		if (is_null($this->insertHandler))
+			throw new SquidException('ID field ');
+		
 		return $this->insertHandler->insert($object, $ignore);
 	}
 

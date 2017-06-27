@@ -2,7 +2,6 @@
 namespace Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert;
 
 
-use Squid\MySql\Command\ICmdController;
 use Squid\Exceptions\SquidException;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 

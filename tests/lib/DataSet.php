@@ -28,7 +28,7 @@ class DataSet
 	{
 		$columnExpression = 'VARCHAR(64) NOT NULL';
 		$columnsExpression = [];
-		$createTableExpression = 'CREATE TABLE `' . $name . '`';
+		$createTableExpression = 'CREATE TEMPORARY TABLE `' . $name . '`';
 		
 		foreach ($columns as $column)
 		{

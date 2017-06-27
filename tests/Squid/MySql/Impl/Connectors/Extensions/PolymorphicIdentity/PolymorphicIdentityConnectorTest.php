@@ -4,9 +4,12 @@ namespace Squid\MySql\Impl\Connectors\Extensions\PolymorphicIdentity;
 
 use lib\DataSet;
 use lib\TDBAssert;
+
 use Objection\LiteSetup;
 use Objection\LiteObject;
+
 use PHPUnit\Framework\TestCase;
+
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
 use Squid\MySql\Impl\Connectors\Object\SimpleObjectConnector;
 
@@ -503,17 +506,19 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		);
 	}
 	
-	public function test_insert_IgnoreErrors_SomeObjectNotInserted_Return0()
+	public function test_insert_IgnoreErrors_SomeObjectNotInserted_ReturnCorrectCount()
 	{
 		$this->setKeys();
-		$subject = $this->subject([[1, 2], [3, 4]]);
+		$subject = $this->subject([[1, 2], [3, 4], [7, 8]]);
 		
 		self::assertEquals(
-			0, 
+			2, 
 			$subject->insert(
 				[
-					(new PolyHelper_A())->fromArray(['a' => 1, 'b' => 2]),
-					(new PolyHelper_A())->fromArray(['a' => 5, 'b' => 6]),
+					(new PolyHelper_A())->fromArray(['a' => 1, 'b' => 2]),	// Duplicate
+					(new PolyHelper_A())->fromArray(['a' => 5, 'b' => 6]),	// New
+					(new PolyHelper_A())->fromArray(['a' => 7, 'b' => 6]),	// Duplicate
+					(new PolyHelper_A())->fromArray(['a' => 9, 'b' => 10]),	// New
 				],
 				true
 			)
@@ -525,10 +530,10 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		$this->setKeys();
 		$subject = $this->subject();
 		
-		$subject->insert(
+		$subject->insert([
 			(new PolyHelper_A())->fromArray(['a' => 1, 'b' => 2]),
 			(new PolyHelper_B())->fromArray(['a' => 101, 'b' => 3, 'c' => 4])
-		);
+		]);
 		
 		self::assertRowExists($this->tableB, ['a' => 101, 'b' => 3, 'c' => 4]);
 		self::assertRowExists($this->tableA, ['a' => 1, 'b' => 2]);
@@ -610,14 +615,14 @@ class PolymorphicIdentityConnectorTestConfig extends AbstractPolymorphicIdentity
 
 	public function getConnector(string $type): IIdentifiedObjectConnector
 	{
-		if ($type === 'a')
+		if ($type == 'a')
 		{
 			if ($this->connA === null)
 				$this->connA = $this->create($this->tableA, PolyHelper_A::class);
 				
 			return $this->connA;
 		}
-		else if ($type === 'b')
+		else if ($type == 'b')
 		{
 			if ($this->connB === null)
 				$this->connB = $this->create($this->tableB, PolyHelper_B::class);

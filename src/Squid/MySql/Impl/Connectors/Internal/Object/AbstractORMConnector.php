@@ -15,11 +15,12 @@ abstract class AbstractORMConnector extends AbstractSingleTableConnector impleme
 
 
 	/**
-	 * Create new ORM Connector. Parameter can be another ORM connector with same object/table config, 
-	 * or any other setting that can be parsed into IRawMap (class name, Mapper or another IRawMap).  
-	 * @param IORMConnector|IRowMap|string $parent 
+	 * Create new ORM Connector. Parameter can be another ORM connector with same object/table config,
+	 * or any other setting that can be parsed into IRawMap (class name, Mapper or another IRawMap).
+	 * @param IORMConnector|IRowMap|string $parent
+	 * @param array|null $excludeFields Used if $parent is a LiteObject class name
 	 */
-	public function __construct($parent = null)
+	public function __construct($parent = null, ?array $excludeFields = null)
 	{
 		if ($parent instanceof AbstractORMConnector)
 		{
@@ -32,7 +33,7 @@ abstract class AbstractORMConnector extends AbstractSingleTableConnector impleme
 			
 			if (!is_null($parent))
 			{
-				$this->map = MapFactory::create($parent);
+				$this->map = MapFactory::create($parent, $excludeFields);
 			}
 		}
 	}
@@ -40,11 +41,12 @@ abstract class AbstractORMConnector extends AbstractSingleTableConnector impleme
 
 	/**
 	 * @param mixed $mapper
+	 * @param array|null $excludeFields Used if $parent is a LiteObject class name
 	 * @return static
 	 */
-	public function setObjectMap($mapper)
+	public function setObjectMap($mapper, ?array $excludeFields = null)
 	{
-		$this->map = MapFactory::create($mapper);
+		$this->map = MapFactory::create($mapper, $excludeFields);
 		return $this;
 	}
 

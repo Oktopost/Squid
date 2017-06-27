@@ -5,16 +5,21 @@ namespace Squid\MySql\Impl\Connectors\Internal\Map;
 use Squid\MySql\Impl\Connectors\Internal\Map\Maps\ArrayMapper;
 use Squid\MySql\Impl\Connectors\Internal\Map\Maps\DummyMapper;
 use Squid\MySql\Impl\Connectors\Internal\Map\Maps\LiteObjectMapper;
+use Squid\MySql\Impl\Connectors\Internal\Map\Maps\LiteObjectSimpleMapper;
 use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\Exceptions\SquidException;
 
 use Objection\Mapper;
-use Objection\Mappers;
 
 
 class MapFactory
 {
-	public static function create($data = null): IRowMap
+	/**
+	 * @param mixed $data
+	 * @param array|null $excludeFields Used if $parent is a LiteObject class name
+	 * @return IRowMap
+	 */
+	public static function create($data = null, ?array $excludeFields = null): IRowMap
 	{
 		if (is_null($data))
 		{
@@ -26,7 +31,7 @@ class MapFactory
 		}
 		else if (is_string($data))
 		{
-			return new LiteObjectMapper(Mappers::simple()->setDefaultClassName($data));
+			new LiteObjectSimpleMapper($data, $excludeFields ?: []);
 		}
 		else if (is_array($data))
 		{

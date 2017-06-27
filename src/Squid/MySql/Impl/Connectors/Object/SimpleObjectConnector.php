@@ -6,6 +6,7 @@ use Squid\MySql\Connectors\Object\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\ID\IIDGenerator;
 use Squid\MySql\Connectors\Object\CRUD\IObjectInsert;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
+use Squid\MySql\Connectors\Object\ObjectSelect\IQueryConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\SimpleInsert;
@@ -15,7 +16,7 @@ use Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert\Autoincremen
 use Squid\Exceptions\SquidException;
 
 
-class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedObjectConnector
+class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedObjectConnector, IQueryConnector
 {
 	private $idFiled;
 	private $idProperty;
@@ -201,9 +202,12 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 			->executeDml(true);
 	}
 	
-	/**
-	 * @return IGenericObjectConnector
-	 */
+	public function query(): ICmdObjectSelect
+	{
+		$query = new CmdObjectSelect($this->getObjectMap());
+		return $query->setConnector($this->getConnector())->from($this->getTableName());
+	}
+	
 	public function getGenericConnector(): IGenericObjectConnector
 	{
 		if (!$this->objectConnector)
@@ -212,14 +216,5 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 		}
 		
 		return $this->objectConnector; 
-	}
-	
-	/**
-	 * @return ICmdObjectSelect
-	 */
-	public function query(): ICmdObjectSelect
-	{
-		$query = new CmdObjectSelect($this->getObjectMap());
-		return $query->setConnector($this->getConnector())->from($this->getTableName());
 	}
 }

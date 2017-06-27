@@ -6,14 +6,12 @@ use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\ISelect;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IMySqlCommandConstructor;
-use Squid\MySql\Connectors\IConnector;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
-use Squid\MySql\Impl\Connectors\Internal\Connector;
 
 
-class SelectDecorator extends Connector implements ISelect
+class SelectDecorator implements ISelect
 {
 	use TWithWhere;
 	use TWithLimit;
@@ -32,13 +30,39 @@ class SelectDecorator extends Connector implements ISelect
 	{
 		return $this->select;
 	}
+
+
+	/**
+	 * @param ISelect|IMySqlConnector $from
+	 */
+	public function __construct($from = null)
+	{
+		if ($from instanceof ISelect)
+		{
+			$this->setChild($from);
+		}
+		else if ($from)
+		{
+			$this->setConnector($from);
+		}
+	}
 	
 	
 	/**
-	 * @param IMySqlConnector $connector
-	 * @return IConnector|static
+	 * @param ISelect $select
+	 * @return static
 	 */
-	public function setConnector(IMySqlConnector $connector): IConnector
+	public function setChild(ISelect $select)
+	{
+		$this->select = $select;
+		return $this;
+	}
+	
+	/**
+	 * @param IMySqlConnector $connector
+	 * @return static|SelectDecorator
+	 */
+	public function setConnector(IMySqlConnector $connector)
 	{
 		$this->select = $connector->select();
 		return $this;

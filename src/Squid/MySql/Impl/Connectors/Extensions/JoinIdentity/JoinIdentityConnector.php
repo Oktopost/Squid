@@ -2,17 +2,24 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity;
 
 
+use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
+use Squid\MySql\Connectors\Object\ObjectSelect\IQueryConnector;
+use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
+use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\JoinQueryDecorator;
 use Squid\MySql\Impl\Connectors\Internal\Connector;
 use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\IJoinedDataLoader;
 
 
-class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnector, IJoinedDataLoader
+class JoinIdentityConnector extends Connector implements 
+	IIdentifiedObjectConnector, 
+	IJoinedDataLoader, 
+	IQueryConnector
 {
 	/** @var IIdentifiedObjectConnector */
-	private $objectConnector;
+	private $primaryConnector;
 	
 	/** @var IIdentifiedObjectConnector */
 	private $dataConnector;
@@ -23,7 +30,7 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 	
 	private function invokeSaveMethod($object, callable $method)
 	{
-		$res = $this->objectConnector->$method($object);
+		$res = $this->primaryConnector->$method($object);
 		
 		if ($res !== false)
 		{
@@ -42,7 +49,7 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 	
 	public function setObjectConnector(IIdentifiedObjectConnector $connector): JoinIdentityConnector
 	{
-		$this->objectConnector = $connector;
+		$this->primaryConnector = $connector;
 		return $this;
 	}
 	
@@ -65,7 +72,7 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 	 */
 	public function load($id)
 	{
-		$object = $this->objectConnector->load($id);
+		$object = $this->primaryConnector->load($id);
 		
 		if ($object)
 		{
@@ -87,7 +94,7 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 			return ($obj ? $this->delete($obj) : $obj === null);
 		}
 		
-		return $this->objectConnector->deleteById($id);
+		return $this->primaryConnector->deleteById($id);
 	}
 	
 	/**
@@ -96,7 +103,7 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 	 */
 	public function delete($object)
 	{
-		$res = $this->objectConnector->delete($object);
+		$res = $this->primaryConnector->delete($object);
 		
 		if ($res !== false && $this->config->onDeleteObjectCascadeData())
 		{
@@ -118,7 +125,7 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 	 */
 	public function insert($object, bool $ignore = false)
 	{
-		$res = $this->objectConnector->insert($object, $ignore);
+		$res = $this->primaryConnector->insert($object, $ignore);
 		
 		if ($res !== false)
 		{
@@ -183,5 +190,16 @@ class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnec
 		}
 		
 		return (bool)$data;
+	}
+
+	public function query(): ICmdObjectSelect
+	{
+		if (!($this->primaryConnector instanceof IQueryConnector))
+		{
+			throw new SquidException('query operation is available only if ' . 
+				'object connector is also an IQueryConnector instance');
+		}
+		
+		return new JoinQueryDecorator($this->primaryConnector->query(), $this);
 	}
 }

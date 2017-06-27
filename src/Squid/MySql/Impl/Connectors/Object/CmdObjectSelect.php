@@ -85,7 +85,7 @@ class CmdObjectSelect extends SelectDecorator implements ICmdObjectSelect
 	 */
 	public function queryMapRow(string $key, $removeColumnFromRow = false)
 	{
-		return $this->selector->iterator($this->getSelect());
+		return $this->selector->map($this->getSelect(), $key, $removeColumnFromRow);
 	}
 	
 	

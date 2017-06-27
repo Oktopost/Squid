@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Config;
 
 
+use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
 

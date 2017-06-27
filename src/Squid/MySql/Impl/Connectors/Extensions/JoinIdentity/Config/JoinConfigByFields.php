@@ -5,7 +5,7 @@ namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Config;
 use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
 
-abstract class AbstractJoinConfigByFields implements IJoinIdentityConfig
+class JoinConfigByFields implements IJoinIdentityConfig
 {
 	private $id;
 	private $reference;

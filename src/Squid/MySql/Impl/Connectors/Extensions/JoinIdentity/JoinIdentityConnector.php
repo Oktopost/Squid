@@ -3,11 +3,13 @@ namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity;
 
 
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
-use Squid\MySql\Connectors\Object\ObjectSelect\IObjectQuery;
 use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
+use Squid\MySql\Impl\Connectors\Internal\Connector;
+use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\IJoinedDataLoader;
 
-class JoinIdentityConnector implements IIdentifiedObjectConnector
+
+class JoinIdentityConnector extends Connector implements IIdentifiedObjectConnector, IJoinedDataLoader
 {
 	/** @var IIdentifiedObjectConnector */
 	private $objectConnector;
@@ -56,7 +58,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 		return $this;
 	}
 	
-
+	
 	/**
 	 * @param mixed|array $id
 	 * @return mixed|null|false
@@ -65,29 +67,14 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	{
 		$object = $this->objectConnector->load($id);
 		
-		if ($object !== false)
+		if ($object)
 		{
-			$identifier = $this->config->getDataIdentifier($object);
-			$data = $this->dataConnector->load($identifier);
-			
-			if ($data === false)
-			{
-				return false;
-			}
-			
-			if (is_array($id))
-			{
-				$this->config->combineAll($object, $data);
-			}
-			else
-			{
-				$this->config->combine($object, $data);
-			}
+			$this->loadData($object);
 		}
 		
 		return $object;
 	}
-
+	
 	/**
 	 * @param mixed $id
 	 * @return mixed|false
@@ -102,7 +89,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 		
 		return $this->objectConnector->deleteById($id);
 	}
-
+	
 	/**
 	 * @param mixed|array $object
 	 * @return int|false
@@ -123,7 +110,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 		
 		return $res;
 	}
-
+	
 	/**
 	 * @param mixed|array $object
 	 * @param bool $ignore
@@ -146,7 +133,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 		
 		return $res;
 	}
-
+	
 	/**
 	 * @param mixed|array $object
 	 * @return int|false
@@ -155,7 +142,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	{
 		return $this->invokeSaveMethod($object, __FUNCTION__);
 	}
-
+	
 	/**
 	 * @param mixed $object
 	 * @return int|false
@@ -164,7 +151,7 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 	{
 		return $this->invokeSaveMethod($object, __FUNCTION__);
 	}
-
+	
 	/**
 	 * @param mixed|array $object
 	 * @return int|false
@@ -174,9 +161,27 @@ class JoinIdentityConnector implements IIdentifiedObjectConnector
 		return $this->invokeSaveMethod($object, __FUNCTION__);
 	}
 	
-	
-	public function query(): IObjectQuery
+	/**
+	 * @param $object
+	 * @return bool
+	 */
+	public function loadData($object)
 	{
+		$identifier = $this->config->getDataIdentifier($object);
+		$data = $this->dataConnector->load($identifier);
 		
+		if ($data !== false)
+		{
+			if (is_array($object))
+			{
+				$this->config->combineAll($object, $data);
+			}
+			else
+			{
+				$this->config->combine($object, $data);
+			}
+		}
+		
+		return (bool)$data;
 	}
 }

@@ -94,7 +94,7 @@ class SimpleObjectConnector extends AbstractORMConnector implements IIdentifiedO
 	/**
 	 * @param mixed|array $object
 	 * @param bool $ignore
-	 * @return false|int
+	 * @return int|false
 	 */
 	public function insert($object, bool $ignore = false)
 	{

@@ -47,7 +47,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	/**
 	 * @param mixed $object
 	 * @param string[] $byFields
-	 * @return false|int
+	 * @return int|false
 	 */
 	public function update($object, array $byFields)
 	{		
@@ -57,7 +57,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	/**
 	 * @param mixed|array $objects
 	 * @param string[] $keys
-	 * @return false|int
+	 * @return int|false
 	 */
 	public function upsertByKeys($objects, array $keys)
 	{
@@ -70,7 +70,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 	/**
 	 * @param mixed|array $objects
 	 * @param string[] $valueFields
-	 * @return false|int
+	 * @return int|false
 	 */
 	public function upsertValues($objects, array $valueFields)
 	{

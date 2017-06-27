@@ -2,15 +2,16 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity;
 
 
-use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\IQueryConnector;
 use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
 use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
-use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\JoinQueryDecorator;
 use Squid\MySql\Impl\Connectors\Internal\Connector;
+use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\JoinQueryDecorator;
 use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\IJoinedDataLoader;
+
+use Squid\Exceptions\SquidException;
 
 
 class JoinIdentityConnector extends Connector implements 

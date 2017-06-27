@@ -19,8 +19,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	use TDBAssert;
 	
 	
-	private $doSetupKeys = false;
-	
 	// Table A has elements with id < 100
 	private $tableA;
 	
@@ -62,12 +60,7 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		DataSet::clearDB();
 	}
 	
-	protected function setUp()
-	{
-		$this->doSetupKeys = false;
-	}
-
-
+	
 	/**
 	 * @expectedException \Squid\Exceptions\SquidException
 	 */

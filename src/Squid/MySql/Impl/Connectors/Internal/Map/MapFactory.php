@@ -31,7 +31,7 @@ class MapFactory
 		}
 		else if (is_string($data))
 		{
-			new LiteObjectSimpleMapper($data, $excludeFields ?: []);
+			return new LiteObjectSimpleMapper($data, $excludeFields ?: []);
 		}
 		else if (is_array($data))
 		{

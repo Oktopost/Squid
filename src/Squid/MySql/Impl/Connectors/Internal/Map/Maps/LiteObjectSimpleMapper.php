@@ -16,7 +16,7 @@ class LiteObjectSimpleMapper implements IRowMap
 	private $exclude;
 	
 	
-	public function __construct($className, ?array $excludeFields = null)
+	public function __construct($className, array $excludeFields)
 	{
 		$this->className = $className;
 		$this->exclude = $excludeFields;

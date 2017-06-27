@@ -12,3 +12,6 @@
 
 # Test objects
 test.php
+
+# Build dir
+/build

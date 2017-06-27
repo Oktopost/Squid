@@ -64,7 +64,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 		if (!is_array($objects))
 			$objects = [$objects];
 		
-		return $this->getGenericCRUD()->upsert()->allByKeys($this->getObjectMap()->toRow($objects), $keys);
+		return $this->getGenericCRUD()->upsert()->allByKeys($this->getObjectMap()->toRows($objects), $keys);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class GenericObjectConnector extends AbstractORMConnector implements IGenericObj
 		if (!is_array($objects))
 			$objects = [$objects];
 		
-		return $this->getGenericCRUD()->upsert()->allByValues($this->getObjectMap()->toRow($objects), $valueFields);
+		return $this->getGenericCRUD()->upsert()->allByValues($this->getObjectMap()->toRows($objects), $valueFields);
 	}
 
 	/**

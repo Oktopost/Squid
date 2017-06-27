@@ -24,7 +24,7 @@ class LiteObjectSimpleMapper implements IRowMap
 
 
 	/**
-	 * @param mixed|LiteObject $object
+	 * @param LiteObject $object
 	 * @return array Assoc array that can be inserted into the database.
 	 */
 	public function toRow($object): array

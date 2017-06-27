@@ -44,24 +44,16 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		return DataSet::table(['a', 'b', 'c'], $data);
 	}
 	
-	private function subject(array $dataA = [], array $dataB = [])
+	private function subject(array $dataA = [], array $dataB = [], $autoInc = false)
 	{
 		$this->tableA = $this->insertAObjects($dataA);
 		$this->tableB = $this->insertBObjects($dataB);
-		$config = new PolymorphicIdentityConnectorTestConfig($this->tableA, $this->tableB);
+		$config = new PolymorphicIdentityConnectorTestConfig($this->tableA, $this->tableB, $autoInc);
 		
-		if ($this->doSetupKeys)
-		{
-			DataSet::connector()->direct("ALTER TABLE {$this->tableA} ADD PRIMARY KEY (a)")->executeDml();
-			DataSet::connector()->direct("ALTER TABLE {$this->tableB} ADD PRIMARY KEY (a)")->executeDml();
-		}
+		DataSet::connector()->direct("ALTER TABLE {$this->tableA} ADD PRIMARY KEY (a), CHANGE `a` `a` INT(11) NOT NULL AUTO_INCREMENT")->executeDml();
+		DataSet::connector()->direct("ALTER TABLE {$this->tableB} ADD PRIMARY KEY (a), CHANGE `a` `a` INT(11) NOT NULL AUTO_INCREMENT")->executeDml();
 		
 		return new PolymorphicIdentityConnector($config);
-	}
-	
-	private function setKeys()
-	{
-		$this->doSetupKeys = true;
 	}
 	
 	
@@ -349,7 +341,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	 */
 	public function test_upsert_InvalidObject_ErrorThrown()
 	{
-		$this->setKeys();
 		$this->subject()->upsert($this);
 	}
 	
@@ -358,13 +349,11 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	 */
 	public function test_upsert_OneOfTheObjectsIsInvalid()
 	{
-		$this->setKeys();
 		$this->subject()->upsert([new PolyHelper_A(), $this, new PolyHelper_B()]);
 	}
 	
 	public function test_upsert_ObjectNotFound_ObjectInserted()
 	{
-		$this->setKeys();
 		$this->subject()->upsert((new PolyHelper_A())->fromArray(['a' => 1, 'b' => 2]));
 		
 		self::assertRowCount(1, $this->tableA);
@@ -373,13 +362,11 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_upsert_ObjectNotFound_Return1()
 	{
-		$this->setKeys();
 		$this->assertEquals(1, $this->subject()->upsert((new PolyHelper_A())->fromArray(['a' => 1])));
 	}
 	
 	public function test_upsert_ObjectNotModified_Return0()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]]);
 		
 		self::assertEquals(
@@ -392,7 +379,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_upsert_ObjectUpdated_Return2()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]]);
 		
 		self::assertEquals(
@@ -405,7 +391,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_upsert_ObjectUpdated_DataChanged()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]]);
 		
 		$subject->upsert(
@@ -418,7 +403,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_upsert_OtherObjectsExist_ObjectUpdatedInCorrectTable()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2], [3, 4]], [[101, 1, 2], [102, 3, 4]]);
 		
 		$subject->upsert(
@@ -437,7 +421,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_upsert_OtherObjectsExist_OnlyTargetOBjectUpdated_Return1()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2], [3, 4]], [[101, 1, 2], [102, 3, 4]]);
 		
 		self::assertEquals(
@@ -470,7 +453,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	 */
 	public function test_insert_KeyAlreadyExists()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]]);
 		
 		$subject->insert([(new PolyHelper_A())->fromArray(['a' => 1])]);
@@ -479,7 +461,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_insert_ObjectNotFound_ObjectInserted()
 	{
-		$this->setKeys();
 		$this->subject()->insert((new PolyHelper_A())->fromArray(['a' => 1, 'b' => 2]));
 		
 		self::assertRowCount(1, $this->tableA);
@@ -488,13 +469,11 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_insert_ObjectNotFound_Return1()
 	{
-		$this->setKeys();
 		$this->assertEquals(1, $this->subject()->insert((new PolyHelper_A())->fromArray(['a' => 1])));
 	}
 	
 	public function test_insert_IgnoreErrors_ObjectNotInserted_Return0()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]]);
 		
 		self::assertEquals(
@@ -508,7 +487,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_insert_IgnoreErrors_SomeObjectNotInserted_ReturnCorrectCount()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2], [3, 4], [7, 8]]);
 		
 		self::assertEquals(
@@ -527,7 +505,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_insert_InsertIntoMultipleTables_DataInserted()
 	{
-		$this->setKeys();
 		$subject = $this->subject();
 		
 		$subject->insert([
@@ -544,7 +521,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_insert_OtherObjectsExist_OnlyNewObjectsInserted()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]], [[101, 1, 2]]);
 		
 		$subject->insert(
@@ -568,7 +544,6 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_insert_OtherObjectsExist_CorrectCountReturned()
 	{
-		$this->setKeys();
 		$subject = $this->subject([[1, 2]], [[101, 1, 2]]);
 		
 		$count = $subject->insert(
@@ -583,6 +558,87 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		
 		self::assertEquals(2, $count);
 	}
+
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_save_InvalidObjectPassed_ErrorThrown()
+	{
+		$subject = $this->subject();
+		$subject->save($this);
+	}
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_save_OneOfManyInvalidObjectPassed_ErrorThrown()
+	{
+		$subject = $this->subject();
+		$subject->save([new PolyHelper_A(), $this, new PolyHelper_B()]);
+	}
+	
+	public function test_save_ObjectWithNullIDPassed_ObjectInserted()
+	{
+		$subject = $this->subject();
+		$subject->save(new PolyHelper_A(['b' => 2]));
+		
+		self::assertRowCount(1, $this->tableA);
+		self::assertRowExists($this->tableA, ['b' => 2]);
+	}
+	
+	public function test_save_ObjectWithExistingIDPassed_ObjectUpdated()
+	{
+		$subject = $this->subject([['a' => 3, 'b' => 2]]);
+		$subject->save(new PolyHelper_A(['a' => 3, 'b' => 4]));
+		
+		self::assertRowCount(1, $this->tableA);
+		self::assertRowExists($this->tableA, ['a' => 3, 'b' => 4]);
+	}
+	
+	public function test_save_DifferentObjectsPassed_ObjectsSaved()
+	{
+		$subject = $this->subject();
+		$subject->save([
+			new PolyHelper_A(['a' => 3, 'b' => 4]),
+			new PolyHelper_B(['a' => 102, 'b' => 4, 'c' => 5]),
+			new PolyHelper_B(['a' => 103, 'b' => 6, 'c' => 7]),
+		]);
+		
+		self::assertRowCount(1, $this->tableA);
+		self::assertRowCount(2, $this->tableB);
+		
+		self::assertRowExists($this->tableA, ['a' => 3, 'b' => 4]);
+		self::assertRowExists($this->tableB, ['a' => 102, 'b' => 4, 'c' => 5]);
+		self::assertRowExists($this->tableB, ['a' => 103, 'b' => 6, 'c' => 7]);
+	}
+	
+	public function test_save_ArrayOfSameTypeObjects_ObjectsSaved()
+	{
+		$subject = $this->subject();
+		$subject->save([
+			new PolyHelper_B(['a' => null, 'b' => 4, 'c' => 5]),
+			new PolyHelper_B(['a' => null, 'b' => 6, 'c' => 7])
+		]);
+		
+		self::assertRowCount(2, $this->tableB);
+		
+		self::assertRowExists($this->tableB, ['b' => 4, 'c' => 5]);
+		self::assertRowExists($this->tableB, ['b' => 6, 'c' => 7]);
+	}
+	
+	public function test_save_CorrectCountReturned()
+	{
+		$subject = $this->subject([['a' => 3, 'b' => 4]]);
+		
+		$res = $subject->save([
+			new PolyHelper_A(['a' => 3, 'b' => 4]),
+			new PolyHelper_B(['a' => 102, 'b' => 4, 'c' => 5]),
+			new PolyHelper_B(['a' => 104, 'b' => 4, 'c' => 5])
+		]);
+		
+		self::assertEquals(2, $res);
+	}
 }
 
 
@@ -591,7 +647,7 @@ class PolymorphicIdentityConnectorTestConfig extends AbstractPolymorphicIdentity
 	private $tableA;
 	private $tableB;
 	
-	
+	private $autoInc = false;
 	private $connA = null;
 	private $connB = null;
 	
@@ -599,17 +655,28 @@ class PolymorphicIdentityConnectorTestConfig extends AbstractPolymorphicIdentity
 	private function create($table, $class)
 	{
 		$conn = new SimpleObjectConnector();
-		return $conn->setConnector(DataSet::connector())
+		$res = $conn->setConnector(DataSet::connector())
 			->setObjectMap($class)
-			->setTable($table)
-			->setIDProperty('a');
+			->setTable($table);
+		
+		if ($this->autoInc)
+		{
+			$res->setAutoincrementID('a');
+		}
+		else
+		{
+			$res->setIDProperty('a');
+		}
+		
+		return $res;
 	}
 	
 	
-	public function __construct($tableA, $tableB)
+	public function __construct($tableA, $tableB, $autoInc = false)
 	{
 		$this->tableA = $tableA;
 		$this->tableB = $tableB;
+		$this->autoInc = $autoInc;
 	}
 
 
@@ -650,6 +717,12 @@ class PolymorphicIdentityConnectorTestConfig extends AbstractPolymorphicIdentity
 
 class PolyHelper_A extends LiteObject
 {
+	public function __construct($data = [])
+	{
+		parent::__construct();
+		if ($data) $this->fromArray($data);
+	}
+
 	protected function _setup()
 	{
 		return [
@@ -661,6 +734,12 @@ class PolyHelper_A extends LiteObject
 
 class PolyHelper_B extends LiteObject
 {
+	public function __construct($data = [])
+	{
+		parent::__construct();
+		if ($data) $this->fromArray($data);
+	}
+	
 	protected function _setup()
 	{
 		return [

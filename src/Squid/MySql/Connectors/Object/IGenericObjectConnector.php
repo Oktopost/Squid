@@ -17,18 +17,18 @@ interface IGenericObjectConnector extends
 	public function update($object, array $byFields);
 	
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param string[] $keys
 	 * @return false|int
 	 */
-	public function upsertByKeys($object, array $keys);
+	public function upsertByKeys($objects, array $keys);
 	
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertValues($object, array $valueFields);
+	public function upsertValues($objects, array $valueFields);
 	
 	/**
 	 * @param array $fields

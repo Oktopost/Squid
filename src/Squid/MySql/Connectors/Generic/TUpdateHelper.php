@@ -13,7 +13,7 @@ trait TUpdateHelper
 	 * @param array $row
 	 * @return int|null
 	 */
-	public function byFields(array $fields, array $row): ?int
+	public function updateByRowFields(array $fields, array $row): ?int
 	{
 		$where = [];
 		
@@ -23,6 +23,6 @@ trait TUpdateHelper
 			unset($row[$field]);
 		}
 		
-		return $this->where($where, $row);
+		return $this->updateByFields($where, $row);
 	}
 }

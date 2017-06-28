@@ -32,7 +32,7 @@ trait TCountConnector
 	 */
 	public function byFields($fields)
 	{
-		return $this->getCountConnector()->byFields($fields);
+		return $this->getCountConnector()->countByFields($fields);
 	}
 
 	/**
@@ -51,7 +51,7 @@ trait TCountConnector
 	 */
 	public function byField(string $field, $value)
 	{
-		return $this->getCountConnector()->byField($field, $value);
+		return $this->getCountConnector()->countByField($field, $value);
 	}
 
 	/**

@@ -17,7 +17,7 @@ class UpdateConnector extends AbstractSingleTableConnector implements IUpdateCon
 	 * @param array $row
 	 * @return int|false
 	 */
-	public function where(array $where, array $row)
+	public function updateByFields(array $where, array $row)
 	{
 		return $this->getTable()
 			->update()

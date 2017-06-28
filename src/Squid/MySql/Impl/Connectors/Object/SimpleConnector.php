@@ -105,7 +105,7 @@ class SimpleConnector extends AbstractORMConnector implements IIdentityConnector
 		if (is_null($this->insertHandler))
 			throw new SquidException('ID field ');
 		
-		return $this->insertHandler->insert($object, $ignore);
+		return $this->insertHandler->insertObjects($object, $ignore);
 	}
 
 	/**
@@ -114,7 +114,7 @@ class SimpleConnector extends AbstractORMConnector implements IIdentityConnector
 	 */
 	public function update($object)
 	{
-		return $this->getGenericConnector()->updateByFields($object, [$this->idFiled]);
+		return $this->getGenericConnector()->updateObject($object, [$this->idFiled]);
 	}
 
 	/**
@@ -123,7 +123,7 @@ class SimpleConnector extends AbstractORMConnector implements IIdentityConnector
 	 */
 	public function upsert($object)
 	{
-		return $this->getGenericConnector()->upsertByKeys($object, [$this->idFiled]);
+		return $this->getGenericConnector()->upsertObjectsByKeys($object, [$this->idFiled]);
 	}
 
 	/**
@@ -136,11 +136,11 @@ class SimpleConnector extends AbstractORMConnector implements IIdentityConnector
 		
 		if (is_array($id))
 		{
-			return $this->getGenericConnector()->selectAllByFields($where);
+			return $this->getGenericConnector()->selectObjectsByFields($where);
 		}
 		else
 		{
-			return $this->getGenericConnector()->selectOneByFields($where);
+			return $this->getGenericConnector()->selectObjectByFields($where);
 		}
 	}
 	

@@ -9,12 +9,12 @@ interface IObjectUpsert
 	 * @param string[] $keys
 	 * @return false|int
 	 */
-	public function upsertByKeys($objects, array $keys);
+	public function upsertObjectsByKeys($objects, array $keys);
 	
 	/**
 	 * @param mixed|array $objects
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertValues($objects, array $valueFields);
+	public function upsertObjectsValues($objects, array $valueFields);
 }

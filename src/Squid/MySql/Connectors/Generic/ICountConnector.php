@@ -9,13 +9,13 @@ interface ICountConnector
 	 * @param mixed $value
 	 * @return int|false
 	 */
-	public function byField(string $field, $value);
+	public function countByField(string $field, $value);
 
 	/**
 	 * @param array $fields
 	 * @return int|false
 	 */
-	public function byFields($fields);
+	public function countByFields($fields);
 
 	/**
 	 * @param string $field

@@ -10,12 +10,12 @@ interface IDeleteConnector
 	 * @param int|null $limit
 	 * @return int|false
 	 */
-	public function byField(string $field, $value, ?int $limit = null);
+	public function deleteByField(string $field, $value, ?int $limit = null);
 
 	/**
 	 * @param array $fields
 	 * @param int|null $limit
 	 * @return int|false
 	 */
-	public function byFields(array $fields, ?int $limit = null);
+	public function deleteByFields(array $fields, ?int $limit = null);
 }

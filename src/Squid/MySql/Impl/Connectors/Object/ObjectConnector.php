@@ -15,7 +15,7 @@ use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 /**
  * @deprecated 
  */
-class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnector
+class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnector 
 {
 	use TGenericObjectConnector;
 	
@@ -40,7 +40,7 @@ class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnec
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function insert($object, bool $ignore = false)
+	public function insertObjects($object, bool $ignore = false)
 	{
 		if (!is_array($object))
 			$object = [$object];
@@ -53,7 +53,7 @@ class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnec
 	 * @param string[] $byFields
 	 * @return int|false
 	 */
-	public function updateByFields($object, array $byFields)
+	public function updateObject($object, array $byFields)
 	{		
 		return $this->getGenericCRUD()->update()->byFields($byFields, $this->getObjectMap()->toRow($object));
 	}
@@ -63,12 +63,12 @@ class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnec
 	 * @param string[] $keys
 	 * @return int|false
 	 */
-	public function upsertByKeys($objects, array $keys)
+	public function upsertObjectsByKeys($objects, array $keys)
 	{
 		if (!is_array($objects))
 			$objects = [$objects];
 		
-		return $this->getGenericCRUD()->upsert()->allByKeys($this->getObjectMap()->toRows($objects), $keys);
+		return $this->getGenericCRUD()->upsert()->upsertAllByKeys($this->getObjectMap()->toRows($objects), $keys);
 	}
 
 	/**
@@ -76,12 +76,12 @@ class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnec
 	 * @param string[] $valueFields
 	 * @return int|false
 	 */
-	public function upsertValues($objects, array $valueFields)
+	public function upsertObjectsValues($objects, array $valueFields)
 	{
 		if (!is_array($objects))
 			$objects = [$objects];
 		
-		return $this->getGenericCRUD()->upsert()->allByValues($this->getObjectMap()->toRows($objects), $valueFields);
+		return $this->getGenericCRUD()->upsert()->upsertAllByValues($this->getObjectMap()->toRows($objects), $valueFields);
 	}
 
 	/**

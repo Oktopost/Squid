@@ -9,5 +9,5 @@ interface IObjectInsert
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insert($object, bool $ignore = false);
+	public function insertObjects($object, bool $ignore = false);
 }

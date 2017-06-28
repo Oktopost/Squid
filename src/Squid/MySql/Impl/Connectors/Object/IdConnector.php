@@ -26,7 +26,7 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 	public function deleteById($id)
 	{
 		$connector = new DeleteConnector($this);
-		return $connector->byField($this->getIdField(), $id);
+		return $connector->deleteByField($this->getIdField(), $id);
 	}
 
 	public function loadById($id)
@@ -35,11 +35,11 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 		
 		if (is_array($id))
 		{
-			return $connector->selectAllByFields([$this->getIdField() => $id]);
+			return $connector->selectObjectsByFields([$this->getIdField() => $id]);
 		}
 		else
 		{
-			return $connector->selectOneByField($this->getIdField(), $id);
+			return $connector->selectObjectByField($this->getIdField(), $id);
 		}
 	}
 }

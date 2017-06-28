@@ -34,7 +34,7 @@ trait TPlainDecorator
 	 */
 	public function insert($object, bool $ignore = false)
 	{
-		return $this->_getPlainConnector()->insert($object, $ignore);
+		return $this->_getPlainConnector()->insertObjects($object, $ignore);
 	}
 
 	/**

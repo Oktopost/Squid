@@ -10,10 +10,37 @@ trait TPrimaryKeys
 	/** @var array */
 	private $_primaryKeys;
 	
+	/** @var array */
+	private $_primaryFields;
+	
+	/** @var array */
+	private $_primaryProps;
+	
 	
 	protected function getPrimaryKeys(): array
 	{
 		return $this->_primaryKeys;
+	}
+	
+	protected function getKeysCount(): int
+	{
+		return count($this->_primaryKeys);
+	}
+	
+	protected function getPrimaryFields(): array 
+	{
+		if (!$this->_primaryFields)
+			$this->_primaryFields = array_keys($this->_primaryKeys);
+			
+		return $this->_primaryFields;
+	}
+	
+	protected function getPrimaryProperties(): array 
+	{
+		if (!$this->_primaryProps)
+			$this->_primaryProps = array_values($this->_primaryKeys);
+			
+		return $this->_primaryProps;
 	}
 	
 	

@@ -12,7 +12,7 @@ trait TCountHelper
 	 * @param mixed $value
 	 * @return int|false
 	 */
-	public function byField(string $field, $value)
+	public function countByField(string $field, $value)
 	{
 		return $this->byFields([$field => $value]);
 	}

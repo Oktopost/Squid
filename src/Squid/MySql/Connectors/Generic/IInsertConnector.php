@@ -9,14 +9,14 @@ interface IInsertConnector
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function row(array $row, bool $ignore = false);
+	public function insertRow(array $row, bool $ignore = false);
 
 	/**
 	 * @param array $rows
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function all(array $rows, bool $ignore = false);
+	public function insertAll(array $rows, bool $ignore = false);
 
 	/**
 	 * @param array $fields
@@ -24,5 +24,5 @@ interface IInsertConnector
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function allIntoFields(array $fields, array $rows, bool $ignore = false);
+	public function insertAllIntoFields(array $fields, array $rows, bool $ignore = false);
 }

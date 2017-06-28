@@ -12,9 +12,9 @@ trait TUpsertHelper
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function byKeys(array $row, $keys)
+	public function upsertByKeys(array $row, $keys)
 	{
-		return $this->allByKeys([$row], $keys);
+		return $this->upsertAllByKeys([$row], $keys);
 	}
 
 	/**
@@ -22,8 +22,8 @@ trait TUpsertHelper
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function byValues(array $row, $valueFields)
+	public function upsertByValues(array $row, $valueFields)
 	{
-		return $this->allByValues([$row], $valueFields);
+		return $this->upsertAllByValues([$row], $valueFields);
 	}
 }

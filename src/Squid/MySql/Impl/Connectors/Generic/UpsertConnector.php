@@ -17,7 +17,7 @@ class UpsertConnector extends AbstractSingleTableConnector implements IUpsertCon
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function allByKeys(array $rows, $keys)
+	public function upsertAllByKeys(array $rows, $keys)
 	{
 		return $this->getTable()
 			->upsert()
@@ -31,7 +31,7 @@ class UpsertConnector extends AbstractSingleTableConnector implements IUpsertCon
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function allByValues(array $rows, $valueFields)
+	public function upsertAllByValues(array $rows, $valueFields)
 	{
 		return $this->getTable()
 			->upsert()

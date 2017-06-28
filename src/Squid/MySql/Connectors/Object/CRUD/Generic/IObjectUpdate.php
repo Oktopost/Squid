@@ -9,5 +9,5 @@ interface IObjectUpdate
 	 * @param string[] $byFields
 	 * @return false|int
 	 */
-	public function updateByFields($object, array $byFields);
+	public function updateObject($object, array $byFields);
 }

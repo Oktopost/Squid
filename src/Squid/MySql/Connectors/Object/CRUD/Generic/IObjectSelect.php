@@ -8,38 +8,38 @@ interface IObjectSelect
 	 * @param array $fields
 	 * @return mixed|false
 	 */
-	public function selectOneByFields(array $fields);
+	public function selectObjectByFields(array $fields);
 	
 	/**
 	 * @param string $field
 	 * @param mixed $value
 	 * @return mixed|false
 	 */
-	public function selectOneByField(string $field, $value);
+	public function selectObjectByField(string $field, $value);
 	
 	/**
 	 * @param array $fields
 	 * @return mixed|false
 	 */
-	public function selectFirstByFields(array $fields);
+	public function selectFirstObjectByFields(array $fields);
 	
 	/**
 	 * @param string $field
 	 * @param mixed $value
 	 * @return mixed|false
 	 */
-	public function selectFirstByField(string $field, $value);
+	public function selectFirstObjectByField(string $field, $value);
 
 	/**
 	 * @param array $fields
 	 * @param int|null $limit
 	 * @return array|false
 	 */
-	public function selectAllByFields(array $fields, ?int $limit = null);
+	public function selectObjectsByFields(array $fields, ?int $limit = null);
 	
 	/**
 	 * @param array|null $orderBy
 	 * @return array|false
 	 */
-	public function selectAll(?array $orderBy = null);
+	public function selectObjects(?array $orderBy = null);
 }

@@ -29,7 +29,7 @@ class InsertConnector extends AbstractSingleTableConnector implements IInsertCon
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function all(array $rows, bool $ignore = false)
+	public function insertAll(array $rows, bool $ignore = false)
 	{
 		return $this->doInsert($rows, $ignore, null);
 	}

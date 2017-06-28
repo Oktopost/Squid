@@ -32,7 +32,7 @@ trait TPlainDecorator
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insert($object, bool $ignore = false)
+	public function insertObjects($object, bool $ignore = false)
 	{
 		return $this->_getPlainConnector()->insertObjects($object, $ignore);
 	}
@@ -41,7 +41,7 @@ trait TPlainDecorator
 	 * @param array $fields
 	 * @return mixed|false
 	 */
-	public function selectOneByFields(array $fields)
+	public function selectObjectByFields(array $fields)
 	{
 		// TODO: Implement selectOneByFields() method.
 	}
@@ -51,7 +51,7 @@ trait TPlainDecorator
 	 * @param mixed $value
 	 * @return mixed|false
 	 */
-	public function selectOneByField(string $field, $value)
+	public function selectObjectByField(string $field, $value)
 	{
 		// TODO: Implement selectOneByField() method.
 	}
@@ -60,7 +60,7 @@ trait TPlainDecorator
 	 * @param array $fields
 	 * @return mixed|false
 	 */
-	public function selectFirstByFields(array $fields)
+	public function selectFirstObjectByFields(array $fields)
 	{
 		// TODO: Implement selectFirstByFields() method.
 	}
@@ -70,7 +70,7 @@ trait TPlainDecorator
 	 * @param mixed $value
 	 * @return mixed|false
 	 */
-	public function selectFirstByField(string $field, $value)
+	public function selectFirstObjectByField(string $field, $value)
 	{
 		// TODO: Implement selectFirstByField() method.
 	}
@@ -80,7 +80,7 @@ trait TPlainDecorator
 	 * @param int|null $limit
 	 * @return array|false
 	 */
-	public function selectAllByFields(array $fields, ?int $limit = null)
+	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
 		// TODO: Implement selectAllByFields() method.
 	}
@@ -89,7 +89,7 @@ trait TPlainDecorator
 	 * @param array|null $orderBy
 	 * @return array|false
 	 */
-	public function selectAll(?array $orderBy = null)
+	public function selectObjects(?array $orderBy = null)
 	{
 		// TODO: Implement selectAll() method.
 	}
@@ -99,7 +99,7 @@ trait TPlainDecorator
 	 * @param string[] $byFields
 	 * @return false|int
 	 */
-	public function updateByFields($object, array $byFields)
+	public function updateObject($object, array $byFields)
 	{
 		// TODO: Implement updateByFields() method.
 	}
@@ -109,7 +109,7 @@ trait TPlainDecorator
 	 * @param string[] $keys
 	 * @return false|int
 	 */
-	public function upsertByKeys($objects, array $keys)
+	public function upsertObjectsByKeys($objects, array $keys)
 	{
 		// TODO: Implement upsertByKeys() method.
 	}
@@ -119,7 +119,7 @@ trait TPlainDecorator
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertValues($objects, array $valueFields)
+	public function upsertObjectsByValues($objects, array $valueFields)
 	{
 		// TODO: Implement upsertValues() method.
 	}

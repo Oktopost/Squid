@@ -16,5 +16,5 @@ interface IObjectUpsert
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertObjectsValues($objects, array $valueFields);
+	public function upsertObjectsByValues($objects, array $valueFields);
 }

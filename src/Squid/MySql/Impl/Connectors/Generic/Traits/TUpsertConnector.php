@@ -31,7 +31,7 @@ trait TUpsertConnector
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function byKeys(array $row, $keys)
+	public function upsertByKeys(array $row, $keys)
 	{
 		// TODO
 	}
@@ -41,7 +41,7 @@ trait TUpsertConnector
 	 * @param string[]|string $keys
 	 * @return int|false
 	 */
-	public function allByKeys(array $rows, $keys)
+	public function upsertAllByKeys(array $rows, $keys)
 	{
 		// TODO
 	}
@@ -51,7 +51,7 @@ trait TUpsertConnector
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function byValues(array $row, $valueFields)
+	public function upsertByValues(array $row, $valueFields)
 	{
 		// TODO
 	}
@@ -61,7 +61,7 @@ trait TUpsertConnector
 	 * @param string[]|string $valueFields
 	 * @return int|false
 	 */
-	public function allByValues(array $rows, $valueFields)
+	public function upsertAllByValues(array $rows, $valueFields)
 	{
 		// TODO
 	}

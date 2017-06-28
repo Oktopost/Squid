@@ -2,40 +2,22 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
-use Squid\MySql\Connectors\Object\IIdentityConnector;
-use Squid\MySql\Impl\Connectors\Object\Identity\TPrimaryKeys;
-use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
+use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
+use Squid\MySql\Impl\Connectors\Object\Generic\GenericObjectConnector;
+use Squid\MySql\Impl\Connectors\Object\Identity\AbstractIdentityConnector;
 
 
-class IdentityConnector extends AbstractORMConnector implements IIdentityConnector
+class IdentityConnector extends AbstractIdentityConnector
 {
-	use TPrimaryKeys;
+	/** @var IGenericObjectConnector */
+	private $genericConnector;
 	
-	
-	/**
-	 * @param mixed|array $object
-	 * @return int|false
-	 */
-	public function delete($object)
-	{
-		// TODO: Implement delete() method.
-	}
 
-	/**
-	 * @param mixed $object
-	 * @return int|false
-	 */
-	public function update($object)
+	protected function getGenericConnector(): IGenericObjectConnector
 	{
-		// TODO: Implement update() method.
-	}
-
-	/**
-	 * @param mixed|array $object
-	 * @return int|false
-	 */
-	public function upsert($object)
-	{
-		// TODO: Implement upsert() method.
+		if (!$this->genericConnector)
+			$this->genericConnector = new GenericObjectConnector($this);
+		
+		return $this->genericConnector;
 	}
 }

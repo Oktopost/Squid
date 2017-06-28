@@ -7,6 +7,7 @@ trait TPrimaryKeys
 	use TPrimaryKeysConsumer;
 	
 	
+	/** @var array */
 	private $_primaryKeys;
 	
 	
@@ -17,12 +18,17 @@ trait TPrimaryKeys
 	
 	
 	/**
-	 * @param array|string $keys
+	 * @param string|array $keys Maps of Columns to Properties
 	 * @return static
 	 */
 	public function setPrimaryKeys($keys)
 	{
-		$this->_primaryKeys = (is_array($keys) ? $keys : [$keys]);
+		if (is_string($keys))
+			$keys = [$keys => $keys];
+		else if (isset($keys[0]))
+			$keys = array_combine($keys, $keys);
+		
+		$this->_primaryKeys = $keys;
 		return $this;
 	}
 }

@@ -93,15 +93,15 @@ trait TPlainDecorator
 	{
 		// TODO: Implement selectAll() method.
 	}
-
+	
 	/**
 	 * @param mixed $object
 	 * @param string[] $byFields
 	 * @return false|int
 	 */
-	public function update($object, array $byFields)
+	public function updateByFields($object, array $byFields)
 	{
-		// TODO: Implement update() method.
+		// TODO: Implement updateByFields() method.
 	}
 
 	/**

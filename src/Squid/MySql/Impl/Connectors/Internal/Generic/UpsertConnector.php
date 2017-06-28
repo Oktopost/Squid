@@ -3,13 +3,13 @@ namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
 use Squid\MySql\Connectors\Generic\IUpsertConnector;
-use Squid\MySql\Connectors\Generic\TUpsertConnector;
+use Squid\MySql\Connectors\Generic\TUpsertHelper;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
 class UpsertConnector extends AbstractSingleTableConnector implements IUpsertConnector
 {
-	use TUpsertConnector;
+	use TUpsertHelper;
 
 
 	/**

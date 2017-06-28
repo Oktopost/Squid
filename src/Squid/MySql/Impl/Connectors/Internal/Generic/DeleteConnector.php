@@ -2,14 +2,14 @@
 namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
-use Squid\MySql\Connectors\Generic\TDeleteConnector;
+use Squid\MySql\Connectors\Generic\TDeleteHelper;
 use Squid\MySql\Connectors\Generic\IDeleteConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
 class DeleteConnector extends AbstractSingleTableConnector implements IDeleteConnector
 {
-	use TDeleteConnector;
+	use TDeleteHelper;
 	
 	
 	/**

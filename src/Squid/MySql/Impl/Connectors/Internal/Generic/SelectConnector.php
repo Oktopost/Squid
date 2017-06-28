@@ -3,13 +3,13 @@ namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
 use Squid\MySql\Connectors\Generic\ISelectConnector;
-use Squid\MySql\Connectors\Generic\TSelectConnector;
+use Squid\MySql\Connectors\Generic\TSelectHelper;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
 class SelectConnector extends AbstractSingleTableConnector implements ISelectConnector 
 {
-	use TSelectConnector;
+	use TSelectHelper;
 	
 
 	/**

@@ -2,14 +2,15 @@
 namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
-use Squid\MySql\Connectors\Generic\TInsertConnector;
+use Squid\MySql\Connectors\Generic\TInsertHelper;
 use Squid\MySql\Connectors\Generic\IInsertConnector;
+
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
 class InsertConnector extends AbstractSingleTableConnector implements IInsertConnector 
 {
-	use TInsertConnector;
+	use TInsertHelper;
 	
 	
 	private function doInsert(array $data, bool $ignore, ?array $fields = null)

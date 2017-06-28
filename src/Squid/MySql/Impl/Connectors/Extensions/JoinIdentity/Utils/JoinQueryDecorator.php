@@ -2,8 +2,8 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils;
 
 
-use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
-use Squid\MySql\Impl\Connectors\Extensions\Select\SelectDecorator;
+use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
+use Squid\MySql\Impl\Connectors\Utils\Select\SelectDecorator;
 
 
 class JoinQueryDecorator extends SelectDecorator implements ICmdObjectSelect

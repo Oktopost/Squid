@@ -2,27 +2,26 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\JoinIdentity;
 
 
-use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
-use Squid\MySql\Connectors\Object\ObjectSelect\IQueryConnector;
-use Squid\MySql\Connectors\Object\ObjectSelect\ICmdObjectSelect;
+use Squid\MySql\Connectors\Object\IIdentityConnector;
+use Squid\MySql\Connectors\Object\IQueryConnector;
+use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
 use Squid\MySql\Connectors\Extensions\JoinIdentity\IJoinIdentityConfig;
 
-use Squid\MySql\Impl\Connectors\Internal\Connector;
 use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\JoinQueryDecorator;
 use Squid\MySql\Impl\Connectors\Extensions\JoinIdentity\Utils\IJoinedDataLoader;
 
 use Squid\Exceptions\SquidException;
 
 
-class JoinIdentityConnector extends Connector implements 
-	IIdentifiedObjectConnector, 
+class JoinIdentityConnector implements 
+	IIdentityConnector, 
 	IJoinedDataLoader, 
 	IQueryConnector
 {
-	/** @var IIdentifiedObjectConnector */
+	/** @var IIdentityConnector */
 	private $primaryConnector;
 	
-	/** @var IIdentifiedObjectConnector */
+	/** @var IIdentityConnector */
 	private $dataConnector;
 	
 	/** @var IJoinIdentityConfig */
@@ -48,13 +47,13 @@ class JoinIdentityConnector extends Connector implements
 	}
 	
 	
-	public function setObjectConnector(IIdentifiedObjectConnector $connector): JoinIdentityConnector
+	public function setObjectConnector(IIdentityConnector $connector): JoinIdentityConnector
 	{
 		$this->primaryConnector = $connector;
 		return $this;
 	}
 	
-	public function setDataConnector(IIdentifiedObjectConnector $connector): JoinIdentityConnector
+	public function setDataConnector(IIdentityConnector $connector): JoinIdentityConnector
 	{
 		$this->dataConnector = $connector;
 		return $this;

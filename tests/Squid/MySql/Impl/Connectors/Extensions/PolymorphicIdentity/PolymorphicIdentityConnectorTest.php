@@ -10,8 +10,8 @@ use Objection\LiteObject;
 
 use PHPUnit\Framework\TestCase;
 
-use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
-use Squid\MySql\Impl\Connectors\Object\SimpleObjectConnector;
+use Squid\MySql\Connectors\Object\IIdentityConnector;
+use Squid\MySql\Impl\Connectors\Object\SimpleConnector;
 
 
 class PolymorphicIdentityConnectorTest extends TestCase
@@ -647,7 +647,7 @@ class PolymorphicIdentityConnectorTestConfig extends AbstractPolymorphicIdentity
 	
 	private function create($table, $class)
 	{
-		$conn = new SimpleObjectConnector();
+		$conn = new SimpleConnector();
 		$res = $conn->setConnector(DataSet::connector())
 			->setObjectMap($class)
 			->setTable($table);
@@ -673,7 +673,7 @@ class PolymorphicIdentityConnectorTestConfig extends AbstractPolymorphicIdentity
 	}
 
 
-	public function getConnector(string $type): IIdentifiedObjectConnector
+	public function getConnector(string $type): IIdentityConnector
 	{
 		if ($type == 'a')
 		{

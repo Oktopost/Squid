@@ -24,7 +24,7 @@ abstract class Connector implements IConnector
 	/**
 	 * @return IMySqlConnector
 	 */
-	public function getConnector(): IMySqlConnector
+	public function getConnector(): ?IMySqlConnector
 	{
 		return $this->connector;
 	}

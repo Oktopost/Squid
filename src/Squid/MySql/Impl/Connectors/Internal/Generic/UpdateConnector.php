@@ -3,13 +3,13 @@ namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
 use Squid\MySql\Connectors\Generic\IUpdateConnector;
-use Squid\MySql\Connectors\Generic\TUpdateConnector;
+use Squid\MySql\Connectors\Generic\TUpdateHelper;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 
 class UpdateConnector extends AbstractSingleTableConnector implements IUpdateConnector
 {
-	use TUpdateConnector;
+	use TUpdateHelper;
 	
 	
 	/**

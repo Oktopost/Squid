@@ -3,7 +3,7 @@ namespace Squid\MySql\Connectors\Object;
 
 
 /**
- * @mixin IGenericObjectConnector
+ * @mixin IObjectConnector
  */
 trait TGenericObjectConnector
 {

@@ -5,6 +5,7 @@ namespace Squid\MySql\Impl\Connectors\Extensions\Select;
 use PHPUnit\Framework\TestCase;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Impl\Command\CmdSelect;
+use Squid\MySql\Impl\Connectors\Utils\Select\SelectDecorator;
 use Squid\MySql\IMySqlConnector;
 use Squid\OrderBy;
 

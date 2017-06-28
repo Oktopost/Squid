@@ -4,7 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Extensions\PolymorphicIdentity;
 
 use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Extensions\PolymorphicIdentity\IPolymorphicIdentityConfig;
-use Squid\MySql\Connectors\Object\CRUD\IIdentifiedObjectConnector;
+use Squid\MySql\Connectors\Object\IIdentityConnector;
 
 
 abstract class AbstractPolymorphicIdentityConfig implements IPolymorphicIdentityConfig
@@ -32,13 +32,13 @@ abstract class AbstractPolymorphicIdentityConfig implements IPolymorphicIdentity
 	}
 	
 	
-	public function getConnectorByIdentity($id): ?IIdentifiedObjectConnector
+	public function getConnectorByIdentity($id): ?IIdentityConnector
 	{
 		$type = $this->getTypeByIdentity($id);
 		return ($type ? $this->getConnector($type) : null);
 	}
 	
-	public function getConnectorByObject($object): ?IIdentifiedObjectConnector
+	public function getConnectorByObject($object): ?IIdentityConnector
 	{
 		$type = $this->getTypeByObject($object);
 		return ($type ? $this->getConnector($type) : null);

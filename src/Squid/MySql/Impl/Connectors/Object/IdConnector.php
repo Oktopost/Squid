@@ -32,14 +32,6 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 	public function loadById($id)
 	{
 		$connector = new PlainObjectConnector($this);
-		
-		if (is_array($id))
-		{
-			return $connector->selectObjectsByFields([$this->getIdField() => $id]);
-		}
-		else
-		{
-			return $connector->selectObjectByField($this->getIdField(), $id);
-		}
+		return $connector->selectObjectsByFields([$this->getIdField() => $id]);
 	}
 }

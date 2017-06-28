@@ -6,5 +6,4 @@ trait TIdentityComposition
 {
 	use TIdentityDecorator;
 	use TPrimaryKeys;
-	
 }

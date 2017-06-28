@@ -2,8 +2,10 @@
 namespace Squid\MySql\Impl\Connectors\Object\Identity;
 
 
+use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\IIdentityConnector;
 
+use Squid\MySql\Impl\Connectors\Object\Generic\GenericObjectConnector;
 use Squid\MySql\Impl\Connectors\Object\IdentityConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
@@ -25,11 +27,19 @@ trait TIdentityDecorator
 	{
 		if (!$this->_identityConnector)
 		{
-			$this->_identityConnector = new IdentityConnector($this);
-			$this->_identityConnector->setPrimaryKeys($this->getPrimaryKeys());
+			$this->_identityConnector = new DecoratedIdentityConnector($this);
+			$this->_identityConnector
+				->setPrimaryKeys($this->getPrimaryKeys())
+				->setGenericObjectConnector($this->getGenericObjectConnector());
 		}
 		
 		return $this->_identityConnector;
+	}
+	
+	
+	protected function getGenericObjectConnector(): IGenericObjectConnector 
+	{
+		return new GenericObjectConnector($this);
 	}
 	
 	

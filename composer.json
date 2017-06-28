@@ -25,5 +25,8 @@
 		"psr-0": {
 			"Squid": "src"
 		}
+	},
+	"scripts": {
+		"test": "./vendor/bin/phpunit"
 	}
 }

@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 
 use Squid\MySql\Connectors\Table\ITableNameConnector;
+use Squid\MySql\Impl\Connectors\Generic\InsertConnector;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 use Squid\MySql\Command\ICmdInsert;

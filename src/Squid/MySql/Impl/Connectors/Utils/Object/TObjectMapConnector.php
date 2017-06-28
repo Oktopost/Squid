@@ -1,5 +1,5 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Helpers;
+namespace Squid\MySql\Impl\Connectors\Utils\Object;
 
 
 use Squid\Exceptions\SquidException;

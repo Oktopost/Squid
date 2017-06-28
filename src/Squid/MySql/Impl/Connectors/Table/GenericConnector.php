@@ -8,11 +8,11 @@ use Squid\MySql\Connectors\Table\ISingleTableConnector;
 
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 use Squid\MySql\Impl\Connectors\Internal\Generic\CountConnector;
-use Squid\MySql\Impl\Connectors\Internal\Generic\DeleteConnector;
-use Squid\MySql\Impl\Connectors\Internal\Generic\InsertConnector;
-use Squid\MySql\Impl\Connectors\Internal\Generic\SelectConnector;
-use Squid\MySql\Impl\Connectors\Internal\Generic\UpdateConnector;
-use Squid\MySql\Impl\Connectors\Internal\Generic\UpsertConnector;
+use Squid\MySql\Impl\Connectors\Generic\DeleteConnector;
+use Squid\MySql\Impl\Connectors\Generic\InsertConnector;
+use Squid\MySql\Impl\Connectors\Generic\SelectConnector;
+use Squid\MySql\Impl\Connectors\Generic\UpdateConnector;
+use Squid\MySql\Impl\Connectors\Generic\UpsertConnector;
 
 
 class GenericConnector extends AbstractSingleTableConnector implements IGenericCRUDConnector

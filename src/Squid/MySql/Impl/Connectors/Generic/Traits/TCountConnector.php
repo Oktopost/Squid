@@ -1,8 +1,9 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Generic;
+namespace Squid\MySql\Impl\Connectors\Generic\Traits;
 
 
 use Squid\MySql\Connectors\Generic\ICountConnector;
+use Squid\MySql\Impl\Connectors\Generic\CountConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 

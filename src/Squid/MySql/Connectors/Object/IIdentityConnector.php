@@ -11,8 +11,7 @@ use Squid\MySql\Connectors\Object\CRUD\Identity\IIdentityUpsert;
 /**
  * Refers to an object that have a Primary Key identifier, ether a single column or a combined index.
  */
-interface IIdentityConnector extends 
-	IObjectInsert,
+interface IIdentityConnector extends
 	IIdentityDelete,
 	IIdentityUpdate,
 	IIdentityUpsert

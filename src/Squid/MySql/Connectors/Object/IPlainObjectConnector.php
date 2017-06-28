@@ -5,7 +5,7 @@ namespace Squid\MySql\Connectors\Object;
 use Squid\MySql\Connectors\Object\CRUD\Generic;
 
 
-interface IObjectConnector extends 
+interface IPlainObjectConnector extends 
 	Generic\IObjectInsert,
 	Generic\IObjectSelect,
 	Generic\IObjectUpdate,

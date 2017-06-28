@@ -2,7 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
-use Squid\MySql\Connectors\Object\IObjectConnector;
+use Squid\MySql\Connectors\Object\IPlainObjectConnector;
 use Squid\MySql\Connectors\Object\ID\IIDGenerator;
 use Squid\MySql\Connectors\Object\CRUD\Generic\IObjectInsert;
 use Squid\MySql\Connectors\Object\IIdentityConnector;
@@ -17,12 +17,15 @@ use Squid\Exceptions\SquidException;
 use Squid\MySql\Impl\Connectors\Object\Query\CmdObjectSelect;
 
 
+/**
+ * @deprecated 
+ */
 class SimpleConnector extends AbstractORMConnector implements IIdentityConnector, IQueryConnector
 {
 	private $idFiled;
 	private $idProperty;
 	
-	/** @var IObjectConnector */
+	/** @var IPlainObjectConnector */
 	private $objectConnector;
 	
 	/** @var IObjectInsert */
@@ -111,7 +114,7 @@ class SimpleConnector extends AbstractORMConnector implements IIdentityConnector
 	 */
 	public function update($object)
 	{
-		return $this->getGenericConnector()->update($object, [$this->idFiled]);
+		return $this->getGenericConnector()->updateByFields($object, [$this->idFiled]);
 	}
 
 	/**
@@ -209,7 +212,7 @@ class SimpleConnector extends AbstractORMConnector implements IIdentityConnector
 		return $query->setConnector($this->getConnector())->from($this->getTableName());
 	}
 	
-	public function getGenericConnector(): IObjectConnector
+	public function getGenericConnector(): IPlainObjectConnector
 	{
 		if (!$this->objectConnector)
 		{

@@ -3,7 +3,7 @@ namespace Squid\MySql\Impl\Connectors\Object;
 
 
 use Squid\MySql\Connectors\IGenericCRUDConnector;
-use Squid\MySql\Connectors\Object\IObjectConnector;
+use Squid\MySql\Connectors\Object\IPlainObjectConnector;
 use Squid\MySql\Connectors\Object\TGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
 
@@ -12,7 +12,10 @@ use Squid\MySql\Impl\Connectors\Table\GenericConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
-class ObjectConnector extends AbstractORMConnector implements IObjectConnector
+/**
+ * @deprecated 
+ */
+class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnector
 {
 	use TGenericObjectConnector;
 	
@@ -50,7 +53,7 @@ class ObjectConnector extends AbstractORMConnector implements IObjectConnector
 	 * @param string[] $byFields
 	 * @return int|false
 	 */
-	public function update($object, array $byFields)
+	public function updateByFields($object, array $byFields)
 	{		
 		return $this->getGenericCRUD()->update()->byFields($byFields, $this->getObjectMap()->toRow($object));
 	}

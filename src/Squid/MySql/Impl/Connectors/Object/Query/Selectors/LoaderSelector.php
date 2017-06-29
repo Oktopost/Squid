@@ -53,6 +53,8 @@ class LoaderSelector implements IObjectSelector
 			$this->selector = new StandardSelector();
 			$this->selector->setObjectMap($selector);
 		}
+		
+		return $this;
 	}
 
 	/**
@@ -103,7 +105,7 @@ class LoaderSelector implements IObjectSelector
 	 */
 	public function withCallback(ICmdSelect $select, callable $callback): bool
 	{
-		// TODO: Implement withCallback() method.
+		return $this->selector->withCallback($select, $callback);
 	}
 
 	/**
@@ -112,7 +114,7 @@ class LoaderSelector implements IObjectSelector
 	 */
 	public function iterator(ICmdSelect $select): iterable
 	{
-		// TODO: Implement iterator() method.
+		return $this->selector->iterator($select);
 	}
 
 	/**
@@ -123,6 +125,6 @@ class LoaderSelector implements IObjectSelector
 	 */
 	public function map(ICmdSelect $select, string $field, bool $removeColumnFromRow = false)
 	{
-		// TODO: Implement map() method.
+		return $this->selector->map($select, $field, $removeColumnFromRow);
 	}
 }

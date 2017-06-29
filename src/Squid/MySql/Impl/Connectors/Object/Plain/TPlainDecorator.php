@@ -43,7 +43,7 @@ trait TPlainDecorator
 	 */
 	public function selectObjectByFields(array $fields)
 	{
-		// TODO: Implement selectOneByFields() method.
+		return $this->getPlainConnector()->selectObjectByFields($fields);
 	}
 
 	/**
@@ -53,7 +53,7 @@ trait TPlainDecorator
 	 */
 	public function selectObjectByField(string $field, $value)
 	{
-		// TODO: Implement selectOneByField() method.
+		return $this->getPlainConnector()->selectObjectByField($field, $value);
 	}
 
 	/**
@@ -62,7 +62,7 @@ trait TPlainDecorator
 	 */
 	public function selectFirstObjectByFields(array $fields)
 	{
-		// TODO: Implement selectFirstByFields() method.
+		return $this->getPlainConnector()->selectFirstObjectByFields($fields);
 	}
 
 	/**
@@ -72,7 +72,7 @@ trait TPlainDecorator
 	 */
 	public function selectFirstObjectByField(string $field, $value)
 	{
-		// TODO: Implement selectFirstByField() method.
+		return $this->getPlainConnector()->selectFirstObjectByField($field, $value);
 	}
 
 	/**
@@ -82,7 +82,7 @@ trait TPlainDecorator
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
-		// TODO: Implement selectAllByFields() method.
+		return $this->getPlainConnector()->selectObjectsByFields($fields, $limit);
 	}
 
 	/**
@@ -91,7 +91,7 @@ trait TPlainDecorator
 	 */
 	public function selectObjects(?array $orderBy = null)
 	{
-		// TODO: Implement selectAll() method.
+		return $this->getPlainConnector()->selectObjects($orderBy);
 	}
 	
 	/**
@@ -101,7 +101,7 @@ trait TPlainDecorator
 	 */
 	public function updateObject($object, array $byFields)
 	{
-		// TODO: Implement updateByFields() method.
+		return $this->getPlainConnector()->updateObject($object, $byFields);
 	}
 
 	/**
@@ -111,7 +111,7 @@ trait TPlainDecorator
 	 */
 	public function upsertObjectsByKeys($objects, array $keys)
 	{
-		// TODO: Implement upsertByKeys() method.
+		return $this->getPlainConnector()->upsertObjectsByKeys($objects, $keys);
 	}
 
 	/**
@@ -121,6 +121,6 @@ trait TPlainDecorator
 	 */
 	public function upsertObjectsByValues($objects, array $valueFields)
 	{
-		// TODO: Implement upsertValues() method.
+		return $this->getPlainConnector()->upsertObjectsByValues($objects, $valueFields);
 	}
 }

@@ -30,7 +30,7 @@ trait TCountConnector
 	 * @param array $fields
 	 * @return int|false
 	 */
-	public function countByFields($fields)
+	public function countByFields(array $fields)
 	{
 		return $this->getCountConnector()->countByFields($fields);
 	}
@@ -39,7 +39,7 @@ trait TCountConnector
 	 * @param array $fields
 	 * @return bool
 	 */
-	public function existsByFields($fields): bool
+	public function existsByFields(array $fields): bool
 	{
 		return $this->getCountConnector()->existsByFields($fields);
 	}

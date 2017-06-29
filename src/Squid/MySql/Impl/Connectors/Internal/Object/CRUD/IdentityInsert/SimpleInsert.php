@@ -29,15 +29,15 @@ class SimpleInsert implements IObjectInsert
 	
 	
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insertObjects($object, bool $ignore = false)
+	public function insertObjects($objects, bool $ignore = false)
 	{
 		if (!$this->insertObject)
 			$this->insertObject = new ObjectConnector($this->ormConnector);
 		
-		return $this->insertObject->insertObjects($object, $ignore);
+		return $this->insertObject->insertObjects($objects, $ignore);
 	}
 }

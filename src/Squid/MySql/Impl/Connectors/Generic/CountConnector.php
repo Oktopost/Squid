@@ -16,7 +16,7 @@ class CountConnector extends AbstractSingleTableConnector implements ICountConne
 	 * @param array $fields
 	 * @return int|false
 	 */
-	public function countByFields($fields)
+	public function countByFields(array $fields)
 	{
 		return $this->getTable()->select()->byFields($fields)->queryCount();
 	}
@@ -25,7 +25,7 @@ class CountConnector extends AbstractSingleTableConnector implements ICountConne
 	 * @param array $fields
 	 * @return bool
 	 */
-	public function existsByFields($fields): bool
+	public function existsByFields(array $fields): bool
 	{
 		return $this->getTable()->select()->byFields($fields)->queryExists();
 	}

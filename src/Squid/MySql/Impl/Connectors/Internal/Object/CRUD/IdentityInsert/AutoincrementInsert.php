@@ -19,33 +19,33 @@ class AutoincrementInsert extends AbstractIdentityInsert
 	
 	
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insertObjects($object, bool $ignore = false)
+	public function insertObjects($objects, bool $ignore = false)
 	{
-		if (!is_array($object))
+		if (!is_array($objects))
 		{
-			$object = [$object];
+			$objects = [$objects];
 		}
-		else if ($ignore && is_array($object))
+		else if ($ignore && is_array($objects))
 		{
 			throw new SquidException('Can not use Autoincrement connector for object with the ignore flag on');
 		}
 		
-		foreach ($object as $item)
+		foreach ($objects as $item)
 		{
 			$item->{$this->id} = null;
 		}
 		
-		$res = $this->doInsert($object, false);
+		$res = $this->doInsert($objects, false);
 		
 		if ($res)
 		{
 			$id = $this->getConnector()->controller()->lastId();
 			
-			foreach ($object as $item)
+			foreach ($objects as $item)
 			{
 				$item->{$this->id} = $id++;
 			}

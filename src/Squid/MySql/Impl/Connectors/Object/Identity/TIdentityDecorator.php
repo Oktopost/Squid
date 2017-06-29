@@ -62,7 +62,7 @@ trait TIdentityDecorator
 	 */
 	public function update($object)
 	{
-		return $this->getIdentityConnector()->delete($object);
+		return $this->getIdentityConnector()->update($object);
 	}
 
 	/**
@@ -71,6 +71,6 @@ trait TIdentityDecorator
 	 */
 	public function upsert($object)
 	{
-		return $this->getIdentityConnector()->delete($object);
+		return $this->getIdentityConnector()->upsert($object);
 	}
 }

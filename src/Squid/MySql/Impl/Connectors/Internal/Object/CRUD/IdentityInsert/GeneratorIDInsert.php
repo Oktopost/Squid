@@ -22,20 +22,20 @@ class GeneratorIDInsert extends AbstractIdentityInsert
 	
 
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insertObjects($object, bool $ignore = false)
+	public function insertObjects($objects, bool $ignore = false)
 	{
-		if (!is_array($object))
-			$object = [$object];
+		if (!is_array($objects))
+			$objects = [$objects];
 		
-		$ids = $this->generator->generate($this->getORMConnector()->getTableName(), $object);
+		$ids = $this->generator->generate($this->getORMConnector()->getTableName(), $objects);
 		
 		try
 		{
-			return $this->doInsert($object);
+			return $this->doInsert($objects);
 		}
 		finally
 		{

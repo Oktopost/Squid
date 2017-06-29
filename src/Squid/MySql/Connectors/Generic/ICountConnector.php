@@ -15,7 +15,7 @@ interface ICountConnector
 	 * @param array $fields
 	 * @return int|false
 	 */
-	public function countByFields($fields);
+	public function countByFields(array $fields);
 
 	/**
 	 * @param string $field
@@ -28,5 +28,5 @@ interface ICountConnector
 	 * @param array $fields
 	 * @return bool
 	 */
-	public function existsByFields($fields): bool;
+	public function existsByFields(array $fields): bool;
 }

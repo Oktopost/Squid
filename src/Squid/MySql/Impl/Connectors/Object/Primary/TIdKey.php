@@ -14,12 +14,6 @@ trait TIdKey
 	private $_idKey;
 	private $_idField;
 	private $_idProperty;
-	
-	
-	protected function getIdKey(): array
-	{
-		return $this->_idKey;
-	}
 
 	
 	private function getIdField(): string
@@ -30,6 +24,17 @@ trait TIdKey
 	private function getIdProperty(): string
 	{
 		return $this->_idProperty;
+	}
+	
+	
+	protected function getPrimaryKeys(): array
+	{
+		return $this->getIdKey();
+	}
+	
+	protected function getIdKey(): array
+	{
+		return $this->_idKey;
 	}
 	
 

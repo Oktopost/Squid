@@ -36,16 +36,16 @@ class ObjectConnector extends AbstractORMConnector implements IPlainObjectConnec
 	
 	
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function insertObjects($object, bool $ignore = false)
+	public function insertObjects($objects, bool $ignore = false)
 	{
-		if (!is_array($object))
-			$object = [$object];
+		if (!is_array($objects))
+			$objects = [$objects];
 		
-		return $this->getGenericCRUD()->insert()->all($this->getObjectMap()->toRows($object), $ignore);
+		return $this->getGenericCRUD()->insert()->all($this->getObjectMap()->toRows($objects), $ignore);
 	}
 
 	/**

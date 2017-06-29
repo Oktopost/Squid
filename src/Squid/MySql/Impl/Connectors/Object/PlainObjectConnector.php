@@ -10,18 +10,18 @@ use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectConnector
 {
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insertObjects($object, bool $ignore = false)
+	public function insertObjects($objects, bool $ignore = false)
 	{
 		// TODO: Implement insert() method.
 	}
 
 	/**
 	 * @param array $fields
-	 * @return mixed|false
+	 * @return mixed|null|false
 	 */
 	public function selectObjectByFields(array $fields)
 	{
@@ -31,7 +31,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return mixed|false
+	 * @return mixed|null|false
 	 */
 	public function selectObjectByField(string $field, $value)
 	{
@@ -40,7 +40,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 
 	/**
 	 * @param array $fields
-	 * @return mixed|false
+	 * @return mixed|null|false
 	 */
 	public function selectFirstObjectByFields(array $fields)
 	{
@@ -50,7 +50,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return mixed|false
+	 * @return mixed|null|false
 	 */
 	public function selectFirstObjectByField(string $field, $value)
 	{

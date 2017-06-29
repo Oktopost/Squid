@@ -5,9 +5,9 @@ namespace Squid\MySql\Connectors\Object\CRUD\Generic;
 interface IObjectInsert
 {
 	/**
-	 * @param mixed|array $object
+	 * @param mixed|array $objects
 	 * @param bool $ignore
 	 * @return false|int
 	 */
-	public function insertObjects($object, bool $ignore = false);
+	public function insertObjects($objects, bool $ignore = false);
 }

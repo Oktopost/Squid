@@ -39,9 +39,11 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectByFields(array $fields)
 	{
-		return $this->cmdSelect()
+		$result = $this->cmdSelect()
 			->byFields($fields)
-			->queryAll(true);
+			->queryRow(true);
+		
+		return $this->getObjectMap()->toObject($result);
 	}
 
 	/**
@@ -51,9 +53,11 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectByField(string $field, $value)
 	{
-		return $this->cmdSelect()
+		$result = $this->cmdSelect()
 			->byField($field, $value)
 			->queryRow(true);
+		
+		return $this->getObjectMap()->toObject($result);
 	}
 
 	/**
@@ -62,10 +66,12 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectFirstObjectByFields(array $fields)
 	{
-		return $this->cmdSelect()
+		$result = $this->cmdSelect()
 			->byFields($fields)
 			->limitBy(1)
 			->queryRow(true, true);
+		
+		return $this->getObjectMap()->toObject($result);
 	}
 
 	/**
@@ -75,10 +81,12 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectFirstObjectByField(string $field, $value)
 	{
-		return $this->cmdSelect()
+		$result = $this->cmdSelect()
 			->byField($field, $value)
 			->limitBy(1)
 			->queryRow(true, true);
+		
+		return $this->getObjectMap()->toObject($result);
 	}
 
 	/**
@@ -88,10 +96,12 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
-		return $this->cmdSelect()
+		$result = $this->cmdSelect()
 			->byFields($fields)
 			->limitBy($limit)
 			->queryAll(true);
+		
+		return $this->getObjectMap()->toObjects($result);
 	}
 
 	/**
@@ -107,7 +117,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			$result->orderBy($orderBy);
 		}
 		
-		return $result->queryAll(true);
+		return $this->getObjectMap()->toObjects($result->queryAll(true));
 	}
 
 	/**

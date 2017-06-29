@@ -1,10 +1,9 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Internal\Generic;
+namespace Squid\MySql\Impl\Connectors\Generic;
 
 
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Table\ITableNameConnector;
-use Squid\MySql\Impl\Connectors\Generic\CountConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 use PHPUnit\Framework\TestCase;

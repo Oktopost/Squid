@@ -53,12 +53,12 @@ class GenericObjectConnectorTest extends TestCase
 	{
 		$a = $this->newObject();
 		$this->connector->insertObjects($a);
-		
 		$result = $this->connector->query()->byField('a', $a->a)->queryFirst();
 		
 		self::assertInstanceOf(GenericObjectHelper::class, $result);
 	}
 }
+
 
 /**
  * @property string $a

@@ -16,6 +16,12 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 	use TIdKey;
 	
 	
+	protected function getPrimaryKeys(): array
+	{
+		return $this->getIdKey();
+	}
+	
+	
 	public function deleteById($id)
 	{
 		return $this->getGenericObjectConnector()->deleteByField($this->getIdField(), $id);

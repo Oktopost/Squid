@@ -7,9 +7,6 @@ use Squid\Exceptions\SquidException;
 
 trait TIdKey
 {
-	use TIdKeyConsumer;
-	
-	
 	/** @var array */
 	private $_idKey;
 	private $_idField;
@@ -26,11 +23,6 @@ trait TIdKey
 		return $this->_idProperty;
 	}
 	
-	
-	protected function getPrimaryKeys(): array
-	{
-		return $this->getIdKey();
-	}
 	
 	protected function getIdKey(): array
 	{

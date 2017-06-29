@@ -23,7 +23,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	public function insertObjects($objects, bool $ignore = false)
 	{
 		if (!is_array($objects))
+		{
 			$objects = [$objects];
+		}
 		
 		return $this->getConnector()
 			->insert()
@@ -32,7 +34,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			->ignore($ignore)
 			->executeDml(true);
 	}
-
+	
 	/**
 	 * @param array $fields
 	 * @return mixed|null|false
@@ -43,9 +45,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			->byFields($fields)
 			->queryRow(true);
 		
-		return $this->getObjectMap()->toObject($result);
+		return $result ? $this->getObjectMap()->toObject($result) : null;
 	}
-
+	
 	/**
 	 * @param string $field
 	 * @param mixed $value
@@ -57,9 +59,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			->byField($field, $value)
 			->queryRow(true);
 		
-		return $this->getObjectMap()->toObject($result);
+		return $result ? $this->getObjectMap()->toObject($result) : null;
 	}
-
+	
 	/**
 	 * @param array $fields
 	 * @return mixed|null|false
@@ -71,9 +73,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			->limitBy(1)
 			->queryRow(true, true);
 		
-		return $this->getObjectMap()->toObject($result);
+		return $result ? $this->getObjectMap()->toObject($result) : null;
 	}
-
+	
 	/**
 	 * @param string $field
 	 * @param mixed $value
@@ -86,9 +88,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			->limitBy(1)
 			->queryRow(true, true);
 		
-		return $this->getObjectMap()->toObject($result);
+		return $result ? $this->getObjectMap()->toObject($result) : null;
 	}
-
+	
 	/**
 	 * @param array $fields
 	 * @param int|null $limit
@@ -96,30 +98,34 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
-		$result = $this->cmdSelect()
-			->byFields($fields)
-			->limitBy($limit)
-			->queryAll(true);
+		$query = $this->cmdSelect()->byFields($fields);
 		
-		return $this->getObjectMap()->toObjects($result);
+		if ($limit)
+			$query->limitBy($limit);
+		
+		$result = $query->queryAll(true);
+		
+		return $result ? $this->getObjectMap()->toObjects($result) : null;
 	}
-
+	
 	/**
 	 * @param array|null $orderBy
 	 * @return array|false
 	 */
 	public function selectObjects(?array $orderBy = null)
 	{
-		$result = $this->cmdSelect();
+		$query = $this->cmdSelect();
 		
 		if ($orderBy)
 		{
-			$result->orderBy($orderBy);
+			$query->orderBy($orderBy);
 		}
 		
-		return $this->getObjectMap()->toObjects($result->queryAll(true));
+		$result = $query->queryAll(true);
+		
+		return $result ? $this->getObjectMap()->toObjects($result) : null;
 	}
-
+	
 	/**
 	 * @param mixed $object
 	 * @param string[] $byFields
@@ -127,14 +133,16 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function updateObject($object, array $byFields)
 	{
+		$data = $this->getObjectMap()->toRow($object);
+		
 		return $this->getConnector()
 			->update()
 			->table($this->getTableName())
-			->set($this->getObjectMap()->toRow($object))
-			->byFields($byFields)
+			->set($data)
+			->byFields(array_intersect_key($data, array_flip($byFields)))
 			->executeDml(true);
 	}
-
+	
 	/**
 	 * @param mixed|array $objects
 	 * @param string[] $keys
@@ -143,7 +151,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	public function upsertObjectsByKeys($objects, array $keys)
 	{
 		if (!is_array($objects))
+		{
 			$objects = [$objects];
+		}
 		
 		return $this->getConnector()
 			->upsert()
@@ -152,7 +162,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 			->setDuplicateKeys($keys)
 			->executeDml(true);
 	}
-
+	
 	/**
 	 * @param mixed|array $objects
 	 * @param string[] $valueFields
@@ -161,7 +171,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	public function upsertObjectsByValues($objects, array $valueFields)
 	{
 		if (!is_array($objects))
+		{
 			$objects = [$objects];
+		}
 		
 		return $this->getConnector()
 			->upsert()

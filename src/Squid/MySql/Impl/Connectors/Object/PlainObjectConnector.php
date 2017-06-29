@@ -1,14 +1,20 @@
 <?php
-
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
+use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Object\IPlainObjectConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
 class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectConnector
 {
+	private function cmdSelect(): ICmdSelect
+	{
+		return $this->getConnector()->select()->from($this->getTableName());
+	}
+	
+	
 	/**
 	 * @param mixed|array $objects
 	 * @param bool $ignore
@@ -16,7 +22,15 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function insertObjects($objects, bool $ignore = false)
 	{
-		// TODO: Implement insert() method.
+		if (!is_array($objects))
+			$objects = [$objects];
+		
+		return $this->getConnector()
+			->insert()
+			->into($this->getTableName())
+			->valuesBulk($this->getObjectMap()->toRows($objects))
+			->ignore($ignore)
+			->executeDml(true);
 	}
 
 	/**
@@ -25,7 +39,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectByFields(array $fields)
 	{
-		// TODO: Implement selectOneByFields() method.
+		return $this->cmdSelect()
+			->byFields($fields)
+			->queryAll(true);
 	}
 
 	/**
@@ -35,7 +51,9 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectByField(string $field, $value)
 	{
-		// TODO: Implement selectOneByField() method.
+		return $this->cmdSelect()
+			->byField($field, $value)
+			->queryRow(true);
 	}
 
 	/**
@@ -44,7 +62,10 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectFirstObjectByFields(array $fields)
 	{
-		// TODO: Implement selectFirstByFields() method.
+		return $this->cmdSelect()
+			->byFields($fields)
+			->limitBy(1)
+			->queryRow(true, true);
 	}
 
 	/**
@@ -54,7 +75,10 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectFirstObjectByField(string $field, $value)
 	{
-		// TODO: Implement selectFirstByField() method.
+		return $this->cmdSelect()
+			->byField($field, $value)
+			->limitBy(1)
+			->queryRow(true, true);
 	}
 
 	/**
@@ -64,7 +88,10 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
-		// TODO: Implement selectAllByFields() method.
+		return $this->cmdSelect()
+			->byFields($fields)
+			->limitBy($limit)
+			->queryAll(true);
 	}
 
 	/**
@@ -73,7 +100,14 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjects(?array $orderBy = null)
 	{
-		// TODO: Implement selectAll() method.
+		$result = $this->cmdSelect();
+		
+		if ($orderBy)
+		{
+			$result->orderBy($orderBy);
+		}
+		
+		return $result->queryAll(true);
 	}
 
 	/**
@@ -83,7 +117,12 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function updateObject($object, array $byFields)
 	{
-		// TODO: Implement update() method.
+		return $this->getConnector()
+			->update()
+			->table($this->getTableName())
+			->set($this->getObjectMap()->toRow($object))
+			->byFields($byFields)
+			->executeDml(true);
 	}
 
 	/**
@@ -93,7 +132,15 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function upsertObjectsByKeys($objects, array $keys)
 	{
-		// TODO: Implement upsertByKeys() method.
+		if (!is_array($objects))
+			$objects = [$objects];
+		
+		return $this->getConnector()
+			->upsert()
+			->into($this->getTableName())
+			->valuesBulk($this->getObjectMap()->toRows($objects))
+			->setDuplicateKeys($keys)
+			->executeDml(true);
 	}
 
 	/**
@@ -103,6 +150,14 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function upsertObjectsByValues($objects, array $valueFields)
 	{
-		// TODO: Implement upsertValues() method.
+		if (!is_array($objects))
+			$objects = [$objects];
+		
+		return $this->getConnector()
+			->upsert()
+			->into($this->getTableName())
+			->valuesBulk($this->getObjectMap()->toRows($objects))
+			->setUseNewValues($valueFields)
+			->executeDml(true);
 	}
 }

@@ -5,6 +5,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Query\Selectors;
 use Squid\Exceptions\SquidException;
 
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\MySql\Connectors\Object\Query\IObjectSelector;
 
 use Squid\MySql\Impl\Connectors\Utils\Object\TObjectMapConnector;
@@ -14,7 +15,15 @@ class StandardSelector implements IObjectSelector
 {
 	use TObjectMapConnector;
 	
-
+	
+	public function __construct(?IRowMap $mapper = null)
+	{
+		if ($mapper)
+		{
+			$this->setObjectMap($mapper);
+		}
+	}
+	
 	/**
 	 * @param ICmdSelect $select
 	 * @return array|false

@@ -31,7 +31,7 @@ trait TInsertConnector
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function row(array $row, bool $ignore = false)
+	public function insertRow(array $row, bool $ignore = false)
 	{
 		// TODO: 
 	}
@@ -52,7 +52,7 @@ trait TInsertConnector
 	 * @param bool $ignore
 	 * @return int|false Number of affected rows
 	 */
-	public function allIntoFields(array $fields, array $rows, bool $ignore = false)
+	public function insertAllIntoFields(array $fields, array $rows, bool $ignore = false)
 	{
 		// TODO: 
 	}

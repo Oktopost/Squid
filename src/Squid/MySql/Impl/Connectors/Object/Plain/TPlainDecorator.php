@@ -18,7 +18,7 @@ trait TPlainDecorator
 	private $_plainConnector;
 	
 	
-	private function _getPlainConnector(): IPlainObjectConnector
+	protected function getPlainConnector(): IPlainObjectConnector
 	{
 		if (!$this->_plainConnector)
 			$this->_plainConnector = new PlainObjectConnector($this);
@@ -34,7 +34,7 @@ trait TPlainDecorator
 	 */
 	public function insertObjects($object, bool $ignore = false)
 	{
-		return $this->_getPlainConnector()->insertObjects($object, $ignore);
+		return $this->getPlainConnector()->insertObjects($object, $ignore);
 	}
 
 	/**

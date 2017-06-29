@@ -22,6 +22,8 @@ class GenericObjectConnector extends AbstractORMConnector implements
 	use Traits\TDeleteConnector;
 	use Traits\TUpdateConnector;
 	use Traits\TUpsertConnector;
+	use Traits\TSelectConnector;
+	use Traits\TInsertConnector;
 	
 	
 	/**

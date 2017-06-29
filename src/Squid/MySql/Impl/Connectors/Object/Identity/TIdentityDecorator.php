@@ -2,11 +2,10 @@
 namespace Squid\MySql\Impl\Connectors\Object\Identity;
 
 
-use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\IIdentityConnector;
+use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 
 use Squid\MySql\Impl\Connectors\Object\Generic\GenericObjectConnector;
-use Squid\MySql\Impl\Connectors\Object\IdentityConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
@@ -22,8 +21,11 @@ trait TIdentityDecorator
 	/** @var IIdentityConnector */
 	private $_identityConnector;
 	
+	/** @var IGenericObjectConnector */
+	private $_genericObjectConnector;
 	
-	private function _getIdentityConnector(): IIdentityConnector
+	
+	protected function getIdentityConnector(): IIdentityConnector
 	{
 		if (!$this->_identityConnector)
 		{
@@ -36,10 +38,12 @@ trait TIdentityDecorator
 		return $this->_identityConnector;
 	}
 	
-	
 	protected function getGenericObjectConnector(): IGenericObjectConnector 
 	{
-		return new GenericObjectConnector($this);
+		if (!$this->_genericObjectConnector)
+			$this->_genericObjectConnector = new GenericObjectConnector($this);
+		
+		return $this->_genericObjectConnector;
 	}
 	
 	
@@ -49,7 +53,7 @@ trait TIdentityDecorator
 	 */
 	public function delete($object)
 	{
-		// TODO: Implement delete() method.
+		return $this->getIdentityConnector()->delete($object);
 	}
 
 	/**
@@ -58,7 +62,7 @@ trait TIdentityDecorator
 	 */
 	public function update($object)
 	{
-		// TODO: Implement update() method.
+		return $this->getIdentityConnector()->delete($object);
 	}
 
 	/**
@@ -67,6 +71,6 @@ trait TIdentityDecorator
 	 */
 	public function upsert($object)
 	{
-		// TODO: Implement upsert() method.
+		return $this->getIdentityConnector()->delete($object);
 	}
 }

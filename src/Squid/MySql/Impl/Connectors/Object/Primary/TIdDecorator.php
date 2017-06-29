@@ -3,8 +3,10 @@ namespace Squid\MySql\Impl\Connectors\Object\Primary;
 
 
 use Squid\MySql\Connectors\Object\IIdConnector;
+use Squid\MySql\Connectors\Object\IIdentityConnector;
+
+use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
-use Squid\MySql\Impl\Connectors\Object\IdConnector;
 
 
 /**
@@ -14,58 +16,39 @@ use Squid\MySql\Impl\Connectors\Object\IdConnector;
 trait TIdDecorator
 {
 	use TIdKeyConsumer;
+	use TIdentityDecorator;
 	
 	
 	/** @var IIdConnector */
 	private $_idConnector;
 	
 	
-	private function _getIdConnector(): IIdConnector
+	protected function getIdConnector(): IIdConnector
 	{
 		if (!$this->_idConnector)
 		{
-			$this->_idConnector = new IdConnector($this);
-			$this->_idConnector->setIdKey($this->getIdKey());
+			$this->_idConnector = new DecoratedIdConnector($this);
+			$this->_idConnector
+				->setIdKey($this->getIdKey())
+				->setGenericObjectConnector($this->getGenericObjectConnector());
 		}
 		
 		return $this->_idConnector;
 	}
 	
-	
+	protected function getIdentityConnector(): IIdentityConnector
+	{
+		return $this->getIdConnector();
+	}
+
+
 	public function deleteById($id)
 	{
-		// TODO: Implement deleteById() method.
+		return $this->getIdConnector()->deleteById($id);
 	}
 
 	public function loadById($id)
 	{
-		// TODO: Implement loadById() method.
-	}
-
-	/**
-	 * @param mixed|array $object
-	 * @return int|false
-	 */
-	public function delete($object)
-	{
-		// TODO: Implement delete() method.
-	}
-
-	/**
-	 * @param mixed $object
-	 * @return int|false
-	 */
-	public function update($object)
-	{
-		// TODO: Implement update() method.
-	}
-
-	/**
-	 * @param mixed|array $object
-	 * @return int|false
-	 */
-	public function upsert($object)
-	{
-		// TODO: Implement upsert() method.
+		return $this->getIdConnector()->loadById($id);
 	}
 }

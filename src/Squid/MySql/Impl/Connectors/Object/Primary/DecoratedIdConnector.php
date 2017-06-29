@@ -1,13 +1,12 @@
 <?php
-namespace Squid\MySql\Impl\Connectors\Object\Identity;
+namespace Squid\MySql\Impl\Connectors\Object\Primary;
 
 
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
+use Squid\MySql\Impl\Connectors\Object\IdConnector;
 
-use Squid\MySql\Impl\Connectors\Object\IdentityConnector;
 
-
-class DecoratedIdentityConnector extends IdentityConnector
+class DecoratedIdConnector extends IdConnector
 {
 	private $genericObjectConnector;
 	

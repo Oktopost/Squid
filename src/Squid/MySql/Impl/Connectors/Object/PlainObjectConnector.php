@@ -101,7 +101,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertObjectsValues($objects, array $valueFields)
+	public function upsertObjectsByValues($objects, array $valueFields)
 	{
 		// TODO: Implement upsertValues() method.
 	}

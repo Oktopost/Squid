@@ -14,6 +14,6 @@ trait TInsertHelper
 	 */
 	public function insertRow(array $row, bool $ignore = false): ?int
 	{
-		return $this->all([$row], $ignore);
+		return $this->insertAll([$row], $ignore);
 	}
 }

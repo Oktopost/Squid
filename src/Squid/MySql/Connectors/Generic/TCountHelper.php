@@ -14,7 +14,7 @@ trait TCountHelper
 	 */
 	public function countByField(string $field, $value)
 	{
-		return $this->byFields([$field => $value]);
+		return $this->countByFields([$field => $value]);
 	}
 
 	/**

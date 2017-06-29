@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Internal\Generic;
 
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Table\ITableNameConnector;
+use Squid\MySql\Impl\Connectors\Generic\CountConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
 use PHPUnit\Framework\TestCase;
@@ -60,14 +61,14 @@ class CountConnectorTest extends TestCase
 	{
 		$count = new CountConnector($this->connector);
 		$this->mockData('queryCount', 123);
-		self::assertEquals(123, $count->byFields(['a' => 1]));
+		self::assertEquals(123, $count->countByFields(['a' => 1]));
 	}
 
 	public function test_byField()
 	{
 		$count = new CountConnector($this->connector);
 		$this->mockData('queryCount', 123);
-		self::assertEquals(123, $count->byField('a', 1));
+		self::assertEquals(123, $count->countByField('a', 1));
 	}
 
 

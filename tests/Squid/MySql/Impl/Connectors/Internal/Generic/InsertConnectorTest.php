@@ -77,13 +77,13 @@ class InsertConnectorTest extends TestCase
 	{
 		$insertConnector = new InsertConnector($this->connector);
 		$this->mockData(null, false, [['a' => 1, 'b' => 2]], 1);
-		self::assertEquals(1, $insertConnector->row(['a' => 1, 'b' => 2]));
+		self::assertEquals(1, $insertConnector->insertRow(['a' => 1, 'b' => 2]));
 	}
 	
 	public function test_row_NoIgnore()
 	{
 		$insertConnector = new InsertConnector($this->connector);
 		$this->mockData(null, true, [['a' => 1, 'b' => 2]], 1);
-		self::assertEquals(1, $insertConnector->row(['a' => 1, 'b' => 2], true));
+		self::assertEquals(1, $insertConnector->insertRow(['a' => 1, 'b' => 2], true));
 	}
 }

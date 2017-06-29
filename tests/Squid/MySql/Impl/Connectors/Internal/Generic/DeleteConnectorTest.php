@@ -83,13 +83,13 @@ class DeleteConnectorTest extends TestCase
 	{
 		$deleteConnector = new DeleteConnector($this->connector);
 		$this->mockData(2);
-		self::assertEquals(2, $deleteConnector->byField('a', 1));
+		self::assertEquals(2, $deleteConnector->deleteByField('a', 1));
 	}
 	
 	public function test_byField_WithLimit()
 	{
 		$deleteConnector = new DeleteConnector($this->connector);
 		$this->mockData(2, 2);
-		self::assertEquals(2, $deleteConnector->byField('a', 1, 2));
+		self::assertEquals(2, $deleteConnector->deleteByField('a', 1, 2));
 	}
 }

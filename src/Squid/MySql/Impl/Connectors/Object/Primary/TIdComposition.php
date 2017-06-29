@@ -14,5 +14,4 @@ use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 trait TIdComposition
 {
 	use TIdDecorator;
-	use TIdKey;
 }

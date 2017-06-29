@@ -40,7 +40,7 @@ trait TIdDecorator
 	{
 		return $this->getIdConnector();
 	}
-
+	
 
 	public function deleteById($id)
 	{

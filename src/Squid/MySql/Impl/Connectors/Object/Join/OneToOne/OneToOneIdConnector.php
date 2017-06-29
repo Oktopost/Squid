@@ -2,29 +2,58 @@
 namespace Squid\MySql\Impl\Connectors\Object\Join\OneToOne;
 
 
+use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneIdConnector;
-use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
-
-use Squid\MySql\Impl\Connectors\Object\Primary\TIdComposition;
+use Squid\MySql\Connectors\Object\Generic\IGenericIdConnector;
 
 
-class OneToOneIdConnector extends OneToOneConnector implements IOneToOneIdConnector
+class OneToOneIdConnector extends AbstractOneToOneIdConnector implements IOneToOneIdConnector
 {
-	use TIdComposition;
+	/** @var IGenericIdConnector|string */
+	private $connector;
 	
 	
-	protected function getGenericObjectConnector(): IGenericObjectConnector
+	protected function getPrimaryIdConnector(): IGenericIdConnector
 	{
+		if (!$this->connector)
+			throw new SquidException('setPrimaryConnector must be called before using OneToOneConnector');
+		
+		if (is_string($this->connector))
+		{
+			$this->connector = \Squid::skeleton($this->connector);
+		}
+		
+		return $this->connector;
+	}
+	
+	
+	/**
+	 * @param IGenericIdConnector|string $connector
+	 * @return static
+	 */
+	public function setPrimaryConnector($connector)
+	{
+		$this->connector = $connector;
 		return $this;
 	}
-
-	protected function getIdKey(): array
+	
+	
+	/**
+	 * @param string|array $id
+	 * @return int|false
+	 */
+	public function deleteById($id)
 	{
-		// TODO: Implement getIdKey() method.
+		return $this->getPrimaryIdConnector()->deleteById($id);
 	}
 
-	protected function getPrimaryKeys(): array
+	/**
+	 * @param string|array $id
+	 * @return mixed|null|false
+	 */
+	public function loadById($id)
 	{
-		// TODO: Implement getPrimaryKeys() method.
+		$object = $this->getPrimaryIdConnector()->loadById($id);
+		return $this->populate($object);
 	}
 }

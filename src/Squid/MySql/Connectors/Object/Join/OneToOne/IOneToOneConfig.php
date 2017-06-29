@@ -23,4 +23,10 @@ interface IOneToOneConfig
 	 * @return array|null Array of modified children.
 	 */
 	public function afterParentSaved($parents): ?array;
+
+	/**
+	 * @param mixed|array $parents
+	 * @return mixed|null|array If parent is not an array, single child must be returned.
+	 */
+	public function getChildren($parents);
 }

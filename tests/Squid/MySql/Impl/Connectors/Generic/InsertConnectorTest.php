@@ -94,4 +94,44 @@ class InsertConnectorTest extends TestCase
 		$subject = $this->subject(['a' => 1, 'b' => 2]);
 		self::assertEquals(1, $subject->insertAll([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]], true));
 	}
+	
+	
+	public function test_insertAllIntoFields_RowsInserted()
+	{
+		$subject = $this->subject();
+		$subject->insertAllIntoFields(['a', 'b'], [[1, 2], [3, 4]]);
+		
+		self::assertRowCount(1, $this->table, ['a' => 1, 'b' => 2]);
+		self::assertRowCount(1, $this->table, ['a' => 3, 'b' => 4]);
+	}
+	
+	public function test_insertAllIntoFields_CountReturned()
+	{
+		$subject = $this->subject();
+		self::assertEquals(2, $subject->insertAllIntoFields(['a', 'b'], [[1, 2], [3, 4]]));
+	}
+	
+	public function test_insertAllIntoFields_PassedFieldsUsed()
+	{
+		$subject = $this->subject();
+		$subject->insertAllIntoFields(['b', 'a'], [[1, 2], [3, 4]]);
+		
+		self::assertRowCount(1, $this->table, ['a' => 2, 'b' => 1]);
+		self::assertRowCount(1, $this->table, ['a' => 4, 'b' => 3]);
+	}
+	
+	/**
+	 * @expectedException \Squid\MySql\Exceptions\MySqlException
+	 */
+	public function test_insertAllIntoFields_RawAlreadyExists()
+	{
+		$subject = $this->subject(['a' => 3, 'b' => 4]);
+		$subject->insertAllIntoFields(['a', 'b'], [[1, 2], [3, 4]]);
+	}
+	
+	public function test_insertAllIntoFields_RawAlreadyExistsWithIgnoreFlag_NoError()
+	{
+		$subject = $this->subject(['a' => 1, 'b' => 2]);
+		self::assertEquals(1, $subject->insertAllIntoFields(['a', 'b'], [[1, 2], [3, 4]], true));
+	}
 }

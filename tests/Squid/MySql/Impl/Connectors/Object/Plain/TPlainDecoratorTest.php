@@ -61,7 +61,7 @@ class TPlainDecoratorTest extends TestCase
 		
 		$this->assertMethodCalled('updateObject', new TPlainDecoratorTestHelperClass(), ['a' => 'b']);
 		$this->assertMethodCalled('upsertObjectsByKeys', new TPlainDecoratorTestHelperClass(), ['a' => 'b']);
-		$this->assertMethodCalled('upsertObjectsByValues', new TPlainDecoratorTestHelperClass(), ['a' => 'b']);
+		$this->assertMethodCalled('upsertObjectsForValues', new TPlainDecoratorTestHelperClass(), ['a' => 'b']);
 	}
 }
 

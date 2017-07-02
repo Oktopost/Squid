@@ -68,6 +68,7 @@ interface IQuery
 	 * If callback returns false, queryWithCallback will abort and return false.
 	 * If callback returns 0, queryWithCallback will abort and return true.
 	 * For any other value, callback will continue to the next row.
+	 * If no rows selected at all, queryWithCallback will still return true.
 	 * @param bool $isAssoc
 	 * @return bool
 	 */

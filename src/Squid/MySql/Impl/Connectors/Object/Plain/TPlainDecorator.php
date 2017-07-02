@@ -2,6 +2,8 @@
 namespace Squid\MySql\Impl\Connectors\Object\Plain;
 
 
+use Squid\OrderBy;
+
 use Squid\MySql\Connectors\Object\IPlainObjectConnector;
 
 use Squid\MySql\Impl\Connectors\Object\PlainObjectConnector;
@@ -87,11 +89,12 @@ trait TPlainDecorator
 
 	/**
 	 * @param array|null $orderBy
+	 * @param int $order
 	 * @return array|false
 	 */
-	public function selectObjects(?array $orderBy = null)
+	public function selectObjects(?array $orderBy = null, int $order = OrderBy::DESC)
 	{
-		return $this->getPlainConnector()->selectObjects($orderBy);
+		return $this->getPlainConnector()->selectObjects($orderBy, $order);
 	}
 	
 	/**
@@ -119,8 +122,8 @@ trait TPlainDecorator
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertObjectsByValues($objects, array $valueFields)
+	public function upsertObjectsForValues($objects, array $valueFields)
 	{
-		return $this->getPlainConnector()->upsertObjectsByValues($objects, $valueFields);
+		return $this->getPlainConnector()->upsertObjectsForValues($objects, $valueFields);
 	}
 }

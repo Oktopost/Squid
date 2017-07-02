@@ -2,14 +2,18 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
+use Squid\OrderBy;
+
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Object\IPlainObjectConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
+use Squid\Exceptions\SquidException;
+
 
 class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectConnector
 {
-	private function cmdSelect(): ICmdSelect
+	private function getSelect(): ICmdSelect
 	{
 		return $this->getConnector()->select()->from($this->getTableName());
 	}
@@ -41,11 +45,18 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectByFields(array $fields)
 	{
-		$result = $this->cmdSelect()
+		$object = null;
+		$res = $this->getSelect()
 			->byFields($fields)
-			->queryRow(true);
+			->queryWithCallback(
+				function($row)
+					use (&$object)
+				{
+					$object = $this->getObjectMap()->toObject($row);
+					return 0;
+				});
 		
-		return $result ? $this->getObjectMap()->toObject($result) : null;
+		return $res ? $object : null;
 	}
 	
 	/**
@@ -55,11 +66,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectByField(string $field, $value)
 	{
-		$result = $this->cmdSelect()
-			->byField($field, $value)
-			->queryRow(true);
-		
-		return $result ? $this->getObjectMap()->toObject($result) : null;
+		return $this->selectObjectByFields([$field => $value]);
 	}
 	
 	/**
@@ -68,12 +75,20 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectFirstObjectByFields(array $fields)
 	{
-		$result = $this->cmdSelect()
+		$object = null;
+		$res = $this->getSelect()
 			->byFields($fields)
-			->limitBy(1)
-			->queryRow(true, true);
+			->queryWithCallback(
+				function($row)
+					use (&$object)
+				{
+					if ($object)
+						throw new SquidException('More then one row selected!');
+					
+					$object = $this->getObjectMap()->toObject($row);
+				});
 		
-		return $result ? $this->getObjectMap()->toObject($result) : null;
+		return $res ? $object : null;
 	}
 	
 	/**
@@ -83,12 +98,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectFirstObjectByField(string $field, $value)
 	{
-		$result = $this->cmdSelect()
-			->byField($field, $value)
-			->limitBy(1)
-			->queryRow(true, true);
-		
-		return $result ? $this->getObjectMap()->toObject($result) : null;
+		return $this->selectFirstObjectByFields([$field => $value]);
 	}
 	
 	/**
@@ -98,32 +108,31 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
-		$query = $this->cmdSelect()->byFields($fields);
+		$query = $this->getSelect()->byFields($fields);
 		
 		if ($limit)
 			$query->limitBy($limit);
 		
 		$result = $query->queryAll(true);
 		
-		return $result ? $this->getObjectMap()->toObjects($result) : null;
+		return $result ? $this->getObjectMap()->toObjects($result) : $result;
 	}
-	
+
 	/**
 	 * @param array|null $orderBy
+	 * @param int $order
 	 * @return array|false
 	 */
-	public function selectObjects(?array $orderBy = null)
+	public function selectObjects(?array $orderBy = null, int $order = OrderBy::DESC)
 	{
-		$query = $this->cmdSelect();
+		$query = $this->getSelect();
 		
 		if ($orderBy)
-		{
-			$query->orderBy($orderBy);
-		}
+			$query->orderBy($orderBy, $order);
 		
 		$result = $query->queryAll(true);
 		
-		return $result ? $this->getObjectMap()->toObjects($result) : null;
+		return $result ? $this->getObjectMap()->toObjects($result) : $result;
 	}
 	
 	/**
@@ -135,11 +144,15 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	{
 		$data = $this->getObjectMap()->toRow($object);
 		
+		$byFields = array_flip($byFields);
+		$where = array_intersect_key($data, $byFields);
+		$data = array_diff_key($data, $byFields);
+		
 		return $this->getConnector()
 			->update()
 			->table($this->getTableName())
 			->set($data)
-			->byFields(array_intersect_key($data, array_flip($byFields)))
+			->byFields($where)
 			->executeDml(true);
 	}
 	
@@ -151,9 +164,7 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	public function upsertObjectsByKeys($objects, array $keys)
 	{
 		if (!is_array($objects))
-		{
 			$objects = [$objects];
-		}
 		
 		return $this->getConnector()
 			->upsert()
@@ -168,12 +179,10 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertObjectsByValues($objects, array $valueFields)
+	public function upsertObjectsForValues($objects, array $valueFields)
 	{
 		if (!is_array($objects))
-		{
 			$objects = [$objects];
-		}
 		
 		return $this->getConnector()
 			->upsert()

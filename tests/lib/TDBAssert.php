@@ -37,6 +37,11 @@ trait TDBAssert
 		
 		self::assertSame($expected, $select->queryCount());
 	}
+	
+	public static function assertLastRowExists($table)
+	{
+		self::assertRowExists($table, self::$LAST_ROW);
+	}
 
 
 	public static function row(...$values): array

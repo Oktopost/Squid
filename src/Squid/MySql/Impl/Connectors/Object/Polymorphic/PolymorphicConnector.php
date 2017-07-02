@@ -11,6 +11,7 @@ use Squid\MySql\Connectors\Object\Polymorphic\IPolymorphicConnector;
 
 use Squid\MySql\Connectors\Generic\TCountHelper;
 use Squid\MySql\Connectors\Generic\TDeleteHelper;
+use Squid\OrderBy;
 
 
 class PolymorphicConnector implements IPolymorphicConnector
@@ -175,12 +176,13 @@ class PolymorphicConnector implements IPolymorphicConnector
 		
 		return array_merge(...$foundObjects);
 	}
-
+	
 	/**
 	 * @param array|null $orderBy
+	 * @param int $order
 	 * @return array|false
 	 */
-	public function selectObjects(?array $orderBy = null)
+	public function selectObjects(?array $orderBy = null, int $order = OrderBy::DESC)
 	{
 		if ($orderBy)
 		{
@@ -288,7 +290,7 @@ class PolymorphicConnector implements IPolymorphicConnector
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertObjectsByValues($objects, array $valueFields)
+	public function upsertObjectsForValues($objects, array $valueFields)
 	{
 		return $this->executeDmlOperationOnObjects($objects,
 			function($connector, $items) 

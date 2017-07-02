@@ -2,6 +2,9 @@
 namespace Squid\MySql\Connectors\Object\CRUD\Generic;
 
 
+use Squid\OrderBy;
+
+
 interface IObjectSelect
 {
 	/**
@@ -36,10 +39,11 @@ interface IObjectSelect
 	 * @return array|false
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null);
-	
+
 	/**
 	 * @param array|null $orderBy
+	 * @param int $order
 	 * @return array|false
 	 */
-	public function selectObjects(?array $orderBy = null);
+	public function selectObjects(?array $orderBy = null, int $order = OrderBy::DESC);
 }

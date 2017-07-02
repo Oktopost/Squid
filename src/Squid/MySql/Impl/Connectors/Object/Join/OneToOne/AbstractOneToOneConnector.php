@@ -6,6 +6,7 @@ use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneConfig;
 use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
+use Squid\OrderBy;
 
 
 abstract class AbstractOneToOneConnector implements IOneToOneConnector
@@ -152,11 +153,12 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 
 	/**
 	 * @param array|null $orderBy
+	 * @param int $order
 	 * @return array|false
 	 */
-	public function selectObjects(?array $orderBy = null)
+	public function selectObjects(?array $orderBy = null, int $order = OrderBy::DESC)
 	{
-		return $this->populate($this->getPrimary()->selectObjects($orderBy));
+		return $this->populate($this->getPrimary()->selectObjects($orderBy, $order));
 	}
 
 	/**
@@ -186,9 +188,9 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 * @param string[] $valueFields
 	 * @return false|int
 	 */
-	public function upsertObjectsByValues($objects, array $valueFields)
+	public function upsertObjectsForValues($objects, array $valueFields)
 	{
-		$count = $this->getPrimary()->upsertObjectsByValues($objects, $valueFields);
+		$count = $this->getPrimary()->upsertObjectsForValues($objects, $valueFields);
 		return $this->upsertChildren($objects, $count);
 	}
 }

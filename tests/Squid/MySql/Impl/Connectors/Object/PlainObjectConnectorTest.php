@@ -3,202 +3,372 @@ namespace Squid\MySql\Impl\Connectors\Object;
 
 
 use lib\DataSet;
-use lib\TestTable;
+use lib\TDBAssert;
 use Objection\LiteObject;
 use Objection\LiteSetup;
 use PHPUnit\Framework\TestCase;
-use Squid\MySql\Exceptions\MySqlException;
+use Squid\OrderBy;
 
 
 class PlainObjectConnectorTest extends TestCase
 {
-	/** @var PlainObjectConnector */
-	private $connector;
+	use TDBAssert;
 	
 	
-	private function newObject(): PlainObjectHelper
+	private $table;
+	
+	
+	private function newObject($a, $b): PlainObjectHelper
 	{
 		$result = new PlainObjectHelper();
 		
-		$result->a = mt_rand();
-		$result->b = uniqid();
+		$result->a = $a;
+		$result->b = $b;
+		
+		self::$LAST_ROW = $result->toArray();
 		
 		return $result;
 	}
 	
-	private function newTable(): TestTable
+	private function subject(array $data = []): PlainObjectConnector
 	{
-		$t = DataSet::table(['a', 'b']);
+		$this->table = DataSet::table(['a', 'b'], $data);
 		
 		DataSet::connector()
-			->direct("ALTER TABLE {$t} ADD PRIMARY KEY (a), CHANGE `a` `a` INT(11) NOT NULL AUTO_INCREMENT")
+			->direct("ALTER TABLE {$this->table} ADD PRIMARY KEY (a), CHANGE `a` `a` INT(11) NOT NULL AUTO_INCREMENT")
 			->executeDml();
 		
-		return $t;
-	}
-	
-	
-	public function setUp()
-	{
-		$this->connector = new PlainObjectConnector();
-		$this->connector->setConnector(DataSet::connector());
-		$this->connector->setObjectMap(PlainObjectHelper::class);
-		$this->connector->setTable($this->newTable());
-	}
-	
-	
-	public function test_insertObjects_ReturnInt()
-	{
-		self::assertEquals(1, $this->connector->insertObjects($this->newObject()));
-	}
-	
-	public function test_insertObjects_Multiple_ReturnInt()
-	{
-		self::assertEquals(2, $this->connector->insertObjects([$this->newObject(), $this->newObject()]));
-	}
-	
-	public function test_insertObjects_Ignore_ReturnInt()
-	{
-		$a = $this->newObject();
-		self::assertEquals(1, $this->connector->insertObjects([$a, $a], true));
-	}
-	
-	public function test_insert_Ignore_ReturnZero()
-	{
-		$a = $this->newObject();
-		$this->connector->insertObjects($a);
+		$connector = new PlainObjectConnector();
+		$connector->setConnector(DataSet::connector());
+		$connector->setObjectMap(PlainObjectHelper::class);
+		$connector->setTable($this->table);
 		
-		self::assertEquals(0, $this->connector->insertObjects($a, true));
-	}
-	
-	public function test_insert_Duplicate_ThrowException()
-	{
-		self::expectException(MySqlException::class);
-		
-		$a = $this->newObject();
-		$this->connector->insertObjects([$a, $a], false);
+		return $connector;
 	}
 	
 	
-	public function test_selectObjectByFields_ReturnObject()
+	public function test_insertObjects_EmptyTable_ObjectInserted()
 	{
-		$a = $this->newObject();
-		$this->connector->insertObjects($a);
-		
-		self::assertInstanceOf(PlainObjectHelper::class, $this->connector->selectObjectByFields(['a' => $a->a]));
+		$this->subject()->insertObjects($this->newObject(1, 2));
+		self::assertRowExists($this->table, self::$LAST_ROW);
 	}
 	
-	public function test_selectObjectByFields_ReturnNull()
+	public function test_insertObjects_OtherObjectsExist_ObjectsNotModifed()
 	{
-		self::assertNull($this->connector->selectObjectByFields(['a' => -1]));
+		$this->subject($this->row(1, 2))->insertObjects($this->newObject(3, 4));
+		self::assertRowExists($this->table, $this->row(1, 2));
+		self::assertLastRowExists($this->table);
+	}
+
+	/**
+	 * @expectedException \Squid\MySql\Exceptions\MySqlException
+	 */
+	public function test_insertObjects_ObjectWithSameKeyExists_ErrorThrown()
+	{
+		$this->subject($this->row(1, 2))->insertObjects($this->newObject(1, 4));
 	}
 	
-	public function test_selectObjectByField_ReturnObject()
+	public function test_insertObjects_ObjectWithSameKeyExistsWithIgnoreFlagOn_NoErrorAndRowNotModified()
 	{
-		$a = $this->newObject();
-		$this->connector->insertObjects($a);
-		
-		self::assertInstanceOf(PlainObjectHelper::class, $this->connector->selectObjectByField('a', $a->a));
+		$this->subject($this->row(1, 2))->insertObjects($this->newObject(1, 4), true);
+		self::assertRowExists($this->table, $this->row(1, 2));
 	}
 	
-	public function test_selectObjectByField_ReturnNull()
+	public function test_insertObjects_OneObjectInserted_CorrectCountReturned()
 	{
-		self::assertNull($this->connector->selectObjectByField('a', -1));
+		$res = $this->subject()->insertObjects($this->newObject(1, 2));
+		self::assertEquals(1, $res);
 	}
 	
-	public function test_selectFirstObjectByFields_ReturnObject()
+	public function test_insertObjects_NumberOfObjectysInserted_CorrectCountReturned()
 	{
-		$a = $this->newObject();
-		$this->connector->insertObjects([$a, $this->newObject()]);
-		
-		self::assertInstanceOf(PlainObjectHelper::class, $this->connector->selectFirstObjectByFields(['a' => $a->a]));
+		$res = $this->subject()->insertObjects([$this->newObject(1, 2), $this->newObject(3, 4)]);
+		self::assertEquals(2, $res);
 	}
 	
-	public function test_selectFirstObjectByFields_ReturnNull()
+	public function test_insertObjects_InsertingMultipleObjectsWithIgnoreFlagOn_CountIsCorrect()
 	{
-		self::assertNull($this->connector->selectFirstObjectByFields(['a' => -1]));
+		$res = $this->subject($this->row(1, 2))
+			->insertObjects([$this->newObject(1, 4), $this->newObject(2, 3), $this->newObject(5, 6)], true);
+		
+		self::assertEquals(2, $res);
 	}
 	
-	public function test_selectFirstObjectByField_ReturnObject()
+	public function test_insertObjects_InsertingMultipleObjectsWithIgnoreFlagOn_OnlyNonDuplicatesInserted()
 	{
-		$a = $this->newObject();
-		$this->connector->insertObjects($a);
+		$this->subject($this->row(1, 2))
+			->insertObjects([$this->newObject(1, 4), $this->newObject(2, 3), $this->newObject(5, 6)], true);
 		
-		self::assertInstanceOf(PlainObjectHelper::class, $this->connector->selectFirstObjectByField('a', $a->a));
+		self::assertRowCount(3, $this->table);
+		self::assertRowExists($this->table, $this->row(1, 2));
+		self::assertRowExists($this->table, $this->row(2, 3));
+		self::assertRowExists($this->table, $this->row(5, 6));
 	}
 	
-	public function test_selectFirstObjectByField_ReturnNull()
+	
+	public function test_selectObjectByFields_ObjectNotFound_ReturnNull()
 	{
-		self::assertNull($this->connector->selectFirstObjectByField('a', -1));
+		$res = $this->subject($this->row(1, 2))->selectObjectByFields(['a' => 3]);
+		self::assertNull($res);
 	}
 	
-	public function test_selectObjectsByFields_ReturnObjects()
+	public function test_selectObjectByFields_ObjectFound_ObjectReturned()
 	{
-		$a = $this->newObject();
-		$b = $this->newObject();
+		$res = $this->subject($this->row(1, 2))->selectObjectByFields(['a' => 1]);
 		
-		$a->b = 'string';
-		$b->b = 'string';
-		
-		$this->connector->insertObjects([$a, $b]);
-		
-		$result = $this->connector->selectObjectsByFields(['b' => 'string']);
-		
-		self::assertCount(2, $result);
-		self::assertInstanceOf(PlainObjectHelper::class, $result[0]);
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	public function test_selectObjectsByFields_ReturnNull()
+	public function test_selectObjectByFields_NumberOfMatchingObjects_OnlyFirstObjectReturned()
 	{
-		self::assertNull($this->connector->selectObjectsByFields(['a' => -1]));	
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByFields(['b' => 2]);
+		
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals($this->row(1, 2), $res->toArray());
 	}
 	
-	public function test_selectObjects_ReturnObjects()
+	
+	public function test_selectObjectByField_ObjectNotFound_ReturnNull()
 	{
-		$this->connector->insertObjects([$this->newObject(), $this->newObject()]);
-		
-		$result = $this->connector->selectObjects();
-		
-		self::assertCount(2, $result);
-		self::assertInstanceOf(PlainObjectHelper::class, $result[0]);
+		$res = $this->subject($this->row(1, 2))->selectObjectByField('a', 3);
+		self::assertNull($res);
 	}
 	
-	public function test_updateObject_ReturnInt()
+	public function test_selectObjectByField_ObjectFound_ObjectReturned()
 	{
-		$a = $this->newObject();
-		$this->connector->insertObjects($a);
-		$a->b = 'oi';
+		$res = $this->subject($this->row(1, 2))->selectObjectByField('a', 1);
 		
-		self::assertEquals(1, $this->connector->updateObject($a, ['a']));
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	public function test_updateObject_ReturnZero()
+	public function test_selectObjectByField_NumberOfMatchingObjects_OnlyFirstObjectReturned()
 	{
-		self::assertEquals(0, $this->connector->updateObject($this->newObject(), ['a']));
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByField('b', 2);
+		
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals($this->row(1, 2), $res->toArray());
 	}
 	
-	public function test_upsertObjectByKeys_ReturnInt()
+	
+	public function test_selectFirstObjectByFields_ObjectNotFound_ReturnNull()
 	{
-		$a = $this->newObject();
-		$b = $this->newObject();
-		$c = $this->newObject();
-		
-		$c->a = $b->a;
-		
-		self::assertEquals(4, $this->connector->upsertObjectsByKeys([$a,$b,$c], ['a']));
+		$res = $this->subject($this->row(1, 2))->selectFirstObjectByFields(['a' => 3]);
+		self::assertNull($res);
 	}
 	
-	public function test_upsertObjectsByValues_ReturnInt()
+	public function test_selectFirstObjectByFields_ObjectFound_ObjectReturned()
 	{
-		$a = $this->newObject();
-		$b = $this->newObject();
-		$c = $this->newObject();
+		$res = $this->subject($this->row(1, 2))->selectFirstObjectByFields(['a' => 1]);
 		
-		$c->a = $b->a;
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals(self::$LAST_ROW, $res->toArray());
+	}
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_selectFirstObjectByFields_NumberOfMatchingObjects_ExceptionThrown()
+	{
+		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectFirstObjectByFields(['b' => 2]);
+	}
+	
+	
+	public function test_selectFirstObjectByField_ObjectNotFound_ReturnNull()
+	{
+		$res = $this->subject($this->row(1, 2))->selectFirstObjectByField('a', 3);
+		self::assertNull($res);
+	}
+	
+	public function test_selectFirstObjectByField_ObjectFound_ObjectReturned()
+	{
+		$res = $this->subject($this->row(1, 2))->selectFirstObjectByField('a', 1);
 		
-		self::assertEquals(4, $this->connector->upsertObjectsByValues([$a,$b,$c], ['b']));
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals(self::$LAST_ROW, $res->toArray());
+	}
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_selectFirstObjectByField_NumberOfMatchingObjects_OnlyFirstObjectReturned()
+	{
+		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectFirstObjectByField('b', 2);
+	}
+	
+	
+	public function test_selectFirstObjectsByField_ObjectNotFound_ReturnEmptyArray()
+	{
+		$res = $this->subject($this->row(1, 2))->selectObjectsByFields(['a' => 3]);
+		self::assertEquals([], $res);
+	}
+	
+	public function test_selectFirstObjectsByField_ObjectsFound_ObjectsReturned()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(3, 2)])->selectObjectsByFields(['b' => 2]);
+		self::assertCount(2, $res);
+		self::assertEquals([$this->row(1, 2), $this->row(3, 2)], PlainObjectHelper::allToArray($res));
+	}
+	
+	public function test_selectFirstObjectsByField_ObjectsFoundWithLimit_OnlyFirstNElementsReturned()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(3, 2)])->selectObjectsByFields(['b' => 2], 1);
+		
+		self::assertCount(1, $res);
+		self::assertEquals([$this->row(1, 2)], PlainObjectHelper::allToArray($res));
+	}
+	
+	
+	public function test_selectObjects_EmptyTable_ReturnEmptyArray()
+	{
+		$res = $this->subject()->selectObjects();
+		self::assertEquals([], $res);
+	}
+	
+	public function test_selectObjects_TableHasValue_AllValuesReturned()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(3, 4)])->selectObjects();
+		
+		self::assertCount(2, $res);
+		self::assertEquals([$this->row(1, 2), $this->row(3, 4)], PlainObjectHelper::allToArray($res));
+	}
+	
+	public function test_selectObjects_OrderByUsed_DataReturnedOrderByRequestedField()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(3, 4)])->selectObjects(['b'], OrderBy::DESC);
+		
+		self::assertCount(2, $res);
+		self::assertEquals([$this->row(3, 4), $this->row(1, 2)], PlainObjectHelper::allToArray($res));
+	}
+	
+	
+	public function test_updateObject_EmptyTable_NoObjectInserted()
+	{
+		$this->subject()->updateObject($this->newObject(1, 2), ['a']);
+		self::assertRowCount(0, $this->table);
+	}
+	
+	public function test_updateObject_EmptyTable_Return0()
+	{
+		$res = $this->subject()->updateObject($this->newObject(1, 2), ['a']);
+		self::assertEquals(0, $res);
+	}
+	
+	public function test_updateObject_DifferentObjectsExists_OtherObjectsNotAffected()
+	{
+		$this->subject($this->row(1, 2))->updateObject($this->newObject(2, 3), ['a']);
+		
+		self::assertRowCount(1, $this->table);
+		self::assertRowExists($this->table, $this->row(1, 2));
+	}
+	
+	public function test_updateObject_MatchingObjectExists_ObjectsUpdated()
+	{
+		$this->subject([$this->row(1, 2), $this->row(2, 4)])->updateObject($this->newObject(1, 3), ['a']);
+		
+		self::assertRowCount(2, $this->table);
+		self::assertRowExists($this->table, $this->row(1, 3));
+		self::assertRowExists($this->table, $this->row(2, 4));
+	}
+	
+	public function test_updateObject_MatchingObjectExists_CorrectCountReturned()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 4)])->updateObject($this->newObject(1, 3), ['a']);
+		self::assertEquals(1, $res);
+	}
+	
+	
+	public function test_upsertObjectsByKeys_EmptyTable_ObjectInserted()
+	{
+		$this->subject()->upsertObjectsByKeys($this->newObject(1, 2), ['a']);
+		self::assertRowCount(1, $this->table);
+		self::assertLastRowExists($this->table);
+	}
+	
+	public function test_upsertObjectsByKeys_EmptyTable_ReturnCorrectCount()
+	{
+		$res = $this->subject()->upsertObjectsByKeys($this->newObject(1, 2), ['a']);
+		self::assertEquals(1, $res);
+	}
+	
+	public function test_upsertObjectsByKeys_DifferentObjectsExists_OtherObjectsNotAffected()
+	{
+		$this->subject($this->row(1, 2))->upsertObjectsByKeys($this->newObject(2, 3), ['a']);
+		
+		self::assertRowExists($this->table, $this->row(1, 2));
+	}
+	
+	public function test_upsertObjectsByKeys_DifferentObjectsExists_NewObjectInserted()
+	{
+		$this->subject($this->row(1, 2))->upsertObjectsByKeys($this->newObject(2, 3), ['a']);
+		
+		self::assertRowCount(2, $this->table);
+		self::assertRowExists($this->table, $this->row(2, 3));
+	}
+	
+	public function test_upsertObjectsByKeys_MatchingObjectExists_ObjectsUpdated()
+	{
+		$this->subject([$this->row(1, 2), $this->row(2, 4)])->upsertObjectsByKeys($this->newObject(1, 3), ['a']);
+		
+		self::assertRowCount(2, $this->table);
+		self::assertRowExists($this->table, $this->row(1, 3));
+		self::assertRowExists($this->table, $this->row(2, 4));
+	}
+	
+	public function test_upsertObjectsByKeys_MatchingObjectExists_CorrectCountReturned()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 4)])->upsertObjectsByKeys($this->newObject(1, 3), ['a']);
+		
+		self::assertEquals(2, $res);
+	}
+	
+	
+	public function test_upsertObjectsForValues_EmptyTable_ObjectInserted()
+	{
+		$this->subject()->upsertObjectsForValues($this->newObject(1, 2), ['b']);
+		self::assertRowCount(1, $this->table);
+		self::assertLastRowExists($this->table);
+	}
+	
+	public function test_upsertObjectsForValues_EmptyTable_ReturnCorrectCount()
+	{
+		$res = $this->subject()->upsertObjectsForValues($this->newObject(1, 2), ['b']);
+		self::assertEquals(1, $res);
+	}
+	
+	public function test_upsertObjectsForValues_DifferentObjectsExists_OtherObjectsNotAffected()
+	{
+		$this->subject($this->row(1, 2))->upsertObjectsForValues($this->newObject(2, 3), ['b']);
+		
+		self::assertRowExists($this->table, $this->row(1, 2));
+	}
+	
+	public function test_upsertObjectsForValues_DifferentObjectsExists_NewObjectInserted()
+	{
+		$this->subject($this->row(1, 2))->upsertObjectsForValues($this->newObject(2, 3), ['b']);
+		
+		self::assertRowCount(2, $this->table);
+		self::assertRowExists($this->table, $this->row(2, 3));
+	}
+	
+	public function test_upsertObjectsForValues_MatchingObjectExists_ObjectsUpdated()
+	{
+		$this->subject([$this->row(1, 2), $this->row(2, 4)])->upsertObjectsForValues($this->newObject(1, 3), ['b']);
+		
+		self::assertRowCount(2, $this->table);
+		self::assertRowExists($this->table, $this->row(1, 3));
+		self::assertRowExists($this->table, $this->row(2, 4));
+	}
+	
+	public function test_upsertObjectsForValues_MatchingObjectExists_CorrectCountReturned()
+	{
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 4)])->upsertObjectsForValues($this->newObject(1, 3), ['b']);
+		
+		self::assertEquals(2, $res);
 	}
 }
+
 
 /**
  * @property string $a
@@ -208,6 +378,9 @@ class PlainObjectHelper extends LiteObject
 {
 	protected function _setup()
 	{
-		return ['a' => LiteSetup::createInt(), 'b' => LiteSetup::createString()];
+		return [
+			'a' => LiteSetup::createInt(),
+			'b' => LiteSetup::createInt()
+		];
 	}
 }

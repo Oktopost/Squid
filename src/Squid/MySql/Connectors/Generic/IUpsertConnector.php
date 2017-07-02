@@ -5,31 +5,31 @@ namespace Squid\MySql\Connectors\Generic;
 interface IUpsertConnector
 {
 	/**
-	 * @param array $row
 	 * @param string[]|string $keys
+	 * @param array $row
 	 * @return int|false
 	 */
-	public function upsertByKeys(array $row, $keys);
+	public function upsertByKeys($keys, array $row);
 
 	/**
-	 * @param array $rows
 	 * @param string[]|string $keys
+	 * @param array $rows
 	 * @return int|false
 	 */
-	public function upsertAllByKeys(array $rows, $keys);
+	public function upsertAllByKeys($keys, array $rows);
 	
 	
 	/**
-	 * @param array $row
 	 * @param string[]|string $valueFields
+	 * @param array $row
 	 * @return int|false
 	 */
-	public function upsertByValues(array $row, $valueFields);
+	public function upsertByValues($valueFields, array $row);
 
 	/**
-	 * @param array $rows
 	 * @param string[]|string $valueFields
+	 * @param array $rows
 	 * @return int|false
 	 */
-	public function upsertAllByValues(array $rows, $valueFields);
+	public function upsertAllByValues($valueFields, array $rows);
 }

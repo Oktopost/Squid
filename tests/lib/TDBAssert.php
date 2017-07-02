@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
  */
 trait TDBAssert
 {
+	public static $LAST_ROW = [];
+	
+	
 	public static function assertRowExists($table, $fields, $value = null)
 	{
 		if (is_string($fields))
@@ -33,5 +36,20 @@ trait TDBAssert
 		}
 		
 		self::assertSame($expected, $select->queryCount());
+	}
+
+
+	public static function row(...$values): array
+	{
+		static $fields = 'abcdefghijklmnopqrstvuwxyz';
+		
+		self::$LAST_ROW = [];
+		
+		for ($i = 0; $i < count($values); $i++)
+		{
+			self::$LAST_ROW[$fields[$i]] = $values[$i];
+		}
+		
+		return self::$LAST_ROW;
 	}
 }

@@ -8,22 +8,22 @@ namespace Squid\MySql\Connectors\Generic;
 trait TUpsertHelper 
 {
 	/**
-	 * @param array $row
 	 * @param string[]|string $keys
+	 * @param array $row
 	 * @return int|false
 	 */
-	public function upsertByKeys(array $row, $keys)
+	public function upsertByKeys($keys, array $row)
 	{
-		return $this->upsertAllByKeys([$row], $keys);
+		return $this->upsertAllByKeys($keys, [$row]);
 	}
 
 	/**
-	 * @param array $row
 	 * @param string[]|string $valueFields
+	 * @param array $row
 	 * @return int|false
 	 */
-	public function upsertByValues(array $row, $valueFields)
+	public function upsertByValues($valueFields, array $row)
 	{
-		return $this->upsertAllByValues([$row], $valueFields);
+		return $this->upsertAllByValues($valueFields, [$row]);
 	}
 }

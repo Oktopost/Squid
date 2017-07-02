@@ -33,7 +33,7 @@ trait TInsertConnector
 	 */
 	public function insertRow(array $row, bool $ignore = false)
 	{
-		// TODO: 
+		return $this->_insertConnector->insertRow($row, $ignore);
 	}
 
 	/**
@@ -43,7 +43,7 @@ trait TInsertConnector
 	 */
 	public function insertAll(array $rows, bool $ignore = false)
 	{
-		// TODO: 
+		return $this->_insertConnector->insertAll($rows, $ignore);
 	}
 
 	/**
@@ -54,6 +54,6 @@ trait TInsertConnector
 	 */
 	public function insertAllIntoFields(array $fields, array $rows, bool $ignore = false)
 	{
-		// TODO: 
+		return $this->_insertConnector->insertAllIntoFields($fields, $rows, $ignore);
 	}
 }

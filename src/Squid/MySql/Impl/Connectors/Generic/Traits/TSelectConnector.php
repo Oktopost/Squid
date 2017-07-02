@@ -33,7 +33,7 @@ trait TSelectConnector
 	 */
 	public function oneByField(string $field, $value)
 	{
-		// TODO: 
+		return $this->_selectConnector->oneByField($field, $value);
 	}
 
 	/**
@@ -43,7 +43,7 @@ trait TSelectConnector
 	 */
 	public function firstByField(string $field, $value)
 	{
-		// TODO: 
+		return $this->_selectConnector->firstByField($field, $value);
 	}
 
 	/**
@@ -53,7 +53,7 @@ trait TSelectConnector
 	 */
 	public function allByField(string $field, $value)
 	{
-		// TODO: 
+		return $this->_selectConnector->allByField($field, $value);
 	}
 
 	/**
@@ -64,7 +64,7 @@ trait TSelectConnector
 	 */
 	public function nByField(string $field, $value, int $limit)
 	{
-		// TODO: 
+		return $this->_selectConnector->nByField($field, $value, $limit);
 	}
 	
 	/**
@@ -73,7 +73,7 @@ trait TSelectConnector
 	 */
 	public function oneByFields(array $fields)
 	{
-		// TODO: 
+		return $this->_selectConnector->oneByFields($fields);
 	}
 
 	/**
@@ -82,7 +82,7 @@ trait TSelectConnector
 	 */
 	public function firstByFields(array $fields)
 	{
-		// TODO: 
+		return $this->_selectConnector->firstByFields($fields);
 	}
 
 	/**
@@ -91,7 +91,7 @@ trait TSelectConnector
 	 */
 	public function allByFields(array $fields)
 	{
-		// TODO: 
+		return $this->_selectConnector->allByFields($fields);
 	}
 
 	/**
@@ -101,7 +101,7 @@ trait TSelectConnector
 	 */
 	public function nByFields(array $fields, int $limit)
 	{
-		// TODO: 
+		return $this->_selectConnector->nByFields($fields, $limit);
 	}
 	
 	/**
@@ -109,6 +109,6 @@ trait TSelectConnector
 	 */
 	public function all()
 	{
-		// TODO: 
+		return $this->_selectConnector->all();
 	}
 }

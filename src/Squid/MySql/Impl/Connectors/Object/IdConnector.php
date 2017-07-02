@@ -24,7 +24,7 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 	
 	public function deleteById($id)
 	{
-		return $this->getGenericObjectConnector()->deleteByField($this->getIdField(), $id);
+		return $this->getGenericObjectConnector()->deleteByFields([$this->getIdField() => $id]);
 	}
 
 	public function loadById($id)

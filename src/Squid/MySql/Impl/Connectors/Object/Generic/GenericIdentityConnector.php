@@ -6,14 +6,14 @@ use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 
 use Squid\MySql\Impl\Connectors\Object\Identity\TPrimaryKeys;
-use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityComposition;
+use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
 
 
 class GenericIdentityConnector extends GenericObjectConnector implements 
 	IGenericIdentityConnector
 {
-	use TIdentityComposition;
 	use TPrimaryKeys;
+	use TIdentityDecorator;
 	
 	
 	protected function getGenericObjectConnector(): IGenericObjectConnector

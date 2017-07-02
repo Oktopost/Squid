@@ -6,13 +6,13 @@ use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Polymorphic\IPolymorphicIdConnector;
 
 use Squid\MySql\Impl\Connectors\Object\Primary\TIdKey;
-use Squid\MySql\Impl\Connectors\Object\Primary\TIdComposition;
+use Squid\MySql\Impl\Connectors\Object\Primary\TIdDecorator;
 
 
 class PolymorphicIdConnector extends PolymorphicConnector implements IPolymorphicIdConnector
 {
-	use TIdComposition;
 	use TIdKey;
+	use TIdDecorator;
 	
 	
 	protected function getGenericObjectConnector(): IGenericObjectConnector

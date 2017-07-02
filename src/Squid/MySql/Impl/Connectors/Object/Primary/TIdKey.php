@@ -9,6 +9,7 @@ trait TIdKey
 {
 	/** @var array */
 	private $_idKey;
+	
 	private $_idField;
 	private $_idProperty;
 

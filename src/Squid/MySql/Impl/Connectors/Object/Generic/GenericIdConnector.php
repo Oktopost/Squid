@@ -6,12 +6,12 @@ use Squid\MySql\Connectors\Object\Generic\IGenericIdConnector;
 
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Impl\Connectors\Object\Primary\TIdKey;
-use Squid\MySql\Impl\Connectors\Object\Primary\TIdComposition;
+use Squid\MySql\Impl\Connectors\Object\Primary\TIdDecorator;
 
 
 class GenericIdConnector extends GenericObjectConnector implements IGenericIdConnector
 {
-	use TIdComposition;
+	use TIdDecorator;
 	use TIdKey;
 	
 	

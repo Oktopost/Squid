@@ -33,7 +33,7 @@ trait TUpsertConnector
 	 */
 	public function upsertByKeys($keys, array $row)
 	{
-		return $this->_upsertConnector->upsertByKeys($keys, $row);
+		return $this->getUpsertConnector()->upsertByKeys($keys, $row);
 	}
 	
 	/**
@@ -43,7 +43,7 @@ trait TUpsertConnector
 	 */
 	public function upsertAllByKeys($keys, array $rows)
 	{
-		return $this->_upsertConnector->upsertAllByKeys($keys, $rows);
+		return $this->getUpsertConnector()->upsertAllByKeys($keys, $rows);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ trait TUpsertConnector
 	 */
 	public function upsertByValues($valueFields, array $row)
 	{
-		return $this->_upsertConnector->upsertByValues($valueFields, $row);
+		return $this->getUpsertConnector()->upsertByValues($valueFields, $row);
 	}
 
 	/**
@@ -63,6 +63,6 @@ trait TUpsertConnector
 	 */
 	public function upsertAllByValues($valueFields, array $rows)
 	{
-		return $this->_upsertConnector->upsertAllByValues($valueFields, $rows);
+		return $this->getUpsertConnector()->upsertAllByValues($valueFields, $rows);
 	}
 }

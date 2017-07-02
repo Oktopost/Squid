@@ -50,7 +50,19 @@ class TUpdateConnectorTest extends TestCase
 
 class TUpdateConnectorTestHelper extends AbstractSingleTableConnector
 {
-	use TUpdateConnector;
+	use TUpdateConnector { TUpdateConnector::getUpdateConnector as originGetUpdateConnector; }
+	
+	
+	private $object;
+
+
+	private function getUpdateConnector()
+	{
+		if (!$this->object)
+			return $this->originGetUpdateConnector();
+		
+		return $this->object;
+	}
 	
 	
 	public function __construct()
@@ -63,7 +75,7 @@ class TUpdateConnectorTestHelper extends AbstractSingleTableConnector
 
 	public function override($mock)
 	{
-		$this->_updateConnector = $mock;
+		$this->object = $mock;
 	}
 	
 	public function get()

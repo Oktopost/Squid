@@ -56,7 +56,19 @@ class TUpsertConnectorTest extends TestCase
 
 class TUpsertConnectorTestHelper extends AbstractSingleTableConnector
 {
-	use TUpsertConnector;
+	use TUpsertConnector { TUpsertConnector::getUpsertConnector as originGetUpsertConnector; }
+	
+	
+	private $object;
+
+
+	private function getUpsertConnector()
+	{
+		if (!$this->object)
+			return $this->originGetUpsertConnector();
+		
+		return $this->object;
+	}
 	
 	
 	public function __construct()
@@ -69,7 +81,7 @@ class TUpsertConnectorTestHelper extends AbstractSingleTableConnector
 
 	public function override($mock)
 	{
-		$this->_upsertConnector = $mock;
+		$this->object = $mock;
 	}
 	
 	public function get()

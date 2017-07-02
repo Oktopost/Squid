@@ -52,7 +52,19 @@ class TCountConnectorTest extends TestCase
 
 class TCountConnectorTestHelper extends AbstractSingleTableConnector
 {
-	use TCountConnector;
+	use TCountConnector { TCountConnector::getCountConnector as originGetCountConnector; }
+	
+	
+	private $object;
+
+
+	private function getCountConnector()
+	{
+		if (!$this->object)
+			return $this->originGetCountConnector();
+		
+		return $this->object;
+	}
 	
 	
 	public function __construct()
@@ -65,7 +77,7 @@ class TCountConnectorTestHelper extends AbstractSingleTableConnector
 
 	public function override($mock)
 	{
-		$this->_countConnector = $mock;
+		$this->object = $mock;
 	}
 	
 	public function get()

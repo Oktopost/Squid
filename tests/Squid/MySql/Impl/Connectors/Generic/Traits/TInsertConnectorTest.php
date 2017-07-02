@@ -54,7 +54,19 @@ class TInsertConnectorTest extends TestCase
 
 class TInsertConnectorTestHelper extends AbstractSingleTableConnector
 {
-	use TInsertConnector;
+	use TInsertConnector { TInsertConnector::getInsertConnector as originGetInsertConnector; }
+	
+	
+	private $object;
+
+
+	private function getInsertConnector()
+	{
+		if (!$this->object)
+			return $this->originGetInsertConnector();
+		
+		return $this->object;
+	}
 	
 	
 	public function __construct()
@@ -67,7 +79,7 @@ class TInsertConnectorTestHelper extends AbstractSingleTableConnector
 
 	public function override($mock)
 	{
-		$this->_insertConnector = $mock;
+		$this->object = $mock;
 	}
 	
 	public function get()

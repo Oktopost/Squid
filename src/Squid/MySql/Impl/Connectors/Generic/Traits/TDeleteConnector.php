@@ -34,7 +34,7 @@ trait TDeleteConnector
 	 */
 	public function deleteByField(string $field, $value, ?int $limit = null)
 	{
-		return $this->_deleteConnector->deleteByField($field, $value, $limit);
+		return $this->getDeleteConnector()->deleteByField($field, $value, $limit);
 	}
 
 	/**
@@ -44,6 +44,6 @@ trait TDeleteConnector
 	 */
 	public function deleteByFields(array $fields, ?int $limit = null)
 	{
-		return $this->_deleteConnector->deleteByFields($fields, $limit); 
+		return $this->getDeleteConnector()->deleteByFields($fields, $limit); 
 	}
 }

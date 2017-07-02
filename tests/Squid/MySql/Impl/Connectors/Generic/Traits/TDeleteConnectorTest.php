@@ -52,7 +52,19 @@ class TDeleteConnectorTest extends TestCase
 
 class TDeleteConnectorTestHelper extends AbstractSingleTableConnector
 {
-	use TDeleteConnector;
+	use TDeleteConnector { TDeleteConnector::getDeleteConnector as originGetDeleteConnector; }
+	
+	
+	private $object;
+
+
+	private function getDeleteConnector()
+	{
+		if (!$this->object)
+			return $this->originGetDeleteConnector();
+		
+		return $this->object;
+	}
 	
 	
 	public function __construct()
@@ -65,7 +77,7 @@ class TDeleteConnectorTestHelper extends AbstractSingleTableConnector
 
 	public function override($mock)
 	{
-		$this->_deleteConnector = $mock;
+		$this->object = $mock;
 	}
 	
 	public function get()

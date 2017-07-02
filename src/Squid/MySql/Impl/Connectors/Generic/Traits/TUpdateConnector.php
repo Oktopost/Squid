@@ -33,7 +33,7 @@ trait TUpdateConnector
 	 */
 	public function updateByRowFields(array $fields, array $row)
 	{
-		return $this->_updateConnector->updateByRowFields($fields, $row);
+		return $this->getUpdateConnector()->updateByRowFields($fields, $row);
 	}
 	
 	/**
@@ -43,6 +43,6 @@ trait TUpdateConnector
 	 */
 	public function updateByFields(array $where, array $row)
 	{
-		return $this->_updateConnector->updateByFields($where, $row); 
+		return $this->getUpdateConnector()->updateByFields($where, $row); 
 	}
 }

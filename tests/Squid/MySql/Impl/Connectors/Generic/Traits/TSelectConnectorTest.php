@@ -59,7 +59,19 @@ class TSelectConnectorTest extends TestCase
 
 class TSelectConnectorTestHelper extends AbstractSingleTableConnector
 {
-	use TSelectConnector;
+	use TSelectConnector { TSelectConnector::getSelectConnector as originGetSelectConnector; }
+	
+	
+	private $object;
+
+
+	private function getSelectConnector()
+	{
+		if (!$this->object)
+			return $this->originGetSelectConnector();
+		
+		return $this->object;
+	}
 	
 	
 	public function __construct()
@@ -72,7 +84,7 @@ class TSelectConnectorTestHelper extends AbstractSingleTableConnector
 
 	public function override($mock)
 	{
-		$this->_selectConnector = $mock;
+		$this->object = $mock;
 	}
 	
 	public function get()

@@ -2,6 +2,8 @@
 namespace Squid\MySql\Impl\Connectors\Object\Identity;
 
 
+use Squid\Exceptions\SquidException;
+
 trait TPrimaryKeys
 {
 	use TPrimaryKeysConsumer;
@@ -54,6 +56,8 @@ trait TPrimaryKeys
 			$keys = [$keys => $keys];
 		else if (isset($keys[0]))
 			$keys = array_combine($keys, $keys);
+		else if (isset($this->_primaryKeys))
+			throw new SquidException('setPrimaryKeys, can not be called more then once!');
 		
 		$this->_primaryKeys = $keys;
 		return $this;

@@ -42,6 +42,8 @@ class TCountConnectorTest extends TestCase
 	
 	public function test_Sanity()
 	{
+		$this->assertMethodCalled('countByField', 'a', 'b');
+		$this->assertMethodCalled('existsByField', 'a', 'b');
 		$this->assertMethodCalled('countByFields', ['a', 'b']);
 		$this->assertMethodCalled('existsByFields', ['a', 'b']);
 	}

@@ -27,7 +27,7 @@ trait TSelectHelper
 	 */
 	public function firstByField(string $field, $value)
 	{
-		return $this->firstByFields([$field, $value]);
+		return $this->firstByFields([$field => $value]);
 	}
 
 	/**
@@ -37,7 +37,7 @@ trait TSelectHelper
 	 */
 	public function allByField(string $field, $value)
 	{
-		return $this->allByFields([$field, $value]);
+		return $this->allByFields([$field => $value]);
 	}
 
 	/**
@@ -48,7 +48,7 @@ trait TSelectHelper
 	 */
 	public function nByField(string $field, $value, int $limit)
 	{
-		return $this->nByFields([$field, $value], $limit);
+		return $this->nByFields([$field => $value], $limit);
 	}
 	
 	/**
@@ -59,12 +59,17 @@ trait TSelectHelper
 	{
 		$res = $this->nByFields($fields, 2);
 		
-		if ($res && count($res) > 1)
+		if ($res)
 		{
-			throw new SquidException('More then one row selected!');
+			if (count($res) > 1)
+				throw new SquidException('More then one row selected!');
+				
+			return $res[0];
 		}
-		
-		return $res[0];
+		else
+		{
+			return ($res === false ? false : null);
+		}
 	}
 
 	/**
@@ -74,6 +79,18 @@ trait TSelectHelper
 	public function firstByFields(array $fields)
 	{
 		$res = $this->nByFields($fields, 1);
-		return $res ? $res[0] : null;
+		
+		if ($res)
+		{
+			return $res[0];
+		}
+		else if ($res === false)
+		{
+			return false;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

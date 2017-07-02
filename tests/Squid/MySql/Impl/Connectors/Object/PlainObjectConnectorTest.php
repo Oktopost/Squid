@@ -197,7 +197,6 @@ class PlainObjectConnectorTest extends TestCase
 		$c->a = $b->a;
 		
 		self::assertEquals(4, $this->connector->upsertObjectsByValues([$a,$b,$c], ['b']));
-		
 	}
 }
 

@@ -15,12 +15,6 @@ class GenericIdConnector extends GenericObjectConnector implements IGenericIdCon
 	use TIdKey;
 	
 	
-	protected function getPrimaryKeys(): array
-	{
-		return $this->getIdKey();
-	}
-	
-	
 	protected function getGenericObjectConnector(): IGenericObjectConnector
 	{
 		return $this;

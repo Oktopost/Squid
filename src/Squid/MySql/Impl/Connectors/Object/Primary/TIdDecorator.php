@@ -6,13 +6,8 @@ use Squid\MySql\Connectors\Object\IIdConnector;
 use Squid\MySql\Connectors\Object\IIdentityConnector;
 
 use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
-use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
-/**
- * @mixin AbstractORMConnector
- * @mixin IIdConnector
- */
 trait TIdDecorator
 {
 	use TIdKeyConsumer;

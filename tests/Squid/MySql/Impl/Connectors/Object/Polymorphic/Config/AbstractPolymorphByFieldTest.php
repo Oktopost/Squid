@@ -21,7 +21,7 @@ class AbstractPolymorphByFieldTest extends TestCase
 
 
 	/**
-	 * @expectedException \Squid\Exceptions\SquidRuntimeException
+	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
 	 */
 	public function test_getConnector_ConnectorForClassNotDefined_ThrowsException()
 	{
@@ -48,7 +48,7 @@ class AbstractPolymorphByFieldTest extends TestCase
 	
 	
 	/**
-	 * @expectedException \Squid\Exceptions\SquidRuntimeException
+	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
 	 */
 	public function test_getObjectConnector_ConnectorForClassNotDefined_ThrowsException()
 	{
@@ -206,7 +206,7 @@ class AbstractPolymorphByFieldTest extends TestCase
 	
 	
 	/**
-	 * @expectedException \Squid\Exceptions\SquidRuntimeException
+	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
 	 */
 	public function test_sortExpressionsByGroups_InvalidType_ExceptionThrown()
 	{
@@ -246,7 +246,7 @@ class AbstractPolymorphByFieldTest extends TestCase
 	}
 	
 	/**
-	 * @expectedException \Squid\Exceptions\SquidRuntimeException
+	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
 	 */
 	public function test_sortExpressionsByGroups_ArrayRule_FiledValueNotInRuleList_ExceptionThrown()
 	{

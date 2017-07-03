@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Polymorphic;
 
 use Squid\OrderBy;
 use Squid\Exceptions\SquidException;
+use Squid\Exceptions\SquidDevelopmentException;
 
 use Squid\MySql\Connectors\Object\CRUD\Generic\TObjectSelectHelper;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
@@ -28,6 +29,9 @@ class PolymorphicConnector implements IPolymorphicConnector
 	private function executeDmlOperationOnObjects($objects, $callback)
 	{
 		$count = 0;
+		
+		if (!is_array($objects))
+			$objects = [$objects];
 		
 		foreach ($this->config->objectsIterator($objects) as $name => $items)
 		{
@@ -162,7 +166,7 @@ class PolymorphicConnector implements IPolymorphicConnector
 		foreach ($this->config->expressionsIterator($fields) as $name => $expression)
 		{
 			$connector = $this->config->getConnector($name);
-			$objects = $connector->selectObjectByFields($expression);
+			$objects = $connector->selectObjectsByFields($expression, $limit);
 			
 			if ($objects === false)
 			{
@@ -172,9 +176,19 @@ class PolymorphicConnector implements IPolymorphicConnector
 			{
 				$foundObjects[] = $objects;	
 			}
+			
+			if (!is_null($limit))
+			{
+				$limit -= count($objects);
+				
+				if ($limit <= 0)
+				{
+					break;
+				}
+			}
 		}
 		
-		return array_merge(...$foundObjects);
+		return ($foundObjects ? array_merge(...$foundObjects) : []);
 	}
 	
 	/**
@@ -186,7 +200,7 @@ class PolymorphicConnector implements IPolymorphicConnector
 	{
 		if ($orderBy)
 		{
-			throw new SquidException('selectObjects Operation not ' . 
+			throw new SquidDevelopmentException('selectObjects Operation not ' . 
 				'supported by PolyConnector with an orderBy expression');
 		}
 		
@@ -206,7 +220,7 @@ class PolymorphicConnector implements IPolymorphicConnector
 			}
 		}
 		
-		return array_merge(...$foundObjects);
+		return ($foundObjects ? array_merge(...$foundObjects) : []);
 	}
 
 	/**
@@ -297,7 +311,7 @@ class PolymorphicConnector implements IPolymorphicConnector
 				use ($valueFields)
 			{
 				/** @var $connector IGenericObjectConnector */
-				return $connector->upsertObjectsByKeys($items, $valueFields);
+				return $connector->upsertObjectsForValues($items, $valueFields);
 			});
 	}
 }

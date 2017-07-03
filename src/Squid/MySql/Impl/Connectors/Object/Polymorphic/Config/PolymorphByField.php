@@ -4,7 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Polymorphic\Config;
 
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 
-use Squid\Exceptions\SquidRuntimeException;
+use Squid\Exceptions\SquidDevelopmentException;
 
 
 class PolymorphByField extends AbstractPolymorphByField
@@ -47,7 +47,7 @@ class PolymorphByField extends AbstractPolymorphByField
 		}
 		else if (is_null($connector))
 		{
-			throw new SquidRuntimeException('Connector must be set if $className is not an array');
+			throw new SquidDevelopmentException('Connector must be set if $className is not an array');
 		}
 		else
 		{
@@ -72,7 +72,7 @@ class PolymorphByField extends AbstractPolymorphByField
 		}
 		else if (is_null($rule))
 		{
-			throw new SquidRuntimeException('Rule must be set if $fieldName is not an array');
+			throw new SquidDevelopmentException('Rule must be set if $fieldName is not an array');
 		}
 		else
 		{

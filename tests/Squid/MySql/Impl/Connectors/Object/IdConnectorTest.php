@@ -8,20 +8,6 @@ use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 
 class IdConnectorTest extends TestCase
 {
-	public function test_getPrimaryKeys_Sanity()
-	{
-		$conn = new IdConnectorTestHelper();
-		$conn->setIdKey('id');
-		self::assertEquals(['id' => 'id'], $conn->getObjectKeys());
-		
-		$conn->setIdKey(['id' => 'a']);
-		self::assertEquals(['id' => 'a'], $conn->getObjectKeys());
-		
-		$conn->setIdKey('id', 'a');
-		self::assertEquals(['id' => 'a'], $conn->getObjectKeys());
-	}
-	
-	
 	public function test_deleteById()
 	{
 		$generic = $this->getMockBuilder(IGenericObjectConnector::class)->getMock();

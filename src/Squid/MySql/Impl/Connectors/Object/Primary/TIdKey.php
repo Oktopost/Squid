@@ -39,7 +39,11 @@ trait TIdKey
 	 */
 	public function setIdKey($column, ?string $property = null)
 	{
-		if (is_string($column))
+		if ($this->_idField)
+		{
+			throw new SquidException('setIdKey can only be called once');
+		}
+		else if (is_string($column))
 		{
 			$this->_idField = $column;
 			$this->_idProperty = ($property ?: $column);
@@ -47,7 +51,7 @@ trait TIdKey
 		}
 		else if (count($column) > 1)
 		{
-			throw new SquidException('IDConnector can have only one primary key!');
+			throw new SquidException('Only one primary key allowed for this connector');
 		}
 		else	
 		{

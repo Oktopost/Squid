@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Object\Polymorphic;
 
 
+use Squid\OrderBy;
 use Squid\Exceptions\SquidException;
 
 use Squid\MySql\Connectors\Object\CRUD\Generic\TObjectSelectHelper;
@@ -11,7 +12,6 @@ use Squid\MySql\Connectors\Object\Polymorphic\IPolymorphicConnector;
 
 use Squid\MySql\Connectors\Generic\TCountHelper;
 use Squid\MySql\Connectors\Generic\TDeleteHelper;
-use Squid\OrderBy;
 
 
 class PolymorphicConnector implements IPolymorphicConnector

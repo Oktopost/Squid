@@ -20,6 +20,7 @@ class Squid
 		self::$skeleton
 			->enableKnot()
 			->registerGlobalFor('Squid')
+			->useGlobal()
 			->setConfigLoader(new PrefixDirectoryConfigLoader('Squid', __DIR__ . '/../skeleton'));
 		
 		self::$skeleton->set(MySql::class, MySql::class);

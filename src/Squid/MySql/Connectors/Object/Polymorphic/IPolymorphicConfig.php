@@ -15,7 +15,6 @@ interface IPolymorphicConfig
 	 */
 	public function getConnectors(): array;
 	
-	public function getObjectGroup($object): string;
 	public function sortObjectsByGroups(array $objects): array;
 	public function sortExpressionsByGroups(array $whereExpression): array;
 	

@@ -47,6 +47,12 @@ class PolymorphicConnector implements IPolymorphicConnector
 		return $count;
 	}
 	
+	
+	protected function getConfig(): IPolymorphicConfig
+	{
+		return $this->config;
+	}
+	
 
 	/**
 	 * @param IPolymorphicConfig $config

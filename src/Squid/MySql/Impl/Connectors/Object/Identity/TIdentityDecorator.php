@@ -29,7 +29,7 @@ trait TIdentityDecorator
 	{
 		if (!$this->_identityConnector)
 		{
-			$this->_identityConnector = new DecoratedIdentityConnector($this);
+			$this->_identityConnector = new DecoratedIdentityConnector();
 			$this->_identityConnector
 				->setPrimaryKeys($this->getPrimaryKeys())
 				->setGenericObjectConnector($this->getGenericObjectConnector());

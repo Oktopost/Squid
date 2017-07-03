@@ -19,4 +19,63 @@ class PolymorphicIdentityConnector extends PolymorphicConnector implements IPoly
 	{
 		return $this;
 	}
+	
+	
+	/**
+	 * @param mixed|array $object
+	 * @return int|false
+	 */
+	public function delete($object)
+	{
+		if (!is_array($object))
+			$object = [$object];
+		
+		$iterator = $this->getConfig()->objectsIterator($object);
+		$count = 0;
+		
+		foreach ($iterator as $group => $objects)
+		{
+			$connector = $this->getConfig()->getConnector($group);
+			
+			if ($this->getKeysCount() == 1)
+			{
+				$ids = [];
+				$keyProperty = $this->getPrimaryProperties()[0];
+				$keyField = $this->getPrimaryFields()[0];
+				
+				foreach ($object as $item)
+				{
+					$ids[] = $item->$keyProperty;
+				}
+				
+				$res = $connector->deleteByField($keyField, $ids);
+				
+				if ($res === false)
+					return false;
+				
+				$count += $res; 
+			}
+			else
+			{
+				foreach ($object as $item)
+				{
+					$by = [];
+			
+					foreach ($this->getPrimaryKeys() as $field => $property)
+					{
+						$by[$field] = $item->$property;
+					}
+					
+					$res = $connector->deleteByFields($by);
+					
+					if ($res === false)
+						return false;
+					
+					$count += $res; 
+				}
+			}
+		}
+		
+		return $count;
+	}
 }

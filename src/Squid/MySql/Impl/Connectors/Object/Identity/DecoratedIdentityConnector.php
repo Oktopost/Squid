@@ -11,6 +11,12 @@ class DecoratedIdentityConnector extends IdentityConnector
 {
 	private $genericObjectConnector;
 	
+	
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 
 	protected function getGenericObjectConnector(): IGenericObjectConnector
 	{

@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Identity;
 
 use Squid\Exceptions\SquidException;
 
+
 trait TPrimaryKeys
 {
 	use TPrimaryKeysConsumer;
@@ -52,12 +53,14 @@ trait TPrimaryKeys
 	 */
 	public function setPrimaryKeys($keys)
 	{
-		if (is_string($keys))
+		if (isset($this->_primaryKeys))
+			throw new SquidException('Primary Keys can not be redefined for this connector');
+		else if (!$keys)
+			throw new SquidException('Empty key set passed to connector');
+		else if (is_string($keys))
 			$keys = [$keys => $keys];
 		else if (isset($keys[0]))
 			$keys = array_combine($keys, $keys);
-		else if (isset($this->_primaryKeys))
-			throw new SquidException('setPrimaryKeys, can not be called more then once!');
 		
 		$this->_primaryKeys = $keys;
 		return $this;

@@ -5,13 +5,10 @@ namespace Squid\MySql\Impl\Connectors\Object\Generic;
 use lib\DataSet;
 use lib\DummyObject;
 use lib\TDBAssert;
-
 use PHPUnit\Framework\TestCase;
 
-use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
 
-
-class GenericObjectConnectorTest extends TestCase
+class GenericIdConnectorTest extends TestCase
 {
 	use TDBAssert;
 	
@@ -29,19 +26,19 @@ class GenericObjectConnectorTest extends TestCase
 		return $result;
 	}
 	
-	private function subject()
+	private function subject(): GenericIdConnector
 	{
 		$this->table = DataSet::table(['a', 'b']);
 		
-		$connector = new GenericObjectConnector();
+		$connector = new GenericIdConnector();
 		$connector
 			->setConnector(DataSet::connector())
 			->setObjectMap(DummyObject::class)
+			->setIdKey('a')
 			->setTable($this->table);
 		
 		return $connector;
 	}
-	
 	
 	public function test_sanity()
 	{
@@ -49,31 +46,13 @@ class GenericObjectConnectorTest extends TestCase
 		
 		$a = $this->createObject(1, 2);
 		
-		$subject->insertObjects($a);
+		self::assertEquals(1, $subject->insert($a));
 		self::assertRowExists($this->table, ['a' => 1, 'b' => 2]);
 		
-		$b = $subject->selectFirstObjectByFields(['b' => 2]);
+		$b = $subject->loadById('1');
 		self::assertEquals($a->toArray(), $b->toArray());
 		
-		$subject->deleteByField('a', '1');
+		$subject->deleteById(1);
 		self::assertRowCount(0, $this->table);
-	}
-	
-	
-	public function test_query_ICmdObjectSelectInstanceReturned()
-	{
-		self::assertInstanceOf(ICmdObjectSelect::class, $this->subject()->query());
-	}
-	
-	public function test_query_sanity()
-	{
-		$subject = $this->subject();
-		
-		$a = $this->createObject(1, 2);
-		$subject->insertObjects($a);
-		$result = $subject->query()->byField('a', $a->a)->queryFirst();
-		
-		self::assertInstanceOf(DummyObject::class, $result);
-		self::assertEquals(['a' => 1, 'b' => 2], $result->toArray());
 	}
 }

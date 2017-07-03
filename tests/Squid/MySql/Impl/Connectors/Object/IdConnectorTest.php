@@ -30,7 +30,7 @@ class IdConnectorTest extends TestCase
 		$conn->setIdKey('id', 'a');
 		$conn->conn = $generic;
 		
-		$generic->expects($this->once())->method('selectObjectsByFields')->with(['id' => 123])->willReturn(12);
+		$generic->expects($this->once())->method('selectObjectByFields')->with(['id' => 123])->willReturn(12);
 		
 		$res = $conn->loadById(123);
 		

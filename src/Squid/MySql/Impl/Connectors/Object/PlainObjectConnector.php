@@ -52,8 +52,10 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 				function($row)
 					use (&$object)
 				{
+					if ($object)
+						throw new SquidException('More then one row selected!');
+					
 					$object = $this->getObjectMap()->toObject($row);
-					return 0;
 				});
 		
 		return $res ? $object : null;
@@ -82,10 +84,8 @@ class PlainObjectConnector extends AbstractORMConnector implements IPlainObjectC
 				function($row)
 					use (&$object)
 				{
-					if ($object)
-						throw new SquidException('More then one row selected!');
-					
 					$object = $this->getObjectMap()->toObject($row);
+					return 0;
 				});
 		
 		return $res ? $object : null;

@@ -2,18 +2,17 @@
 namespace Squid\MySql\Connectors\Object;
 
 
-use Squid\MySql\Connectors\Object\CRUD\Identity\IIdentityDelete;
-use Squid\MySql\Connectors\Object\CRUD\Identity\IIdentityUpdate;
-use Squid\MySql\Connectors\Object\CRUD\Identity\IIdentityUpsert;
+use Squid\MySql\Connectors\Object\CRUD\Identity;
 
 
 /**
  * Refers to an object that have a Primary Key identifier, ether a single column or a combined index.
  */
 interface IIdentityConnector extends
-	IIdentityDelete,
-	IIdentityUpdate,
-	IIdentityUpsert
+	Identity\IIdentityDelete,
+	Identity\IIdentityUpdate,
+	Identity\IIdentityUpsert,
+	Identity\IIdentityInsert
 {
 	
 }

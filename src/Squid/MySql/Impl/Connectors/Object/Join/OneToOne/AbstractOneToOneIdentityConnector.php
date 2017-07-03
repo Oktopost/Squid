@@ -78,4 +78,30 @@ abstract class AbstractOneToOneIdentityConnector extends AbstractOneToOneConnect
 		
 		return $count;
 	}
+	
+	/**
+	 * @param mixed|array $object
+	 * @return int|false
+	 */
+	public function insert($object)
+	{
+		$count = $this->getPrimaryIdentityConnector()->insert($object);
+		
+		if ($count === false)
+			return false;
+		
+		$children = $this->config()->getChildren($object);
+		
+		if ($children)
+		{
+			$childCount = $this->childConnector()->insert($children);
+			
+			if ($childCount === false)
+				return false;
+			
+			$count += $childCount;
+		}
+		
+		return $count;
+	}
 }

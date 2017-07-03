@@ -2,11 +2,11 @@
 namespace Squid\MySql\Connectors\Object\CRUD\Identity;
 
 
-interface IIdentitySave
+interface IIdentityInsert
 {
 	/**
 	 * @param mixed|array $object
 	 * @return int|false
 	 */
-	public function save($object);
+	public function insert($object);
 }

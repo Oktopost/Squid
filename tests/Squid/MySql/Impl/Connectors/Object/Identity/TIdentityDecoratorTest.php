@@ -47,6 +47,7 @@ class TIdentityDecoratorTest extends TestCase
 		$this->assertMethodCalled('delete', [new DummyObject()]);
 		$this->assertMethodCalled('update', new DummyObject());
 		$this->assertMethodCalled('upsert', [new DummyObject()]);
+		$this->assertMethodCalled('insert', [new DummyObject()]);
 	}
 }
 

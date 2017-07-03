@@ -21,7 +21,7 @@ class IdentityConnectorTest extends TestCase
 	private $table;
 	
 	
-	private function newObject($a, $b, $c): IdentityConnectorTestHelper
+	private function createObject($a, $b, $c): IdentityConnectorTestHelper
 	{
 		$result = new IdentityConnectorTestHelper();
 		
@@ -116,25 +116,25 @@ class IdentityConnectorTest extends TestCase
 	
 	public function test_delete_ObjectNotFound_Return0()
 	{
-		$res = $this->subject()->delete($this->newObject(1, 2, 3));
+		$res = $this->subject()->delete($this->createObject(1, 2, 3));
 		self::assertEquals(0, $res);
 	}
 	
 	public function test_delete_OtherObjectsExistsInTheDB_OtherObjectsNotDeleted()
 	{
-		$this->subject($this->row(1, 2, 3))->delete($this->newObject(1, 3, 3));
+		$this->subject($this->row(1, 2, 3))->delete($this->createObject(1, 3, 3));
 		self::assertRowExists($this->table, $this->row(1, 2, 3));
 	}
 	
 	public function test_delete_ObjectInDB_ObjectDeleted()
 	{
-		$this->subject($this->row(1, 2, 3))->delete($this->newObject(1, 2, 4));
+		$this->subject($this->row(1, 2, 3))->delete($this->createObject(1, 2, 4));
 		self:self::assertRowCount(0, $this->table);
 	}
 	
 	public function test_delete_ObjectDeleted_Return1()
 	{
-		$res = $this->subject($this->row(1, 2, 3))->delete($this->newObject(1, 2, 4));
+		$res = $this->subject($this->row(1, 2, 3))->delete($this->createObject(1, 2, 4));
 		self::assertEquals(1, $res);
 	}
 	
@@ -149,8 +149,8 @@ class IdentityConnectorTest extends TestCase
 			)
 			->delete(
 				[
-					$this->newObject(1, 2, 4),
-					$this->newObject(4, 5, 7)
+					$this->createObject(1, 2, 4),
+					$this->createObject(4, 5, 7)
 				]);
 		
 		self::assertRowCount(0, $this->table);
@@ -167,8 +167,8 @@ class IdentityConnectorTest extends TestCase
 			)
 			->delete(
 				[
-					$this->newObject(1, 2, 4),
-					$this->newObject(4, 5, 7)
+					$this->createObject(1, 2, 4),
+					$this->createObject(4, 5, 7)
 				]);
 		
 		self::assertEquals(2, $res);
@@ -186,8 +186,8 @@ class IdentityConnectorTest extends TestCase
 			)
 			->delete(
 				[
-					$this->newObject(1, 10, 100),
-					$this->newObject(4, 10, 100)
+					$this->createObject(1, 10, 100),
+					$this->createObject(4, 10, 100)
 				]);
 		
 		self::assertEquals(2, $res);
@@ -200,7 +200,7 @@ class IdentityConnectorTest extends TestCase
 	{
 		$generic = $this->getMockBuilder(GenericObjectConnector::class)->getMock();
 		$subject = $this->subjectOverrideGeneric($generic);
-		$object = $this->newObject(1, 2, 5);
+		$object = $this->createObject(1, 2, 5);
 		
 		$generic->expects($this->once())->method('updateObject')->with($object, ['a', 'b']);
 		
@@ -211,11 +211,23 @@ class IdentityConnectorTest extends TestCase
 	{
 		$generic = $this->getMockBuilder(GenericObjectConnector::class)->getMock();
 		$subject = $this->subjectOverrideGeneric($generic);
-		$objects = [$this->newObject(1, 2, 5), $this->newObject(1, 2, 5)];
+		$objects = [$this->createObject(1, 2, 5), $this->createObject(1, 2, 5)];
 		
 		$generic->expects($this->once())->method('upsertObjectsByKeys')->with($objects, ['a', 'b']);
 		
 		$subject->upsert($objects);
+	}
+	
+	public function test_insert_Sanity()
+	{
+		$generic = $this->getMockBuilder(GenericObjectConnector::class)->getMock();
+		$subject = $this->subjectOverrideGeneric($generic);
+		$object1 = $this->createObject(1, 2, 5);
+		$object2 = $this->createObject(1, 2, 5);
+		
+		$generic->expects($this->once())->method('insertObjects')->with([$object1, $object2], false);
+		
+		$subject->insert([$object1, $object2]);
 	}
 }
 

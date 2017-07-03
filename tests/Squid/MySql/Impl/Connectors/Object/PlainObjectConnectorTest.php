@@ -120,12 +120,12 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	public function test_selectObjectByFields_NumberOfMatchingObjects_OnlyFirstObjectReturned()
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_selectObjectByFields_NumberOfMatchingObjects_ExceptionThrown()
 	{
-		$res = $this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByFields(['b' => 2]);
-		
-		self::assertInstanceOf(PlainObjectHelper::class, $res);
-		self::assertEquals($this->row(1, 2), $res->toArray());
+		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByFields(['b' => 2]);
 	}
 	
 	
@@ -143,12 +143,12 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
 	public function test_selectObjectByField_NumberOfMatchingObjects_OnlyFirstObjectReturned()
 	{
-		$res = $this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByField('b', 2);
-		
-		self::assertInstanceOf(PlainObjectHelper::class, $res);
-		self::assertEquals($this->row(1, 2), $res->toArray());
+		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByField('b', 2);
 	}
 	
 	
@@ -166,12 +166,12 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
-	public function test_selectFirstObjectByFields_NumberOfMatchingObjects_ExceptionThrown()
+	public function test_selectFirstObjectByFields_NumberOfMatchingObjects_OnlyFirstObjectReturned()
 	{
-		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectFirstObjectByFields(['b' => 2]);
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 2)])->selectFirstObjectByFields(['b' => 2]);
+		
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals($this->row(1, 2), $res->toArray());
 	}
 	
 	
@@ -189,12 +189,12 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
 	public function test_selectFirstObjectByField_NumberOfMatchingObjects_OnlyFirstObjectReturned()
 	{
-		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectFirstObjectByField('b', 2);
+		$res = $this->subject([$this->row(1, 2), $this->row(2, 2)])->selectFirstObjectByField('b', 2);
+		
+		self::assertInstanceOf(PlainObjectHelper::class, $res);
+		self::assertEquals($this->row(1, 2), $res->toArray());
 	}
 	
 	

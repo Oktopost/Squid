@@ -97,4 +97,13 @@ class IdentityConnector extends AbstractORMConnector implements IIdentityConnect
 	{
 		return $this->getGenericObjectConnector()->upsertObjectsByKeys($object, $this->getPrimaryFields());
 	}
+	
+	/**
+	 * @param mixed|array $object
+	 * @return int|false
+	 */
+	public function insert($object)
+	{
+		return $this->getGenericObjectConnector()->insertObjects($object);
+	}
 }

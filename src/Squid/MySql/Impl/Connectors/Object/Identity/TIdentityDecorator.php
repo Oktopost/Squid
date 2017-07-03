@@ -73,4 +73,13 @@ trait TIdentityDecorator
 	{
 		return $this->getIdentityConnector()->upsert($object);
 	}
+
+	/**
+	 * @param mixed|array $object
+	 * @return int|false
+	 */
+	public function insert($object)
+	{
+		return $this->getIdentityConnector()->insert($object);
+	}
 }

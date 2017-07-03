@@ -3,57 +3,77 @@ namespace Squid\MySql\Impl\Connectors\Object\Generic;
 
 
 use lib\DataSet;
-use lib\TestTable;
+use lib\TDBAssert;
 use Objection\LiteObject;
 use Objection\LiteSetup;
 use Objection\Mapper;
 
 use PHPUnit\Framework\TestCase;
 
+use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
+
 
 class GenericObjectConnectorTest extends TestCase
 {
-	/** @var GenericObjectConnector */
-	private $connector;
+	use TDBAssert;
 	
 	
-	private function newObject(): GenericObjectHelper
+	private $table;
+	
+	
+	private function createObject($a, $b): GenericObjectHelper
 	{
 		$result = new GenericObjectHelper();
 		
-		$result->a = mt_rand();
-		$result->b = uniqid();
+		$result->a = $a;
+		$result->b = $b;
 		
 		return $result;
 	}
 	
-	private function newTable(): TestTable
+	private function subject()
 	{
-		$t = DataSet::table(['a', 'b']);
+		$this->table = DataSet::table(['a', 'b']);
 		
-		DataSet::connector()
-			->direct("ALTER TABLE {$t} ADD PRIMARY KEY (a), CHANGE `a` `a` INT(11) NOT NULL AUTO_INCREMENT")
-			->executeDml();
-		
-		return $t;
-	}
-	
-	
-	public function setUp()
-	{
-		$this->connector = new GenericObjectConnector();
-		$this->connector
+		$connector = new GenericObjectConnector();
+		$connector
 			->setConnector(DataSet::connector())
 			->setObjectMap(Mapper::createFor(GenericObjectHelper::class))
-			->setTable($this->newTable());
+			->setTable($this->table);
+		
+		return $connector;
 	}
 	
+	
+	public function test_sanity()
+	{
+		$subject = $this->subject();
+		
+		$a = $this->createObject(1, 2);
+		
+		$subject->insertObjects($a);
+		self::assertRowExists($this->table, ['a' => 1, 'b' => 2]);
+		
+		$b = $subject->selectFirstObjectByFields(['b' => 2]);
+		self::assertEquals($a->toArray(), $b->toArray());
+		
+		$subject->deleteByField('a', '1');
+		self::assertRowCount(0, $this->table);
+	}
+	
+	
+	public function test_query_ICmdObjectSelectInstanceReturned()
+	{
+		self::assertInstanceOf(ICmdObjectSelect::class, $this->subject()->query());
+	}
 	
 	public function test_query_sanity()
 	{
-		$a = $this->newObject();
-		$this->connector->insertObjects($a);
-		$result = $this->connector->query()->byField('a', $a->a)->queryFirst();
+		$subject = $this->subject();
+		
+		$a = $this->createObject(1, 2);
+		$subject->insertObjects($a);
+		$result = $subject->query()->byField('a', $a->a)->queryFirst();
 		
 		self::assertInstanceOf(GenericObjectHelper::class, $result);
 	}

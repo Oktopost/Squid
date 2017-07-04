@@ -2,37 +2,17 @@
 use Squid\MySql;
 
 use Skeleton\Skeleton;
-use Skeleton\ConfigLoader\PrefixDirectoryConfigLoader;
+use Squid\SkeletonInit;
 
 
 class Squid
 {
-	/** @var Skeleton */
-	private static $skeleton = null;
-	
-	
-	private static function setUp()
-	{
-		if (self::$skeleton) 
-			return;
-		
-		self::$skeleton = new Skeleton();
-		self::$skeleton
-			->enableKnot()
-			->registerGlobalFor('Squid')
-			->useGlobal()
-			->setConfigLoader(new PrefixDirectoryConfigLoader('Squid', __DIR__ . '/../skeleton'));
-		
-		self::$skeleton->set(MySql::class, MySql::class);
-	}
-
-
 	/**
 	 * @return MySql
 	 */
 	public static function MySql()
 	{
-		return self::skeleton(MySql::class);
+		return SkeletonInit::skeleton(MySql::class);
 	}
 	
 	/**
@@ -41,12 +21,6 @@ class Squid
 	 */
 	public static function skeleton($item = null)
 	{
-		if (!self::$skeleton) 
-			self::setUp();
-		
-		if ($item)
-			return self::$skeleton->get($item);
-		
-		return self::$skeleton;
+		return SkeletonInit::skeleton($item);
 	}
 }

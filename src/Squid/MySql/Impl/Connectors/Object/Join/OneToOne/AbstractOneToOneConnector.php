@@ -47,6 +47,17 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	
 	
 	protected abstract function getPrimary(): IGenericObjectConnector;
+
+
+	/**
+	 * @param IJoinConnector $connector
+	 * @return static|AbstractOneToOneConnector
+	 */
+	public function setConfig(IJoinConnector $connector): AbstractOneToOneConnector
+	{
+		$this->config = $connector;
+		return $this;
+	}
 	
 	
 	public function countByField(string $field, $value) { return $this->getPrimary()->countByField($field, $value); }
@@ -69,7 +80,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 		if ($count === false) 
 			return false;
 		
-		$res = $this->config->inserted($objects);
+		$res = $this->config->inserted($objects, $ignore);
 		
 		return ($res === false ? false : $count + $res);
 	}

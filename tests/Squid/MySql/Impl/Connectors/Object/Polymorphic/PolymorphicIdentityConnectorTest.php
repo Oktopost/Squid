@@ -10,6 +10,7 @@ use lib\DummyObjectB;
 
 use PHPUnit\Framework\TestCase;
 
+use Squid\MySql\Impl\Connectors\Object\Generic\GenericIdentityConnector;
 use Squid\MySql\Impl\Connectors\Object\Generic\GenericObjectConnector;
 use Squid\MySql\Impl\Connectors\Object\Polymorphic\Config\PolymorphByField;
 
@@ -36,16 +37,17 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	private function createObjectConnector($table, $object)
 	{
-		$conn = new GenericObjectConnector();
+		$conn = new GenericIdentityConnector();
 		$conn
 			->setConnector(DataSet::connector())
 			->setTable($table)
+			->setPrimaryKeys('a')
 			->setObjectMap($object);
 		
 		return $conn;
 	}
 	
-	private function subject(array $dataA = [], array $dataB = [], $keys = ['a'])
+	private function subject(array $dataA = [], array $dataB = [])
 	{
 		if ($dataA && !isset($dataA[0]))
 			$dataA = [$dataA];
@@ -90,11 +92,24 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		
 		$subject = new PolymorphicIdentityConnector();
 		$subject->setPolymorphicConfig($config);
-		$subject->setPrimaryKeys($keys);
 		
 		return $subject;
 	}
-	
+
+
+	/**
+	 * @expectedException \Squid\Exceptions\SquidUsageException
+	 */
+	public function test_delete_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
+	{
+		$config = new PolymorphByField();
+		$subject = new PolymorphicIdentityConnector();
+		$subject->setPolymorphicConfig($config);
+		
+		$config->addClass(DummyObject::class, new GenericObjectConnector());
+		
+		$subject->delete(new DummyObject());
+	}
 	
 	public function test_delete_OnlyRequestTableAffected()
 	{
@@ -109,44 +124,145 @@ class PolymorphicIdentityConnectorTest extends TestCase
 	
 	public function test_delete_ArrayPassed()
 	{
-		$subject = $this->subject(['a' => 1], ['a' => 2, 'c' => 2]);
+		$subject = $this->subject([['a' => 1], ['a' => 2]], ['a' => 2, 'c' => 2]);
 		
 		$res = $subject->delete([$this->dummyA(1), $this->dummyB(2, 1)]);
 		
 		self::assertEquals(2, $res);
-		self::assertRowCount(0, $this->tableA);
+		self::assertRowCount(1, $this->tableA);
 		self::assertRowCount(0, $this->tableB);
 	}
 	
-	public function test_delete_ArrayKeys()
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidUsageException
+	 */
+	public function test_insert_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
 	{
-		$subject = $this->subject(['a' => 1], ['a' => 2, 'c' => 2], ['a', 'b']);
+		$config = new PolymorphByField();
+		$subject = new PolymorphicIdentityConnector();
+		$subject->setPolymorphicConfig($config);
 		
-		$res = $subject->delete([$this->dummyA(1), $this->dummyB(2, 1)]);
+		$config->addClass(DummyObject::class, new GenericObjectConnector());
+		
+		$subject->insert(new DummyObject());
+	}
+	
+	public function test_insert_ObjectInsertedIntoCorrectTable()
+	{
+		$subject = $this->subject();
+		
+		$res = $subject->insert($this->dummyB(1, 1));
+		
+		self::assertEquals(1, $res);
+		self::assertRowCount(0, $this->tableA);
+		self::assertRowCount(1, $this->tableB);
+	}
+
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_insert_ObjectAlreadyExists_ErrorThrown()
+	{
+		$subject = $this->subject(['a' => 1]);
+		$subject->insert($this->dummyA(1));
+	}
+	
+	public function test_insert_ArrayPassed()
+	{
+		$subject = $this->subject();
+		
+		$res = $subject->insert([$this->dummyA(1), $this->dummyB(2, 1), $this->dummyA(2)]);
+		
+		self::assertEquals(3, $res);
+		self::assertRowCount(2, $this->tableA);
+		self::assertRowCount(1, $this->tableB);
+	}
+	
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidUsageException
+	 */
+	public function test_upsert_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
+	{
+		$config = new PolymorphByField();
+		$subject = new PolymorphicIdentityConnector();
+		$subject->setPolymorphicConfig($config);
+		
+		$config->addClass(DummyObject::class, new GenericObjectConnector());
+		
+		$subject->upsert(new DummyObject());
+	}
+	
+	public function test_upsert_ObjectInsertedIntoCorrectTable()
+	{
+		$subject = $this->subject();
+		
+		$res = $subject->upsert($this->dummyB(1, 1));
+		
+		self::assertEquals(1, $res);
+		self::assertRowCount(0, $this->tableA);
+		self::assertRowCount(1, $this->tableB);
+	}
+	
+	public function test_upsert_ObjectUpdatedIntoTheCorrectTable()
+	{
+		$subject = $this->subject([], ['a' => 1, 'c' => 1]);
+		
+		$res = $subject->upsert($this->dummyB(1, 2));
 		
 		self::assertEquals(2, $res);
 		self::assertRowCount(0, $this->tableA);
-		self::assertRowCount(0, $this->tableB);
+		self::assertRowCount(1, $this->tableB);
+		self::assertRowExists($this->tableB, ['c' => 2]);
+	}
+	
+	public function test_upsert_ArrayPassed()
+	{
+		$subject = $this->subject(['a' => 1]);
+		
+		$res = $subject->upsert([$this->dummyA(1), $this->dummyB(2, 1), $this->dummyA(2)]);
+		
+		self::assertEquals(2, $res);
+		self::assertRowCount(2, $this->tableA);
+		self::assertRowCount(1, $this->tableB);
 	}
 	
 	
-	public function test_sanity()
+	/**
+	 * @expectedException \Squid\Exceptions\SquidUsageException
+	 */
+	public function test_update_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
 	{
-		$subject = $this->subject(['a' => 1], ['a' => 1, 'c' => 2]);
-		$objectA = $this->dummyA(2);
-		$objectB = $this->dummyB(1, 4);
+		$config = new PolymorphByField();
+		$subject = new PolymorphicIdentityConnector();
+		$subject->setPolymorphicConfig($config);
 		
-		$res = $subject->insert($objectA);
+		$config->addClass(DummyObject::class, new GenericObjectConnector());
+		
+		$subject->update(new DummyObject());
+	}
+	
+	public function test_upsert_ObjectNotInserted()
+	{
+		$subject = $this->subject();
+		
+		$res = $subject->update($this->dummyB(1, 1));
+		
+		self::assertEquals(0, $res);
+		self::assertRowCount(0, $this->tableA);
+		self::assertRowCount(0, $this->tableB);
+	}
+	
+	public function test_upsert_ObjectUpdatedIntoCorrectTable()
+	{
+		$subject = $this->subject([], ['a' => 1, 'c' => 1]);
+		
+		$res = $subject->update($this->dummyB(1, 2));
 		
 		self::assertEquals(1, $res);
-		self::assertRowCount(2, $this->tableA);
+		self::assertRowCount(0, $this->tableA);
 		self::assertRowCount(1, $this->tableB);
-		
-		$res = $subject->update($objectB);
-		
-		self::assertEquals(1, $res);
-		self::assertRowCount(2, $this->tableA);
-		self::assertRowCount(1, $this->tableB);
-		self::assertRowExists($this->tableB, ['c' => 4]);
+		self::assertRowExists($this->tableB, ['c' => 2]);
 	}
 }

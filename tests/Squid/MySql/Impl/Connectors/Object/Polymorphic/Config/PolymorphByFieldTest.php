@@ -50,7 +50,7 @@ class PolymorphByFieldTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
+	 * @expectedException \Squid\Exceptions\SquidUsageException
 	 */
 	public function test_addClass_ClassNamePassedButConnecorIsNull_ThrowException()
 	{
@@ -94,7 +94,7 @@ class PolymorphByFieldTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
+	 * @expectedException \Squid\Exceptions\SquidUsageException
 	 */
 	public function test_addFieldRule_FieldPassedAsThingButWithoutRule_ThrowException()
 	{

@@ -2,17 +2,53 @@
 namespace Squid\MySql\Impl\Connectors\Object\Polymorphic;
 
 
+use Squid\Exceptions\SquidUsageException;
+use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Polymorphic\IPolymorphicIdentityConnector;
-
-use Squid\MySql\Impl\Connectors\Object\Identity\TPrimaryKeys;
-use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
 
 
 class PolymorphicIdentityConnector extends PolymorphicConnector implements IPolymorphicIdentityConnector
 {
-	use TPrimaryKeys;
-	use TIdentityDecorator;
+	private function getIdentityConnector(string $name): IGenericIdentityConnector
+	{
+		$connector = $this->getConfig()->getConnector($name);
+		
+		if (!($connector instanceof IGenericIdentityConnector))
+		{
+			throw new SquidUsageException(
+				'Connectors passed to ' . self::class . ' must be of ' . 
+				IGenericIdentityConnector::class . ' type');
+		}
+		
+		return $connector;
+	}
+	
+	/**
+	 * @param mixed|array $object
+	 * @param string $method
+	 * @return int|false
+	 */
+	private function executeIdentityOperation($object, string $method)
+	{
+		if (!is_array($object)) 
+			$object = [$object];
+		
+		$groups = $this->getConfig()->objectsIterator($object);
+		$count = 0;
+		
+		foreach ($groups as $name => $objects)
+		{
+			$res = $this->getIdentityConnector($name)->$method($objects);
+			
+			if ($res === false)
+				return $res;
+			
+			$count += $res;
+		}
+		
+		return $count;
+	}
 	
 	
 	protected function getGenericObjectConnector(): IGenericObjectConnector 
@@ -27,55 +63,42 @@ class PolymorphicIdentityConnector extends PolymorphicConnector implements IPoly
 	 */
 	public function delete($object)
 	{
-		if (!is_array($object))
-			$object = [$object];
+		return $this->executeIdentityOperation($object, __FUNCTION__);
+	}
+
+	/**
+	 * @param mixed|array $object
+	 * @return int|false
+	 */
+	public function insert($object)
+	{
+		return $this->executeIdentityOperation($object, __FUNCTION__);
+	}
+
+	/**
+	 * @param mixed $object
+	 * @return int|false
+	 */
+	public function update($object)
+	{
+		$conn = $this->getConfig()->getObjectConnector($object);
 		
-		$iterator = $this->getConfig()->objectsIterator($object);
-		$count = 0;
-		
-		foreach ($iterator as $group => $objects)
+		if (!($conn instanceof IGenericIdentityConnector))
 		{
-			$connector = $this->getConfig()->getConnector($group);
-			
-			if ($this->getKeysCount() == 1)
-			{
-				$ids = [];
-				$keyProperty = $this->getPrimaryProperties()[0];
-				$keyField = $this->getPrimaryFields()[0];
-				
-				foreach ($object as $item)
-				{
-					$ids[] = $item->$keyProperty;
-				}
-				
-				$res = $connector->deleteByField($keyField, $ids);
-				
-				if ($res === false)
-					return false;
-				
-				$count += $res; 
-			}
-			else
-			{
-				foreach ($object as $item)
-				{
-					$by = [];
-			
-					foreach ($this->getPrimaryKeys() as $field => $property)
-					{
-						$by[$field] = $item->$property;
-					}
-					
-					$res = $connector->deleteByFields($by);
-					
-					if ($res === false)
-						return false;
-					
-					$count += $res; 
-				}
-			}
+			throw new SquidUsageException(
+				'Connectors passed to ' . self::class . ' must be of ' . 
+				IGenericIdentityConnector::class . ' type');
 		}
 		
-		return $count;
+		return $conn->update($object);
+	}
+
+	/**
+	 * @param mixed|array $object
+	 * @return int|false
+	 */
+	public function upsert($object)
+	{
+		return $this->executeIdentityOperation($object, __FUNCTION__);
 	}
 }

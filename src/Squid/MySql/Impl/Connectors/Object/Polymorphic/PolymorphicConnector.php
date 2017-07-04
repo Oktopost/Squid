@@ -4,7 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Polymorphic;
 
 use Squid\OrderBy;
 use Squid\Exceptions\SquidException;
-use Squid\Exceptions\SquidDevelopmentException;
+use Squid\Exceptions\SquidUsageException;
 
 use Squid\MySql\Connectors\Object\CRUD\Generic\TObjectSelectHelper;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
@@ -206,7 +206,7 @@ class PolymorphicConnector implements IPolymorphicConnector
 	{
 		if ($orderBy)
 		{
-			throw new SquidDevelopmentException('selectObjects Operation not ' . 
+			throw new SquidUsageException('selectObjects Operation not ' . 
 				'supported by PolyConnector with an orderBy expression');
 		}
 		

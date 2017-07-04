@@ -5,7 +5,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Polymorphic\Config;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Polymorphic\IPolymorphicConfig;
 
-use Squid\Exceptions\SquidDevelopmentException;
+use Squid\Exceptions\SquidUsageException;
 
 
 abstract class AbstractPolymorphByField implements IPolymorphicConfig
@@ -19,7 +19,7 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 
 	private function throwUndefinedGroup($field, $value)
 	{
-		throw new SquidDevelopmentException('Could not determine the right ' . 
+		throw new SquidUsageException('Could not determine the right ' . 
 			"connector to use for field $field and value $value");
 	}
 	
@@ -96,7 +96,7 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 		$byClass = $this->getConnectorsByClassCached();
 		
 		if (!isset($byClass[$name]))
-			throw new SquidDevelopmentException('No connector defined for class ' . $name);
+			throw new SquidUsageException('No connector defined for class ' . $name);
 		
 		$value = $byClass[$name];
 		
@@ -172,7 +172,7 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 			}
 			else
 			{
-				throw new SquidDevelopmentException('Unexpected rule type. Rule must be array or callable');
+				throw new SquidUsageException('Unexpected rule type. Rule must be array or callable');
 			}
 			
 			foreach ($groups as $group => $fieldValues)

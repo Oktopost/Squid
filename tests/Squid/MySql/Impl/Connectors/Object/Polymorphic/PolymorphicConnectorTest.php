@@ -430,7 +430,7 @@ class PolymorphicConnectorTest extends TestCase
 
 
 	/**
-	 * @expectedException \Squid\Exceptions\SquidDevelopmentException
+	 * @expectedException \Squid\Exceptions\SquidUsageException
 	 */
 	public function test_selectObjects_OrderByPassed_ExceptionThrown()
 	{

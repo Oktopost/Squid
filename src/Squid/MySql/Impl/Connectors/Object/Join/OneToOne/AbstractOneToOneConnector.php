@@ -76,7 +76,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	public function countByFields(array $fields) { return $this->getPrimary()->countByFields($fields); }
 	public function existsByField(string $field, $value): bool { return $this->getPrimary()->existsByField($field, $value); }
 	public function existsByFields(array $fields): bool { return $this->getPrimary()->existsByFields($fields); }
-	public function deleteByField(string $field, $value, ?int $limit = null) { $result = $this->getPrimary()->deleteByField($field, $value, $limit); }
+	public function deleteByField(string $field, $value, ?int $limit = null) { return $this->getPrimary()->deleteByField($field, $value, $limit); }
 	public function deleteByFields(array $fields, ?int $limit = null) { return $this->getPrimary()->deleteByFields($fields, $limit); }
 	
 	

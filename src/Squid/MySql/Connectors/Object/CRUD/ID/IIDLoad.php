@@ -6,7 +6,7 @@ interface IIDLoad
 {
 	/**
 	 * @param string|array $id
-	 * @return mixed|null|false
+	 * @return mixed|array|null|false
 	 */
 	public function loadById($id);
 }

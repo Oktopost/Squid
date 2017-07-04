@@ -2,63 +2,40 @@
 namespace Squid\MySql\Impl\Connectors\Object\Join\OneToOne;
 
 
-use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneConfig;
+use Squid\OrderBy;
+
+use Squid\MySql\Connectors\Object\Join\IJoinConnector;
 use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
-use Squid\OrderBy;
 
 
 abstract class AbstractOneToOneConnector implements IOneToOneConnector
 {
-	/** @var IOneToOneConfig */
+	/** @var IJoinConnector */
 	private $config;
 	
 	/** @var IGenericIdentityConnector */
 	private $childrenConnector;
 	
-
-	/**
-	 * @param mixed|array|false $parents
-	 * @return bool
-	 */
-	protected function populate($parents)
-	{
-		if ($parents === false) return false;
-		
-		$byFields = $this->config->getWhereForChildren($parents);
-		
-		if ($byFields)
-		{
-			$result = $this->childrenConnector->selectObjectsByFields($byFields);
-			
-			if ($result === false)
-				return false;
-			
-			$this->config->combine($parents, $result);
-		}
-		
-		return $parents;
-	}
 	
-	private function upsertChildren($parents, $parentOperationResultCount): int
+	private function upsertChildren($parents, $affectedParents, $method): int
 	{
-		if ($parentOperationResultCount === false) 
+		if ($affectedParents === false) 
 			return false;
 		
-		$childrenCount = 0;
-		$modifiedChildren = $this->config->afterParentSaved($parents);
+		$res = $this->config->$method($parents);
 		
-		if ($modifiedChildren)
-		{
-			$childrenCount = $this->childrenConnector->upsert($childrenCount);
-		}
-		
-		return ($childrenCount === false ? false : $parentOperationResultCount + $childrenCount);
+		return ($res === false ? false : $affectedParents + $res);
 	}
-
 	
-	protected function config(): IOneToOneConfig
+	private function loaded($parents)
+	{
+		return $parents ? $this->config()->loaded($parents) : $parents;
+	}
+	
+	
+	protected function config(): IJoinConnector
 	{
 		return $this->config;
 	}
@@ -87,20 +64,14 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function insertObjects($objects, bool $ignore = false)
 	{
-		$childrenCount = 0;
 		$count = $this->getPrimary()->insertObjects($objects, $ignore);
 		
 		if ($count === false) 
 			return false;
 		
-		$modifiedChildren = $this->config->afterParentSaved($objects);
+		$res = $this->config->inserted($objects);
 		
-		if ($modifiedChildren)
-		{
-			$childrenCount = $this->childrenConnector->insertObjects($childrenCount, $ignore);
-		}
-		
-		return ($childrenCount === false ? false : $count + $childrenCount);
+		return ($res === false ? false : $count + $res);
 	}
 
 	/**
@@ -109,7 +80,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function selectObjectByFields(array $fields)
 	{
-		return $this->populate($this->getPrimary()->selectObjectByFields($fields));
+		return $this->loaded($this->getPrimary()->selectObjectByFields($fields));
 	}
 
 	/**
@@ -119,7 +90,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function selectObjectByField(string $field, $value)
 	{
-		return $this->populate($this->getPrimary()->selectObjectByField($field, $value));
+		return $this->loaded($this->getPrimary()->selectObjectByField($field, $value));
 	}
 
 	/**
@@ -128,7 +99,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function selectFirstObjectByFields(array $fields)
 	{
-		return $this->populate($this->getPrimary()->selectFirstObjectByFields($fields));
+		return $this->loaded($this->getPrimary()->selectFirstObjectByFields($fields));
 	}
 
 	/**
@@ -138,7 +109,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function selectFirstObjectByField(string $field, $value)
 	{
-		return $this->populate($this->getPrimary()->selectFirstObjectByField($field, $value));
+		return $this->loaded($this->getPrimary()->selectFirstObjectByField($field, $value));
 	}
 
 	/**
@@ -148,7 +119,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function selectObjectsByFields(array $fields, ?int $limit = null)
 	{
-		return $this->populate($this->getPrimary()->selectObjectsByFields($fields, $limit));
+		return $this->loaded($this->getPrimary()->selectObjectsByFields($fields, $limit));
 	}
 
 	/**
@@ -158,7 +129,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	 */
 	public function selectObjects(?array $orderBy = null, int $order = OrderBy::DESC)
 	{
-		return $this->populate($this->getPrimary()->selectObjects($orderBy, $order));
+		return $this->loaded($this->getPrimary()->selectObjects($orderBy, $order));
 	}
 
 	/**
@@ -169,7 +140,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	public function updateObject($object, array $byFields)
 	{
 		$count = $this->getPrimary()->updateObject($object, $byFields);
-		return $this->upsertChildren($object, $count);
+		return $this->upsertChildren($object, $count, 'updated');
 	}
 
 	/**
@@ -180,7 +151,7 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	public function upsertObjectsByKeys($objects, array $keys)
 	{
 		$count = $this->getPrimary()->upsertObjectsByKeys($objects, $keys);
-		return $this->upsertChildren($objects, $count);
+		return $this->upsertChildren($objects, $count, 'upserted');
 	}
 
 	/**
@@ -191,6 +162,6 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	public function upsertObjectsForValues($objects, array $valueFields)
 	{
 		$count = $this->getPrimary()->upsertObjectsForValues($objects, $valueFields);
-		return $this->upsertChildren($objects, $count);
+		return $this->upsertChildren($objects, $count, 'upserted');
 	}
 }

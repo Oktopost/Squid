@@ -38,19 +38,9 @@ abstract class AbstractOneToOneIdentityConnector extends AbstractOneToOneConnect
 		if ($count === false)
 			return false;
 		
-		$children = $this->config()->getChildren($object);
+		$children = $this->config()->saved($object);
 		
-		if ($children)
-		{
-			$childCount = $this->childConnector()->update($children);
-			
-			if ($childCount === false)
-				return false;
-			
-			$count += $childCount;
-		}
-		
-		return $count;
+		return $children === false ? false : $children + $count;
 	}
 	
 	/**
@@ -64,19 +54,9 @@ abstract class AbstractOneToOneIdentityConnector extends AbstractOneToOneConnect
 		if ($count === false)
 			return false;
 		
-		$children = $this->config()->getChildren($object);
+		$children = $this->config()->saved($object);
 		
-		if ($children)
-		{
-			$childCount = $this->childConnector()->upsert($children);
-			
-			if ($childCount === false)
-				return false;
-			
-			$count += $childCount;
-		}
-		
-		return $count;
+		return $children === false ? false : $children + $count;
 	}
 	
 	/**
@@ -90,18 +70,8 @@ abstract class AbstractOneToOneIdentityConnector extends AbstractOneToOneConnect
 		if ($count === false)
 			return false;
 		
-		$children = $this->config()->getChildren($object);
+		$children = $this->config()->saved($object);
 		
-		if ($children)
-		{
-			$childCount = $this->childConnector()->insert($children);
-			
-			if ($childCount === false)
-				return false;
-			
-			$count += $childCount;
-		}
-		
-		return $count;
+		return $children === false ? false : $children + $count;
 	}
 }

@@ -18,10 +18,10 @@ interface IJoinConnector
 	public function inserted($parents, $ignore = false);
 
 	/**
-	 * @param mixed|array $parents
+	 * @param mixed $parent
 	 * @return int|false
 	 */
-	public function updated($parents);
+	public function updated($parent);
 
 	/**
 	 * @param mixed|array $parents

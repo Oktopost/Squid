@@ -29,7 +29,6 @@ class ByProperties implements IJoinConnector
 		return $this->connector;
 	}
 	
-	
 	private function resolveNames($names): array
 	{
 		if (is_string($names))
@@ -38,43 +37,6 @@ class ByProperties implements IJoinConnector
 			return array_combine($names, $names);
 		else
 			return $names;
-	}
-
-	/**
-	 * @param mixed|array $parents
-	 * @param string $method
-	 * @return false|int
-	 */
-	private function saved($parents, string $method)
-	{
-		if (!is_array($parents))
-			$parents = [$parents];
-		
-		$modified = [];
-		
-		foreach ($parents as $parent)
-		{
-			$child = $parent->{$this->parentReferenceProperty};
-				
-			if (!$child) continue;
-			
-			$isModified = false;
-			
-			foreach ($this->properties as $parentProp => $childProp)
-			{
-				if ($parent->$parentProp == $child->$childProp) continue;
-				
-				$child->$childProp = $parent->$parentProp;
-				$isModified = true;
-			}
-			
-			if ($isModified)
-			{
-				$modified[] = $child;
-			}
-		}
-		
-		return ($modified ? $this->getConnector()->$method($modified) : 0);
 	}
 	
 	
@@ -200,12 +162,21 @@ class ByProperties implements IJoinConnector
 	}
 
 	/**
-	 * @param mixed|array $parents
+	 * @param mixed $parent
 	 * @return int|false
 	 */
-	public function updated($parents)
+	public function updated($parent)
 	{
-		return $this->saved($parents, 'upsert');
+		$child = $parent->{$this->parentReferenceProperty};
+			
+		if (!$child) return 0;
+		
+		foreach ($this->properties as $parentProp => $childProp)
+		{
+			$child->$childProp = $parent->$parentProp;
+		}
+		
+		return $this->getConnector()->update($child);
 	}
 
 	/**
@@ -214,6 +185,25 @@ class ByProperties implements IJoinConnector
 	 */
 	public function upserted($parents)
 	{
-		return $this->saved($parents, 'upsert');
+		if (!is_array($parents))
+			$parents = [$parents];
+		
+		$children = [];
+		
+		foreach ($parents as $parent)
+		{
+			$child = $parent->{$this->parentReferenceProperty};
+				
+			if (!$child) continue;
+			
+			foreach ($this->properties as $parentProp => $childProp)
+			{
+				$child->$childProp = $parent->$parentProp;
+			}
+			
+			$children[] = $child;
+		}
+		
+		return ($children ? $this->getConnector()->upsert($children) : 0);
 	}
 }

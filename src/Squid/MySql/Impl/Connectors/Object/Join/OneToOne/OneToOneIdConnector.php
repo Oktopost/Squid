@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Join\OneToOne;
 
 
 use Squid\Exceptions\SquidException;
+
 use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneIdConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdConnector;
 
@@ -49,11 +50,11 @@ class OneToOneIdConnector extends AbstractOneToOneIdConnector implements IOneToO
 
 	/**
 	 * @param string|array $id
-	 * @return mixed|null|false
+	 * @return mixed|array|null|false
 	 */
 	public function loadById($id)
 	{
 		$object = $this->getPrimaryIdConnector()->loadById($id);
-		return $this->populate($object);
+		return ($object ? $this->config()->loaded($object) : $object);
 	}
 }

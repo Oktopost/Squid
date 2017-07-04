@@ -347,7 +347,7 @@ class OneToOneConnectorTest extends TestCase
 		
 		$res = $subject->updateObject($parent1, ['b']);
 		
-		self::assertEquals(2, $res);
+		self::assertEquals(1, $res);
 	}
 	
 	public function test_updateObject_ObjectsUpdated()

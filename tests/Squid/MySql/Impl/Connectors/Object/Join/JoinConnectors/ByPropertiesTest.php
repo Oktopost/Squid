@@ -318,30 +318,24 @@ class ByPropertiesTest extends TestCase
 		self::assertEquals(0, $subject->updated($object1));
 	}
 	
-	public function test_updated_HaveChildren_ChildrenUpserted()
+	public function test_updated_HaveChildren_ChildrenUpdated()
 	{
 		$subject = $this->subject();
 		
 		$child1 = new ByPropertiesChild();
-		$child2 = new ByPropertiesChild();
 		
 		$object1 = new ByPropertiesParent();
 		$object1->a = '123';
 		$object1->b = 'abc';
 		$object1->child = $child1;
 		
-		$object2 = new ByPropertiesParent();
-		$object2->a = 'nnn';
-		$object2->b = 'mmm';
-		$object2->child = $child2;
-		
 		$this->connector
 			->expects($this->once())
-			->method('upsert')
-			->with([$child1, $child2])
+			->method('update')
+			->with($child1)
 			->willReturn(2);
 		
-		$subject->updated([$object1, $object2]);
+		$subject->updated($object1);
 	}
 	
 	public function test_updated_HaveChildren_CountFromConnectorReturned()
@@ -353,10 +347,10 @@ class ByPropertiesTest extends TestCase
 		$object->child = new ByPropertiesChild();
 		
 		$this->connector
-			->method('upsert')
+			->method('update')
 			->willReturn(123);
 		
-		self::assertEquals(123, $subject->updated([$object]));
+		self::assertEquals(123, $subject->updated($object));
 	}
 	
 	public function test_updated_FalseReturnedByConnector_FalseReturned()
@@ -368,7 +362,7 @@ class ByPropertiesTest extends TestCase
 		$object->child = new ByPropertiesChild();
 		
 		$this->connector
-			->method('upsert')
+			->method('update')
 			->willReturn(false);
 		
 		self::assertFalse($subject->updated($object));
@@ -383,7 +377,7 @@ class ByPropertiesTest extends TestCase
 		$object->b = 'dc';
 		$object->child = new ByPropertiesChild();
 		
-		$subject->updated([$object]);
+		$subject->updated($object);
 		
 		self::assertEquals($object->a, $object->child->a);
 		self::assertEquals($object->b, $object->child->c);

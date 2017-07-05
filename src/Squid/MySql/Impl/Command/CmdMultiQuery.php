@@ -17,7 +17,7 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 	
 	/**
 	 * @param string|IMySqlCommandConstructor|array $query
-	 * @param array $bind
+	 * @param array $bind Will be ignored if array of strings passed
 	 * @return ICmdMultiQuery
 	 */
 	public function add($query, array $bind = [])
@@ -34,7 +34,7 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 		else if ($query instanceof IMySqlCommandConstructor)
 		{
 			$bind = ($bind ?: $query->bind());
-			$query = $query->assemble() . ';';
+			$query = $query->assemble();
 		}
 		
 		$this->command .= "$query;";

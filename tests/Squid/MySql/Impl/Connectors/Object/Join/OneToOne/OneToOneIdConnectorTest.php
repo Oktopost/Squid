@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 use Squid\MySql\Impl\Connectors\Object\Generic\GenericIdConnector;
 use Squid\MySql\Impl\Connectors\Object\Join\JoinConnectors\ByProperties;
-use Squid\MySql\Impl\Connectors\Object\Generic\GenericIdentityConnector;
 
 
 class OneToOneIdConnectorTest extends TestCase
@@ -30,10 +29,10 @@ class OneToOneIdConnectorTest extends TestCase
 		$this->tableB = DataSet::table(['aa', 'pa', 'c'], $dataB);
 		
 		DataSet::connector()
-			->direct("ALTER TABLE {$this->tableA} ADD PRIMARY KEY (a)")->executeDml();
+			->direct("ALTER TABLE {$this->tableA} ADD PRIMARY KEY (a), CHANGE `a` `a` INT(11) NOT NULL AUTO_INCREMENT;")->executeDml();
 		
 		DataSet::connector()
-			->direct("ALTER TABLE {$this->tableB} ADD PRIMARY KEY (aa)")->executeDml();
+			->direct("ALTER TABLE {$this->tableB} ADD PRIMARY KEY (aa), CHANGE `aa` `aa` INT(11) NOT NULL AUTO_INCREMENT;")->executeDml();
 		
 		
 		$mainConnector = new GenericIdConnector();
@@ -126,6 +125,46 @@ class OneToOneIdConnectorTest extends TestCase
 		self::assertNull($res[1]->child);
 		self::assertEquals(2, $res[1]->a);
 	}
+	
+	
+	public function test_save()
+	{
+		$subject = $this->subject([['a' => 1, 'b' => 2]], [['aa' => 1, 'pa' => 1, 'c' => 4]]);
+		
+		$child1 = new OneToOneIdChild();
+		$child1->aa = 1;
+		$child1->c = 5;
+		
+		$child2 = new OneToOneIdChild();
+		$child2->aa = null;
+		$child2->c = 6;
+		
+		$parent1 = new OneToOneIdParent();
+		$parent1->a = 1;
+		$parent1->b = 3;
+		$parent1->child = $child1;
+		
+		$parent2 = new OneToOneIdParent();
+		$parent2->b = 4;
+		$parent2->child = $child2;
+		
+		$parent3 = new OneToOneIdParent();
+		$parent3->b = 5;
+		
+		$res = $subject->save([$parent1, $parent2, $parent3]);
+		
+		self::assertRowCount(3, $this->tableA);
+		self::assertRowExists($this->tableA, ['b' => 3]);
+		self::assertRowExists($this->tableA, ['b' => 4]);
+		self::assertRowExists($this->tableA, ['b' => 5]);
+		
+		self::assertRowCount(2, $this->tableB);
+		self::assertRowExists($this->tableB, ['c' => 5]);
+		self::assertRowExists($this->tableB, ['c' => 6]);
+		
+		// 2 upserted and 3 inserted
+		self::assertEquals(2 * 2 + 3, $res);
+	}
 }
 
 
@@ -138,7 +177,7 @@ class OneToOneIdChild extends LiteObject
 	protected function _setup()
 	{
 		return [
-			'aa'	=> LiteSetup::createString(),
+			'aa'	=> LiteSetup::createString(null),
 			'pa'	=> LiteSetup::createString(),
 			'c'		=> LiteSetup::createString(),
 		];
@@ -153,7 +192,7 @@ class OneToOneIdParent extends LiteObject
 	protected function _setup()
 	{
 		return [
-			'a'		=> LiteSetup::createString(),
+			'a'		=> LiteSetup::createString(null),
 			'b'		=> LiteSetup::createString(),
 			'child'	=> LiteSetup::createInstanceOf(OneToOneIdChild::class)
 		];

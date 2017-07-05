@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
+use lib\DummyObject;
 use PHPUnit\Framework\TestCase;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 

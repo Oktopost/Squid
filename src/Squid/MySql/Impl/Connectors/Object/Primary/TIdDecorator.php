@@ -10,6 +10,7 @@ use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
 
 trait TIdDecorator
 {
+	use TIdSave;
 	use TIdKeyConsumer;
 	use TIdentityDecorator;
 	
@@ -45,5 +46,14 @@ trait TIdDecorator
 	public function loadById($id)
 	{
 		return $this->getIdConnector()->loadById($id);
+	}
+
+	/**
+	 * @param mixed|array $objects
+	 * @return int|false
+	 */
+	public function save($objects)
+	{
+		return $this->getIdConnector()->save($objects);
 	}
 }

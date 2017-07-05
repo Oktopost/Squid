@@ -42,4 +42,20 @@ abstract class AbstractOneToOneIdConnector extends AbstractOneToOneIdentityConne
 		
 		return $object;
 	}
+	
+	/**
+	 * @param mixed|array $objects
+	 * @return int|false
+	 */
+	public function save($objects)
+	{
+		$count = $this->getPrimaryIdConnector()->save($objects);
+		
+		if ($count === false)
+			return false;
+		
+		$savedCount = $this->config()->saved($objects);
+		
+		return ($savedCount === false ? false : $count + $savedCount);
+	}
 }

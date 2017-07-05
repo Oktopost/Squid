@@ -28,4 +28,10 @@ interface IJoinConnector
 	 * @return int|false
 	 */
 	public function upserted($parents);
+
+	/**
+	 * @param mixed|array $parents
+	 * @return int|false
+	 */
+	public function saved($parents);
 }

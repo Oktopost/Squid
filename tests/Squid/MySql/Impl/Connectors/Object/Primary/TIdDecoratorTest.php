@@ -56,6 +56,20 @@ class TIdDecoratorTest extends TestCase
 		
 		self::assertEquals(12, $res);
 	}
+	
+	
+	public function test_save_ConnectorCalled()
+	{
+		$mock = $this->createMock(IdConnector::class);
+		$subject = $this->subject();
+		$subject->object = $mock;
+		
+		$mock->expects($this->once())->method('save')->with('a')->willReturn(12);
+		
+		$res = $subject->save('a');
+		
+		self::assertEquals(12, $res);
+	}
 }
 
 
@@ -69,7 +83,7 @@ class TIdDecoratorTestHelper extends AbstractORMConnector
 	
 	protected function getIdKey(): array
 	{
-		return ['a'];
+		return ['a' => 'a'];
 	}
 	
 	protected function getIdConnector()
@@ -84,5 +98,10 @@ class TIdDecoratorTestHelper extends AbstractORMConnector
 	public function getIdConnectorMethod()
 	{
 		return $this->getIdConnectorOrigin();
+	}
+
+	protected function getIdProperty(): string
+	{
+		return 'a';
 	}
 }

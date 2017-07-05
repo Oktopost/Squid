@@ -14,7 +14,7 @@ class DummyObject extends LiteObject
 	protected function _setup()
 	{
 		return [
-			'a'	=> LiteSetup::createString(),
+			'a'	=> LiteSetup::createString(null),
 			'b'	=> LiteSetup::createString()
 		];
 	}
@@ -39,7 +39,7 @@ class DummyObjectB extends LiteObject
 	protected function _setup()
 	{
 		return [
-			'a'	=> LiteSetup::createString(),
+			'a'	=> LiteSetup::createString(null),
 			'b'	=> LiteSetup::createString(),
 			'c'	=> LiteSetup::createString()
 		];

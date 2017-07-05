@@ -5,6 +5,7 @@ namespace Squid\MySql\Impl\Connectors\Object;
 use Squid\MySql\Connectors\Object\IIdConnector;
 
 use Squid\MySql\Impl\Connectors\Object\Primary\TIdKey;
+use Squid\MySql\Impl\Connectors\Object\Primary\TIdSave;
 use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
 
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
@@ -13,6 +14,7 @@ use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 class IdConnector extends AbstractORMConnector implements IIdConnector
 {
 	use TIdentityDecorator;
+	use TIdSave;
 	use TIdKey;
 	
 	
@@ -26,7 +28,7 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 	{
 		return $this->getGenericObjectConnector()->deleteByFields([$this->getIdField() => $id]);
 	}
-
+	
 	public function loadById($id)
 	{
 		if (is_array($id))

@@ -2,11 +2,11 @@
 namespace Squid\MySql\Connectors\Object\CRUD\ID;
 
 
-interface IIDLoad
+interface IIdDelete
 {
 	/**
 	 * @param string|array $id
-	 * @return mixed|array|null|false
+	 * @return int|false
 	 */
-	public function loadById($id);
+	public function deleteById($id);
 }

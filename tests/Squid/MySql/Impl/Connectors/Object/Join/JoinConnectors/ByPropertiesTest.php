@@ -5,6 +5,8 @@ namespace Squid\MySql\Impl\Connectors\Object\Join\JoinConnectors;
 use Objection\LiteObject;
 use Objection\LiteSetup;
 use PHPUnit\Framework\TestCase;
+use Squid\MySql\Connectors\Object\CRUD\ID\IIdSave;
+use Squid\MySql\Connectors\Object\Generic\IGenericIdConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
 
 
@@ -381,6 +383,71 @@ class ByPropertiesTest extends TestCase
 		
 		self::assertEquals($object->a, $object->child->a);
 		self::assertEquals($object->b, $object->child->c);
+	}
+
+	/**
+	 * @expectedException \Squid\Exceptions\SquidUsageException
+	 */
+	public function test_save_ConnectorDoesNotHAveSaveMethod_ExceptionThrown()
+	{
+		$subject = $this->subject();
+		
+		$object = new ByPropertiesParent();
+		$object->a = 'ac';
+		$object->b = 'dc';
+		$object->child = new ByPropertiesChild();
+		
+		$subject->saved($object);
+	}
+	
+	public function test_save_NoChildren_Return0()
+	{
+		$connector = $this->getMockBuilder(IGenericIdConnector::class)->getMock();
+		$subject = $this->subject();
+		$subject->setConnector($connector);
+		
+		$object = new ByPropertiesParent();
+		$object->a = 'ac';
+		$object->b = 'dc';
+		
+		self::assertEquals(0, $subject->saved($object));
+	}
+	
+	public function test_save_HaveChildren_SaveCalledForChild()
+	{
+		$connector = $this->getMockBuilder(IGenericIdConnector::class)->getMock();
+		$subject = $this->subject();
+		$subject->setConnector($connector);
+		
+		$object = new ByPropertiesParent();
+		$object->a = 'ac';
+		$object->b = 'dc';
+		$object->child = new ByPropertiesChild();
+		
+		$connector
+			->expects($this->once())
+			->method('save')
+			->with([$object->child]);
+		
+		$subject->saved($object);
+	}
+	
+	public function test_save_HaveChildren_ContReturned()
+	{
+		$connector = $this->getMockBuilder(IGenericIdConnector::class)->getMock();
+		$subject = $this->subject();
+		$subject->setConnector($connector);
+		
+		$object = new ByPropertiesParent();
+		$object->a = 'ac';
+		$object->b = 'dc';
+		$object->child = new ByPropertiesChild();
+		
+		$connector
+			->method('save')
+			->willReturn(123);
+		
+		self:self::assertEquals(123, $subject->saved($object));
 	}
 }
 

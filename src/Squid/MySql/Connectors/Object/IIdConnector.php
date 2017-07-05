@@ -2,8 +2,9 @@
 namespace Squid\MySql\Connectors\Object;
 
 
-use Squid\MySql\Connectors\Object\CRUD\ID\IIDLoad;
-use Squid\MySql\Connectors\Object\CRUD\ID\IIDDelete;
+use Squid\MySql\Connectors\Object\CRUD\ID\IIdSave;
+use Squid\MySql\Connectors\Object\CRUD\ID\IIdLoad;
+use Squid\MySql\Connectors\Object\CRUD\ID\IIdDelete;
 
 
 /**
@@ -11,8 +12,9 @@ use Squid\MySql\Connectors\Object\CRUD\ID\IIDDelete;
  */
 interface IIdConnector extends 
 	IIdentityConnector,
-	IIDDelete,
-	IIDLoad
+	IIdDelete,
+	IIdLoad,
+	IIdSave
 {
 	
 }

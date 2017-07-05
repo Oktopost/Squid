@@ -3,12 +3,14 @@ namespace Squid\MySql\Impl\Connectors\Object\Polymorphic;
 
 
 use Squid\MySql\Impl\Connectors\Object\Primary\TIdKey;
+use Squid\MySql\Impl\Connectors\Object\Primary\TIdSave;
 use Squid\MySql\Connectors\Object\Polymorphic\IPolymorphicIdConnector;
 
 
 class PolymorphicIdConnector extends PolymorphicIdentityConnector implements IPolymorphicIdConnector
 {
 	use TIdKey;
+	use TIdSave;
 	
 
 	/**

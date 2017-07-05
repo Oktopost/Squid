@@ -2,7 +2,9 @@
 namespace Squid\MySql\Impl\Connectors\Object\Join\JoinConnectors;
 
 
+use Squid\Exceptions\SquidUsageException;
 use Squid\MySql\Connectors\Object\Join\IJoinConnector;
+use Squid\MySql\Connectors\Object\CRUD\ID\IIdSave;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
 
 
@@ -132,15 +134,8 @@ class ByProperties implements IJoinConnector
 		return $parents;
 	}
 
-	/**
-	 * @param mixed|array $parents
-	 * @return int|false
-	 */
-	public function inserted($parents, $ignore = false)
+	private function updateChildren(array $parents): array
 	{
-		if (!is_array($parents))
-			$parents = [$parents];
-		
 		$modified = [];
 		
 		foreach ($parents as $parent)
@@ -158,6 +153,21 @@ class ByProperties implements IJoinConnector
 			}
 		}
 		
+		return $modified;
+	}
+	
+	/**
+	 * @param mixed|array $parents
+	 * @param bool $ignore
+	 * @return false|int
+	 */
+	public function inserted($parents, $ignore = false)
+	{
+		if (!is_array($parents))
+			$parents = [$parents];
+		
+		$modified = $this->updateChildren($parents);
+		
 		return ($modified ? $this->getConnector()->insertObjects($modified, $ignore) : 0);
 	}
 
@@ -167,16 +177,8 @@ class ByProperties implements IJoinConnector
 	 */
 	public function updated($parent)
 	{
-		$child = $parent->{$this->parentReferenceProperty};
-			
-		if (!$child) return 0;
-		
-		foreach ($this->properties as $parentProp => $childProp)
-		{
-			$child->$childProp = $parent->$parentProp;
-		}
-		
-		return $this->getConnector()->update($child);
+		$modified = $this->updateChildren([$parent]);
+		return ($modified ? $this->getConnector()->update($modified[0]) : 0);
 	}
 
 	/**
@@ -188,22 +190,29 @@ class ByProperties implements IJoinConnector
 		if (!is_array($parents))
 			$parents = [$parents];
 		
-		$children = [];
+		$modified = $this->updateChildren($parents);
 		
-		foreach ($parents as $parent)
-		{
-			$child = $parent->{$this->parentReferenceProperty};
-				
-			if (!$child) continue;
-			
-			foreach ($this->properties as $parentProp => $childProp)
-			{
-				$child->$childProp = $parent->$parentProp;
-			}
-			
-			$children[] = $child;
-		}
+		return ($modified ? $this->getConnector()->upsert($modified) : 0);
+	}
+
+	/**
+	 * @param mixed|array $parents
+	 * @return int|false
+	 */
+	public function saved($parents)
+	{
+		if (!is_array($parents))
+			$parents = [$parents];
 		
-		return ($children ? $this->getConnector()->upsert($children) : 0);
+		$connector = $this->getConnector();
+		
+		if (!($connector instanceof IIdSave))
+			throw new SquidUsageException('In order to use the save operation on a OneToOne connector, ' . 
+				'the referenced object\'s connector must also have the save method (see: IIdSave interface)');
+		
+		$modified = $this->updateChildren($parents);
+		
+		return ($modified ? $connector->save($modified) : 0);
+		
 	}
 }

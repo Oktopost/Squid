@@ -2,7 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Internal\Object\CRUD\IdentityInsert;
 
 
-use Squid\MySql\Connectors\Object\ID\IIDGenerator;
+use Squid\MySql\Connectors\Object\ID\IIdGenerator;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
@@ -10,11 +10,11 @@ class GeneratorIDInsert extends AbstractIdentityInsert
 {
 	private $name;
 	
-	/** @var IIDGenerator */
+	/** @var IIdGenerator */
 	private $generator;
 
 	
-	public function __construct(AbstractORMConnector $connector, IIDGenerator $generator)
+	public function __construct(AbstractORMConnector $connector, IIdGenerator $generator)
 	{
 		parent::__construct($connector);
 		$this->generator = $generator;

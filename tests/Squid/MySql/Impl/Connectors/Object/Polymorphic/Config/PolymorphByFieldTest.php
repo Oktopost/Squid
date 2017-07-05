@@ -59,6 +59,25 @@ class PolymorphByFieldTest extends TestCase
 	}
 	
 	
+	public function test_addClasses_PassArrayFirstTime()
+	{
+		$subject = new PolymorphByFieldTestHelper();
+		$subject->addClasses(['a'	=> 'conn1', 'b'	=> 'conn2']);
+		
+		self::assertEquals(['a'	=> 'conn1', 'b'	=> 'conn2'], $subject->callGetConnectorsByClass());
+	}
+	
+	public function test_addClasses_PassArrayNumberOfTimes()
+	{
+		$subject = new PolymorphByFieldTestHelper();
+		$subject->addClass(['a'	=> 'conn1']);
+		
+		$subject->addClasses(['b'	=> 'conn2']);
+		
+		self::assertEquals(['a'	=> 'conn1', 'b'	=> 'conn2'], $subject->callGetConnectorsByClass());
+	}
+	
+	
 	public function test_addFieldRule_PassArrayFirstTime()
 	{
 		$subject = new PolymorphByFieldTestHelper();

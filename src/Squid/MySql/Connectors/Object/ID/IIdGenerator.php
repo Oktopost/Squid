@@ -2,7 +2,7 @@
 namespace Squid\MySql\Connectors\Object\ID;
 
 
-interface IIDGenerator
+interface IIdGenerator
 {
 	/**
 	 * Generate Ids for all given objects

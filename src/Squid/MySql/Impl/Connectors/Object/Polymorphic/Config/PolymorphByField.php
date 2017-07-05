@@ -58,6 +58,15 @@ class PolymorphByField extends AbstractPolymorphByField
 	}
 
 	/**
+	 * @param array $classes
+	 * @return PolymorphByField|static
+	 */
+	public function addClasses(array $classes): PolymorphByField
+	{
+		return $this->addClass($classes);
+	}
+
+	/**
 	 * @param string|array $fieldName
 	 * @param callable|array|null $rule
 	 * @return PolymorphByField|static

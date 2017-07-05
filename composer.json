@@ -9,6 +9,16 @@
 			"name": "Alexey Puchkov",
 			"email": "alexey@oktopost.com",
 			"role": "Developer"
+		},
+		{
+			"name": "Daniel Podrabinek",
+			"email": "dpodrabinek@oktopost.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Ivan Puchkov",
+			"email": "ivan@oktopost.com",
+			"role": "Developer"
 		}
 	],
 	"minimum-stability": "stable",

@@ -2,8 +2,8 @@
 namespace Squid\MySql\Impl\Connectors\Object\Primary;
 
 
-use Squid\MySql\Connectors\Object\IIdConnector;
 use Squid\MySql\Connectors\Object\IIdentityConnector;
+use Squid\MySql\Connectors\Object\ID\IIdGenerator;
 
 use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
 
@@ -15,11 +15,11 @@ trait TIdDecorator
 	use TIdentityDecorator;
 	
 	
-	/** @var IIdConnector */
+	/** @var DecoratedIdConnector */
 	private $_idConnector;
 	
 	
-	protected function getIdConnector(): IIdConnector
+	protected function getIdConnector(): DecoratedIdConnector
 	{
 		if (!$this->_idConnector)
 		{
@@ -55,5 +55,28 @@ trait TIdDecorator
 	public function save($objects)
 	{
 		return $this->getIdConnector()->save($objects);
+	}
+	
+	
+	/**
+	 * @param array|string $column Column name to property name
+	 * @param null|string $property
+	 * @return static
+	 */
+	public function setAutoIncrementId($column, ?string $property = null)
+	{
+		$this->getIdConnector()->setAutoIncrementId($column, $property);
+		return $this;
+	}
+	
+	/**
+	 * @param array|string $column Column name to property name
+	 * @param IIdGenerator $generator
+	 * @return static
+	 */
+	public function setGeneratedId($column, IIdGenerator $generator)
+	{
+		$this->getIdConnector()->setGeneratedId($column, $generator);
+		return $this;
 	}
 }

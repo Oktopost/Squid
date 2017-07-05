@@ -16,7 +16,7 @@ interface IInsertHandler
 	 * @param string $field
 	 * @return static|IInsertHandler
 	 */
-	public function setIdField(string $field): IInsertHandler;
+	public function setIdProperty(string $field): IInsertHandler;
 	
 	/**
 	 * @param array $items

@@ -2,12 +2,15 @@
 namespace Squid\MySql\Impl\Connectors\Object;
 
 
+use Squid\MySql\Connectors\Object\ID\IIdGenerator;
 use Squid\MySql\Connectors\Object\IIdConnector;
+use Squid\MySql\Connectors\Object\Primary\IInsertHandler;
 
+use Squid\MySql\Impl\Connectors\Object\Primary\Insert\AutoIncInsertHandler;
+use Squid\MySql\Impl\Connectors\Object\Primary\Insert\GeneratedIdInsertHandler;
 use Squid\MySql\Impl\Connectors\Object\Primary\TIdKey;
 use Squid\MySql\Impl\Connectors\Object\Primary\TIdSave;
 use Squid\MySql\Impl\Connectors\Object\Identity\TIdentityDecorator;
-
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
@@ -18,12 +21,39 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 	use TIdKey;
 	
 	
+	/** @var IInsertHandler */
+	private $insertHandler = null;
+	
+	
 	protected function getPrimaryKeys(): array
 	{
 		return $this->getIdKey();
 	}
 	
 	
+	/**
+	 * @param array|mixed $object
+	 * @return int|false
+	 */
+	public function insert($object)
+	{
+		if ($this->insertHandler)
+		{
+			return $this->insertHandler
+				->setInsertProvider($this->getIdentityConnector())
+				->setIdProperty($this->getIdProperty())
+				->insert(is_array($object) ? $object : [$object]);
+		}
+		else
+		{
+			return $this->getIdentityConnector()->insert($object);
+		}
+	}
+
+	/**
+	 * @param array|mixed $id
+	 * @return false|int
+	 */
 	public function deleteById($id)
 	{
 		return $this->getGenericObjectConnector()->deleteByFields([$this->getIdField() => $id]);
@@ -39,5 +69,38 @@ class IdConnector extends AbstractORMConnector implements IIdConnector
 		{
 			return $this->getGenericObjectConnector()->selectObjectByFields([$this->getIdField() => $id]);
 		}
+	}
+	
+
+	/**
+	 * @param array|string $column Column name to property name
+	 * @param null|string $property
+	 * @return static|IdConnector
+	 */
+	public function setAutoIncrementId($column, ?string $property = null): IdConnector
+	{
+		$this->setIdKey($column, $property);
+		
+		$this->insertHandler = new AutoIncInsertHandler();
+		$this->insertHandler->setConnector($this->getConnector());
+		
+		return $this;
+	}
+
+	/**
+	 * @param array|string $id Column name to property name
+	 * @param IIdGenerator $generator
+	 * @return IdConnector
+	 */
+	public function setGeneratedId($id, IIdGenerator $generator): IdConnector
+	{
+		$this->setIdKey($id);
+		
+		$this->insertHandler = new GeneratedIdInsertHandler();
+		$this->insertHandler
+			->setTableName($this->getTableName())
+			->setGenerator($generator);
+		
+		return $this;
 	}
 }

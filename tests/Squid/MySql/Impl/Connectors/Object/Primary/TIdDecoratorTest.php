@@ -5,6 +5,7 @@ namespace Squid\MySql\Impl\Connectors\Object\Primary;
 use lib\DataSet;
 use lib\DummyObject;
 use PHPUnit\Framework\TestCase;
+use Squid\MySql\Connectors\Object\ID\IIdGenerator;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 use Squid\MySql\Impl\Connectors\Object\IdConnector;
 
@@ -69,6 +70,36 @@ class TIdDecoratorTest extends TestCase
 		$res = $subject->save('a');
 		
 		self::assertEquals(12, $res);
+	}
+	
+	
+	public function test_setAutoIncrementId_ConnectorCalled()
+	{
+		$mock = $this->createMock(IdConnector::class);
+		$subject = $this->subject();
+		$subject->object = $mock;
+		
+		$mock->expects($this->once())->method('setAutoIncrementId')->with('a')->willReturnSelf();
+		
+		$res = $subject->setAutoIncrementId('a');
+		
+		self::assertEquals($subject, $res);
+	}
+	
+	
+	public function test_setGeneratedId_ConnectorCalled()
+	{
+		$mock = $this->createMock(IdConnector::class);
+		$subject = $this->subject();
+		$subject->object = $mock;
+		
+		/** @var IIdGenerator $generator */
+		$generator = $this->createMock(IIdGenerator::class);
+		$mock->expects($this->once())->method('setGeneratedId')->with('a', $generator)->willReturnSelf();
+		
+		$res = $subject->setGeneratedId('a', $generator);
+		
+		self::assertEquals($subject, $res);
 	}
 }
 

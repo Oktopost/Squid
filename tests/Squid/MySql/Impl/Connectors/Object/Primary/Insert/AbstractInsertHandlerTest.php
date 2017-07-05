@@ -13,7 +13,7 @@ class AbstractInsertHandlerTest extends TestCase
 	{
 		$subject = new AbstractInsertHandlerTestHelper();
 		
-		self::assertEquals($subject, $subject->setIdField('a'));
+		self::assertEquals($subject, $subject->setIdProperty('a'));
 		self::assertEquals($subject, $subject->setInsertProvider(function() {}));
 	}
 	

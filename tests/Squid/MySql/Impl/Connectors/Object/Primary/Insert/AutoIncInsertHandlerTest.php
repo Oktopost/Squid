@@ -27,7 +27,7 @@ class AutoIncInsertHandlerTest extends TestCase
 		$subject = new AutoIncInsertHandler();
 		$subject->setInsertProvider($conn);
 		$subject->setConnector(DataSet::connector());
-		$subject->setIdField('a');
+		$subject->setIdProperty('a');
 		
 		return $subject;
 	}

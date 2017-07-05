@@ -36,7 +36,7 @@ class GeneratedIdInsertHandlerTest extends TestCase
 		$subject = new GeneratedIdInsertHandler();
 		return $subject->setInsertProvider($conn)
 			->setGenerator($this->generator)
-			->setIdField('a')
+			->setIdProperty('a')
 			->setTableName($table);
 	}
 

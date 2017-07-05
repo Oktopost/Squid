@@ -54,7 +54,7 @@ abstract class AbstractInsertHandler implements IInsertHandler
 	 * @param string $field
 	 * @return static|IInsertHandler
 	 */
-	public function setIdField(string $field): IInsertHandler
+	public function setIdProperty(string $field): IInsertHandler
 	{
 		$this->field = $field;
 		return $this;

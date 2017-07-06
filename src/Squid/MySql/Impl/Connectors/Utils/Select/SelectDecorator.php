@@ -22,8 +22,8 @@ class SelectDecorator implements ISelect
 	private $select;
 	
 	
-	private function addColumn($columns, $bind) { $this->select->columnsExp($columns, $bind); return $this; }
-	private function _orderBy(array $expressions) { $this->select->orderBy($expressions); return $this; }
+	protected function addColumn($columns, $bind) { $this->select->columnsExp($columns, $bind); return $this; }
+	protected function _orderBy(array $expressions) { $this->select->orderBy($expressions); return $this; }
 	
 	
 	protected function getSelect(): ICmdSelect

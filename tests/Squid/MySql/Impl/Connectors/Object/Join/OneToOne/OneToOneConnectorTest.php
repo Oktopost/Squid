@@ -7,6 +7,7 @@ use lib\TDBAssert;
 use Objection\LiteObject;
 use Objection\LiteSetup;
 use PHPUnit\Framework\TestCase;
+use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
 use Squid\MySql\Impl\Connectors\Object\Generic\GenericIdentityConnector;
 use Squid\MySql\Impl\Connectors\Object\Join\JoinConnectors\ByProperties;
 use Squid\OrderBy;
@@ -455,6 +456,83 @@ class OneToOneConnectorTest extends TestCase
 		self::assertRowExists($this->tableA, ['a' => 1, 'b' => 'new_1']);
 		self::assertRowExists($this->tableA, ['a' => 2, 'b' => '3']);
 		self::assertRowExists($this->tableB, ['c' => '15']);
+	}
+	
+	public function test_query_QueryObjectReturned()
+	{
+		$subject = $this->subject([['a' => 1, 'b' => 1]], ['aa' => 11, 'pa' => 1, 'c' => 2]);
+		self::assertInstanceOf(ICmdObjectSelect::class, $subject->query());
+	}
+	
+	public function test_query_QueryFirst()
+	{
+		$subject = $this->subject([['a' => 1, 'b' => 1]], ['aa' => 11, 'pa' => 1, 'c' => 2]);
+		$res = $subject->query()->byField('a', 1)->queryFirst();
+		
+		self::assertEquals(1, $res->a);
+		self::assertEquals(11, $res->child->aa);
+	}
+	
+	public function test_query_QueryOne()
+	{
+		$subject = $this->subject([['a' => 1, 'b' => 1]], ['aa' => 11, 'pa' => 1, 'c' => 2]);
+		$res = $subject->query()->byField('a', 1)->queryOne();
+		
+		self::assertEquals(1, $res->a);
+		self::assertEquals(11, $res->child->aa);
+	}
+	
+	public function test_query_QueryMap()
+	{
+		$subject = $this->subject([['a' => 1, 'b' => 1], ['a' => 2, 'b' => 2]], ['aa' => 11, 'pa' => 1, 'c' => 2]);
+		$res = $subject->query()->orderBy('a')->queryMapRow('b');
+		
+		self::assertEquals(1, $res[1]->a);
+		self::assertEquals(11, $res[1]->child->aa);
+		
+		self::assertEquals(2, $res[2]->a);
+		self::assertNull($res[2]->child);
+	}
+	
+	public function test_query_QueryAll()
+	{
+		$subject = $this->subject([['a' => 1, 'b' => 1], ['a' => 2, 'b' => 2]], ['aa' => 11, 'pa' => 1, 'c' => 2]);
+		$res = $subject->query()->orderBy('a')->queryAll();
+		
+		self::assertEquals(1, $res[0]->a);
+		self::assertEquals(11, $res[0]->child->aa);
+		
+		self::assertEquals(2, $res[1]->a);
+		self::assertNull($res[1]->child);
+	}
+
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_query_QueryIterator_ExceptionThrown()
+	{
+		$subject = $this->subject();
+		$subject->query()->orderBy('a')->queryIterator();
+	}
+	
+	/**
+	 * @expectedException \Squid\Exceptions\SquidException
+	 */
+	public function test_query_queryWithCallback_ExceptionThrown()
+	{
+		$subject = $this->subject();
+		$subject->query()->orderBy('a')->queryWithCallback(function() {});
+	}
+	
+	public function test_query_EmptyTable()
+	{
+		$subject = $this->subject();
+		
+		self::assertNull($subject->query()->byField('a', 1)->queryFirst());
+		self::assertNull($subject->query()->byField('a', 1)->queryOne());
+		
+		self::assertEquals([], $subject->query()->byField('a', 1)->queryMapRow('a'));
+		self::assertEquals([], $subject->query()->byField('a', 1)->queryAll());
 	}
 }
 

@@ -34,13 +34,7 @@ abstract class AbstractOneToOneIdConnector extends AbstractOneToOneIdentityConne
 	public function loadById($id)
 	{
 		$object = $this->getPrimaryIdConnector()->loadById($id);
-		
-		if ($object && $this->config()->loaded($object) === false)
-		{
-			return false;
-		}
-		
-		return $object;
+		return ($object ? $this->config()->loaded($object) : $object);
 	}
 	
 	/**

@@ -37,24 +37,4 @@ class OneToOneIdConnector extends AbstractOneToOneIdConnector implements IOneToO
 		$this->connector = $connector;
 		return $this;
 	}
-	
-	
-	/**
-	 * @param string|array $id
-	 * @return int|false
-	 */
-	public function deleteById($id)
-	{
-		return $this->getPrimaryIdConnector()->deleteById($id);
-	}
-
-	/**
-	 * @param string|array $id
-	 * @return mixed|array|null|false
-	 */
-	public function loadById($id)
-	{
-		$object = $this->getPrimaryIdConnector()->loadById($id);
-		return ($object ? $this->config()->loaded($object) : $object);
-	}
 }

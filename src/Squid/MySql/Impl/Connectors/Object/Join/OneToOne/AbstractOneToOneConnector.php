@@ -3,14 +3,21 @@ namespace Squid\MySql\Impl\Connectors\Object\Join\OneToOne;
 
 
 use Squid\OrderBy;
+use Squid\Exceptions\SquidUsageException;
 
+use Squid\MySql\Connectors\Object\IQueryConnector;
 use Squid\MySql\Connectors\Object\Join\IJoinConnector;
 use Squid\MySql\Connectors\Object\Join\OneToOne\IOneToOneConnector;
+use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
 use Squid\MySql\Connectors\Object\Generic\IGenericObjectConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
 
+use Squid\MySql\Impl\Connectors\Object\Join\Selector\JoinedObjectSelect;
 
-abstract class AbstractOneToOneConnector implements IOneToOneConnector
+
+abstract class AbstractOneToOneConnector implements 
+	IOneToOneConnector,
+	IQueryConnector
 {
 	/** @var IJoinConnector */
 	private $config;
@@ -174,5 +181,19 @@ abstract class AbstractOneToOneConnector implements IOneToOneConnector
 	{
 		$count = $this->getPrimary()->upsertObjectsForValues($objects, $valueFields);
 		return $this->upsertChildren($objects, $count, 'upserted');
+	}
+	
+	
+	public function query(): ICmdObjectSelect
+	{
+		$primary = $this->getPrimary();
+		
+		if (!($primary instanceof IQueryConnector))
+		{
+			throw new SquidUsageException('query in OneToOne connector can be used only if the ' . 
+				'primary connector also implements IQueryConnector.');
+		}
+		
+		return new JoinedObjectSelect($primary->query(), $this->config());
 	}
 }

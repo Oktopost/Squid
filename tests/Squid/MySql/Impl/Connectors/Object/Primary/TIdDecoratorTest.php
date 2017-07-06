@@ -4,11 +4,14 @@ namespace Squid\MySql\Impl\Connectors\Object\Primary;
 
 use lib\DataSet;
 use lib\DummyObject;
+
 use PHPUnit\Framework\TestCase;
-use Squid\MySql\Connectors\Object\ID\IIdGenerator;
+
 use Squid\MySql\Connectors\Object\IIdConnector;
-use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
+use Squid\MySql\Connectors\Object\ID\IIdGenerator;
+
 use Squid\MySql\Impl\Connectors\Object\IdConnector;
+use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 
 
 class TIdDecoratorTest extends TestCase

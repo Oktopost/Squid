@@ -6,6 +6,7 @@ use lib\DataSet;
 use lib\DummyObject;
 use PHPUnit\Framework\TestCase;
 use Squid\MySql\Connectors\Object\ID\IIdGenerator;
+use Squid\MySql\Connectors\Object\IIdConnector;
 use Squid\MySql\Impl\Connectors\Internal\Object\AbstractORMConnector;
 use Squid\MySql\Impl\Connectors\Object\IdConnector;
 
@@ -86,6 +87,13 @@ class TIdDecoratorTest extends TestCase
 		self::assertEquals($subject, $res);
 	}
 	
+	public function test_setAutoIncrementId_Sanity()
+	{
+		$subject = $this->subject();
+		$subject->setAutoIncrementId('a');
+		self::assertInstanceOf(IIdConnector::class, $subject->getIdConnectorMethod());
+	}
+	
 	
 	public function test_setGeneratedId_ConnectorCalled()
 	{
@@ -101,12 +109,25 @@ class TIdDecoratorTest extends TestCase
 		
 		self::assertEquals($subject, $res);
 	}
+	
+	public function test_setGeneratedId_Sanity()
+	{
+		/** @var IIdGenerator $generator */
+		$generator = $this->createMock(IIdGenerator::class);
+		
+		$subject = $this->subject();
+		$subject->setGeneratedId('a', $generator);
+		self::assertInstanceOf(IIdConnector::class, $subject->getIdConnectorMethod());
+	}
 }
 
 
 class TIdDecoratorTestHelper extends AbstractORMConnector
 {
-	use TIdDecorator { TIdDecorator::getIdConnector as getIdConnectorOrigin; }
+	use TIdDecorator { 
+		TIdDecorator::getIdConnector as getIdConnectorOrigin;
+		TIdDecorator::getBareIdConnector as getBareIdConnectorOrigin; 
+	}
 	
 	
 	public $object; 
@@ -123,6 +144,14 @@ class TIdDecoratorTestHelper extends AbstractORMConnector
 			return $this->object;
 		
 		return $this->getIdConnectorOrigin();
+	}
+	
+	protected function getBareIdConnector()
+	{
+		if ($this->object)
+			return $this->object;
+		
+		return $this->getBareIdConnectorOrigin();
 	}
 	
 	

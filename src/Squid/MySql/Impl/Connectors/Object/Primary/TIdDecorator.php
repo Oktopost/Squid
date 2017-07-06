@@ -19,6 +19,18 @@ trait TIdDecorator
 	private $_idConnector;
 	
 	
+	protected function getBareIdConnector(): DecoratedIdConnector
+	{
+		if (!$this->_idConnector)
+		{
+			$this->_idConnector = new DecoratedIdConnector($this);
+			$this->_idConnector
+				->setGenericObjectConnector($this->getGenericObjectConnector());
+		}
+		
+		return $this->_idConnector;
+	}
+	
 	protected function getIdConnector(): DecoratedIdConnector
 	{
 		if (!$this->_idConnector)
@@ -65,7 +77,7 @@ trait TIdDecorator
 	 */
 	public function setAutoIncrementId($column, ?string $property = null)
 	{
-		$this->getIdConnector()->setAutoIncrementId($column, $property);
+		$this->getBareIdConnector()->setAutoIncrementId($column, $property);
 		return $this;
 	}
 	
@@ -76,7 +88,7 @@ trait TIdDecorator
 	 */
 	public function setGeneratedId($column, IIdGenerator $generator)
 	{
-		$this->getIdConnector()->setGeneratedId($column, $generator);
+		$this->getBareIdConnector()->setGeneratedId($column, $generator);
 		return $this;
 	}
 }

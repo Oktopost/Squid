@@ -168,7 +168,18 @@ class ByProperties implements IJoinConnector
 		
 		$modified = $this->updateChildren($parents);
 		
-		return ($modified ? $this->getConnector()->insertObjects($modified, $ignore) : 0);
+		if (!$modified)
+		{
+			return 0;
+		}
+		else if ($ignore)
+		{
+			return $this->getConnector()->insertObjects($modified, $ignore);
+		}
+		else
+		{
+			return $this->getConnector()->insert($modified);
+		}
 	}
 
 	/**

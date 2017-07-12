@@ -175,8 +175,8 @@ class ByPropertiesTest extends TestCase
 		
 		$this->connector
 			->expects($this->once())
-			->method('insertObjects')
-			->with([$child1, $child2], false)
+			->method('insert')
+			->with([$child1, $child2])
 			->willReturn(2);
 		
 		$subject->inserted([$object1, $object2]);
@@ -190,7 +190,7 @@ class ByPropertiesTest extends TestCase
 		$object->child = new ByPropertiesChild();
 		
 		$this->connector
-			->method('insertObjects')
+			->method('insert')
 			->willReturn(123);
 		
 		self::assertEquals(123, $subject->inserted([$object]));
@@ -204,7 +204,7 @@ class ByPropertiesTest extends TestCase
 		$object->child = new ByPropertiesChild();
 		
 		$this->connector
-			->method('insertObjects')
+			->method('insert')
 			->willReturn(false);
 		
 		self::assertFalse($subject->inserted($object));

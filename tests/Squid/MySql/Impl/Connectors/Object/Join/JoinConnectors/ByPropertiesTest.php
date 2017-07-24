@@ -5,7 +5,6 @@ namespace Squid\MySql\Impl\Connectors\Object\Join\JoinConnectors;
 use Objection\LiteObject;
 use Objection\LiteSetup;
 use PHPUnit\Framework\TestCase;
-use Squid\MySql\Connectors\Object\CRUD\ID\IIdSave;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdConnector;
 use Squid\MySql\Connectors\Object\Generic\IGenericIdentityConnector;
 
@@ -142,6 +141,32 @@ class ByPropertiesTest extends TestCase
 		self::assertSame($child1, $object1->child);
 		self::assertNull($object2->child);
 		self::assertSame($child3, $object3->child);
+	}
+	
+	public function test_loaded_MultipleObjectsWithSameChildMappedCorrectly()
+	{
+		$subject = $this->subject();
+		
+		$object1 = new ByPropertiesParent();
+		$object1->a = '123';
+		$object1->b = 'abc';
+		
+		$object2 = new ByPropertiesParent();
+		$object2->a = '123';
+		$object2->b = 'abc';
+		
+		$child = new ByPropertiesChild();
+		$child->a = '123';
+		$child->c = 'abc';
+		
+		$this->connector
+			->method('selectObjectsByFields')
+			->willReturn([$child]);
+		
+		$subject->loaded([$object1, $object2]);
+		
+		self::assertNotNull($object1->child);
+		self::assertSame($object1->child, $object2->child);
 	}
 	
 	

@@ -101,12 +101,17 @@ class ByProperties implements IJoinConnector
 				$key .= '_' . $parentProp . $parent->$parentProp;
 			}
 			
-			$parentsMap[$key] = $parent;
+			if (!isset($parentsMap[$key]))
+			{
+				$parentsMap[$key] = [];
+			}
+			
+			$parentsMap[$key][] = $parent;
 		}
 		
 		foreach ($this->childPropertyToField as $prop => $field)
 		{
-			$where[$field] = $map[$prop];
+			$where[$field] = array_unique($map[$prop]);
 		}
 		
 		$result = $this->getConnector()->selectObjectsByFields($where);
@@ -126,7 +131,10 @@ class ByProperties implements IJoinConnector
 			
 			if (isset($parentsMap[$key]))
 			{
-				$parentsMap[$key]->{$this->parentReferenceProperty} = $child;
+				foreach ($parentsMap[$key] as $p)
+				{
+					$p->{$this->parentReferenceProperty} = $child;
+				}
 			}
 		}
 		

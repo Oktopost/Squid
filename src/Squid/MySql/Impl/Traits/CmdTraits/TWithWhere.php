@@ -114,7 +114,7 @@ trait TWithWhere
 			
 			if ($this->isConvertableToPlainArray($values))
 			{
-				$values = array_reduce($values, 'array_merge', []);
+				$values = array_merge(...$values);
 			}
 		}
 		

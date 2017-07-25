@@ -38,8 +38,8 @@ interface IWithWhere
 	
 	/**
 	 * Search for an expression or field in given set or sub query.
-	 * @param string $field Field (cna also be expression) to compare to the set 
-	 * of values (or sub query).
+	 * @param string|array $field Field (can also be expression) to compare to the set 
+	 * of values (or sub query) or array of fields to compare with arrays of values (or sub query).
 	 * @param array|ICmdSelect $values Array of values to search in, or sub query.
 	 * @param bool $negate If true use NOT IN statement.
 	 * @return static
@@ -48,8 +48,8 @@ interface IWithWhere
 	
 	/**
 	 * Same as whereIn but always with NOT IN expression.
-	 * @param string $field Field (cna also be expression) to compare to the set 
-	 * of values (or sub query).
+	*  @param string|array $field Field (can also be expression) to compare to the set 
+	 * of values (or sub query) or array of fields to compare with arrays of values (or sub query).
 	 * @param array|ICmdSelect $values Array of values to search in, or sub query.
 	 * @return static
 	 */

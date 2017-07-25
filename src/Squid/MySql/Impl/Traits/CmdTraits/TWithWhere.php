@@ -43,6 +43,16 @@ trait TWithWhere
 		return $self;
 	}
 	
+	private function isConvertableToPlainArray($array): bool 
+	{
+		return is_array($array) && isset($array[0]) && is_array($array[0]);
+	}
+	
+	private function prepareFiller(array $field): string 
+	{
+		return '(' . implode(',', array_pad([], count($field), '?')) . ')';
+	}
+	
 	
 	/**
 	 * @inheritdoc
@@ -91,10 +101,22 @@ trait TWithWhere
 		}
 		else 
 		{
-			$in = implode(',', array_pad([], count($values), '?'));
+			$filler = is_array($field) ? $this->prepareFiller($field)  : '?';
+			
+			$in = implode(',', array_pad([], count($values), $filler));
 		}
 		
 		$statement = ($negate ? 'NOT IN' : 'IN');
+		
+		if (is_array($field))
+		{
+			$field = '(' . implode(',', $field) . ')';
+			
+			if ($this->isConvertableToPlainArray($values))
+			{
+				$values = array_reduce($values, 'array_merge', []);
+			}
+		}
 		
 		return $this->where("$field $statement ($in)", $values);
 	}

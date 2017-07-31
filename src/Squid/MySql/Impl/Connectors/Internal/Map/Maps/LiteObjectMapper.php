@@ -16,22 +16,36 @@ class LiteObjectMapper implements IRowMap
 	/** @var Mapper */
 	private $mapper;
 	
+	/** @var array */
+	private $exclude;
 	
-	public function __construct(Mapper $mapper)
+	
+	public function __construct(Mapper $mapper, array $excludeFields)
 	{
 		$this->mapper = $mapper;
+		$this->exclude = $excludeFields;
 	}
-
-
+	
+	
 	/**
 	 * @param mixed $object
 	 * @return array Assoc array that can be inserted into the database.
 	 */
 	public function toRow($object): array
 	{
-		return $this->mapper->getArray($object);
+		$result = $this->mapper->getArray($object);
+		
+		foreach ($this->exclude as $key)
+		{
+			if (array_key_exists($key, $result))
+			{
+				unset($result[$key]);
+			}
+		}
+		
+		return $result;
 	}
-
+	
 	/**
 	 * @param array $row Assoc row from database.
 	 * @return mixed

@@ -39,7 +39,7 @@ class MapFactory
 		}
 		else if ($data instanceof Mapper)
 		{
-			return new LiteObjectMapper($data);
+			return new LiteObjectMapper($data, $excludeFields ?: []);
 		}
 		
 		throw new SquidException('Can not convert target object into a mapper');

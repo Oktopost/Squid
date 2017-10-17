@@ -4,7 +4,7 @@ namespace Squid;
 
 class OrderBy 
 {
-	use \Objection\TEnum;
+	use \Traitor\TEnum;
 	
 	
 	const DESC	= 0;

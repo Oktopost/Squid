@@ -7,7 +7,7 @@ use Squid\MySql;
 
 class DataSet
 {
-	use \Objection\TStaticClass;
+	use \Traitor\TStaticClass;
 	
 	
 	const TABLE_PREFIX = 'st_';

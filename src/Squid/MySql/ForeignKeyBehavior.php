@@ -4,7 +4,7 @@ namespace Squid\MySql;
 
 class ForeignKeyBehavior
 {
-	use \Objection\TEnum;
+	use \Traitor\TEnum;
 	
 	
 	const NO_ACTION = 'NO_ACTION';

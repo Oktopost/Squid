@@ -4,7 +4,7 @@ namespace Squid\MySql\Utils;
 
 class ClassName
 {
-	use \Objection\TStaticClass;
+	use \Traitor\TStaticClass;
 
 
 	/**

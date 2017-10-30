@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "eec71fc7ae7471ed1786ec1942453c0e",
+    "content-hash": "2612e9aff55faaf3ce06eba3af2ac02b",
     "packages": [
         {
             "name": "oktopost/objection",
@@ -96,6 +96,49 @@
             "description": "Inversion of Control library",
             "homepage": "https://github.com/Oktopost/Skeleton",
             "time": "2017-07-27T15:11:38+00:00"
+        },
+        {
+            "name": "unstable-cacao/traitor",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unstable-cacao/Traitor.git",
+                "reference": "31211450441132853d30f03892642712bc77f82a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unstable-cacao/Traitor/zipball/31211450441132853d30f03892642712bc77f82a",
+                "reference": "31211450441132853d30f03892642712bc77f82a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1-stable"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Traitor": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Puchkov",
+                    "email": "alexey.pkv@gmail.com"
+                },
+                {
+                    "name": "Marina Puchkov",
+                    "email": "marinashers@gmail.com"
+                }
+            ],
+            "time": "2017-10-10T13:16:49+00:00"
         }
     ],
     "packages-dev": [

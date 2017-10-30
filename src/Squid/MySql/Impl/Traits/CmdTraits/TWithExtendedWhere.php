@@ -2,12 +2,11 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
-use Squid\MySql\Command\ICmdSelect;
-use Squid\Exceptions\SquidException;
+use Squid\MySql\Command\IWithExtendedWhere;
 
 
 /**
- * @see \Squid\MySql\Command\IWithExtendedWhere
+ * @see IWithExtendedWhere
  */
 trait TWithExtendedWhere
 {
@@ -19,7 +18,8 @@ trait TWithExtendedWhere
 	 */
 	public function whereBetween(string $field, $greater, $less): IWithExtendedWhere
 	{
-		// TODO:
+		$this->where("$field BETWEEN ? AND ?", [$greater, $less]);
+		return $this;
 	}
 
 	/**
@@ -29,7 +29,8 @@ trait TWithExtendedWhere
 	 */
 	public function whereNotEqual(string $field, $value): IWithExtendedWhere
 	{
-		// TODO:
+		$this->where("$field != ?", [$value]);
+		return $this;
 	}
 
 	/**
@@ -39,7 +40,8 @@ trait TWithExtendedWhere
 	 */
 	public function whereLess(string $field, $value): IWithExtendedWhere
 	{
-		// TODO:
+		$this->where("$field < ?", [$value]);
+		return $this;
 	}
 
 	/**
@@ -49,7 +51,8 @@ trait TWithExtendedWhere
 	 */
 	public function whereLessOrEqualTo(string $field, $value): IWithExtendedWhere
 	{
-		// TODO:
+		$this->where("$field <= ?", [$value]);
+		return $this;
 	}
 	
 	/**
@@ -59,7 +62,8 @@ trait TWithExtendedWhere
 	 */
 	public function whereGreater(string $field, $value): IWithExtendedWhere
 	{
-		// TODO:
+		$this->where("$field > ?", [$value]);
+		return $this;
 	}
 	
 	/**
@@ -69,6 +73,7 @@ trait TWithExtendedWhere
 	 */
 	public function whereGreaterOrEqual(string $field, $value): IWithExtendedWhere
 	{
-		// TODO:
+		$this->where("$field >= ?", [$value]);
+		return $this;
 	}
 }

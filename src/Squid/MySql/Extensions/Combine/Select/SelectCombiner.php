@@ -5,6 +5,7 @@ namespace Squid\MySql\Impl\Extensions\Combine\Select;
 use Squid\OrderBy;
 
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Command\IWithExtendedWhere;
 use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Connection\IMySqlConnection;
 
@@ -147,6 +148,12 @@ class SelectCombiner implements ICmdSelect
 	public function whereNotIn($field, $values) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereExists(ICmdSelect $select, $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereNotExists(ICmdSelect $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereBetween(string $field, $greater, $less): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereNotEqual(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereLess(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereLessOrEqualTo(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereGreater(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereGreaterOrEqual(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	
 	
 	// Calls on union of all selects

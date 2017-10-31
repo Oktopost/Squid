@@ -2,7 +2,7 @@
 namespace lib;
 
 
-use Objection\TStaticClass;
+use Traitor\TStaticClass;
 use Skeleton\UnitTestSkeleton;
 
 

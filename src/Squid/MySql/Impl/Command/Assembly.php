@@ -7,7 +7,7 @@ use Squid\Exceptions\SquidException;
 
 class Assembly 
 {
-	use \Objection\TStaticClass;
+	use \Traitor\TStaticClass;
 	
 	
 	/**

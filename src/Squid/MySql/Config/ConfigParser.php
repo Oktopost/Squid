@@ -4,7 +4,7 @@ namespace Squid\MySql\Config;
 
 class ConfigParser 
 {
-	use \Objection\TStaticClass;
+	use \Traitor\TStaticClass;
 	
 	
 	private static $MAP = 

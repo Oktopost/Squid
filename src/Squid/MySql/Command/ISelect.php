@@ -2,7 +2,7 @@
 namespace Squid\MySql\Command;
 
 
-interface ISelect extends IWithWhere, IWithLimit, IWithColumns
+interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColumns
 {
 	/**
 	 * @param bool $distinct 

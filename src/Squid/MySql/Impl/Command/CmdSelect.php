@@ -12,6 +12,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
+	use \Squid\MySql\Impl\Traits\CmdTraits\TWithExtendedWhere;
 	
 	
 	const PART_DISTINCT		= 0;

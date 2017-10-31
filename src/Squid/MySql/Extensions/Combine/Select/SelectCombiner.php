@@ -151,7 +151,7 @@ class SelectCombiner implements ICmdSelect
 	public function whereBetween(string $field, $greater, $less): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereNotEqual(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereLess(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function whereLessOrEqualTo(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereLessOrEqual(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereGreater(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereGreaterOrEqual(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	

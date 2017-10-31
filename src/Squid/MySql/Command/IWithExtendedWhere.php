@@ -31,7 +31,7 @@ interface IWithExtendedWhere extends IWithWhere
 	 * @param mixed $value
 	 * @return IWithExtendedWhere|static
 	 */
-	public function whereLessOrEqualTo(string $field, $value): IWithExtendedWhere;
+	public function whereLessOrEqual(string $field, $value): IWithExtendedWhere;
 	
 	/**
 	 * @param string $field

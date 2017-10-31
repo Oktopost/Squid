@@ -4,24 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2612e9aff55faaf3ce06eba3af2ac02b",
+    "content-hash": "108bb6247d0082dbc326a853aa084f08",
     "packages": [
         {
             "name": "oktopost/objection",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Oktopost/Objection.git",
-                "reference": "ebcb8490f23ea01795fd57b733c22d339c3762eb"
+                "reference": "ed779b56a96e395ae1c16273f73cf5e16a0f79f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/ebcb8490f23ea01795fd57b733c22d339c3762eb",
-                "reference": "ebcb8490f23ea01795fd57b733c22d339c3762eb",
+                "url": "https://api.github.com/repos/Oktopost/Objection/zipball/ed779b56a96e395ae1c16273f73cf5e16a0f79f3",
+                "reference": "ed779b56a96e395ae1c16273f73cf5e16a0f79f3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5-stable"
+                "php": ">=5.5-stable",
+                "unstable-cacao/traitor": "^1.0"
             },
             "type": "library",
             "autoload": {
@@ -52,7 +53,7 @@
             ],
             "description": "Objects in PHP",
             "homepage": "https://github.com/Oktopost/Objection",
-            "time": "2017-09-18T05:28:08+00:00"
+            "time": "2017-10-19T05:25:35+00:00"
         },
         {
             "name": "oktopost/skeleton",

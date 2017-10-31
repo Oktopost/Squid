@@ -24,7 +24,7 @@
 	"minimum-stability": "stable",
 	"require": {
 		"php": ">=7.1-stable",
-		"oktopost/objection": "^1.0.10",
+		"oktopost/objection": "^1.0.13",
 		"oktopost/skeleton": "^1.1.0",
 		"unstable-cacao/traitor": "^1.0"
 	},

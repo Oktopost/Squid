@@ -10,6 +10,7 @@ use Squid\Exceptions\SquidUsageException;
 class PolymorphByField extends AbstractPolymorphByField
 {
 	private $byField = [];
+	private $ignoredFields = [];
 	
 	/** @var IGenericObjectConnector[] */
 	private $byClass = [];
@@ -29,6 +30,14 @@ class PolymorphByField extends AbstractPolymorphByField
 	protected function getConnectorsByClass(): array
 	{
 		return $this->byClass;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	protected function getIgnoredFields(): array
+	{
+		return $this->ignoredFields;
 	}
 
 
@@ -52,6 +61,24 @@ class PolymorphByField extends AbstractPolymorphByField
 		else
 		{
 			$this->byClass[$className] = $connector;
+		}
+		
+		return $this;
+	}
+
+	/**
+	 * @param string|string[] $fields
+	 * @return PolymorphByField
+	 */
+	public function setIgnoreFields($fields): PolymorphByField
+	{
+		if (is_array($fields))
+		{
+			$this->ignoredFields = array_merge($this->ignoredFields, $fields);
+		}
+		else
+		{
+			$this->ignoredFields[] = $fields;
 		}
 		
 		return $this;

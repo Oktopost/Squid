@@ -44,7 +44,7 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 				$this->throwUndefinedGroup($field, $item);
 			
 			$group = $rule[$item];
-			
+					
 			if (!isset($grouped[$group]))
 				$grouped[$group] = [$item];
 			else
@@ -84,6 +84,11 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 	 * @return array
 	 */
 	protected abstract function getByFieldRules(): array;
+
+	/**
+	 * @return string[]
+	 */
+	protected abstract function getIgnoredFields(): array;
 	
 	
 	public function getObjectConnector($object): IGenericObjectConnector
@@ -154,6 +159,7 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 	public function sortExpressionsByGroups(array $whereExpression): array
 	{
 		$byGroup = [];
+		$ignore = array_flip($this->getIgnoredFields());
 		
 		foreach ($this->getByFieldRules() as $field => $rule)
 		{
@@ -179,6 +185,12 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 			{
 				$expressions = $whereExpression;
 				$expressions[$field] = $fieldValues;
+				
+				if ($ignore)
+				{
+					$expressions = array_diff_key($expressions, $ignore);
+				}
+				
 				$byGroup[$group] = $expressions;
 			}
 			
@@ -188,6 +200,11 @@ abstract class AbstractPolymorphByField implements IPolymorphicConfig
 		if (!$byGroup)
 		{
 			$all = $this->getConnectorsByClassCached();
+			
+			if ($ignore)
+			{
+				$whereExpression = array_diff_key($whereExpression, $ignore);
+			}
 			
 			$byGroup = array_combine(
 				array_keys($all),

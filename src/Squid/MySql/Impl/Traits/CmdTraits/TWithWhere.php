@@ -34,6 +34,8 @@ trait TWithWhere
 	 */
 	private function byFieldsAssoc($fields)
 	{
+		$self = $this;
+		
 		foreach ($fields as $field => $value)
 		{
 			$self = $this->byField($field, $value);

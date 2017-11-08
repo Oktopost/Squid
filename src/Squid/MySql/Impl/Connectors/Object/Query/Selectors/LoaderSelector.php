@@ -2,10 +2,11 @@
 namespace Squid\MySql\Impl\Connectors\Object\Query\Selectors;
 
 
+use Squid\MySql\Impl\Connectors\Object\Query\Selectors\Decorator\IObjectLoader;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Object\Query\IObjectSelector;
 
-use Squid\MySql\Impl\Connectors\Object\Query\Selectors\Decorator\IObjectLoader;
+use Structura\Map;
 
 
 class LoaderSelector implements IObjectSelector
@@ -126,5 +127,16 @@ class LoaderSelector implements IObjectSelector
 	public function map(ICmdSelect $select, string $field, bool $removeColumnFromRow = false)
 	{
 		return $this->selector->map($select, $field, $removeColumnFromRow);
+	}
+	
+	/**
+	 * @param ICmdSelect $select
+	 * @param string|int $byColumn
+	 * @param bool $removeColumn
+	 * @return Map
+	 */
+	public function groupBy(ICmdSelect $select, $byColumn, bool $removeColumn = false): Map
+	{
+		return $this->selector->groupBy($select, $byColumn, $removeColumn);
 	}
 }

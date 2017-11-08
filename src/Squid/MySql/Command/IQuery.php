@@ -2,6 +2,9 @@
 namespace Squid\MySql\Command;
 
 
+use Structura\Map;
+
+
 interface IQuery
 {
 	/**
@@ -89,6 +92,14 @@ interface IQuery
 	 * @return array|false
 	 */
 	public function queryMap($key = 0, $value = 1);
+	
+	/**
+	 * Return array where each value is an array of rows grouped by a single column.
+	 * @param string|int $byColumn Column to group by.
+	 * @param bool $removeColumn If set to true, the group by column is removed from the row.
+	 * @return Map
+	 */
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map;
 	
 	/**
 	 * Return an array where the result of one column is the index and the remaining data is value.

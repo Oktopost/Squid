@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Command\MultiQuery;
 
 
 use Squid\MySql\Command\MultiQuery\IStatementResult;
+use Structura\Map;
 
 
 class StatementResult implements IStatementResult
@@ -150,5 +151,15 @@ class StatementResult implements IStatementResult
 	public function rowsCount()
 	{
 		// TODO: Implement rowsCount() method.
+	}
+	
+	/**
+	 * @param string|int $byColumn
+	 * @param bool $removeColumn
+	 * @return Map
+	 */
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map
+	{
+		// TODO: Implement queryGroupBy() method.
 	}
 }

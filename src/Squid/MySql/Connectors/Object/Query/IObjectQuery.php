@@ -2,6 +2,9 @@
 namespace Squid\MySql\Connectors\Object\Query;
 
 
+use Structura\Map;
+
+
 interface IObjectQuery
 {
 	/**
@@ -40,4 +43,12 @@ interface IObjectQuery
 	 * @return array|false
 	 */
 	public function queryMapRow(string $key, $removeColumnFromRow = false);
+	
+	/**
+	 * Return array where each value is an array of rows grouped by a single column.
+	 * @param string|int $byColumn Column to group by.
+	 * @param bool $removeColumn If set to true, the group by column is removed from the row.
+	 * @return Map
+	 */
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map;
 }

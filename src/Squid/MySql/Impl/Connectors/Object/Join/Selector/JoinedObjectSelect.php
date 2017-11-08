@@ -5,7 +5,10 @@ namespace Squid\MySql\Impl\Connectors\Object\Join\Selector;
 use Squid\Exceptions\SquidException;
 use Squid\MySql\Connectors\Object\Join\IJoinConnector;
 use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
+
 use Squid\MySql\Impl\Connectors\Utils\Select\SelectDecorator;
+
+use Structura\Map;
 
 
 class JoinedObjectSelect extends SelectDecorator implements ICmdObjectSelect
@@ -88,5 +91,18 @@ class JoinedObjectSelect extends SelectDecorator implements ICmdObjectSelect
 		}
 		
 		return $data;
+	}
+	
+	/**
+	 * Return array where each value is an array of rows grouped by a single column.
+	 * @param string|int $byColumn Column to group by.
+	 * @param bool $removeColumn If set to true, the group by column is removed from the row.
+	 * @return Map
+	 */
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map
+	{
+		$map = $this->child->queryGroupBy($byColumn, $removeColumn);
+		
+		$allObjects = $map->key
 	}
 }

@@ -2,6 +2,8 @@
 namespace Squid\MySql\Impl\Connectors\Object\Query;
 
 
+use Structura\Map;
+
 use Squid\MySql\Connectors\Map\IRowMap;
 use Squid\MySql\Connectors\Object\Query\IObjectSelector;
 use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
@@ -95,6 +97,17 @@ class CmdObjectSelect extends SelectDecorator implements ICmdObjectSelect
 	public function queryMapRow(string $key, $removeColumnFromRow = false)
 	{
 		return $this->selector->map($this->getSelect(), $key, $removeColumnFromRow);
+	}
+	
+	/**
+	 * Return array where each value is an array of rows grouped by a single column.
+	 * @param string|int $byColumn Column to group by.
+	 * @param bool $removeColumn If set to true, the group by column is removed from the row.
+	 * @return Map
+	 */
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map
+	{
+		return $this->selector->groupBy($this->getSelect(), $byColumn, $removeColumn);
 	}
 	
 	

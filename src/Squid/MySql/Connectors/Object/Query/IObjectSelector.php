@@ -3,6 +3,7 @@ namespace Squid\MySql\Connectors\Object\Query;
 
 
 use Squid\MySql\Command\ICmdSelect;
+use Structura\Map;
 
 
 interface IObjectSelector
@@ -45,4 +46,12 @@ interface IObjectSelector
 	 * @return array|false
 	 */
 	public function map(ICmdSelect $select, string $field, bool $removeColumnFromRow = false);
+	
+	/**
+	 * @param ICmdSelect $select
+	 * @param string|int $byColumn
+	 * @param bool $removeColumn
+	 * @return Map
+	 */
+	public function groupBy(ICmdSelect $select, $byColumn, bool $removeColumn = false): Map;
 }

@@ -2,8 +2,9 @@
 namespace Squid\MySql\Impl\Extensions\Combine\Select;
 
 
-use Squid\OrderBy;
+use Structura\Map;
 
+use Squid\OrderBy;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IWithExtendedWhere;
 use Squid\MySql\Command\IMySqlCommandConstructor;
@@ -172,6 +173,7 @@ class SelectCombiner implements ICmdSelect
 	public function queryIterator($isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMap($key = 0, $value = 1) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMapRow($key = 0, $removeColumnFromRow = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryCount() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	
 	

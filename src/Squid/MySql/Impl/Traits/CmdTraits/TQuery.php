@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 use Squid\MySql\Exceptions\MySqlException;
 use Squid\Exceptions\SquidException;
+use Structura\Map;
 
 
 /**
@@ -201,6 +202,52 @@ trait TQuery
 						implode(array_keys($row)));
 				
 				$map[$row[$key]] = $row[$value];
+			}
+		}
+		// Free resources when generator released before reaching the end of the iteration.
+		finally
+		{
+			$result->closeCursor();
+		}
+		
+		return $map;
+	}
+	
+	/**
+	 * @param string|int $byColumn
+	 * @param bool $removeColumn
+	 * @return Map
+	 */
+	public function queryGroupBy($byColumn, bool $removeColumn = false): Map
+	{
+		$fetchMode = $this->resolveFetchMode(is_string($byColumn));
+		$result = $this->execute();
+		$map = new Map();
+		
+		try
+		{
+			while ($row = $result->fetch($fetchMode))
+			{
+				if (!isset($row[$byColumn])) 
+					throw new MySqlException(
+						"Column '$byColumn' not found in the query result: " . 
+						implode(array_keys($row)));
+				
+				$key = $row[$byColumn];
+				
+				if ($removeColumn)
+				{
+					unset($row[$byColumn]);
+				}
+				
+				if (!$map->has($key))
+				{
+					$map->add($key, [$row]);
+				}
+				else
+				{
+					$map->add($key, $map->get($key) + [$row]);
+				}
 			}
 		}
 		// Free resources when generator released before reaching the end of the iteration.

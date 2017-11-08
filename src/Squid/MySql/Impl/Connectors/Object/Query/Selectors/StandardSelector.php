@@ -2,6 +2,8 @@
 namespace Squid\MySql\Impl\Connectors\Object\Query\Selectors;
 
 
+use Structura\Map;
+
 use Squid\Exceptions\SquidException;
 
 use Squid\MySql\Command\ICmdSelect;
@@ -129,5 +131,26 @@ class StandardSelector implements IObjectSelector
 		}
 		
 		return $parsedMap ?: $map;
+	}
+	
+	/**
+	 * @param ICmdSelect $select
+	 * @param string|int $byColumn
+	 * @param bool $removeColumn
+	 * @return Map
+	 */
+	public function groupBy(ICmdSelect $select, $byColumn, bool $removeColumn = false): Map
+	{
+		$map = $select->queryGroupBy($byColumn, $removeColumn);
+		
+		if (!$map) 
+			throw new SquidException('False values for queryGroupBy are not supported');
+		
+		foreach ($map as $key => $values)
+		{
+			$map->add($key, $this->getMap()->toObjects($values));
+		}
+		
+		return $map;
 	}
 }

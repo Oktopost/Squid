@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1853c1ed4160d4ddc426f4a8f96ca0fc",
+    "content-hash": "a6c638a5c11524b0726c68e0732f10c8",
     "packages": [
         {
             "name": "oktopost/objection",
@@ -100,16 +100,16 @@
         },
         {
             "name": "unstable-cacao/structura",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unstable-cacao/Structura.git",
-                "reference": "44a2e007c4ea3c3e508ab8e98687d50ec7e52e5b"
+                "reference": "4f23a57ab5f6cc093c593cbb750522e4ae75ba2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unstable-cacao/Structura/zipball/44a2e007c4ea3c3e508ab8e98687d50ec7e52e5b",
-                "reference": "44a2e007c4ea3c3e508ab8e98687d50ec7e52e5b",
+                "url": "https://api.github.com/repos/unstable-cacao/Structura/zipball/4f23a57ab5f6cc093c593cbb750522e4ae75ba2f",
+                "reference": "4f23a57ab5f6cc093c593cbb750522e4ae75ba2f",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
                 }
             ],
             "homepage": "https://github.com/unstable-cacao/Structura",
-            "time": "2017-11-09T06:13:35+00:00"
+            "time": "2017-11-09T06:31:08+00:00"
         },
         {
             "name": "unstable-cacao/traitor",

@@ -103,6 +103,14 @@ class JoinedObjectSelect extends SelectDecorator implements ICmdObjectSelect
 	{
 		$map = $this->child->queryGroupBy($byColumn, $removeColumn);
 		
-		$allObjects = $map->key
+		if ($map->count())
+		{
+			$allGroups = $map->toArray();
+			$allObjects = array_merge(...$allGroups);
+			
+			$this->config->loaded($allObjects);
+		}
+		
+		return $map;
 	}
 }

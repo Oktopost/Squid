@@ -482,4 +482,12 @@ class AbstractPolymorphByFieldTestHelper extends AbstractPolymorphByField
 	{
 		return $this->byField;
 	}
+
+	/**
+	 * @return string[]
+	 */
+	protected function getIgnoredFields(): array
+	{
+		return [];
+	}
 }

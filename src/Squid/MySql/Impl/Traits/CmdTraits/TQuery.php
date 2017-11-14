@@ -246,7 +246,7 @@ trait TQuery
 				}
 				else
 				{
-					$map->add($key, $map->get($key) + [$row]);
+					$map->add($key, array_merge($map->get($key), [$row]));
 				}
 			}
 		}

@@ -65,6 +65,12 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @return static
 	 */
 	public function withRollup($withRollup = true);
+
+	/**
+	 * @param string $exp
+	 * @param array|bool $bind
+	 * @return static
+	 */
 	public function having($exp, $bind = false);
 	
 	/**

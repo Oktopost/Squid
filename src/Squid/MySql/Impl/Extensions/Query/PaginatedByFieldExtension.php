@@ -20,6 +20,7 @@ class PaginatedByFieldExtension
 	
 	/** @var null|int */ 
 	private $limit = null;
+	private $offset = 0;
 	
 	private $field;
 	private $value;
@@ -59,7 +60,7 @@ class PaginatedByFieldExtension
 			->byField($this->field, $this->value)
 			->where("{$this->idField} $sign ?", [$this->idValue]);
 		
-		return $beforeQuery->queryCount() + $atQuery->queryCount();
+		return $beforeQuery->queryCount() + $atQuery->queryCount() + $this->offset;
 	}
 	
 	private function getData(): array
@@ -88,7 +89,7 @@ class PaginatedByFieldExtension
 			)
 			->orderBy($this->field,		$fieldOrder)
 			->orderBy($this->idField,	$idOrder)
-			->limitBy($this->limit);
+			->limit(abs($this->offset), $this->limit);
 		
 		return $query->query();
 	}
@@ -141,9 +142,10 @@ class PaginatedByFieldExtension
 		return $this;
 	}
 	
-	public function setLimit(int $limit): PaginatedByFieldExtension
+	public function setLimit(int $limit, int $offset): PaginatedByFieldExtension
 	{
-		$this->limit = $limit;
+		$this->limit	= $limit;
+		$this->offset	= $offset;
 		return $this;
 	}
 	

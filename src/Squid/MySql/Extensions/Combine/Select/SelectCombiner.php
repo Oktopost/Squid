@@ -196,6 +196,27 @@ class SelectCombiner implements ICmdSelect
 		return false;
 	}
 	
+	public function queryLimit(int $totalLimit, $isAssoc = true)
+	{
+		$result = [];
+		
+		foreach ($this->selects as $select)
+		{
+			$query = clone $select;
+			$query->limitBy($totalLimit);
+			
+			$queryResult = $select->queryAll($isAssoc);
+			$totalLimit -= count($queryResult);
+			
+			$result = array_merge($queryResult);
+			
+			if ($totalLimit <= 0)
+				break;
+		}
+		
+		return $result;
+	}
+	
 	
 	/**
 	 * For debug only

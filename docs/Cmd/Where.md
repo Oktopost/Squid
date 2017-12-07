@@ -74,11 +74,11 @@ $select->byId([1, 2, 3]);
 * ```$value``` Any scalar value, or a non empty array of scalar values
 
 ```php
-$select->byField('Name', 'Jhon');
-// SELECT ... WHERE Name = 'Jhon'
+$select->byField('Name', 'John');
+// SELECT ... WHERE Name = 'John'
 
-$select->byField('Name', ['Jhon', 'Ron']);
-// SELECT ... WHERE Name IN ('Jhon', 'Ron')
+$select->byField('Name', ['John', 'Ron']);
+// SELECT ... WHERE Name IN ('John', 'Ron')
 
 $select->byField('SUBSTR(Name, 3)', 'Ron');
 // SELECT ... WHERE SUBSTR(Name, 3) = 'Ron'
@@ -94,14 +94,14 @@ $select->byField('SUBSTR(Name, 3)', 'Ron');
 	* ```$values``` In this case ```$values``` parameter is ignored.
 
 ```php
-$select->byFields(['Name', 'Age'], ['Jhon', 13]);
-// SELECT ... WHERE Name = 'Jhon' AND Age = 13
+$select->byFields(['Name', 'Age'], ['John', 13]);
+// SELECT ... WHERE Name = 'John' AND Age = 13
 
 $select->byField([
-	'Name'	=> 'Jhon', 
+	'Name'	=> 'John', 
 	'Age'	=> [13, 14, 15]
 ]);
-// SELECT ... WHERE Name = 'Jhon' AND Age IN (13, 14, 15)
+// SELECT ... WHERE Name = 'John' AND Age IN (13, 14, 15)
 ```
 
 ### where($exp, $bind = false)
@@ -110,8 +110,8 @@ $select->byField([
 * ```$bind``` Bind parameters for the expression. Either a single scalar value, or array of multiple values. 
 
 ```php
-$select->where('(Name = ? OR LastName = ?)', ['Jhon', 'Jhonson']);
-// SELECT ... WHERE (Name = 'Jhon' OR LastName = 'Jhonson')
+$select->where('(Name = ? OR LastName = ?)', ['John', 'Johnson']);
+// SELECT ... WHERE (Name = 'John' OR LastName = 'Johnson')
 ```
 
 To pass `false` as the bind value, set the `bind` parameter to `[false]`
@@ -135,11 +135,11 @@ To pass `false` as the bind value, set the `bind` parameter to `[false]`
 		
 
 ```php
-$select->whereIn('Name', ['Jhon', 'Ron']);
-// SELECT ... WHERE Name IN ('Jhon', 'Ron')
+$select->whereIn('Name', ['John', 'Ron']);
+// SELECT ... WHERE Name IN ('John', 'Ron')
 
-$select->whereIn(['FirstName', 'LastName', [['Jhon', 'Jhonson'], ['Ron', 'Ronson']);
-// SELECT ... WHERE (FirstName, LastName) IN (('Jhon', 'Jhonson'), ('Ron', 'Ronson'));
+$select->whereIn(['FirstName', 'LastName', [['John', 'Johnson'], ['Ron', 'Ronson']);
+// SELECT ... WHERE (FirstName, LastName) IN (('John', 'Johnson'), ('Ron', 'Ronson'));
 
 
 $select->whereIn('Name', $subQuery);
@@ -236,7 +236,7 @@ $select->whereLessOrEqual('Age', 80);
 * ```$value``` Scalar value to compare to.
 
 ```php
-$select->whereLess('Age', 20);
+$select->whereGreater('Age', 20);
 // SELECT ... WHERE Age > 20
 ```
 
@@ -246,6 +246,6 @@ $select->whereLess('Age', 20);
 * ```$value``` Scalar value to compare to.
 
 ```php
-$select->whereLess('Age', 25);
+$select->whereGreaterOrEqual('Age', 25);
 // SELECT ... WHERE Age >= 25
 ```

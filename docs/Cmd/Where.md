@@ -1,4 +1,58 @@
 
+### Contents
+  * [Notes](#notes)
+  * [Where Functions](#where-functions)
+    * [byId($value)](#byidvalue)
+    * [byField($field, $value)](#byfieldfield-value)
+    * [byFields($fields, $values)](#byfieldsfields-value)
+    * [where($exp, $bind = false)](#whereexp-bind--false)
+    * [whereIn($field, $values, $negate = false)](#whereinfield-values-negate--false)
+    * [whereNotIn($field, $values)](#wherenotinfield-values)
+    * [whereExists(ICmdSelect $select, $negate = false)](#whereexistsicmdselect-select-negate--false)
+    * [whereNotExists(ICmdSelect $select)](#wherenotexistsicmdselect-select)
+  * [Additional Where Functions](#additional-where-functions)
+    * [whereBetween(string $field, $greater, $less)](#wherebetweenstring-field-greater-less)
+    * [whereNotEqual(string $field, $value))](#wherenotequalstring-field-value)
+    * [whereLess(string $field, $value)](#wherelessstring-field-value)
+    * [whereLessOrEqual(string $field, $value)](#wherelessorequalstring-field-value)
+    * [whereGreater(string $field, $value)](#wheregreaterstring-field-value)
+    * [whereGreaterOrEqual(string $field, $value)](#wheregreaterorequalstring-field-value)
+
+## Notes 
+
+All the value parameters are always bind and therefore are injection safe. 
+for example the expression:
+```php
+$select->where('Id', "= '' or true");
+```
+will result in:
+```sql
+SELECT /*...*/ WHERE Id = ?
+```
+With bind values `"= '' or true"`
+
+However any string passed as the field name or expression must be safe.
+To avoid injections, instead of:
+```php
+$select->where("Id = $value");
+```
+You should use:
+```php
+$select->byField("Id", $value);
+// OR
+$select->where("Id = ?", [$value]);
+```
+
+
+
+## Where Functions
+
+The next list of functions is available for:
+- `ICmdSelect`
+- `ICmdDelete`
+- `ICmdUpdate`
+
+
 ### byId($value)
 
 * ```$value``` Any scalar value, or a non empty array of scalar values
@@ -30,7 +84,7 @@ $select->byField('SUBSTR(Name, 3)', 'Ron');
 // SELECT ... WHERE SUBSTR(Name, 3) = 'Ron'
 ```
 
-### byFields($fields, $value)
+### byFields($fields, $values)
 
 * First case
 	* ```$feilds``` Numeric array of fields names or valid mysql expressions
@@ -68,7 +122,7 @@ To pass `false` as the bind value, set the `bind` parameter to `[false]`
 // SELECT ... WHERE IsDeleted = 0
 ```
 
-### whereIn($field, $values, $negate = false);
+### whereIn($field, $values, $negate = false)
 
 * Single column comparison
 	* ```$field``` Field name or expression to match given set.
@@ -92,7 +146,7 @@ $select->whereIn('Name', $subQuery);
 // SELECT ... WHERE Name IN (SELECT ... )
 ```
 
-### whereNotIn($field, $values);
+### whereNotIn($field, $values)
 
 Alias to ```whereNotIn($field, $values, true)``` 
 
@@ -109,3 +163,89 @@ $select->whereExists($subQuery);
 ### whereNotExists($field, $values);
 
 Alias to ```whereExists(ICmdSelect $select)``` 
+
+
+### whereNotIn($field, $values);
+
+Alias to ```whereNotIn($field, $values, true)``` 
+
+### whereExists(ICmdSelect $select, $negate = false)
+
+* ```$select``` The sub-query to check
+* ```$negate``` If true, `NOT EXISTS` statement is used instead of `EXISTS`
+
+```php
+$select->whereExists($subQuery);
+// SELECT ... WHERE EXISTS (SELECT ... )
+```
+
+### whereNotExists(ICmdSelect $select)	
+
+Alias to ```whereExists(ICmdSelect $select)``` 
+
+
+## Additional Where Functions
+
+This list of function is present only in the `ICmdSelect` interface
+
+
+### whereBetween(string $field, $greater, $less)
+
+* ```$field``` Field name to compare
+* ```$greater``` Scalar value the field must be greater of
+* ```$less``` Scalar value the field must be less then.
+
+```php
+$select->whereBetween('Age', 10, 20);
+// SELECT ... WHERE Age BETWEEN 10 AND 20
+```
+
+### whereNotEqual(string $field, $value)
+
+* ```$field``` Field name to compare
+* ```$value``` Scalar value to compare to.
+
+```php
+$select->whereNotEqual('Age', -1);
+// SELECT ... WHERE Age != -1
+```
+
+### whereLess(string $field, $value)
+
+* ```$field``` Field name to compare
+* ```$value``` Scalar value to compare to.
+
+```php
+$select->whereLess('Age', 60);
+// SELECT ... WHERE Age < 60
+```
+
+### whereLessOrEqual(string $field, $value)
+
+* ```$field``` Field name to compare
+* ```$value``` Scalar value to compare to.
+
+```php
+$select->whereLess('Age', 80);
+// SELECT ... WHERE Age <= 80
+```
+
+### whereGreater(string $field, $value)
+
+* ```$field``` Field name to compare
+* ```$value``` Scalar value to compare to.
+
+```php
+$select->whereLess('Age', 20);
+// SELECT ... WHERE Age > 20
+```
+
+### whereGreaterOrEqual(string $field, $value)
+
+* ```$field``` Field name to compare
+* ```$value``` Scalar value to compare to.
+
+```php
+$select->whereLess('Age', 25);
+// SELECT ... WHERE Age >= 25
+```

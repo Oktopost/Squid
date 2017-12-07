@@ -1,6 +1,7 @@
 
 ### Contents
   * [Notes](#notes)
+  
   * [Methods](#methods)
     * [byId($value)](#byidvalue)
     * [byField($field, $value)](#byfieldfield-value)

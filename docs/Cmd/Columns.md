@@ -1,7 +1,7 @@
 
 ### Contents
   * [Notes](#notes)
-  * [Column Methods](#column-methods)
+  * [Methods](#methods)
     * [column(...$columns)](#columncolumns)
     * [columns($columns, $table = false)](#columnscolumns-table--false)
     * [columnsExp($columns, $bind = false)](#columnsexpcolumns-bind--false)
@@ -12,10 +12,7 @@
 Only the values passed in the `$bind` parameter for methods `columnsExp` and `columnAsExp` - are injection safe,
 all the other parameters must be valid and safe strings.
 
-## Column Methods
-
-The next list of functions is available only for `ICmdSelect` interface.
-
+## Methods
 
 ### column(...$columns)
 

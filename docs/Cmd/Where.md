@@ -1,7 +1,7 @@
 
 ### Contents
   * [Notes](#notes)
-  * [Where Functions](#where-functions)
+  * [Methods](#methods)
     * [byId($value)](#byidvalue)
     * [byField($field, $value)](#byfieldfield-value)
     * [byFields($fields, $values)](#byfieldsfields-values)
@@ -10,7 +10,7 @@
     * [whereNotIn($field, $values)](#wherenotinfield-values)
     * [whereExists(ICmdSelect $select, $negate = false)](#whereexistsicmdselect-select-negate--false)
     * [whereNotExists(ICmdSelect $select)](#wherenotexistsicmdselect-select)
-  * [Additional Where Functions](#additional-where-functions)
+  * [Additional Where Methods](#additional-where-methods)
     * [whereBetween(string $field, $greater, $less)](#wherebetweenstring-field-greater-less)
     * [whereNotEqual(string $field, $value))](#wherenotequalstring-field-value)
     * [whereLess(string $field, $value)](#wherelessstring-field-value)
@@ -45,13 +45,7 @@ $select->where("Id = ?", [$value]);
 
 
 
-## Where Functions
-
-The next list of functions is available for:
-- `ICmdSelect`
-- `ICmdDelete`
-- `ICmdUpdate`
-
+## Methods
 
 ### byId($value)
 
@@ -184,9 +178,10 @@ $select->whereExists($subQuery);
 Alias to ```whereExists(ICmdSelect $select)``` 
 
 
-## Additional Where Functions
+## Additional Where Methods
 
-This list of function is present only in the `ICmdSelect` interface
+This list of function is present only for select, and are not
+present in the delete or update interfaces.
 
 
 ### whereBetween(string $field, $greater, $less)

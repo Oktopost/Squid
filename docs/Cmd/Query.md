@@ -1,7 +1,7 @@
 
 ### Contents
   * [Notes](#notes)
-  * [Query Functions](#query-functions)
+  * [Methods](#methods)
     * [query()](#query)
     * [queryAll($isAssoc = false)](#queryallisassoc--false)
     * [queryRow($isAssoc = false, $expectOne = true)](#queryrowisassoc--false-expectone--true)
@@ -20,13 +20,7 @@
 All of this functions are available only for the `ICmdSelect` and `ICmdDirect` interfaces.
 
 
-## Query Functions
-
-The next list of methods is available for:
-- `ICmdSelect`
-- `ICmdDelete`
-- `ICmdUpdate`
-
+## Methods
 
 ### query()
 

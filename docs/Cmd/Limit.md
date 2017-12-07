@@ -1,7 +1,7 @@
 
 ### Contents
   * [Notes](#notes)
-  * [Limit Functions](#limit-functions)
+  * [Methods](#methods)
     * [limit($from, $count)](#limitfrom-count)
     * [limitBy($count)](#limitbycount)
     * [page($page, $pageSize)](#pagepage-pagesize)
@@ -11,13 +11,7 @@
 
 All the limit values are injection safe.
 
-## Limit Functions
-
-The next list of functions is available for:
-- `ICmdSelect`
-- `ICmdDelete`
-- `ICmdUpdate`
-
+## Methods
 
 ### limit($from, $count)
 

@@ -6,12 +6,13 @@
     * [queryAll($isAssoc = false)](#queryallisassoc--false)
     * [queryRow($isAssoc = false, $expectOne = true)](#queryrowisassoc--false-expectone--true)
     * [queryColumn($expectOne = true)](#querycolumnexpectone--true)
-    * [queryScalar($default = false, $expectOne = true)](#queryscalardefault--false-expectOne--true)
+    * [queryScalar($default = false, $expectOne = true)](#queryscalardefault--false-expectone--true)
     * [queryInt($expectOne = true)](#queryintexpectone--true)
     * [queryBool($expectOne = true)](#queryboolexpectone--true)
     * [queryWithCallback($callback, $isAssoc = true)](#querywithcallbackcallback-isassoc--true)
     * [queryIterator($isAssoc = true)](#queryiteratorisassoc--true)
     * [queryMap($key = 0, $value = 1)](#querymapkey--0-value--1)
+    * [queryMapRow($key = 0, $removeColumnFromRow = false)](#querymaprowkey--0-removecolumnfromrow--false)
 
 
 ## Notes 
@@ -81,7 +82,7 @@ $select
 	->limit(1);
 	
 $res = $select ->queryRow(true);
-// $res = ['Id' => 1, 'b' => 'John',	'cnt' => 3]
+// $res = ['Id' => 1, 'b' => 'John', 'cnt' => 3]
 
 $res = $select ->queryRow(false);
 // $res = [2, 'Bjorn', 12]

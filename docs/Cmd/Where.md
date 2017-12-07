@@ -4,7 +4,7 @@
   * [Where Functions](#where-functions)
     * [byId($value)](#byidvalue)
     * [byField($field, $value)](#byfieldfield-value)
-    * [byFields($fields, $values)](#byfieldsfields-value)
+    * [byFields($fields, $values)](#byfieldsfields-values)
     * [where($exp, $bind = false)](#whereexp-bind--false)
     * [whereIn($field, $values, $negate = false)](#whereinfield-values-negate--false)
     * [whereNotIn($field, $values)](#wherenotinfield-values)
@@ -62,7 +62,7 @@ This function is identical to calling ```byField('Id', $value)```
 
 ```php
 $select->byId(14);
-// SELECT ... WHERE Id = 15
+// SELECT ... WHERE Id = 14
 
 $select->byId([1, 2, 3]);
 // SELECT ... WHERE Id IN (1, 2, 3)
@@ -111,7 +111,7 @@ $select->byField([
 
 ```php
 $select->where('(Name = ? OR LastName = ?)', ['Jhon', 'Jhonson']);
-// SELECT ... WHERE (Name = 'Jhon' OR Age = 'Jhonson')
+// SELECT ... WHERE (Name = 'Jhon' OR LastName = 'Jhonson')
 ```
 
 To pass `false` as the bind value, set the `bind` parameter to `[false]`
@@ -226,7 +226,7 @@ $select->whereLess('Age', 60);
 * ```$value``` Scalar value to compare to.
 
 ```php
-$select->whereLess('Age', 80);
+$select->whereLessOrEqual('Age', 80);
 // SELECT ... WHERE Age <= 80
 ```
 

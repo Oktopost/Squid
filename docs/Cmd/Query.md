@@ -9,6 +9,9 @@
     * [queryScalar($default = false, $expectOne = true)](#queryscalardefault--false-expectone--true)
     * [queryInt($expectOne = true)](#queryintexpectone--true)
     * [queryBool($expectOne = true)](#queryboolexpectone--true)
+    * [queryExists()](#queryexists)
+    * [queryCount()](#querycount)
+    * [queryBool($expectOne = true)](#queryboolexpectone--true)
     * [queryWithCallback($callback, $isAssoc = true)](#querywithcallbackcallback-isassoc--true)
     * [queryIterator($isAssoc = true)](#queryiteratorisassoc--true)
     * [queryMap($key = 0, $value = 1)](#querymapkey--0-value--1)
@@ -108,22 +111,6 @@ Query only the first column of the first result
 ```php
 $res = $select
 	->columns('Name')
-	->queryScalar(true);
-	
-// $res = 'John'
-```
-
-
-### queryScalar($default = false, $expectOne = true)
-
-Query only the first column of the first result
-
-* ```$default``` Default value to return if the result set was empty.
-* ```$expectOne``` If set to true, and more then one column OR row was seleted, an exception will be thrown.
-
-```php
-$res = $select
-	->columns('Name')
 	->queryScalar();
 	
 // $res = 'John'
@@ -149,6 +136,88 @@ If nothing was found and `$expectOne` if `false`, then `false` is returned.
 Behaves like queryScalar, but the result is always cast to a boolean.
 
 If nothing was found and `$expectOne` if `false`, then `false` is returned. 
+
+
+### queryExists()
+
+Create a `SELECT EXISTS (...)` expression, where the subquery, is the query generated from 
+the subject on which queryExists was called. Result of this method is always a boolean value
+
+```php
+$res = $select
+	->from('Data')
+	->where('Id > ?', 25)
+	->queryExists();
+
+// SELECT EXISTS (SELECT * FROM Data WHERE Id > 25)
+```
+
+Note that if any column expression was specified, it will be persistent in the generated expression.
+
+
+### queryCount()
+
+Generate a `select count(*)` expression, based on the current query.
+
+This function will behave differently based on the type of the target query
+
+- For a **simple query**, any column expression will be replaced with a single `COUNT(*)`
+
+```php
+$res = $select
+	->column('Id', 'Name')
+	->from('Data')
+	->where('Id > ?', 25)
+	->queryCount();
+
+// SELECT COUNT(*) FROM Data WHERE Id > 25
+```
+
+- For a **`GROUP BY`** expression, the columns expression will be replaced with a `COUNT(DISTINCT ...)` expression.
+
+```php
+$res = $select
+	->column('MAX(Age)')
+	->from('Data')
+	->where('Id > ?', 25)
+	->groupBy('Type')
+	->queryCount();
+
+// SELECT COUNT(DISTINCT MAX(Age)) FROM Data WHERE Id > 25
+```
+
+- For a **`UNION`** query or if the **`DISTINCT`** flag is present, a subquery is used:
+
+```php
+$res = $select
+	->distinct()
+	->column('Age')
+	->from('Data')
+	->where('Id > ?', 25)
+	->queryCount();
+
+// SELECT COUNT(*) FROM (SELECT DISTINCT Age FROM Data WHERE Id > 25) a
+
+
+$res = $selectOldUsers
+	->distinct()
+	->column('Age')
+	->from('Data_Old')
+	->where('Id > ?', 25)
+	->union($select)
+	->queryCount();
+
+// SELECT COUNT(*) 
+// FROM (
+//		SELECT DISTINCT Age FROM Data WHERE Id > 25 
+//		UNION 
+//		SELECT DISTINCT Age FROM Data_Old WHERE Id > 25)
+// ) a
+```
+
+
+If none of the above fits, it's also possible to generate a query with `COUNT(...)` set explicitly 
+and then invoke the `queryInt()` method to get desired behivor. 
 
 
 ### queryWithCallback($callback, $isAssoc = true)
@@ -261,7 +330,7 @@ $map = $select
 // ]
 ```
 
-Invoking  `queryMap('Id', 'Name');` would produce the same result.
+Invoking `queryMap('Id', 'Name')` would produce the same result.
 
 ### queryMapRow($key = 0, $removeColumnFromRow = false)
 

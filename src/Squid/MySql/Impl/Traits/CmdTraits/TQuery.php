@@ -2,9 +2,12 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
+use Objection\LiteObject;
+
+use Structura\Map;
+
 use Squid\MySql\Exceptions\MySqlException;
 use Squid\Exceptions\SquidException;
-use Structura\Map;
 
 
 /**
@@ -22,6 +25,18 @@ trait TQuery
 		else if ($fetchMode === false) return \PDO::FETCH_NUM;
 		
 		return $fetchMode;
+	}
+	
+	private function parseObject(array $row, string $className): LiteObject
+	{
+		$object = new $className;
+		
+		foreach ($row as $key => $value)
+		{
+			$object->$key = $value;
+		}
+		
+		return $object;
 	}
 
 
@@ -211,6 +226,37 @@ trait TQuery
 		}
 		
 		return $map;
+	}
+	
+	/**
+	 * @param string $className LiteObject class name.
+	 * @return LiteObject|null
+	 */
+	public function queryObject(string $className): ?LiteObject
+	{
+		$result = $this->queryRow(true);
+		
+		if (!$result)
+			return null;
+		
+		return $this->parseObject($result, $className);
+	}
+	
+	/**
+	 * @param string $className LiteObject class name.
+	 * @return LiteObject[]
+	 */
+	public function queryObjects(string $className): array
+	{
+		$data = $this->query();
+		$result = [];
+		
+		foreach ($data as $row)
+		{
+			$result[] = $this->parseObject($row, $className);
+		}
+		
+		return $result;
 	}
 	
 	/**

@@ -2,8 +2,9 @@
 namespace Squid\MySql\Impl\Command\MultiQuery;
 
 
-use Squid\MySql\Command\MultiQuery\IStatementResult;
 use Structura\Map;
+use Objection\LiteObject;
+use Squid\MySql\Command\MultiQuery\IStatementResult;
 
 
 class StatementResult implements IStatementResult
@@ -132,6 +133,16 @@ class StatementResult implements IStatementResult
 	public function queryMap($key = 0, $value = 1)
 	{
 		// TODO: Implement queryMap() method.
+	}
+	
+	public function queryObject(string $className): ?LiteObject
+	{
+		// TODO: Implement queryObject() method.
+	}
+	
+	public function queryObjects(string $className): array
+	{
+		// TODO: Implement queryObjects() method.
 	}
 	
 	/**

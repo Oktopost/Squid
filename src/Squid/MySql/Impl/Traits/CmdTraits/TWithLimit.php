@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
+use Squid\MySql\Command\IWithLimit;
 use Squid\OrderBy;
 
 
@@ -19,7 +20,7 @@ trait TWithLimit
 	 * Append the DESC keyword to all requested keywords or expressions.
 	 * @param string|array $column
 	 */
-	private function appendDesc(&$column) 
+	private function appendDesc(&$column): void
 	{
 		if (is_array($column)) 
 		{
@@ -38,9 +39,9 @@ trait TWithLimit
 	/**
 	 * Set as limit but with $from always equals to zero.
 	 * @param int $count Maximum number of rows to select.
-	 * @return static
+	 * @return IWithLimit|static
 	 */
-	public function limitBy($count) 
+	public function limitBy($count) : IWithLimit
 	{
 		return $this->limit(0, $count);
 	}
@@ -49,9 +50,9 @@ trait TWithLimit
 	 * Use limit statement for a page expression.
 	 * @param int $page Zero based index of the page to select.
 	 * @param int $pageSize Number of elements per page.
-	 * @return static
+	 * @return IWithLimit|static
 	 */
-	public function page($page, $pageSize) 
+	public function page($page, $pageSize): IWithLimit
 	{
 		return $this->limit($page * $pageSize, $pageSize);
 	}
@@ -61,9 +62,9 @@ trait TWithLimit
 	 * @param string|array $column Single column, expression or array of columns.
 	 * @param int $type Order type. Use OrderBy consts. Either single value, or array of 
 	 * values. In the later, $column must be of same size.
-	 * @return static
+	 * @return IWithLimit|static
 	 */
-	public function orderBy($column, $type = OrderBy::ASC) 
+	public function orderBy($column, $type = OrderBy::ASC): IWithLimit
 	{
 		if ($type == OrderBy::DESC) 
 		{

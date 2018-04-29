@@ -2,9 +2,12 @@
 namespace Squid\MySql\Impl\Extensions\Combine\Select;
 
 
+use Objection\LiteObject;
 use Structura\Map;
 
 use Squid\OrderBy;
+
+use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IWithExtendedWhere;
 use Squid\MySql\Command\IMySqlCommandConstructor;
@@ -137,10 +140,10 @@ class SelectCombiner implements ICmdSelect
 	public function forUpdate($forUpdate = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function lockInShareMode($lockInShareMode = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function setConnection(IMySqlConnection $conn) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function limit($from, $count) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function limitBy($count) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function page($page, $pageSize) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function orderBy($column, $type = OrderBy::ASC) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function limit($from, $count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function limitBy($count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function page($page, $pageSize): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function orderBy($column, $type = OrderBy::ASC): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byId($value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byField($field, $value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byFields($fields, $values = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
@@ -172,6 +175,8 @@ class SelectCombiner implements ICmdSelect
 	public function queryWithCallback($callback, $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryIterator($isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMap($key = 0, $value = 1) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryObject(string $className): ?LiteObject { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryObjects(string $className): array { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMapRow($key = 0, $removeColumnFromRow = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryGroupBy($byColumn, bool $removeColumn = false): Map { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryCount() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }

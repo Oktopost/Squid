@@ -2,8 +2,9 @@
 namespace Squid\MySql\Extensions\Enrichment;
 
 
-use Squid\MySql\Command\IQuery;
+use Objection\LiteObject;
 use Structura\Map;
+use Squid\MySql\Command\IQuery;
 
 
 abstract class AbstractQueryEnrichment implements IQueryEnrichment
@@ -173,5 +174,15 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	public function queryMapRow($key = 0, $removeColumnFromRow = false)
 	{
 		return $this->source->queryMapRow($key, $removeColumnFromRow);
+	}
+	
+	public function queryObject(string $className): ?LiteObject
+	{
+		return $this->source->queryObject($className);
+	}
+	
+	public function queryObjects(string $className): array
+	{
+		return $this->source->queryObjects($className);
 	}
 }

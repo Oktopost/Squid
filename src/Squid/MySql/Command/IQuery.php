@@ -2,6 +2,7 @@
 namespace Squid\MySql\Command;
 
 
+use Objection\LiteObject;
 use Structura\Map;
 
 
@@ -92,6 +93,18 @@ interface IQuery
 	 * @return array|false
 	 */
 	public function queryMap($key = 0, $value = 1);
+	
+	/**
+	 * @param string $className LiteObject class name.
+	 * @return LiteObject|null
+	 */
+	public function queryObject(string $className): ?LiteObject;
+	
+	/**
+	 * @param string $className LiteObject class name.
+	 * @return LiteObject[]
+	 */
+	public function queryObjects(string $className): array;
 	
 	/**
 	 * Return array where each value is an array of rows grouped by a single column.

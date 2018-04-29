@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdUpdate;
+use Squid\MySql\Command\IWithLimit;
 
 
 class CmdUpdate extends PartsCommand implements ICmdUpdate
@@ -107,9 +108,9 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * Limit the query for given set.
 	 * @param int $from Select form this row.
 	 * @param int $count Maximum number of rows to select.
-	 * @return static
+	 * @return IWithLimit|static
 	 */
-	public function limit($from, $count) 
+	public function limit($from, $count): IWithLimit
 	{
 		return $this->setPart(CmdUpdate::PART_LIMIT, true, ($from ? array($from, $count) : $count));
 	}

@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\IMySqlCommandConstructor;
 
 
@@ -326,9 +327,9 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param int $from
 	 * @param int $count
-	 * @return static
+	 * @return IWithLimit|static
 	 */
-	public function limit($from, $count)
+	public function limit($from, $count): IWithLimit
 	{
 		return $this->setPart(CmdSelect::PART_LIMIT, [(int)$from, (int)$count], []);
 	}

@@ -3,6 +3,7 @@ namespace Squid\MySql\Impl\Command;
 
 
 use Squid\MySql\Command\ICmdDelete;
+use Squid\MySql\Command\IWithLimit;
 use Squid\Exceptions\SquidException;
 
 
@@ -87,10 +88,9 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	/**
 	 * @param int $from Zero based index.
 	 * @param int $count
-	 * @return static
-	 * @throws SquidException
+	 * @return static|IWithLimit
 	 */
-	public function limit($from, $count)
+	public function limit($from, $count): IWithLimit
 	{
 		if ($from)
 			throw new SquidException('MySQL DELETE query supports only LIMIT [count] and not LIMIT [from], [count]');

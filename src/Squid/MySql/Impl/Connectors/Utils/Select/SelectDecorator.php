@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Connectors\Utils\Select;
 
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\ISelect;
+use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
@@ -82,7 +83,7 @@ class SelectDecorator implements ISelect
 	public function unionAll(IMySqlCommandConstructor $select) { $this->select->unionAll($select); return $this; }
 	
 	public function where($exp, $bind = false) { $this->select->where($exp, $bind); return $this; }
-	public function limit($from, $count) { $this->select->limit($from, $count); return $this; }
+	public function limit($from, $count): IWithLimit { $this->select->limit($from, $count); return $this; }
 	public function withRollup($withRollup = true) { $this->select->withRollup($withRollup); return $this; }
 	public function forUpdate($forUpdate = true) { $this->select->forUpdate($forUpdate); return $this; }
 	public function lockInShareMode($lockInShareMode = true) { $this->select->lockInShareMode($lockInShareMode); return $this; }

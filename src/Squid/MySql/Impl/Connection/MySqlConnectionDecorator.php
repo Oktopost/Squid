@@ -51,7 +51,12 @@ class MySqlConnectionDecorator implements IMySqlConnection
 	 */
 	public function isOpen()
 	{
-		$this->connection->isOpen();
+		return $this->connection->isOpen();
+	}
+	
+	public function version(): string
+	{
+		return $this->connection->version();
 	}
 	
 	/**

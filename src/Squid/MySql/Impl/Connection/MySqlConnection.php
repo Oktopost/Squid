@@ -106,7 +106,12 @@ class MySqlConnection implements IMySqlConnection
 	{
 		return !is_null($this->pdo);
 	}
-	
+
+	public function version(): string
+	{
+		return $this->config->Version;
+	}
+
 	/**
 	 * @param string $cmd Sql SAFE query to execute.
 	 * @param array $bind Array of parameters to bind.

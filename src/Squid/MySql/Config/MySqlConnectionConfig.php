@@ -13,6 +13,7 @@ use Objection\LiteObject;
  * @property string	$User
  * @property string	$Pass
  * @property array	$PDOFlags
+ * @property string	$Version
  */
 class MySqlConnectionConfig extends LiteObject 
 {
@@ -38,7 +39,8 @@ class MySqlConnectionConfig extends LiteObject
 			'Port'		=> LiteSetup::createInt(3306),
 			'User'		=> LiteSetup::createString(),
 			'Pass'		=> LiteSetup::createString(),
-			'PDOFlags'	=> LiteSetup::createArray()
+			'PDOFlags'	=> LiteSetup::createArray(),
+			'Version'	=> LiteSetup::createString('5.6')
 		];
 	}
 	

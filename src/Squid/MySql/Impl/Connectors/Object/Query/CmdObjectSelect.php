@@ -9,8 +9,8 @@ use Squid\MySql\Connectors\Object\Query\IObjectSelector;
 use Squid\MySql\Connectors\Object\Query\ICmdObjectSelect;
 
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
-use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
+use Squid\MySql\Impl\Traits\CmdTraits\Decorators\TWithWhereDecorated;
 
 use Squid\MySql\Impl\Connectors\Utils\Select\SelectDecorator;
 use Squid\MySql\Impl\Connectors\Object\Query\Selectors\StandardSelector;
@@ -18,7 +18,7 @@ use Squid\MySql\Impl\Connectors\Object\Query\Selectors\StandardSelector;
 
 class CmdObjectSelect extends SelectDecorator implements ICmdObjectSelect
 {
-	use TWithWhere;
+	use TWithWhereDecorated;
 	use TWithLimit;
 	use TWithColumn;
 	

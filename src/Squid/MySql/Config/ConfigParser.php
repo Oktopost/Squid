@@ -9,12 +9,13 @@ class ConfigParser
 	
 	private static $MAP = 
 	[
-		'db'	=> ['db', 'database', 'dbname'],
-		'host'	=> ['host'],
-		'pass'	=> ['pass', 'password', 'pwd'],
-		'user'	=> ['user', 'username'],
-		'port'	=> ['port'],
-		'flags'	=> ['flags', 'attribute']
+		'db'		=> ['db', 'database', 'dbname'],
+		'host'		=> ['host'],
+		'pass'		=> ['pass', 'password', 'pwd'],
+		'user'		=> ['user', 'username'],
+		'port'		=> ['port'],
+		'flags'		=> ['flags', 'attribute'],
+		'version'	=> ['version']
 	];
 	
 	
@@ -51,6 +52,7 @@ class ConfigParser
 		$object->Pass		= self::getValue('', 'pass', $config);
 		$object->User		= self::getValue('', 'user', $config);
 		$object->PDOFlags	= self::getValue([], 'flags', $config);
+		$object->Version	= self::getValue($object->Version, 'version', $config);
 		
 		return $object;
 	}

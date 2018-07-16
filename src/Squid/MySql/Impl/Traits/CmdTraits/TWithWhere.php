@@ -56,6 +56,9 @@ trait TWithWhere
 	}
 	
 	
+	abstract protected function getVersion(): string;
+	
+	
 	/**
 	 * @inheritdoc
 	 */

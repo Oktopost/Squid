@@ -37,7 +37,7 @@ class SelectDecorator implements ISelect
 
 	protected function getChild(): IWithWhere
 	{
-		return $this->getSelect();
+		return $this->select;
 	}
 
 	/**

@@ -10,7 +10,7 @@ class Config
 			'db'		=> '_squid_test_',
 			'user'		=> '_squid_test_u_',
 			'password'	=> '_squid_test_pass_',
-			'host'		=> '192.168.10.10'
+			'host'		=> 'localhost'
 		];
 	}
 }

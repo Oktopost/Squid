@@ -211,40 +211,40 @@ class SelectDecoratorTest extends TestCase
 	
 	public function test_byId()
 	{
-		$this->assertMethodRecalls('byId', 'where', [
-			[['a'], ['Id=?', 'a']]
+		$this->assertMethodRecalls('byId', 'byId', [
+			[['a'], ['a']]
 		]);
 	}
 	
 	public function test_byField()
 	{
-		$this->assertMethodRecalls('byField', 'where', [
-			[['a', 1], ['a=?', 1]],
-			[['a', [1]], ['a IN (?)', [1]]],
-			[['a', [1, 2]], ['a IN (?,?)', [1, 2]]]
+		$this->assertMethodRecalls('byField', 'byField', [
+			[['a', 1], ['a', 1]],
+			[['a', [1]], ['a', [1]]],
+			[['a', [1, 2]], ['a', [1, 2]]]
 		]);
 	}
 	
 	public function test_byFields()
 	{
-		$this->assertMethodRecalls('byFields', 'where', [
+		$this->assertMethodRecalls('byFields', 'byFields', [
 			[
 				[['a' => 1]], 
-				['a=?', 1]
+				[['a' => 1]]
 			],
 			[
-				[['a'], [1]], 
-				['a=?', 1]
+				[['a'], [1]],
+				[['a'], [1]]
 			]
 		]);
 	}
 	
 	public function test_whereIn()
 	{
-		$this->assertMethodRecalls('whereIn', 'where', [
+		$this->assertMethodRecalls('whereIn', 'whereIn', [
 			[
 				['a', [1, 2, 3]], 
-				['a IN (?,?,?)', [1, 2, 3]]
+				['a', [1, 2, 3]]
 			]
 		]);
 	}
@@ -252,14 +252,14 @@ class SelectDecoratorTest extends TestCase
 	public function test_whereExists()
 	{
 		$select = new CmdSelect();
-		$this->assertMethodRecalls('whereExists', 'where', [
+		$this->assertMethodRecalls('whereExists', 'whereExists', [
 			[
 				[$select], 
-				['EXISTS (SELECT * )', []]
+				[$select]
 			],
 			[
 				[$select, true], 
-				['NOT EXISTS (SELECT * )', []]
+				[$select, true]
 			]
 		]);
 	}
@@ -267,10 +267,10 @@ class SelectDecoratorTest extends TestCase
 	public function test_whereNotExists()
 	{
 		$select = new CmdSelect();
-		$this->assertMethodRecalls('whereNotExists', 'where', [
+		$this->assertMethodRecalls('whereNotExists', 'whereNotExists', [
 			[
 				[$select], 
-				['NOT EXISTS (SELECT * )', []]
+				[$select]
 			]
 		]);
 	}

@@ -99,6 +99,8 @@ trait TWithWhere
 		if (!$values)
 			throw new SquidException('Empty values set passed to whereIn!');
 		
+		// var_dump($this->getVersion()); die;
+		
 		if ($values instanceof ICmdSelect) 
 		{
 			$in = $values->assemble();

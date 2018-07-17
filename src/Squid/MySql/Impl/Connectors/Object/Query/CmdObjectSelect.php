@@ -18,9 +18,9 @@ use Squid\MySql\Impl\Connectors\Object\Query\Selectors\StandardSelector;
 
 class CmdObjectSelect extends SelectDecorator implements ICmdObjectSelect
 {
-	use TWithWhereDecorated;
 	use TWithLimit;
 	use TWithColumn;
+	use TWithWhereDecorated;
 	
 	
 	/** @var IObjectSelector */

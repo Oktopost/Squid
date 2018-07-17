@@ -18,7 +18,7 @@ class TWithWhereTest extends TestCase
 	private $field = null;
 	private $value = null;
 	
-	private $version = '5.6';
+	private $version = '5.7';
 
 	
 	private function isMultiDimensionalArray($value): bool
@@ -70,8 +70,8 @@ class TWithWhereTest extends TestCase
 	{
 		return $this->version;
 	}
-
-
+	
+	
 	/**
 	 * It ss called inside the trait
 	 */

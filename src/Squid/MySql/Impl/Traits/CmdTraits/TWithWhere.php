@@ -91,41 +91,55 @@ trait TWithWhere
 	}
 	
 	/**
-	 * @inheritdoc
-	 * @throws SquidException
+	 * @param string|string[] $field
+	 * @param ICmdSelect|array $values
+	 * @param bool $negate
 	 */
 	public function whereIn($field, $values, $negate = false) 
 	{
 		if (!$values)
 			throw new SquidException('Empty values set passed to whereIn!');
 		
-		// var_dump($this->getVersion()); die;
-		
-		if ($values instanceof ICmdSelect) 
+		if ($this->getVersion() < '5.7' && is_array($field) && !($values instanceof ICmdSelect))
 		{
-			$in = $values->assemble();
-			$values = $values->bind();
-		}
-		else 
-		{
-			$filler = is_array($field) ? $this->prepareFiller($field)  : '?';
+			$singleSet = '(' . implode(' = ? AND ', $field). ' = ?' . ')';
+			$expression = '(' . implode(' OR ', array_fill(0, count($values), $singleSet)) . ')';
 			
-			$in = implode(',', array_pad([], count($values), $filler));
-		}
-		
-		$statement = ($negate ? 'NOT IN' : 'IN');
-		
-		if (is_array($field))
-		{
-			$field = '(' . implode(',', $field) . ')';
-			
-			if ($this->isConvertableToPlainArray($values))
+			if ($negate)
 			{
-				$values = array_merge(...$values);
+				$expression = "NOT $expression";
 			}
+			
+			$this->where($expression, $values);
 		}
-		
-		return $this->where("$field $statement ($in)", $values);
+		else
+		{
+			/** @var ICmdSelect|array $values */
+			if ($values instanceof ICmdSelect) 
+			{
+				$in = $values->assemble();
+				$values = $values->bind();
+			}
+			else 
+			{
+				$filler = is_array($field) ? $this->prepareFiller($field)  : '?';
+				$in = implode(',', array_pad([], count($values), $filler));
+			}
+			
+			$statement = ($negate ? 'NOT IN' : 'IN');
+			
+			if (is_array($field))
+			{
+				$field = '(' . implode(',', $field) . ')';
+				
+				if ($this->isConvertableToPlainArray($values))
+				{
+					$values = array_merge(...$values);
+				}
+			}
+			
+			return $this->where("$field $statement ($in)", $values);
+		}
 	}
 	
 	/**

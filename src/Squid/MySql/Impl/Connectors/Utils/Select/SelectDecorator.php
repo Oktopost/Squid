@@ -2,23 +2,24 @@
 namespace Squid\MySql\Impl\Connectors\Utils\Select;
 
 
+use Squid\MySql\Command\IWithWhere;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\ISelect;
 use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithLimit;
-use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithColumn;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithExtendedWhere;
+use Squid\MySql\Impl\Traits\CmdTraits\Decorators\TWithWhereDecorated;
 
 
 class SelectDecorator implements ISelect
 {
-	use TWithWhere;
 	use TWithLimit;
 	use TWithColumn;
 	use TWithExtendedWhere;
+	use TWithWhereDecorated;
 	
 	
 	/** @var ICmdSelect */
@@ -34,6 +35,10 @@ class SelectDecorator implements ISelect
 		return $this->select;
 	}
 
+	protected function getChild(): IWithWhere
+	{
+		return $this->select;
+	}
 
 	/**
 	 * @param ISelect|IMySqlConnector $from
@@ -87,8 +92,8 @@ class SelectDecorator implements ISelect
 	public function withRollup($withRollup = true) { $this->select->withRollup($withRollup); return $this; }
 	public function forUpdate($forUpdate = true) { $this->select->forUpdate($forUpdate); return $this; }
 	public function lockInShareMode($lockInShareMode = true) { $this->select->lockInShareMode($lockInShareMode); return $this; }
-	
-	
+
+
 	public function __clone()
 	{
 		$this->select = clone $this->select;

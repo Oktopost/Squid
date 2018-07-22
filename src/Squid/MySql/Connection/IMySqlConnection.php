@@ -25,6 +25,8 @@ interface IMySqlConnection extends IMySqlExecutor
 	 */
 	public function isOpen();
 	
+	public function version(): string;
+	
 	/**
 	 * @param string $cmd
 	 * @param array $bind

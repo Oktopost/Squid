@@ -21,6 +21,11 @@ abstract class AbstractCommand implements IMySqlCommandConstructor
 		return $this->conn;
 	}
 	
+	protected function getVersion(): string
+	{
+		return $this->conn->version();
+	}
+	
 	
 	/**
 	 * Set the connection to use.

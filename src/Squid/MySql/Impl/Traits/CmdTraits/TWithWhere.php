@@ -110,7 +110,7 @@ trait TWithWhere
 				$expression = "NOT $expression";
 			}
 			
-			$this->where($expression, $values);
+			return $this->where($expression, array_merge(...$values));
 		}
 		else
 		{

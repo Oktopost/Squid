@@ -16,22 +16,6 @@ class ConfigCollection
 	
 	
 	/**
-	 * Load connection by name.
-	 * @param string $name
-	 * @return MySqlConnection
-	 */
-	private function load($name)
-	{
-		$config = $this->configLoader->getConfig($name);
-		
-		$conn = new MySqlConnection();
-		$conn->setConfig($config);
-		
-		return $conn;
-	}
-	
-	
-	/**
 	 * @param IConfigLoader $loader
 	 */
 	public function __construct(IConfigLoader $loader) 
@@ -43,17 +27,12 @@ class ConfigCollection
 	/**
 	 * @return MySqlConnectionConfig[]
 	 */
-	public function getAllConnections()
+	public function getAllConnections(): array
 	{
 		return array_values($this->configs);
 	}
-
-	/**
-	 * @param string $name
-	 * @param MySqlConnectionConfig $connection
-	 * @throws SquidException
-	 */
-	public function add($name, MySqlConnectionConfig $connection) 
+	
+	public function add(string $name, MySqlConnectionConfig $connection) 
 	{
 		if (isset($this->configs[$name]))
 			throw new SquidException("Config $name already exists");
@@ -65,19 +44,15 @@ class ConfigCollection
 	 * @param string $name
 	 * @return MySqlConnectionConfig
 	 */
-	public function get($name) 
+	public function get($name): MySqlConnectionConfig
 	{
 		if (!isset($this->configs[$name]))
-			$this->configs[$name] = $this->load($name);
+			$this->configs[$name] = $this->configLoader->getConfig($name);
 		
 		return $this->configs[$name];
 	}
 	
-	/**.
-	 * @param string $name
-	 * @return MySqlConnectionConfig
-	 */
-	public function has($name) 
+	public function has(string $name): bool  
 	{
 		return isset($this->configs[$name]) || $this->configLoader->hasConfig($name);
 	}

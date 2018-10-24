@@ -8,42 +8,42 @@ interface IWithExtendedWhere extends IWithWhere
 	 * @param string $field
 	 * @param mixed $greater
 	 * @param mixed $less
-	 * @return IWithExtendedWhere|static
+	 * @return static
 	 */
-	public function whereBetween(string $field, $greater, $less): IWithExtendedWhere;
+	public function whereBetween(string $field, $greater, $less);
 
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return IWithExtendedWhere|static
+	 * @return static
 	 */
-	public function whereNotEqual(string $field, $value): IWithExtendedWhere;
+	public function whereNotEqual(string $field, $value);
 
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return IWithExtendedWhere|static
+	 * @return static
 	 */
-	public function whereLess(string $field, $value): IWithExtendedWhere;
+	public function whereLess(string $field, $value);
 
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return IWithExtendedWhere|static
+	 * @return static
 	 */
-	public function whereLessOrEqual(string $field, $value): IWithExtendedWhere;
+	public function whereLessOrEqual(string $field, $value);
 	
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return IWithExtendedWhere|static
+	 * @return static
 	 */
-	public function whereGreater(string $field, $value): IWithExtendedWhere;
+	public function whereGreater(string $field, $value);
 	
 	/**
 	 * @param string $field
 	 * @param mixed $value
-	 * @return IWithExtendedWhere|static
+	 * @return static
 	 */
-	public function whereGreaterOrEqual(string $field, $value): IWithExtendedWhere;
+	public function whereGreaterOrEqual(string $field, $value);
 }

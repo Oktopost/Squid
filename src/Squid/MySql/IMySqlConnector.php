@@ -3,10 +3,17 @@ namespace Squid\MySql;
 
 
 use Squid\MySql\Command;
+use Squid\MySql\Query\IQueryHandler;
 
 
 interface IMySqlConnector 
 {
+	/**
+	 * @param string|IQueryHandler $queryHandler
+	 * @return IQueryHandler
+	 */
+	public function query($queryHandler): IQueryHandler;
+	
 	/**
 	 * @return Command\ICmdController
 	 */

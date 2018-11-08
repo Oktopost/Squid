@@ -5,6 +5,8 @@ namespace Squid\MySql\Impl;
 use Squid\MySql\Impl;
 use Squid\MySql\Command;
 use Squid\MySql\IMySqlConnector;
+use Squid\MySql\Query\IQuery;
+use Squid\MySql\Query\IQueryHandler;
 use Squid\MySql\Command\IMySqlCommand;
 use Squid\MySql\Connection\IMySqlConnection;
 
@@ -36,6 +38,22 @@ class MySqlConnector implements IMySqlConnector
 		$this->connectionName = $name;
 	}
 	
+	
+	/**
+	 * @param string|IQueryHandler $queryHandler
+	 * @return IQueryHandler
+	 */
+	public function query($queryHandler): IQueryHandler
+	{
+		if (is_string($queryHandler))
+			$queryHandler = new $queryHandler;
+		
+		/** @var IQuery $query */
+		$query = new Impl\Query\Query($queryHandler, $this->select()); 
+		$queryHandler->setup($query);
+		
+		return $queryHandler;
+	}
 	
 	/**
 	 * @param IMySqlConnection $connection

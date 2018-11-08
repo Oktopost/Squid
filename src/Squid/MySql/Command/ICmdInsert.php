@@ -27,7 +27,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * @return static
 	 */
 	public function defaultValues(array $default);
-
+	
 	/**
 	 * Append a set of values to insert.
 	 * @param array $values If numeric array, values must match fields that were set in into(...) method.

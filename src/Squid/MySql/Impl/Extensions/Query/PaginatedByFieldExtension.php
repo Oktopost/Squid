@@ -18,7 +18,7 @@ class PaginatedByFieldExtension
 	];
 	
 	
-	/** @var null|int */ 
+	/** @var null|int */
 	private $limit = null;
 	private $offset = 0;
 	
@@ -46,8 +46,11 @@ class PaginatedByFieldExtension
 		return self::SIGNS[$greater ? 1 : 0];
 	}
 	
-	private function getOffset(): int 
+	private function getOffset(): int
 	{
+		if (!$this->idValue)
+			return 0;
+		
 		$sign = $this->getFieldSign(!$this->isBefore);
 		
 		$beforeQuery = clone $this->query;
@@ -82,14 +85,19 @@ class PaginatedByFieldExtension
 		
 		$query = clone $this->query;
 		$query
-			->where("{$this->field} {$sign}= ?", [$this->value])
-			->having(
-				"{$this->field} {$sign} ? OR {$this->idField} {$idSign} ?", 
-				[$this->value, $this->idValue]
-			)
 			->orderBy($this->field,		$fieldOrder)
 			->orderBy($this->idField,	$idOrder)
 			->limit(abs($this->offset), $this->limit);
+		
+		if ($this->idValue)
+		{
+			$query
+				->where("{$this->field} {$sign}= ?", [$this->value])
+				->having(
+					"{$this->field} {$sign} ? OR {$this->idField} {$idSign} ?",
+					[$this->value, $this->idValue]
+				);
+		}
 		
 		return $query->query();
 	}
@@ -100,8 +108,8 @@ class PaginatedByFieldExtension
 		if ($select)
 			$this->setQuery($select);
 	}
-
-
+	
+	
 	/**
 	 * @param ICmdSelect $select
 	 * @return PaginatedByFieldExtension|static
@@ -114,15 +122,22 @@ class PaginatedByFieldExtension
 	
 	public function setOrder(int $order): PaginatedByFieldExtension
 	{
-		$this->order = ($order == OrderBy::ASC ? OrderBy::ASC : OrderBy::DESC); 
+		$this->order = ($order == OrderBy::ASC ? OrderBy::ASC : OrderBy::DESC);
 		return $this;
 	}
 	
 	
-	public function setIdField(string $field, $id): PaginatedByFieldExtension
+	public function setIdField(string $field, $id = null): PaginatedByFieldExtension
 	{
 		$this->idField = $field;
 		$this->idValue = $id;
+		return $this;
+	}
+	
+	public function setOrderField(string $field): PaginatedByFieldExtension
+	{
+		$this->isBefore = false;
+		$this->field = $field;
 		return $this;
 	}
 	
@@ -161,7 +176,7 @@ class PaginatedByFieldExtension
 		if ($this->isBefore)
 		{
 			$result->setData(array_reverse($data));
-			$result->Offset = max(0, $result->Offset - $result->Count); 
+			$result->Offset = max(0, $result->Offset - $result->Count);
 		}
 		else
 		{

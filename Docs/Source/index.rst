@@ -3,6 +3,6 @@ Squid - PHP Library for MySQL
 
 .. toctree::
 	:caption: Contents:
-	:maxdepth: 5
+	:maxdepth: 3
 	
-	
+	standard

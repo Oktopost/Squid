@@ -1,8 +1,11 @@
 Limit Trait
 ===========
 
-
 The Limit trait is present in any sql commands that have the :code:`LIMIT` and :code:`ORDER BY` clauses.
+
+.. function:: 
+	interface \\Squid\\MySql\\Command\\IWithLimit
+	trait \\Squid\\MySql\\Impl\\Traits\\CmdTraits\\TWithLimit
 
 * All of the methods, excluding odrerBy's first parameter are binded or otherwise validated and therefore SQLi safe. 
 * Calling one of the limit (:code:`limit`, :code:`limitBy` or :code:`page`) methods will override any previously set values.
@@ -13,8 +16,8 @@ The Limit trait is present in any sql commands that have the :code:`LIMIT` and :
 
 The limit method is equivalent to MySQL's :code:`LIMIT` clause.
 
-.. function:: public limit(int $from, int $count): static
 
+.. function:: public function limit(int $from, int $count): static
 
 ==========  =====
 **$from**   Query offset
@@ -33,8 +36,7 @@ The limit method is equivalent to MySQL's :code:`LIMIT` clause.
 
 Equivalent to :code:`limit(0, $count)`.
 
-.. function:: public limitBy($count): static
-
+.. function:: public function limitBy($count): static
 
 ==========  =====
 **$count**  Maximum number of elements to select 
@@ -52,8 +54,8 @@ Equivalent to :code:`limit(0, $count)`.
 
 Given a const of :code:`$pageSize` elements per page, match the Nth (:code:`$page`) page for given command.
 
-.. function:: public page($page, $pageSize): static
 
+.. function:: public function page($page, $pageSize): static
 
 =============  =====
 **$page**      Zero based index of the page to select
@@ -69,10 +71,10 @@ Given a const of :code:`$pageSize` elements per page, match the Nth (:code:`$pag
 4. orderBy
 ----------
 
-Set the order option of the current sql command. Any consecutive call will append a new expression to the :code:`ORDER BY` claus.
+Set the order option of the current sql command. Any consecutive call will append a new expression to the :code:`ORDER BY` claus
 
-.. function:: public orderBy($column, $type = OrderBy::ASC)
 
+.. function:: public function orderBy($column, $type = OrderBy::ASC)
 
 =============  =====
 **$column**    Column, or array of columns to order by

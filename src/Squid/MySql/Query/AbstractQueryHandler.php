@@ -2,6 +2,7 @@
 namespace Squid\MySql\Query;
 
 
+use Objection\LiteObject;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Command\ICmdSelect;
 
@@ -14,6 +15,26 @@ abstract class AbstractQueryHandler implements IQueryHandler
 	/** @var IQuery */
 	private $query;
 	
+	
+	private $table = null;
+	private $object = null;
+	
+	
+	private function invoke(string $func, array $args)
+	{
+		call_user_func_array([$this->select(), substr(__FUNCTION__, 1)], func_get_args()); return $this;
+	}
+	
+	
+	protected function setTable(string $table): void
+	{
+		$this->table = $table;
+	}
+	
+	protected function setObject(string $className): void
+	{
+		$this->object = $className;
+	}
 	
 	protected function conn(): IMySqlConnector
 	{
@@ -31,6 +52,13 @@ abstract class AbstractQueryHandler implements IQueryHandler
 	}
 	
 	
+	protected function _limitBy(int $count): AbstractQueryHandler { return $this->invoke(__FUNCTION__, func_get_args()); }
+	protected function _limit(int $from, int $count): AbstractQueryHandler { return $this->invoke(__FUNCTION__, func_get_args()); }
+	protected function _where($exp, $bind = []): AbstractQueryHandler { return $this->invoke(__FUNCTION__, func_get_args()); }
+	protected function _byField($field, $value): AbstractQueryHandler { return $this->invoke(__FUNCTION__, func_get_args()); }
+	protected function _byFields($fields, $values = null): AbstractQueryHandler { return $this->invoke(__FUNCTION__, func_get_args()); }
+	
+	
 	public function __construct(?IMySqlConnector $connector = null)
 	{
 		if ($connector)
@@ -44,6 +72,11 @@ abstract class AbstractQueryHandler implements IQueryHandler
 	public function setup(IQuery $query): void
 	{
 		$this->query = $query;
+		
+		if ($this->table)
+		{
+			$this->query->select()->from($this->table);
+		}
 	}
 	
 	public function preExecute(ICmdSelect $select): ICmdSelect
@@ -62,6 +95,17 @@ abstract class AbstractQueryHandler implements IQueryHandler
 	 */
 	public function processRecord(array $record)
 	{
+		if ($this->object)
+		{
+			$o = $this->object;
+			
+			/** @var LiteObject $i */
+			$i = new $o;
+			$i->fromArray($record);
+			
+			return $i;
+		}
+		
 		return null;
 	}
 	

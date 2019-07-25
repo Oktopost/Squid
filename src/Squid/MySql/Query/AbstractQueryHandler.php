@@ -20,9 +20,10 @@ abstract class AbstractQueryHandler implements IQueryHandler
 	private $object = null;
 	
 	
-	private function invoke(string $func, array $args)
+	private function invoke(string $func, array $args): AbstractQueryHandler
 	{
-		call_user_func_array([$this->select(), substr(__FUNCTION__, 1)], func_get_args()); return $this;
+		call_user_func_array([$this->select(), substr($func, 1)], $args);
+		return $this;
 	}
 	
 	

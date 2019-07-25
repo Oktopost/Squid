@@ -8,6 +8,7 @@ use Squid\MySql\Connection\IMySqlConnection;
 
 use Squid\MySql\Impl\MySqlConnector;
 use Squid\MySql\Impl\Connection\ConnectionBuilder;
+use Squid\Utils\EmptyWhereInHandler;
 
 
 class MySql
@@ -94,5 +95,10 @@ class MySql
 		$mysql = new MySql();
 		$mysql->config()->addConfig('main', $config);
 		return $mysql->getConnector('main');
+	}
+	
+	public static function setEmptyWhereInHandler(callable $callback): void
+	{
+		EmptyWhereInHandler::set($callback);
 	}
 }

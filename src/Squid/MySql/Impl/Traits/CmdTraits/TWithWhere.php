@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 use Squid\MySql\Command\ICmdSelect;
 use Squid\Exceptions\SquidException;
+use Squid\Utils\EmptyWhereInHandler;
 
 
 /**
@@ -98,7 +99,11 @@ trait TWithWhere
 	public function whereIn($field, $values, $negate = false) 
 	{
 		if (!$values)
-			throw new SquidException('Empty values set passed to whereIn!');
+		{
+			/** @noinspection PhpParamsInspection */
+			EmptyWhereInHandler::handle($field, $this);
+			return $this;
+		}
 		
 		if ($this->getVersion() < '5.7' && is_array($field) && !($values instanceof ICmdSelect))
 		{

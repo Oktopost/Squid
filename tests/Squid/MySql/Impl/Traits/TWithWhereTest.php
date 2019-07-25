@@ -4,13 +4,13 @@ namespace Squid\MySql\Impl\Traits;
 
 use PHPUnit\Framework\TestCase;
 
-use Squid\Exceptions\SquidException;
 use Squid\MySql;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
+use Squid\Utils\EmptyWhereInHandler;
 
 
-class TWithWhereTest extends TestCase
+class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 {
 	use TWithWhere;
 	
@@ -65,6 +65,21 @@ class TWithWhereTest extends TestCase
 		}
 	}
 	
+	private function invokeWhereInWithEmptyValue(string $field): void
+	{
+		try
+		{
+			$this->whereIn('hello', []);
+		}
+		finally
+		{
+			$r = new \ReflectionClass(EmptyWhereInHandler::class);
+			$p = $r->getProperty('handler');
+			$p->setAccessible(true);
+			$p->setValue(null, null);
+		}
+	}
+	
 	
 	protected function getVersion(): string
 	{
@@ -85,7 +100,7 @@ class TWithWhereTest extends TestCase
 	/**
 	 * @expectedException \Squid\Exceptions\SquidException
 	 */
-	public function test_WhereIn_PassEmptyValue()
+	public function test_whereIn_PassEmptyValue()
 	{
 		$this->field = 'field';
 		$this->value = null;
@@ -93,7 +108,7 @@ class TWithWhereTest extends TestCase
 		$this->whereIn($this->field, $this->value);
 	}
 	
-	public function test_WhereIn_PassStringFieldAndArrayValues_GotStringAndBind()
+	public function test_whereIn_PassStringFieldAndArrayValues_GotStringAndBind()
 	{
 		$this->field = 'field';
 		$this->value = [1,2];
@@ -101,7 +116,7 @@ class TWithWhereTest extends TestCase
 		$this->whereIn($this->field, $this->value);
 	}
 	
-	public function test_WhereIn_PassArrayField_AndPlainArrayValues_GotStringAndBind()
+	public function test_whereIn_PassArrayField_AndPlainArrayValues_GotStringAndBind()
 	{
 		$this->field = ['field1', 'field2'];
 		$this->value = [1,2];
@@ -109,7 +124,7 @@ class TWithWhereTest extends TestCase
 		$this->whereIn($this->field, $this->value);
 	}
 	
-	public function test_WhereIn_PassArrayField_AndMultidimensionalArrayValues_GotStringAndBind()
+	public function test_whereIn_PassArrayField_AndMultidimensionalArrayValues_GotStringAndBind()
 	{
 		$this->field = ['field1', 'field2'];
 		$this->value = [[1,2], [1,4]];
@@ -117,7 +132,7 @@ class TWithWhereTest extends TestCase
 		$this->whereIn($this->field, $this->value);
 	}
 	
-	public function test_WhereIn_PassStringField_AndISelectValue_GotStringAndBind()
+	public function test_whereIn_PassStringField_AndISelectValue_GotStringAndBind()
 	{
 		$this->field = 'field';
 		$this->value = (new MySql\Impl\Command\CmdSelect())->from('TestTable')->where('A', 1);
@@ -125,11 +140,33 @@ class TWithWhereTest extends TestCase
 		$this->whereIn($this->field, $this->value);
 	}
 	
-	public function test_WhereIN_PassArrayField_AndISelectValue_GotStringAndBind()
+	public function test_whereIn_PassArrayField_AndISelectValue_GotStringAndBind()
 	{
 		$this->field = ['field1', 'field2'];
 		$this->value = (new MySql\Impl\Command\CmdSelect())->from('TestTable')->where('A', 1);
 		
 		$this->whereIn($this->field, $this->value);
+	}
+	
+	
+	public function test_whereIn_PassEmptyArray_HandlerInvoked()
+	{
+		$field = null;
+		$where = null;
+		
+		EmptyWhereInHandler::set(
+			function($a, $b) 
+				use (&$field, &$where)
+			{
+				$field = $a;
+				$where = $b;
+			});
+		
+		
+		$this->invokeWhereInWithEmptyValue('hello');
+		
+		
+		self::assertEquals('hello', $field);
+		self::assertSame($this, $where);
 	}
 }

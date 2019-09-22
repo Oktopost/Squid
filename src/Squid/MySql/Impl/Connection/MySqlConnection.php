@@ -18,6 +18,11 @@ class MySqlConnection implements IMySqlConnection
 	private $pdo = null;
 	
 	
+	private function getMysqlBool($value): int
+	{
+		return $value ? 1 : 0;
+	}
+	
 	private function openConnection() 
 	{
 		try
@@ -51,12 +56,18 @@ class MySqlConnection implements IMySqlConnection
 			if (is_array($value)) 
 			{
 				if (count($value) != 2)
-					throw new SquidException('Invalid bind value: ' . json_encode($value));
+					throw new SquidException('Invalid bind value: ' . jsonencode($value));
+				
+				if (is_bool($value[0]))
+					$value[0] = $this->getMysqlBool($value[0]);
 				
 				$statement->bindValue($index + 1, $value[0], $value[1]);
 			}
 			else 
 			{
+				if (is_bool($value))
+					$value = $this->getMysqlBool($value);
+				
 				$statement->bindValue($index + 1, $value);
 			}
 		}

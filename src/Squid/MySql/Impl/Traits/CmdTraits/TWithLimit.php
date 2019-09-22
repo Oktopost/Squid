@@ -77,4 +77,30 @@ trait TWithLimit
 		
 		return $this->_orderBy($column);
 	}
+	
+	/**
+	 * Add ascending order by fields.
+	 * @param string|string[] $column Single column, expression or array of columns.
+	 * @return static
+	 */
+	public function orderByAsc($column): IWithLimit
+	{
+		if (!is_array($column))
+		{
+			$column = [$column];
+		}
+		
+		return $this->_orderBy($column);
+	}
+	
+	/**
+	 * Add descending order by fields.
+	 * @param string|string[] $column Single column, expression or array of columns.
+	 * @return static
+	 */
+	public function orderByDesc($column): IWithLimit
+	{
+		$this->appendDesc($column);
+		return $this->_orderBy($column);
+	}
 }

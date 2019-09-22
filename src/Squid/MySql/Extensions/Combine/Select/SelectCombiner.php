@@ -144,6 +144,8 @@ class SelectCombiner implements ICmdSelect
 	public function limitBy($count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function page($page, $pageSize): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function orderBy($column, $type = OrderBy::ASC): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function orderByAsc($column): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function orderByDesc($column): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byId($value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byField($field, $value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byFields($fields, $values = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

@@ -37,4 +37,18 @@ interface IWithLimit
 	 * @return static
 	 */
 	public function orderBy($column, $type = OrderBy::ASC);
+	
+	/**
+	 * Add ascending order by fields.
+	 * @param string|string[] $column Single column, expression or array of columns.
+	 * @return static
+	 */
+	public function orderByAsc($column);
+	
+	/**
+	 * Add descending order by fields.
+	 * @param string|string[] $column Single column, expression or array of columns.
+	 * @return static
+	 */
+	public function orderByDesc($column);
 }

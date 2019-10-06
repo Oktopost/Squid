@@ -102,6 +102,20 @@ class JoinPerRow extends AbstractQueryEnrichment
 		return $this;
 	}
 	
+	/**
+	 * @return array
+	 */
+	public function queryNumeric()
+	{
+		$data = $this->getSource()->queryNumeric();
+		
+		if ($data !== false)
+		{
+			$data = $this->enrichData($data, false);
+		}
+		
+		return $data;
+	}
 	
 	/**
 	 * @param bool $isAssoc

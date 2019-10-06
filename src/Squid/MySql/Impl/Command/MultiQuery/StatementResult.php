@@ -24,6 +24,15 @@ class StatementResult implements IStatementResult
 	}
 	
 	/**
+	 * Query numeric result set.
+	 * @return array|false
+	 */
+	public function queryNumeric()
+	{
+		// TODO: Implement queryNumeric() method.
+	}
+		
+	/**
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
 	 * @return array|false
 	 */

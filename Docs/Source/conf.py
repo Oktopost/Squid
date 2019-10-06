@@ -40,6 +40,7 @@ release = u''
 # ones.
 extensions = [
     'sphinx.ext.todo',
+    'sphinxcontrib.phpdomain'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -160,6 +161,12 @@ texinfo_documents = [
 # -- Extension configuration -------------------------------------------------
 
 # -- Options for todo extension ----------------------------------------------
+
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+lexers['php'] = PhpLexer(startinline=True, linenos=1)
+lexers['php-annotations'] = PhpLexer(startinline=True, linenos=1)
+primary_domain = 'php'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True

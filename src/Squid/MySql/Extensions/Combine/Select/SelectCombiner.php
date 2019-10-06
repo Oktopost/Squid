@@ -168,6 +168,7 @@ class SelectCombiner implements ICmdSelect
 	public function assemble() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function execute() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function query() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryNumeric() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryAll($isAssoc = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryRow($isAssoc = false, $expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryColumn($expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }

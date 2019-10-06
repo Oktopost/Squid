@@ -2,7 +2,7 @@ $(document).ready(function ()
 {
 	var INCORRECT_TAB = '        ';
 	
-	$('.code').each(function () 
+	function fixTabs() 
 	{ 
 		var codeBlocks = $(this).html();
 		var pos = codeBlocks.indexOf(INCORRECT_TAB);
@@ -14,5 +14,8 @@ $(document).ready(function ()
 		}
 		
 		$(this).html(codeBlocks);
-	});
+	}
+	
+	$('.code').each(fixTabs);
+	$('.highlight').each(fixTabs);
 });

@@ -34,6 +34,15 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	
 	
 	/**
+	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
+	 * @return array
+	 */
+	public function queryAll($isAssoc = false)
+	{
+		return $this->source->queryAll($isAssoc);
+	}
+	
+	/**
 	 * Identical to queryAll(true);
 	 * @return array
 	 */
@@ -43,12 +52,12 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	}
 	
 	/**
-	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
-	 * @return array
+	 * Query numeric result set.
+	 * @return array|false
 	 */
-	public function queryAll($isAssoc = false)
+	public function queryNumeric()
 	{
-		return $this->source->queryAll($isAssoc);
+		return $this->source->queryNumeric();
 	}
 	
 	/**

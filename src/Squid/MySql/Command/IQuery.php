@@ -9,12 +9,19 @@ use Structura\Map;
 interface IQuery
 {
 	/**
-	 * Identical to queryAll(true);
+	 * Query associative result set.
 	 * @return array
 	 */
 	public function query();
 	
 	/**
+	 * Query numeric result set.
+	 * @return array|false
+	 */
+	public function queryNumeric();
+	
+	/**
+	 * Query the entire result set using defined fetch method. 
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
 	 * @return array|false
 	 */

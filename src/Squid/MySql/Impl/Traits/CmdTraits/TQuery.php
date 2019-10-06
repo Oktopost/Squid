@@ -196,6 +196,38 @@ trait TQuery
 	
 	
 	/**
+	 *  Return an iterator to iterate over all found rows.
+	 *  Each iteration will contain an array of rows instead of a single raw.
+	 * @param bool $isAssoc
+	 * @param int $size
+	 * @return \Iterator
+	 */
+	public function queryIteratorBulk(int $size = 100, $isAssoc = true)
+	{
+		$page = 0;
+		$found = $size;
+		
+		while ($found)
+		{
+			$query = clone $this;
+			
+			$query->page($page++, $size);
+			$result = $query->queryAll($isAssoc);
+			
+			if ($result)
+			{
+				$found = ($size == count($result));
+				yield $result;
+			}
+			else
+			{
+				$found = false;
+			}
+		}
+	}
+	
+	
+	/**
 	 * Return an array where the result of one column is the index and the second is value.
 	 * @param int|string $key Name of the key column.
 	 * @param int|string $value Name of the value column

@@ -144,6 +144,18 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	}
 	
 	/**
+	 *  Return an iterator to iterate over all found rows.
+	 *  Each iteration will contain an array of rows instead of a single raw.
+	 * @param bool $isAssoc
+	 * @param int $size
+	 * @return \Iterator
+	 */
+	public function queryIteratorBulk(int $size = 100, $isAssoc = true)
+	{
+		return $this->source->queryIteratorBulk($isAssoc, $size);
+	}
+	
+	/**
 	 * Return an array where the result of one column is the index and the second is value.
 	 * @param int|string $key Name of the key column.
 	 * @param int|string $value Name of the value column

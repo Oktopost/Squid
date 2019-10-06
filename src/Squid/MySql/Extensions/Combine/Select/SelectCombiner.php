@@ -176,6 +176,7 @@ class SelectCombiner implements ICmdSelect
 	public function queryBool($expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryWithCallback($callback, $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryIterator($isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryIteratorBulk(int $size = 100, $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMap($key = 0, $value = 1) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryObject(string $className): ?LiteObject { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryObjects(string $className): array { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }

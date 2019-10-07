@@ -39,8 +39,7 @@ release = u''
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.todo',
-    'sphinxcontrib.phpdomain'
+    'sphinx.ext.todo'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -68,7 +67,10 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'autumn'
+
+from pygments.styles import STYLE_MAP
+print STYLE_MAP.keys()
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -164,9 +166,8 @@ texinfo_documents = [
 
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
-lexers['php'] = PhpLexer(startinline=True, linenos=1)
-lexers['php-annotations'] = PhpLexer(startinline=True, linenos=1)
-primary_domain = 'php'
+lexers["php"] = PhpLexer(startinline=True, linenos=1)
+lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True

@@ -16,3 +16,13 @@
 {
 	tab-size: 4;
 }
+
+h2
+{
+	margin-bottom: 0
+}
+
+.docutils
+{
+	margin: 0 0 8px;
+}

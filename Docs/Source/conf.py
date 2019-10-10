@@ -69,9 +69,6 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'autumn'
 
-from pygments.styles import STYLE_MAP
-print STYLE_MAP.keys()
-
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -17,9 +17,27 @@
 	tab-size: 4;
 }
 
+table.highlighttable
+{
+	background-color: #fcfcfc;
+}
+
+h1
+{
+	font-size: 200%;
+	border-bottom: 1px solid #CCCCCC;
+}
+
 h2
 {
-	margin-bottom: 0
+	font-size: 125%;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+p.rubric
+{
+	font-size: 125%;
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .docutils

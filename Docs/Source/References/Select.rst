@@ -3,6 +3,7 @@ Select
 
 
 .. toctree::
+	:titlesonly:
 	
 	Select/column
 

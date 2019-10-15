@@ -38,7 +38,7 @@ trait TQuery
 		
 		return $object;
 	}
-
+	
 
 	/**
 	 * Identical to queryAll(true);
@@ -47,6 +47,15 @@ trait TQuery
 	public function query()
 	{
 		return $this->queryAll(true);
+	}
+	
+	/**
+	 * Query numeric result set.
+	 * @return array|false
+	 */
+	public function queryNumeric()
+	{
+		return $this->queryAll(false);
 	}
 
 	/**

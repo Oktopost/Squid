@@ -5,6 +5,8 @@ namespace Squid\MySql\Command;
 interface IWithWhere 
 {
 	/**
+	 * @deprecated 
+	 * 
 	 * Append section comparing field named 'Id' to given value.
 	 * @param mixed $value Value to compare to Id.
 	 * @return static

@@ -157,6 +157,15 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	
+	public function debug(): array
+	{
+		return [
+			$this->assemble(),
+			$this->bind()
+		];
+	}
+	
+	
 	/**
 	 * @param bool $distinct
 	 * @return static

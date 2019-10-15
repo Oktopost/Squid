@@ -1,0 +1,33 @@
+-----
+limit
+-----
+
+.. code-block:: php
+
+	public function limit(int $from, int $count): static
+
+The limit method is equivalent to MySQL's :code:`LIMIT` clause.
+
+
+.. rubric:: Parameters
+
+* **$from**: *int*  
+
+	Zero based query offset
+
+* **$count**:  *int* 
+	
+	Maximum number of elements to select
+
+
+.. rubric:: Return
+	
+Reference to ``$this``
+
+.. rubric:: Examples
+
+.. code-block:: php
+	:linenos:
+	
+	$select->limit(10, 2);
+	// SELECT ... LIMIT 10, 2

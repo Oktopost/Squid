@@ -14,7 +14,7 @@ queryInt
 
 .. rubric:: Return
 
-	``false`` if the query returned an empty result set, otherwise the first column of the first row, casted to int.
+``false`` if the query returned an empty result set, otherwise the first column of the first row, casted to int.
 
 
 .. rubric:: Examples

@@ -1,0 +1,25 @@
+/*noinspection CssUnknownTarget*/
+@import "css/theme.css";
+
+
+.wy-nav-content
+{
+	max-width: 100%;
+}
+
+.code 
+{
+	tab-size: 4;
+}
+
+.highlight 
+{
+	tab-size: 4;
+}
+
+
+/* Fix for code highlights inside a note element */
+div[class^='highlight'].notranslate, div[class*=' highlight-'].notranslate
+{
+    background-color: #fcfcfc;
+}

@@ -14,7 +14,7 @@ queryBool
 
 .. rubric:: Return
 
-	``null`` if the query returned an empty result set, otherwise the first column of the first row, casted to bool.
+``null`` if the query returned an empty result set, otherwise the first column of the first row, casted to bool.
 
 
 .. rubric:: Examples

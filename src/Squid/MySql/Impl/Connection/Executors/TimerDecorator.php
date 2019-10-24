@@ -35,7 +35,7 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 	/**
 	 * @param callable $callback Ignore if overriding measure() method.
 	 */
-	public function __construct($callback = null)
+	public function __construct(callable $callback = null)
 	{
 		$this->callback = $callback;
 	}
@@ -45,7 +45,7 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 	 * @param callable $callback
 	 * @return static
 	 */
-	public function setCallback($callback)
+	public function setCallback(callable $callback)
 	{
 		$this->callback = $callback;
 		return $this;

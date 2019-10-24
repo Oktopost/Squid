@@ -14,3 +14,5 @@ Generated SQL query. The query sent to the server would be exactly the same as g
 
 .. rubric:: Examples
 
+	
+

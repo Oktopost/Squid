@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'Squid'
+project = u'Oktopost'
 copyright = u'2019, Oktopost'
 author = u'Oktopost'
 
@@ -75,8 +75,8 @@ pygments_style = 'autumn'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-html_style = 'css/custom.css'
+html_theme = 'ok'
+html_theme_path = ["./../Theme"]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -168,7 +168,3 @@ lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
-
-
-def setup(app):
-    app.add_javascript("fix-tabs.js")

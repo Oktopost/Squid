@@ -3,6 +3,7 @@ namespace Squid;
 
 
 use Squid\MySql\ConfigFacade;
+use Squid\MySql\Connection\IMySqlExecuteDecorator;
 use Squid\MySql\IMySqlConnector;
 use Squid\MySql\Connection\IMySqlConnection;
 
@@ -53,6 +54,35 @@ class MySql
 	public function config() 
 	{
 		return $this->configFacade;
+	}
+	
+	/**
+	 * @param string|array $name
+	 * @param array $config
+	 * @return static
+	 */
+	public function addConnector($name, array $config = []) 
+	{
+		$this->config()->addConfig($name, $config);
+		return $this;
+	}
+	
+	/**
+	 * @param string[]|IMySqlExecuteDecorator[] ...$decorators
+	 * @return static
+	 */
+	public function addDecorator(...$decorators)
+	{
+		foreach ($decorators as &$decorator)
+		{
+			if (is_string($decorator))
+			{
+				$decorator = new $decorator;
+			}
+		}
+		
+		$this->config()->addExecuteDecorator(...$decorators);
+		return $this;
 	}
 	
 	/** 

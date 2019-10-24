@@ -1,0 +1,9 @@
+{%- extends "sphinx_rtd_theme/layout.html" %}
+{% block footer %}
+ 	<script type="text/javascript" src="{{ pathto('_static/js/fix-tabs.js', 1) }}"></script>
+ 	<script type="text/javascript" src="{{ pathto('_static/js/fix-home.js', 1) }}"></script>
+ 	<script type="text/javascript" src="{{ pathto('_static/js/fix-single-page-app.js', 1) }}"></script>
+	{{ super() }}
+{% endblock %}
+
+{% set show_sphinx = false %}

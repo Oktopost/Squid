@@ -7,10 +7,13 @@ Generate a `SELECT` query and parse response
 .. code-block:: php
 
 	$mysql = new MySql();
-	$mysql->config()
-		->addConfig('main', 
+	$mysql->addConnector(
+		'main', 
 		[
-			// ...
+			'host'	=> 'localhost',
+			'user'	=> 'admin',
+			'pass'	=> 'pass',
+			'db'	=> 'application'
 		]);
 	
 	

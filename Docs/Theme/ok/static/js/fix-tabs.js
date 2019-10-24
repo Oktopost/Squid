@@ -1,6 +1,6 @@
 $(document).ready(function ()
 {
-	var INCORRECT_TAB = '        ';
+	var INCORRECT_TAB = '        '; // 2
 	
 	function fixTabs() 
 	{ 

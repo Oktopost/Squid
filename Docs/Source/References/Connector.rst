@@ -13,8 +13,9 @@ and obtained usually in the following way:
 	$mysql->addConnector(
 		[
 			'host'	=> 'localhost',
-			'user'	=> 'root',
-			'pass'	=> ''
+			'user'	=> 'admin',
+			'pass'	=> 'pass',
+			'db'	=> 'application'
 		]);
 
 	$connector = $mysql->getConnector();

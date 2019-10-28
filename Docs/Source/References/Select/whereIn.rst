@@ -1,11 +1,12 @@
--------
+.. _select_whereIn:
+
+=======
 whereIn
--------
+=======
 
 .. code-block:: php
 	
 	public function whereIn($field, $values, $negate = false): static
-
 
 .. rubric:: Parameters
 

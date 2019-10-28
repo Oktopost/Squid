@@ -6,8 +6,9 @@ columnAs
 	
 	public function columnAs($column, $alias): static
 
-Equivalent to :code:`->column("$column as $alias")`
+Alias to :code:`->column("$column as $alias")`
 
+----------
 
 .. rubric:: Parameters
 
@@ -19,6 +20,7 @@ Equivalent to :code:`->column("$column as $alias")`
 
 	Column alias
 
+----------
 
 .. rubric:: Examples
 

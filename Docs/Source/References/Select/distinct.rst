@@ -1,6 +1,6 @@
---------
+========
 distinct
---------
+========
 
 .. code-block:: php
 	
@@ -8,23 +8,27 @@ distinct
 
 Toggle if the ``DISTINCT`` keyword should be added to the generated query.
 
+----------
 
 .. rubric:: Parameters
 
 * **$distinct**: *bool* = true
 	
 	| If set to true, add the ``DISTINCT`` keyword to the generated query.
-	| By default the *distinct* flag is set to ``false``.
+	| By default ``DISTINCT`` is not present.
 
+----------
 
 .. rubric:: Return
 
 Reference to ``$this``
 
+----------
 
 .. rubric:: Examples
 
 .. code-block:: php
+	:linenos:
 	
 	$select
 		->distinct()

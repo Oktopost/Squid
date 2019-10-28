@@ -10,6 +10,7 @@ debug
 
 	This method is not part of ``Squid\MySql\Command\ICmdSelect`` but ``Squid\MySql\Impl\Command\CmdSelect``
 
+----------
 
 .. rubric:: Return
 	
@@ -25,10 +26,12 @@ An array containing the result of ``assemble()`` as the first value and ``bind()
 		];
 	}
 
+----------
 
 .. rubric:: Examples
 
 .. code-block:: php
+	:linenos:
 	
 	[$command, $bind] = $cmd->debug();
 	

@@ -9,6 +9,7 @@ columnsExp
 Add a single expression to the :code:`SELECT` clause. Note that the string is appended as is, meaning that if a comma is 
 present in the :code:`$columns` parameter, it will also be present is the query.
 
+----------
 
 .. rubric:: Parameters
 
@@ -21,10 +22,13 @@ present in the :code:`$columns` parameter, it will also be present is the query.
 	Array of bind values or a single bind value. Empty array of false will be considered as no bind values. 
 	Use ``[false]`` to bind the ``false`` value
 
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 

@@ -8,6 +8,7 @@ column
 
 List columns to append to the :code:`SELECT` clause.
 
+----------
 
 .. rubric:: Parameters
 
@@ -15,11 +16,12 @@ List columns to append to the :code:`SELECT` clause.
 
 	Array of columns or valid SQL queries to execute.
 
+----------
 
 .. rubric:: Examples
 
 .. code-block:: php
 	:linenos:
 	
-	$select->column('a', 'COUNT(*)');
-	// SELECT a, COUNT(*) ...
+	$select->column('a', 'COUNT(*)', 't.Name', '(SELECT 1)');
+	// SELECT a,COUNT(*),t.Name,(SELECT 1) ... 

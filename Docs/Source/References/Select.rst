@@ -108,15 +108,6 @@ Generate a `SELECT` query and parse response
 	Select/page
 
 
-.. rubric:: Additional Query Flags
-
-.. toctree::
-	:maxdepth: 1
-
-	Select/forUpdate
-	Select/lockInShareMode
-
-
 .. rubric:: `UNION ...`
 
 .. toctree::
@@ -149,6 +140,15 @@ Generate a `SELECT` query and parse response
 	Select/queryObjects
 	Select/queryGroupBy
 	Select/queryMapRow
+
+
+.. rubric:: Additional Query Flags
+
+.. toctree::
+	:maxdepth: 1
+
+	Select/forUpdate
+	Select/lockInShareMode
 
 
 .. rubric:: Util methods

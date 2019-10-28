@@ -8,6 +8,7 @@ columnAsExp
 
 Equivalent to :code:`->columnsExp(["$column as $alias"], $bind)`
 
+----------
 
 .. rubric:: Parameters
 
@@ -23,6 +24,7 @@ Equivalent to :code:`->columnsExp(["$column as $alias"], $bind)`
 
 	Bind values for the query
 
+----------
 
 .. rubric:: Examples
 

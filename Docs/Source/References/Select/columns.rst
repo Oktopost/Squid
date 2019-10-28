@@ -8,6 +8,7 @@ columns
 
 Add a single or an array of columns to the :code:`SELECT` clause with an option to attach a table prefix before each column.
 
+----------
 
 .. rubric:: Parameters
 
@@ -19,10 +20,13 @@ Add a single or an array of columns to the :code:`SELECT` clause with an option 
 	
 	If set, will be appended as the table alias before each column.
 
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 

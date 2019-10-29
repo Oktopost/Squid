@@ -6,28 +6,47 @@ page
 
 	public function page($page, $pageSize): static
 
-Given a const of :code:`$pageSize` elements per page, match the Nth (:code:`$page`) page for given command.
+Append a ``LIMIT`` expression eqvivalent to selecting the Nth page, given a size of ``$pageSize`` elements per page.
 
+For example, the offset of the 7th page with 6 elements per page is: ``7 * 6 = 42``, therefore ``->page(7, 6)`` 
+will generate the expression ``LIMIT 42, 6``.
+
+----------
 
 .. rubric:: Parameters
 
-* **$from**: *int*  
+* **$page**: *int*  
 
-	Zero based query offset
+	**Zero** based query offset
 
-* **$count**:  *int* 
+* **$pageSize**:  *int* 
 	
 	Maximum number of elements to select
 
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 
 .. code-block:: php
 	:linenos:
 	
-	$select->limit(10, 2);
-	// SELECT ... LIMIT 10, 2
+	$select
+		->from('Account')
+		// ...
+		->page(0, 6);
+	
+	// SELECT ... LIMIT 0,6
+	
+	$select
+		->from('Account')
+		// ...
+		->page(7, 6);
+	
+	// SELECT ... LIMIT 42,6
+

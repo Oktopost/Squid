@@ -5,15 +5,6 @@ namespace Squid\MySql\Command;
 interface IWithWhere 
 {
 	/**
-	 * @deprecated 
-	 * 
-	 * Append section comparing field named 'Id' to given value.
-	 * @param mixed $value Value to compare to Id.
-	 * @return static
-	 */
-	public function byId($value);
-	
-	/**
 	 * @param string $field
 	 * @param array|string $value If array, IN used instead
 	 * @return static
@@ -36,7 +27,7 @@ interface IWithWhere
 	 * bind values are needed for this expression.
 	 * @return static
 	 */
-	public function where($exp, $bind = false);
+	public function where($exp, $bind = []);
 	
 	/**
 	 * Search for an expression or field in given set or sub query.

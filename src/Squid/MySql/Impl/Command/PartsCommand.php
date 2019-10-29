@@ -22,7 +22,8 @@ abstract class PartsCommand extends AbstractCommand
 	{
 		if ($bind === false) return $this;
 		
-		if (!is_array($bind)) $bind = [$bind]; 
+		if (!is_array($bind)) $bind = [$bind];
+		else if (!$bind) return $this;
 		
 		if (!$this->bind[$part]) 
 		{
@@ -59,10 +60,10 @@ abstract class PartsCommand extends AbstractCommand
 	 * Append new query to given part.
 	 * @param int $part Part to append to.
 	 * @param string $sql Command to append.
-	 * @param array|bool $bind Bind params.
+	 * @param mixed[] $bind Bind params.
 	 * @return static
 	 */
-	protected function appendPart($part, $sql, $bind = false) 
+	protected function appendPart($part, $sql, $bind = []) 
 	{
 		if (!is_array($sql)) $sql = [$sql];
 		
@@ -86,7 +87,7 @@ abstract class PartsCommand extends AbstractCommand
 	 * @param array|bool $bind Array of bind values if any.
 	 * @return static
 	 */
-	protected function setPart($part, $sql, $bind = false)
+	protected function setPart($part, $sql, $bind = [])
 	{
 		$this->parts[$part] = $sql;
 		

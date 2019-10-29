@@ -11,7 +11,6 @@ trait TWithWhereDecorated
 	protected abstract function getChild(): IWithWhere;
 	
 	
-	public function byId($value) { $this->getChild()->byId($value); return $this; }
 	public function byField($field, $value) { $this->getChild()->byField($field, $value); return $this; }
 	public function byFields($fields, $values = null) { $this->getChild()->byFields($fields, $values); return $this; }
 	public function whereIn($field, $values, $negate = false) { $this->getChild()->whereIn($field, $values, $negate); return $this; }

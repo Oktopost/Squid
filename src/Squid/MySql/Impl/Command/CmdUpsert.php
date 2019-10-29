@@ -83,7 +83,7 @@ class CmdUpsert extends CmdInsert implements ICmdUpsert
 	/**
 	 * @inheritdoc
 	 */
-	public function _set($exp, $bind = false) 
+	public function _set($exp, $bind = []) 
 	{
 		return $this->appendPart(CmdUpsert::$PART_SET, $exp, $bind); 
 	}

@@ -17,7 +17,7 @@ interface IWithSet
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function setExp($field, $exp = false, $bind = false);
+	public function setExp($field, $exp = false, $bind = []);
 	
 	/**
 	 * @see https://dev.mysql.com/doc/refman/5.7/en/case.html

@@ -4,9 +4,9 @@ columnAsExp
 
 .. code-block:: php
 	
-	public function columnAsExp($column, $alias, $bind = false): static
+	public function columnAsExp($column, $alias, $bind = []): static
 
-Equivalent to :code:`->columnsExp(["$column as $alias"], $bind)`
+Equivalent to ``->columnsExp(["$column as $alias"], $bind)``
 
 ----------
 
@@ -20,9 +20,9 @@ Equivalent to :code:`->columnsExp(["$column as $alias"], $bind)`
 
 	Column alias
 
-* **$bind**: *string*  
+* **$bind**: *array* | *mixed* = []  
 
-	Bind values for the query
+	Optional scalar or array of scalar bind parameters.
 
 ----------
 

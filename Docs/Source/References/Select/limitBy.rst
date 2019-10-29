@@ -6,23 +6,23 @@ limitBy
 
 	public function limitBy($count): static
 
-Equivalent to calling ``limit`` with an ``$offset`` of 0: ``->limit(0, $count)``.
+Alias to ``->limit(0, $count)``.
 
+----------
 
 .. rubric:: Parameters
 
-* **$page**:  *int* 
-	
-	Zero based index of the page to select
+* **$count**:  *int*
 
-* **$pageSize**:  *int*
+	Number of elements to select
 
-	Number of elements per page
-
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 

@@ -89,7 +89,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * bind values are needed for this expression.
 	 * @return static
 	 */
-	public function where($exp, $bind = false) 
+	public function where($exp, $bind = []) 
 	{
 		return $this->appendPart(CmdUpdate::PART_WHERE, $exp, $bind); 
 	}
@@ -122,7 +122,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param mixed $bind Bind params, if any.
 	 * @return static
 	 */
-	public function _set($exp, $bind = false) 
+	public function _set($exp, $bind = []) 
 	{
 		return $this->appendPart(CmdUpdate::PART_SET, $exp, $bind); 
 	}

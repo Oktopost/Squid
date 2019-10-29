@@ -22,7 +22,7 @@ interface IWithColumns
 	 * @param bool|array $bind
 	 * @return static
 	 */
-	public function columnsExp($columns, $bind = false);
+	public function columnsExp($columns, $bind = []);
 	
 	/**
 	 * @param string $column
@@ -37,5 +37,5 @@ interface IWithColumns
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function columnAsExp($column, $alias, $bind = false);
+	public function columnAsExp($column, $alias, $bind = []);
 }

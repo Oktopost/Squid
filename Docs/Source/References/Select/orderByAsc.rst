@@ -6,10 +6,11 @@ orderByAsc
 
 	public function orderByAsc($column): static
 
-Equivalent to :code:`orderBy($column, OrderBy::ASC)`
+Alias to :code:`orderBy($column, OrderBy::ASC)`
 
 Add an ``ORDER BY ... ASC`` expression to the current Select statement for the provided column(s).
 
+----------
 
 .. rubric:: Parameters
 
@@ -17,10 +18,13 @@ Add an ``ORDER BY ... ASC`` expression to the current Select statement for the p
 
 	Column, or array of columns to order by
 
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 
@@ -35,6 +39,8 @@ The ``ASC`` keyword is the default option for the ``ORDER BY`` clause, therefore
 	$select->orderBy(['COUNT(*)', 'Name']);
 	// SELECT ... ORDER BY COUNT(*), Name
 
+----------
+
 .. warning:: 
 	
-	:code:`$column` parameter is treated as an SQL expression, therefore it must be a safe SQL string.
+	``$column`` parameter is treated as an SQL expression, therefore it must be a safe SQL string.

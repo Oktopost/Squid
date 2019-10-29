@@ -10,6 +10,7 @@ Equivalent to :code:`orderBy($column, OrderBy::DESC)`
 
 Add an ``ORDER BY ... DESC`` expression to the current Select statement for the provided column(s).
 
+----------
 
 .. rubric:: Parameters
 
@@ -17,10 +18,13 @@ Add an ``ORDER BY ... DESC`` expression to the current Select statement for the 
 
 	Column, or array of columns to order by
 
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 
@@ -32,6 +36,8 @@ Reference to ``$this``
 	
 	$select->orderByDesc(['COUNT(*)', 'Name']);
 	// SELECT ... ORDER BY COUNT(*), Name DESC
+
+----------
 
 .. warning:: 
 	

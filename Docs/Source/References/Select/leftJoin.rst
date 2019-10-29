@@ -4,7 +4,7 @@ leftJoin
 
 .. code-block:: php
 	
-	public function leftJoin($table, $alias, $condition, $bind = false, $outer = false): static
+	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false): static
 
 Add a left join expression to the query.
 
@@ -19,19 +19,19 @@ Add a left join expression to the query.
 
 	Table name, MySQL expression or MySQL command to use as the target. 
 	
-* **$alias**: 
+* **$alias**: *string*
 	
 	Alias for the table/expression.
 
-* **$condition**: 
+* **$condition**: *string*
 
 	Expression to use as the join condition.
 
-* **$bind**:
+* **$bind**: *array* | *mixed*
 	
-	Optional scalar or array of bind params. To pass ``false`` as a bind param, use an array - ``[false]``
+	Optional scalar or array of scalar bind parameters.
 
-* **$outer**:
+* **$outer**: *bool* = false
 
 	If set to true, ``LEFT OUTER JOIN`` is generated.
 

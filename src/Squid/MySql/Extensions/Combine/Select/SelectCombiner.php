@@ -125,15 +125,15 @@ class SelectCombiner implements ICmdSelect
 	public function distinct($distinct = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function column(...$columns) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columns($columns, $table = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function columnsExp($columns, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function columnsExp($columns, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnAs($column, $alias) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function columnAsExp($column, $alias, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function columnAsExp($column, $alias, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function from($table, $alias = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function join($table, $alias, $condition, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function leftJoin($table, $alias, $condition, $bind = false, $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function rightJoin($table, $alias, $condition, $bind = false, $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function groupBy($column, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function having($exp, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function join($table, $alias, $condition, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function groupBy($column, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function having($exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function withRollup($withRollup = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function union(IMySqlCommandConstructor $select, $all = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function unionAll(IMySqlCommandConstructor $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
@@ -146,10 +146,9 @@ class SelectCombiner implements ICmdSelect
 	public function orderBy($column, $type = OrderBy::ASC): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function orderByAsc($column): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function orderByDesc($column): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function byId($value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byField($field, $value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byFields($fields, $values = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function where($exp, $bind = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function where($exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereIn($field, $values, $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereNotIn($field, $values) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereExists(ICmdSelect $select, $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

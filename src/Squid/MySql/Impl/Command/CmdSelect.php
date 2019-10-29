@@ -203,7 +203,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param mixed|array $bind
 	 * @return static
 	 */
-	public function join($table, $alias, $condition, $bind = false) 
+	public function join($table, $alias, $condition, $bind = []) 
 	{
 		return $this->joinWith($table, $alias, $condition, $bind, 'JOIN');
 	}
@@ -216,7 +216,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function leftJoin($table, $alias, $condition, $bind = false, $outer = false) 
+	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false) 
 	{
 		return $this->joinWith(
 			$table, $alias, $condition, $bind, 
@@ -231,7 +231,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function rightJoin($table, $alias, $condition, $bind = false, $outer = false) 
+	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false) 
 	{
 		return $this->joinWith(
 			$table, $alias, $condition, $bind, 
@@ -244,7 +244,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function groupBy($column, $bind = false) 
+	public function groupBy($column, $bind = []) 
 	{
 		if (is_array($column)) $column = implode(',', $column);
 		
@@ -256,7 +256,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param mixed|array|bool $bind
 	 * @return static
 	 */
-	public function having($exp, $bind = false) 
+	public function having($exp, $bind = []) 
 	{
 		return $this->appendPart(CmdSelect::PART_HAVING, $exp, $bind);
 	}
@@ -328,7 +328,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param mixed|array|null $bind
 	 * @return static
 	 */
-	public function where($exp, $bind = false)
+	public function where($exp, $bind = [])
 	{
 		return $this->appendPart(CmdSelect::PART_WHERE, $exp, $bind); 
 	}

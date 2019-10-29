@@ -10,7 +10,7 @@ use Squid\Utils\EmptyWhereInHandler;
 /**
  * Implements calculation behavior for the IWithWhere interface. Only method that is not implemented, 
  * is where. Where must be implemented by the using class.
- * @method where(string $exp, $bind = false)
+ * @method where(string $exp, $bind = [])
  * @see \Squid\MySql\Command\IWithSet
  */
 trait TWithWhere
@@ -59,14 +59,6 @@ trait TWithWhere
 	
 	abstract protected function getVersion(): string;
 	
-	
-	/**
-	 * @inheritdoc
-	 */
-	public function byId($value) 
-	{
-		return $this->byField('Id', $value);
-	}
 	
 	/**
 	 * @param string $field

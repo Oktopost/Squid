@@ -24,7 +24,7 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param mixed|array $bind
 	 * @return static
 	 */
-	public function join($table, $alias, $condition, $bind = false);
+	public function join($table, $alias, $condition, $bind = []);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
@@ -34,7 +34,7 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function leftJoin($table, $alias, $condition, $bind = false, $outer = false);
+	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
@@ -44,7 +44,7 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function rightJoin($table, $alias, $condition, $bind = false, $outer = false);
+	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false);
 
 
 	/**
@@ -52,7 +52,7 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function groupBy($column, $bind = false);
+	public function groupBy($column, $bind = []);
 	
 	/**
 	 * @param string $exp
@@ -71,7 +71,7 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function having($exp, $bind = false);
+	public function having($exp, $bind = []);
 	
 	/**
 	 * @param IMySqlCommandConstructor $select

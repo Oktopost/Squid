@@ -6,8 +6,9 @@ limit
 
 	public function limit(int $from, int $count): static
 
-The limit method is equivalent to MySQL's :code:`LIMIT` clause.
+Set the limits of the current query.
 
+----------
 
 .. rubric:: Parameters
 
@@ -19,10 +20,13 @@ The limit method is equivalent to MySQL's :code:`LIMIT` clause.
 	
 	Maximum number of elements to select
 
+----------
 
 .. rubric:: Return
 	
 Reference to ``$this``
+
+----------
 
 .. rubric:: Examples
 

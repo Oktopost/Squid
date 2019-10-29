@@ -222,7 +222,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * @param mixed|array $bind Single bind param or array of bind params.
 	 * @return static
 	 */
-	public function valuesExp($expression, $bind = false)
+	public function valuesExp($expression, $bind = [])
 	{
 		return $this->appendPart(
 			CmdInsert::PART_VALUES, 

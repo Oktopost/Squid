@@ -6,7 +6,7 @@ columns
 
 	public function columns($columns, $table = false): static
 
-Add a single or an array of columns to the :code:`SELECT` clause with an option to attach a table prefix before each column.
+Add a single or an array of columns to the ``SELECT`` clause with an option to attach a table prefix before each column.
 
 ----------
 

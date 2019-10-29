@@ -5,7 +5,7 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 /**
  * Implements calculation behavior for the IWithSet interface. Relies on the using class
  * to implement method _set($exp, $bind).
- * @method mixed _set(string $exp, $bind = false)
+ * @method mixed _set(string $exp, $bind = [])
  * @see \Squid\MySql\Command\IWithSet
  */
 trait TWithSet 
@@ -106,7 +106,7 @@ trait TWithSet
 	 * @param string|array|false $exp
 	 * @inheritdoc
 	 */
-	public function setExp($field, $exp = false, $bind = false) 
+	public function setExp($field, $exp = false, $bind = []) 
 	{
 		if (!is_array($field)) return $this->_set("$field=$exp", $bind);
 		

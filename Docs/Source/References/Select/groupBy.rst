@@ -4,7 +4,7 @@ groupBy
 
 .. code-block:: php
 	
-	public function groupBy($column, $bind = false): static
+	public function groupBy($column, $bind = []): static
 
 ----------
 
@@ -15,10 +15,9 @@ groupBy
 	| A single column or an array of columns to group by.
 	| Note that this value is attached to the query as is and therefore should be MySQL safe.
 	
-* **$bind**: *false* | *mixed* | *array* = false
+* **$bind**: *array* | *mixed* = []
 
-	| An optional array of bind parameters to send with the query. 
-	| To pass a single ``false`` parameter, use an array - ``[false]``.
+	Optional scalar or array of scalar bind parameters.
 	
 ----------
 

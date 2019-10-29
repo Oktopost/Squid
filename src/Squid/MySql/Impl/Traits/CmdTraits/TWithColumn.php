@@ -42,7 +42,7 @@ trait TWithColumn
 	 * @param bool|array $bind
 	 * @return static
 	 */
-	public function columnsExp($columns, $bind = false) 
+	public function columnsExp($columns, $bind = []) 
 	{
 		if (!is_array($columns)) $columns = [$columns];
 		
@@ -65,7 +65,7 @@ trait TWithColumn
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function columnAsExp($column, $alias, $bind = false) 
+	public function columnAsExp($column, $alias, $bind = []) 
 	{
 		return $this->addColumn(["$column as $alias"], $bind);
 	}

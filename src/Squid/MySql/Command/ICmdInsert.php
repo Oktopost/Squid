@@ -53,7 +53,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * @param array|mixed $bind
 	 * @return static
 	 */
-	public function valuesExp($expression, $bind = false);
+	public function valuesExp($expression, $bind = []);
 	
 	/**
 	 * Use select command to insert into the table. 

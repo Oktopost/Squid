@@ -87,10 +87,7 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 	}
 	
 	
-	/**
-	 * It ss called inside the trait
-	 */
-	public function where($exp, $bind = false): void
+	public function where($exp, $bind = []): void
 	{
 		$this->checkValue($bind, $exp);
 		$this->checkField($exp);

@@ -1,0 +1,1 @@
+1. all $bind = false changed to $bind = []

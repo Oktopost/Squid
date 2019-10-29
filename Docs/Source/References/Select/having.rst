@@ -4,7 +4,7 @@ having
 
 .. code-block:: php
 	
-	public function having($exp, $bind = false): static
+	public function having($exp, $bind = []): static
 
 The behaviour of this method is identical to :ref:`select_where`, expect that all expressions are appended to the ``HAVING`` clause.
 
@@ -18,9 +18,9 @@ The behaviour of this method is identical to :ref:`select_where`, expect that al
 	| This string is not validated and passed as is to the MySQL server, therefore and *unsafe* values should be passed in the 
 	  ``$bind`` parameter.
 	
-* **$bind**: *mixed* | *array* | *false* 
+* **$bind**: *array* | *mixed* = []
 
-	Optional bind parameters. To pass ``false`` as a parameter use an array - ``[false]``.
+	Optional scalar or array of scalar bind parameters.
 
 ----------
 

@@ -88,7 +88,7 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 	}
 	
 	
-	public function where($exp, $bind = []): void
+	public function where(string $exp, $bind = []): void
 	{
 		$this->checkValue($bind, $exp);
 		$this->checkField($exp);

@@ -149,7 +149,7 @@ class SelectCombiner implements ICmdSelect
 	public function byId($value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byField($field, $value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byFields($fields, $values = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function where($exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function where(string $exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereIn($field, $values, $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereNotIn($field, $values) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereExists(ICmdSelect $select, $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

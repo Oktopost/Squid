@@ -1,6 +1,8 @@
------
+.. _select_union:
+
+=====
 union
------
+=====
 
 .. code-block:: php
 	
@@ -56,9 +58,6 @@ Reference to ``$this``
 		->byField('Disabled', true)
 		->union($select1)
 		->union($select2);
-
-
-	$select3 
 
 	// (SELECT Id FROM Account WHERE Disabled=? ) UNION 
 	// (SELECT Id FROM User WHERE IsBanned=? AND IsLoggedIn=? ) UNION 

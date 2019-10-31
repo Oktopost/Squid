@@ -1,13 +1,14 @@
---------
+========
 queryRow
---------
+========
 
 .. code-block:: php
 
-	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true): array
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true): ?array
 
 Execute the query and return the first row from the result set.
 
+----------
 
 .. rubric:: Parameters
 
@@ -17,16 +18,19 @@ Execute the query and return the first row from the result set.
 
 * **$failOnMultipleResults**: *bool*  = true
 
-	Expect exactly one or zero rows. If more then one row is selected, throw an exception. 
-	Note that if 0 rows selected, an exception will **not** be thrown.   
+	| Expect exactly one or zero rows. If more then one row is selected, throw an exception. 
+	| Note that if no rows selected, an exception will **not** be thrown, and    
 	
+----------
 
 .. rubric:: Return
 	
-Single row as a numeric or associative array based on the ``$isAssoc`` parameter, or false if no rows selected at all.
+Single row as a numeric or associative array based on the ``$isAssoc`` parameter, or **null** if no rows selected at all.
 
 If the generated query is not unique, it's advised to append the ``LIMIT`` clause. 
-Even so only the first row will be returned, the entire data is still queried.   
+Even so only the first row will be returned, the entire data set is still queried.   
+
+----------
 
 .. rubric:: Examples
 

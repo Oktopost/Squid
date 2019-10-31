@@ -27,7 +27,7 @@ Add a left join expression to the query.
 
 	Expression to use as the join condition.
 
-* **$bind**: *mixed | *array* = []
+* **$bind**: *mixed* | *array* = []
 	
 	Optional scalar or array of scalar bind parameters.
 

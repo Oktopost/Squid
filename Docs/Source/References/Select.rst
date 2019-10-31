@@ -4,7 +4,7 @@
 Select
 ======
 
-| A `SELECT` command is generated using an instance of a class that implements `Squid\MySql\Command\ICmdSelect`.
+| A `SELECT` command is generated using an instance of a class that implements ``Squid\MySql\Command\ICmdSelect``.
 | Below is a standard example of how to generate a simple `SELECT` command with Squid.
 
 .. code-block:: php
@@ -30,6 +30,8 @@ Select
 		->query();
 
 ----------
+
+List of entry points grouped by scope
 
 .. rubric:: `SELECT ...`
 

@@ -69,7 +69,9 @@ trait TQuery
 			throw new SquidException('More than one row was selected! ' . $this->__toString());
 		}
 		
-		return $result->fetch($this->resolveFetchMode($isAssoc));
+		$result = $result->fetch($this->resolveFetchMode($isAssoc));
+		
+		return ($result === false ? null : $result);
 	}
 	
 	public function queryColumn($oneOrNone = true)

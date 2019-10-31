@@ -55,6 +55,8 @@ flags
 | Flags is an array of connection options for the PDO driver.
 | See https://www.php.net/manual/en/pdo.construct.php for more info
 
+.. _config_version:
+
 version
 -------
 

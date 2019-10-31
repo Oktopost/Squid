@@ -29,7 +29,15 @@ trait TWithExtendedWhere
 	 */
 	public function whereNotEqual(string $field, $value): IWithExtendedWhere
 	{
-		$this->where("$field != ?", [$value]);
+		if (is_null($value))
+		{
+			$this->where("$field IS NOT NULL");
+		}
+		else
+		{
+			$this->where("$field != ?", [$value]);
+		}
+		
 		return $this;
 	}
 

@@ -70,7 +70,7 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	 * @param mixed|array|null $bind
 	 * @return static
 	 */
-	public function where($exp, $bind = [])
+	public function where(string $exp, $bind = [])
 	{
 		return $this->appendPart(CmdDelete::PART_WHERE, $exp, $bind);
 	}

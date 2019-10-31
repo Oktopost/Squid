@@ -328,7 +328,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param mixed|array|null $bind
 	 * @return static
 	 */
-	public function where($exp, $bind = [])
+	public function where(string $exp, $bind = [])
 	{
 		return $this->appendPart(CmdSelect::PART_WHERE, $exp, $bind); 
 	}

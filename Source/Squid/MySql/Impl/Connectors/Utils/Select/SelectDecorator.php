@@ -87,7 +87,7 @@ class SelectDecorator implements ISelect
 	public function union(IMySqlCommandConstructor $select, bool $all = false) { $this->select->union($select, $all); return $this; }
 	public function unionAll(IMySqlCommandConstructor $select) { $this->select->unionAll($select); return $this; }
 	
-	public function where($exp, $bind = []) { $this->select->where($exp, $bind); return $this; }
+	public function where(string $exp, $bind = []) { $this->select->where($exp, $bind); return $this; }
 	public function limit($from, $count): IWithLimit { $this->select->limit($from, $count); return $this; }
 	public function withRollup(bool $withRollup = true) { $this->select->withRollup($withRollup); return $this; }
 	public function forUpdate(bool $forUpdate = true) { $this->select->forUpdate($forUpdate); return $this; }

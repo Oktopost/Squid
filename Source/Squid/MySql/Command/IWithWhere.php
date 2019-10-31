@@ -33,7 +33,7 @@ interface IWithWhere
 	 * bind values are needed for this expression.
 	 * @return static
 	 */
-	public function where($exp, $bind = []);
+	public function where(string $exp, $bind = []);
 	
 	/**
 	 * Search for an expression or field in given set or sub query.

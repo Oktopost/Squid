@@ -29,7 +29,7 @@ Add a right join expression to the query.
 
 * **$bind**: *mixed* | *array* = []
 	
-	Optional scalar or array of bind params. To pass ``false`` as a bind param, use an array - ``[false]``
+	Optional scalar or array of bind params.
 
 * **$outer**: *bool* = false
 

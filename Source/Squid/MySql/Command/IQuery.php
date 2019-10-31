@@ -30,7 +30,7 @@ interface IQuery
 	/**
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
 	 * @param bool $failOnMultipleResults
-	 * @return array|false
+	 * @return ?array
 	 */
 	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true);
 	

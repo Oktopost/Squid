@@ -34,10 +34,10 @@ connector.
 	$mysql = new MySql();
 	$mysql->addConnector(
 		[
-			'HOST'		=> 'localhost',
-			'username'	=> 'admin',
-			'password'	=> 'pass',
-			'dbname'	=> 'application'
+			'HOST'     => 'localhost',
+			'username' => 'admin',
+			'password' => 'pass',
+			'dbname'   => 'application'
 		]);
 
 | Each set of configuration values is attached to it's connector, and can not be altered later on.
@@ -71,7 +71,6 @@ connector.
 
 | Any command generated from the ``$usersConnector`` object, will be sent to **localhost**, and any command from ``$cacheConnector`` will be sent to the server **10.0.0.23**.
 | You can also see that the MySQL version and password are different, and no default DB specified for ``cache`` connector. 
-
 
 .. note::
 

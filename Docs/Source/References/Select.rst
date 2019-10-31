@@ -58,6 +58,7 @@ Select
 .. toctree::
 	:maxdepth: 1
 
+	Select/byId
 	Select/byField
 	Select/byFields
 	Select/where

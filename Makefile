@@ -5,8 +5,8 @@
 SPHINXOPTS    = 
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = Oktopost
-SOURCEDIR     = Source
-BUILDDIR      = Build
+SOURCEDIR     = Docs/Source
+BUILDDIR      = Docs/Build
 
 # Put it first so that "make" without argument is like "make help".
 help:

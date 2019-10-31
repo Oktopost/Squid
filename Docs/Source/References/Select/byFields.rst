@@ -8,7 +8,7 @@ byFields
 	
 	public function byFields($fields, $values = null): static
 
-Append multiple compare expressions to the WHERE clause either using a numberic array of fields and numberic array of values,
+Append multiple compare expressions to the WHERE clause either using a numeric array of fields and numeric array of values,
 or by using an associative array in format [field name/expression => value] 
 
 ----------
@@ -20,7 +20,7 @@ or by using an associative array in format [field name/expression => value]
 	Either numeric or associative array.
 	
 	| If a numeric array is passed, the length of ``$fields`` and ``$values`` must be the same.
-	| In this case, the query is generated using :ref:`select_byfield` method:  
+	| In this case, the query is generated using :ref:`select_byField` method:  
 	
 	.. code-block:: php
 		

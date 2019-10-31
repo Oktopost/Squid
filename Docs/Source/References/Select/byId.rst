@@ -15,16 +15,12 @@ name is by default ``Id``, unless configured otherwise (See examples).
 
 .. rubric:: Parameters
 
-* **$field**: *string*
-	
-	Name of the field to compare to the ``$value`` parameter. ``$field`` can also be any *safe* MySQL expression. 
-
-* **$value**: *mixed* | *array* | *null*
+* **$value**: *mixed* | *array*
 
 	| If a scalar value is passed, it will be used as a bind value for the generated query. 
 	| If an array passed, an ``IN`` expression is generated instead of ``=``. Array must not be empty, and contain only 
 	  scalar values. All the values in this array are used as bind params and therefore *safe*.
-	| Passing ``null`` will generate a ``ISNULL($field)`` expression. 
+	| Passing ``null`` will generate a ``ISNULL(column)`` expression. 
 	
 
 ----------

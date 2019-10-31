@@ -46,7 +46,7 @@ Example of obtaining such objects from the connector:
 select
 ======
 
-	Create an object for a **SELECT** query.
+	Create a :ref:`select` object to generate **SELECT** queries.
 
 	.. code-block:: php
 

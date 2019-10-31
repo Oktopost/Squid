@@ -1,8 +1,8 @@
 <?php
 use Squid\MySql;
+use Squid\SkeletonInit;
 
 use Skeleton\Skeleton;
-use Squid\SkeletonInit;
 
 
 class Squid

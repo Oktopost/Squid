@@ -1,12 +1,12 @@
-<phpunit bootstrap="tests/boot.php">
+<phpunit bootstrap="Tests/boot.php">
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src/</directory>
+            <directory suffix=".php">./Source/</directory>
         </whitelist>
     </filter>
     <testsuites>
         <testsuite name="Squid">
-            <directory>tests/Squid</directory>
+            <directory>Tests/Squid</directory>
         </testsuite>
     </testsuites>
 </phpunit>

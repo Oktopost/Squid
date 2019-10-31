@@ -77,21 +77,21 @@ class SelectDecorator implements ISelect
 	}
 	
 	
-	public function distinct($distinct = true) { $this->select->distinct($distinct); return $this; }
-	public function from($table, $alias = false) { $this->select->from($table, $alias); return $this; }
-	public function join($table, $alias, $condition, $bind = []) { $this->select->join($table, $alias, $condition, $bind); return $this; }
-	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false) { $this->select->leftJoin($table, $alias, $condition, $bind, $outer); return $this; }
-	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false) { $this->select->rightJoin($table, $alias, $condition, $bind, $outer); return $this; }
+	public function distinct(bool $distinct = true) { $this->select->distinct($distinct); return $this; }
+	public function from($table, ?string $alias = null) { $this->select->from($table, $alias); return $this; }
+	public function join($table, string $alias, string $condition, $bind = []) { $this->select->join($table, $alias, $condition, $bind); return $this; }
+	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { $this->select->leftJoin($table, $alias, $condition, $bind, $outer); return $this; }
+	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { $this->select->rightJoin($table, $alias, $condition, $bind, $outer); return $this; }
 	public function groupBy($column, $bind = []) { $this->select->groupBy($column, $bind); return $this; }
-	public function having($exp, $bind = []) { $this->select->having($exp, $bind); return $this; }
-	public function union(IMySqlCommandConstructor $select, $all = false) { $this->select->union($select, $all); return $this; }
+	public function having(string $exp, $bind = []) { $this->select->having($exp, $bind); return $this; }
+	public function union(IMySqlCommandConstructor $select, bool $all = false) { $this->select->union($select, $all); return $this; }
 	public function unionAll(IMySqlCommandConstructor $select) { $this->select->unionAll($select); return $this; }
 	
 	public function where($exp, $bind = []) { $this->select->where($exp, $bind); return $this; }
 	public function limit($from, $count): IWithLimit { $this->select->limit($from, $count); return $this; }
-	public function withRollup($withRollup = true) { $this->select->withRollup($withRollup); return $this; }
-	public function forUpdate($forUpdate = true) { $this->select->forUpdate($forUpdate); return $this; }
-	public function lockInShareMode($lockInShareMode = true) { $this->select->lockInShareMode($lockInShareMode); return $this; }
+	public function withRollup(bool $withRollup = true) { $this->select->withRollup($withRollup); return $this; }
+	public function forUpdate(bool $forUpdate = true) { $this->select->forUpdate($forUpdate); return $this; }
+	public function lockInShareMode(bool $lockInShareMode = true) { $this->select->lockInShareMode($lockInShareMode); return $this; }
 
 
 	public function __clone()

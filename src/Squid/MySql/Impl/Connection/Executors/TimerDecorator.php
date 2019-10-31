@@ -13,14 +13,9 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 	
 	/** @var double */
 	private $unixStartTime;
-
-
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 * @param $runTime
-	 */
-	protected function measure($cmd, array $bind = [], $runTime)
+	
+	
+	protected function measure(string $cmd, array $bind = [], $runTime): void
 	{
 		if (!$this->callback)
 			throw new SquidException(
@@ -32,9 +27,6 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 	}
 	
 	
-	/**
-	 * @param callable $callback Ignore if overriding measure() method.
-	 */
 	public function __construct(callable $callback = null)
 	{
 		$this->callback = $callback;
@@ -51,12 +43,7 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 		return $this;
 	}
 	
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 * @return mixed
-	 */
-	public function execute($cmd, array $bind = [])
+	public function execute(string $cmd, array $bind = [])
 	{
 		$this->unixStartTime = microtime(true);
 		$result = parent::execute($cmd, $bind);

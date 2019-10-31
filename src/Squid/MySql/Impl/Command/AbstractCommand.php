@@ -13,10 +13,7 @@ abstract class AbstractCommand implements IMySqlCommandConstructor
 	private $conn = null;
 	
 	
-	/**
-	 * @return IMySqlConnection|null
-	 */
-	protected function getConn() 
+	protected function getConn(): ?IMySqlConnection
 	{
 		return $this->conn;
 	}

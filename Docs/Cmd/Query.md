@@ -4,14 +4,14 @@
   * [Methods](#methods)
     * [query()](#query)
     * [queryAll($isAssoc = false)](#queryallisassoc--false)
-    * [queryRow($isAssoc = false, $expectOne = true)](#queryrowisassoc--false-expectone--true)
-    * [queryColumn($expectOne = true)](#querycolumnexpectone--true)
-    * [queryScalar($default = false, $expectOne = true)](#queryscalardefault--false-expectone--true)
-    * [queryInt($expectOne = true)](#queryintexpectone--true)
-    * [queryBool($expectOne = true)](#queryboolexpectone--true)
+    * [queryRow($isAssoc = false, bool $failOnMultipleResults = true)](#queryrowisassoc--false-expectone--true)
+    * [queryColumn($failOnMultipleResults = true)](#querycolumnexpectone--true)
+    * [queryScalar($default = null, bool $failOnMultipleResults = true)](#queryscalardefault--false-expectone--true)
+    * [queryInt($failOnMultipleResults = true)](#queryintexpectone--true)
+    * [queryBool($failOnMultipleResults = true)](#queryboolexpectone--true)
     * [queryExists()](#queryexists)
     * [queryCount()](#querycount)
-    * [queryBool($expectOne = true)](#queryboolexpectone--true)
+    * [queryBool($failOnMultipleResults = true)](#queryboolexpectone--true)
     * [queryWithCallback($callback, $isAssoc = true)](#querywithcallbackcallback-isassoc--true)
     * [queryIterator($isAssoc = true)](#queryiteratorisassoc--true)
     * [queryMap($key = 0, $value = 1)](#querymapkey--0-value--1)
@@ -65,10 +65,10 @@ $res = $select
 ```
 
 
-### queryRow($isAssoc = false, $expectOne = true)
+### queryRow($isAssoc = false, bool $failOnMultipleResults = true)
 
 * ```$isAssoc``` If true, Associative array is returned.
-* ```$expectOne``` If set to true, and more then one record is selected, an exception will be thrown.
+* ```$failOnMultipleResults``` If set to true, and more then one record is selected, an exception will be thrown.
 
 Get only one row from the result set.
 If the result set was empty, false will be returned.
@@ -86,11 +86,11 @@ $res = $select ->queryRow(false);
 ```
 
 
-### queryColumn($expectOne = true)
+### queryColumn($failOnMultipleResults = true)
 
 Get only one column from the result set
 
-* ```$expectOne``` If set to true, and more then one column is selected, an exception will be thrown.
+* ```$failOnMultipleResults``` If set to true, and more then one column is selected, an exception will be thrown.
 
 ```php
 $res = $select
@@ -101,12 +101,12 @@ $res = $select
 ```
 
 
-### queryScalar($default = false, $expectOne = true)
+### queryScalar($default = null, bool $failOnMultipleResults = true)
 
 Query only the first column of the first result
 
 * ```$default``` Default value to return if the result set was empty.
-* ```$expectOne``` If set to true, and more then one column OR row was seleted, an exception will be thrown.
+* ```$failOnMultipleResults``` If set to true, and more then one column OR row was seleted, an exception will be thrown.
 
 ```php
 $res = $select
@@ -124,18 +124,18 @@ $res = $select
 // $res = null
 ```
 
-### queryInt($expectOne = true)
+### queryInt($failOnMultipleResults = true)
 
 Behaves like queryScalar, but the result is always cast to an integer.
 
-If nothing was found and `$expectOne` if `false`, then `false` is returned.
+If nothing was found and `$failOnMultipleResults` if `false`, then `false` is returned.
 
 
-### queryBool($expectOne = true)
+### queryBool($failOnMultipleResults = true)
 
 Behaves like queryScalar, but the result is always cast to a boolean.
 
-If nothing was found and `$expectOne` if `false`, then `false` is returned. 
+If nothing was found and `$failOnMultipleResults` if `false`, then `false` is returned. 
 
 
 ### queryExists()

@@ -4,7 +4,7 @@ leftJoin
 
 .. code-block:: php
 	
-	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false): static
+	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false): static
 
 Add a left join expression to the query.
 
@@ -27,7 +27,7 @@ Add a left join expression to the query.
 
 	Expression to use as the join condition.
 
-* **$bind**: *array* | *mixed*
+* **$bind**: *mixed | *array* = []
 	
 	Optional scalar or array of scalar bind parameters.
 

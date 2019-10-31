@@ -4,9 +4,9 @@ queryFloat
 
 .. code-block:: php
 
-	public function queryBool(?bool $default = null, bool $failOnMultipleResults = true): ?bool
+	public function queryFloat(?int $default = null, bool $failOnMultipleResults = true): ?float
 
-Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResults)`` - unless the value is ``null`` it will be casted to ``bool``.
+Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResults)`` - unless the value is ``null`` it will be casted to ``float``.
 
 ----------
 

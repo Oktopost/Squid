@@ -4,7 +4,7 @@ queryRow
 
 .. code-block:: php
 
-	public function queryRow($isAssoc = false, $expectOne = true): array
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true): array
 
 Execute the query and return the first row from the result set.
 
@@ -15,7 +15,7 @@ Execute the query and return the first row from the result set.
 
 	Set to ``true`` to return an associative array, and ``false`` to return numeric.
 
-* **$expectOne**: *bool*  = true
+* **$failOnMultipleResults**: *bool*  = true
 
 	Expect exactly one or zero rows. If more then one row is selected, throw an exception. 
 	Note that if 0 rows selected, an exception will **not** be thrown.   

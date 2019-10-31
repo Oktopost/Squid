@@ -1,8 +1,9 @@
-------
+======
 Select
-------
+======
 
-Generate a `SELECT` query and parse response
+| A `SELECT` command is generated using an instance of a class that implements `Squid\MySql\Command\ICmdSelect`.
+| Below is a standard example of how to generate a simple `SELECT` command with Squid.
 
 .. code-block:: php
 
@@ -26,6 +27,7 @@ Generate a `SELECT` query and parse response
 		->limitBy(10)
 		->query();
 
+----------
 
 .. rubric:: `SELECT ...`
 
@@ -129,6 +131,7 @@ Generate a `SELECT` query and parse response
 	Select/queryColumn
 	Select/queryScalar
 	Select/queryInt
+	Select/queryFloat
 	Select/queryBool
 	Select/queryExists
 	Select/queryCount

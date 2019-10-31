@@ -125,12 +125,12 @@ class UniqueJoin extends AbstractQueryEnrichment
 	
 	/**
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
-	 * @param bool $expectOne
+	 * @param bool $failOnMultipleResults
 	 * @return array|false
 	 */
-	public function queryRow($isAssoc = false, $expectOne = true)
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true)
 	{
-		$row = $this->getSource()->queryRow($isAssoc, $expectOne);
+		$row = $this->getSource()->queryRow($isAssoc, $failOnMultipleResults);
 		
 		if ($row !== false)
 		{

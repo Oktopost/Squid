@@ -4,7 +4,7 @@ having
 
 .. code-block:: php
 	
-	public function having($exp, $bind = []): static
+	public function having(string $exp, $bind = []): static
 
 The behaviour of this method is identical to :ref:`select_where`, expect that all expressions are appended to the ``HAVING`` clause.
 

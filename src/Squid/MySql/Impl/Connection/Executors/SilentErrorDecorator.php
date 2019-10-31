@@ -12,11 +12,8 @@ class SilentErrorDecorator extends AbstractMySqlExecuteDecorator
 	/** @var callable|null */
 	private $callback;
 	
-
-	/**
-	 * @param bool $result
-	 */
-	public function __construct($result = false)
+	
+	public function __construct(bool $result = false)
 	{
 		$this->result = $result;
 	}
@@ -26,18 +23,13 @@ class SilentErrorDecorator extends AbstractMySqlExecuteDecorator
 	 * @param callable $callback
 	 * @return static
 	 */
-	public function setCallback($callback)
+	public function setCallback(callable $callback)
 	{
 		$this->callback = $callback;
 		return $this;
 	}
 	
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 * @return mixed
-	 */
-	public function execute($cmd, array $bind = [])
+	public function execute(string $cmd, array $bind = [])
 	{
 		try
 		{

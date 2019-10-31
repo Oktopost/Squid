@@ -2,8 +2,10 @@
 namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 
+use Squid\MySql;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\Exceptions\SquidException;
+use Squid\MySql\Connection\IMySqlConnection;
 use Squid\Utils\EmptyWhereInHandler;
 
 
@@ -11,13 +13,10 @@ use Squid\Utils\EmptyWhereInHandler;
  * Implements calculation behavior for the IWithWhere interface. Only method that is not implemented, 
  * is where. Where must be implemented by the using class.
  * @method where(string $exp, $bind = [])
- * @see \Squid\MySql\Command\IWithSet
+ * @see \Squid\MySql\Command\IWithWhere
  */
 trait TWithWhere
 {
-	/**
-	 * @inheritdoc
-	 */
 	private function byFieldsNum($fields, $values)
 	{
 		$fieldsCount = count($fields);
@@ -30,9 +29,6 @@ trait TWithWhere
 		return $this;
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	private function byFieldsAssoc($fields)
 	{
 		$self = $this;
@@ -57,8 +53,19 @@ trait TWithWhere
 	}
 	
 	
-	abstract protected function getVersion(): string;
+	protected abstract function getVersion(): string;
+	protected abstract  function getConn(): ?IMySqlConnection; 
 	
+	
+	/**
+	 * @param array|string $value If array, IN used instead
+	 * @return static
+	 */
+	public function byId($value) 
+	{
+		$field = $this->getConn()->getProperty(MySql::PROP_ID_FIELD, 'Id');
+		return $this->byField($field, $value);
+	}
 	
 	/**
 	 * @param string $field
@@ -73,12 +80,10 @@ trait TWithWhere
 		return $this->where("$field=?", $value);
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	public function byFields($fields, $values = null) 
 	{
-		if (isset($fields[0])) return $this->byFieldsNum($fields, $values);
+		if (key_exists(0, $fields)) 
+			return $this->byFieldsNum($fields, $values);
 		
 		return $this->byFieldsAssoc($fields);
 	}
@@ -139,17 +144,11 @@ trait TWithWhere
 		}
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	public function whereNotIn($field, $values) 
 	{
 		return $this->whereIn($field, $values, true);
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	public function whereExists(ICmdSelect $select, $negate = false) 
 	{
 		$in = $select->assemble();
@@ -158,9 +157,6 @@ trait TWithWhere
 		return $this->where("$statement ($in)", $select->bind());
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	public function whereNotExists(ICmdSelect $select) 
 	{
 		return $this->whereExists($select, true);

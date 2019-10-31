@@ -13,12 +13,8 @@ class CallbackDecorator extends AbstractMySqlExecuteDecorator
 	/** @var callable */
 	private $postCallback;
 
-
-	/**
-	 * @param callable $preCallback
-	 * @param callable $postCallback
-	 */
-	public function __construct($preCallback = null, $postCallback = null)
+	
+	public function __construct(callable $preCallback = null, callable $postCallback = null)
 	{
 		$this->preCallback = $preCallback;
 		$this->postCallback = $postCallback;
@@ -29,7 +25,7 @@ class CallbackDecorator extends AbstractMySqlExecuteDecorator
 	 * @param callable $callback In format function(string $cmd, array $bind = [])
 	 * @return static
 	 */
-	public function setPreExecuteCallback($callback)
+	public function setPreExecuteCallback(callable $callback)
 	{
 		$this->preCallback = $callback;
 		return $this;
@@ -39,19 +35,14 @@ class CallbackDecorator extends AbstractMySqlExecuteDecorator
 	 * @param callable $callback In format function(mixed $result)
 	 * @return static
 	 */
-	public function setPostExecuteCallback($callback)
+	public function setPostExecuteCallback(callable $callback)
 	{
 		$this->postCallback = $callback;
 		return $this;
 	}
 	
 	
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 * @return mixed
-	 */
-	public function execute($cmd, array $bind = [])
+	public function execute(string $cmd, array $bind = [])
 	{
 		if ($this->preCallback)
 		{

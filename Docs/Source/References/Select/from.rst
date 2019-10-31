@@ -6,7 +6,7 @@ from
 
 .. code-block:: php
 	
-	public function from($table, $alias = false): static
+	public function from($table, ?string $alias = null): static
 
 
 Set the expression to put in the ``FROM`` clause. 
@@ -24,9 +24,9 @@ Set the expression to put in the ``FROM`` clause.
 	  of the current query.
 	
 
-* **$alias**:
+* **$alias**: *string* | *null* = null
 	
-	Table alias tp use 
+	Table alias to use. 
 
 ----------
 

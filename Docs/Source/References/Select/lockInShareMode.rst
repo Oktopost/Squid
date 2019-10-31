@@ -4,7 +4,7 @@ lockInShareMode
 
 .. code-block:: php
 	
-	public function lockInShareMode($lockInShareMode = true): static
+	public function lockInShareMode(bool $lockInShareMode = true): static
 
 Toggle if the ``LOCK IN SHARE MODE`` flag should be appended to the query.
 

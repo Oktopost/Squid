@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use Squid\MySql;
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
 use Squid\Utils\EmptyWhereInHandler;
 
@@ -165,5 +166,10 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 		
 		self::assertEquals('hello', $field);
 		self::assertSame($this, $where);
+	}
+	
+	protected function getConn(): ?IMySqlConnection
+	{
+		return null;
 	}
 }

@@ -16,9 +16,6 @@ use Squid\Exceptions\SquidException;
  */
 trait TQuery 
 {
-	/**
-	 * @inheritdoc
-	 */
 	private function resolveFetchMode($fetchMode)
 	{
 		if ($fetchMode === true) return \PDO::FETCH_ASSOC;
@@ -40,28 +37,16 @@ trait TQuery
 	}
 	
 
-	/**
-	 * Identical to queryAll(true);
-	 * @return array
-	 */
 	public function query()
 	{
 		return $this->queryAll(true);
 	}
 	
-	/**
-	 * Query numeric result set.
-	 * @return array|false
-	 */
 	public function queryNumeric()
 	{
 		return $this->queryAll(false);
 	}
-
-	/**
-	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
-	 * @return array|bool
-	 */
+	
 	public function queryAll($isAssoc = false) 
 	{
 		$result = $this->execute();
@@ -71,11 +56,7 @@ trait TQuery
 		return $result->fetchAll($this->resolveFetchMode($isAssoc));
 	}
 	
-	/**
-	 * @inheritdoc
-	 * @throws SquidException
-	 */
-	public function queryRow($isAssoc = false, $oneOrNone = true)
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true)
 	{
 		$result = $this->execute();
 		
@@ -83,7 +64,7 @@ trait TQuery
 		{
 			return $result;
 		}
-		else if ($oneOrNone && $result->rowCount() > 1)
+		else if ($failOnMultipleResults && $result->rowCount() > 1)
 		{
 			throw new SquidException('More than one row was selected! ' . $this->__toString());
 		}
@@ -91,10 +72,6 @@ trait TQuery
 		return $result->fetch($this->resolveFetchMode($isAssoc));
 	}
 	
-	/**
-	 * @inheritdoc
-	 * @throws SquidException
-	 */
 	public function queryColumn($oneOrNone = true)
 	{
 		$result = $this->execute();
@@ -117,11 +94,7 @@ trait TQuery
 		return $data;
 	}
 	
-	/**
-	 * @inheritdoc
-	 * @throws SquidException
-	 */
-	public function queryScalar($default = false, $expectOne = true) 
+	public function queryScalar($default = null, bool $failOnMultipleResults = true) 
 	{
 		$result = $this->execute();
 		
@@ -129,7 +102,7 @@ trait TQuery
 		{
 			return $default;
 		}
-		else if ($expectOne && $result->rowCount() != 1 && $result->columnCount() != 1) 
+		else if ($failOnMultipleResults && ($result->rowCount() > 1 || $result->columnCount() > 1)) 
 		{
 			throw new SquidException('More than one column or row was selected!');
 		} 
@@ -141,27 +114,24 @@ trait TQuery
 		return $result->fetch(\PDO::FETCH_NUM)[0];
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
-	public function queryInt($expectOne = true) 
+	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int
 	{
-		$result = $this->queryScalar(false, $expectOne);
-		return ($result === false ? false : (int)$result);
+		$result = $this->queryScalar($default, $failOnMultipleResults);
+		return (is_null($result) ? null : (int)$result);
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
-	public function queryBool($expectOne = true)
+	public function queryFloat(?float $default = null, bool $failOnMultipleResults = true): ?float
 	{
-		$result = $this->queryScalar(false, $expectOne);
-		return ($result === false ? false : (bool)$result);
+		$result = $this->queryScalar($default, $failOnMultipleResults);
+		return (is_null($result) ? null : (float)$result);
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
+	public function queryBool(?bool $default = null, bool $failOnMultipleResults = true): ?bool
+	{
+		$result = $this->queryScalar($default, $failOnMultipleResults);
+		return (is_null($result) ? null : (bool)$result);
+	}
+	
 	public function queryWithCallback($callback, $isAssoc = true) 
 	{
 		$fetchMode = $this->resolveFetchMode($isAssoc);
@@ -181,9 +151,6 @@ trait TQuery
 		return true;
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	public function queryIterator($isAssoc = true) 
 	{
 		$fetchMode = $this->resolveFetchMode($isAssoc);
@@ -203,14 +170,6 @@ trait TQuery
 		}
 	}
 	
-	
-	/**
-	 *  Return an iterator to iterate over all found rows.
-	 *  Each iteration will contain an array of rows instead of a single raw.
-	 * @param bool $isAssoc
-	 * @param int $size
-	 * @return \Iterator
-	 */
 	public function queryIteratorBulk(int $size = 100, $isAssoc = true)
 	{
 		$page = 0;
@@ -235,13 +194,6 @@ trait TQuery
 		}
 	}
 	
-	
-	/**
-	 * Return an array where the result of one column is the index and the second is value.
-	 * @param int|string $key Name of the key column.
-	 * @param int|string $value Name of the value column
-	 * @return array|false
-	 */
 	public function queryMap($key = 0, $value = 1)
 	{
 		$fetchMode = $this->resolveFetchMode(is_string($key) || is_string($value));
@@ -269,10 +221,6 @@ trait TQuery
 		return $map;
 	}
 	
-	/**
-	 * @param string $className LiteObject class name.
-	 * @return LiteObject|null
-	 */
 	public function queryObject(string $className): ?LiteObject
 	{
 		$result = $this->queryRow(true);
@@ -283,10 +231,6 @@ trait TQuery
 		return $this->parseObject($result, $className);
 	}
 	
-	/**
-	 * @param string $className LiteObject class name.
-	 * @return LiteObject[]
-	 */
 	public function queryObjects(string $className): array
 	{
 		$data = $this->query();
@@ -300,11 +244,6 @@ trait TQuery
 		return $result;
 	}
 	
-	/**
-	 * @param string|int $byColumn
-	 * @param bool $removeColumn
-	 * @return Map
-	 */
 	public function queryGroupBy($byColumn, bool $removeColumn = false): Map
 	{
 		$fetchMode = $this->resolveFetchMode(is_string($byColumn));
@@ -346,12 +285,6 @@ trait TQuery
 		return $map;
 	}
 	
-	/**
-	 * Return an array where the result of one column is the index and the remaining data is value.
-	 * @param int|string $key Name of the key column.
-	 * @param bool $removeColumnFromRow Should remove the key column from values.
-	 * @return array|false
-	 */
 	public function queryMapRow($key = 0, $removeColumnFromRow = false)
 	{
 		$fetchMode = $this->resolveFetchMode(is_string($key));

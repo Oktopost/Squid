@@ -14,7 +14,7 @@ trait TWithColumn
 	 */
 	public function column(...$columns)
 	{
-		return $this->addColumn($columns, false);
+		return $this->addColumn($columns, []);
 	}
 	
 	/**
@@ -34,7 +34,7 @@ trait TWithColumn
 			}
 		}
 		
-		return $this->addColumn($columns, false);
+		return $this->addColumn($columns, []);
 	}
 	
 	/**
@@ -56,7 +56,7 @@ trait TWithColumn
 	 */
 	public function columnAs($column, $alias) 
 	{
-		return $this->addColumn(["$column as $alias"], false);
+		return $this->addColumn(["$column as $alias"], []);
 	}
 	
 	/**

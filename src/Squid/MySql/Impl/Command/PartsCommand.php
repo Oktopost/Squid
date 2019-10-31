@@ -20,8 +20,6 @@ abstract class PartsCommand extends AbstractCommand
 	 */
 	private function appendBind($part, $bind) 
 	{
-		if ($bind === false) return $this;
-		
 		if (!is_array($bind)) $bind = [$bind];
 		else if (!$bind) return $this;
 		

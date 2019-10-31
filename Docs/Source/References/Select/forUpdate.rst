@@ -6,7 +6,7 @@ forUpdate
 
 .. code-block:: php
 	
-	public function forUpdate($forUpdate = true): static
+	public function forUpdate(bool $forUpdate = true): static
 
 Toggle if the ``FOR UPDATE`` expression should be appended to the generated query.
 

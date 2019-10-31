@@ -18,7 +18,7 @@ class ConnectionBuilder
 	 * @param IMySqlExecutor $first
 	 * @return IMySqlExecutor
 	 */
-	private function getExecutors(IMySqlExecutor $first)
+	private function getExecutors(IMySqlExecutor $first): IMySqlExecutor
 	{
 		$last = $first;
 		
@@ -36,7 +36,7 @@ class ConnectionBuilder
 	/**
 	 * @param IMySqlExecuteDecorator[] $decorators
 	 */
-	public function setDecorators(array $decorators)
+	public function setDecorators(array $decorators): void
 	{
 		$this->decorators = $decorators;
 	}
@@ -45,7 +45,7 @@ class ConnectionBuilder
 	 * @param MySqlConnectionConfig $config
 	 * @return IMySqlConnection
 	 */
-	public function create(MySqlConnectionConfig $config)
+	public function create(MySqlConnectionConfig $config): IMySqlConnection
 	{
 		$connection = new MySqlConnection();
 		$connection->setConfig($config);

@@ -6,10 +6,7 @@
     </filter>
     <testsuites>
         <testsuite name="Squid">
-            <directory>tests</directory>
+            <directory>tests/Squid</directory>
         </testsuite>
     </testsuites>
-    <logging>
-         <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
 </phpunit>

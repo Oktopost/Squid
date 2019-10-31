@@ -1,6 +1,6 @@
---------
+========
 queryAll
---------
+========
 
 .. code-block:: php
 
@@ -8,6 +8,7 @@ queryAll
 
 Execute the query and return the entire result set in a single array.
 
+----------
 
 .. rubric:: Parameters
 
@@ -17,11 +18,14 @@ Execute the query and return the entire result set in a single array.
 	| By default ``$isAssoc = false`` and an array of numeric arrays is returned.
 	| Alternatively, some of the ``PDO::FETCH_*`` consts can be passed as well.
 
+----------
 
 .. rubric:: Return
 	
 | Array of the entire results set.
 | Each row is represented as an associative or numeric array based on the ``$isAssoc`` parameter.
+
+----------
 
 .. rubric:: Examples
 

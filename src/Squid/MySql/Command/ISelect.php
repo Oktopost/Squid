@@ -5,36 +5,26 @@ namespace Squid\MySql\Command;
 interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColumns
 {
 	/**
-	 * @param bool $distinct 
+	 * @param bool $distinct
 	 * @return static
 	 */
-	public function distinct($distinct = true);
+	public function distinct(bool $distinct = true);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
-	 * @param string|bool $alias
+	 * @param string|null $alias
 	 * @return static
 	 */
-	public function from($table, $alias = false);
-	
-	/**
-	 * @param string|IMySqlCommandConstructor $table
-	 * @param string $alias
-	 * @param string $condition
-	 * @param mixed|array $bind
-	 * @return static
-	 */
-	public function join($table, $alias, $condition, $bind = []);
+	public function from($table, ?string $alias = null);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind
-	 * @param bool $outer
 	 * @return static
 	 */
-	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false);
+	public function join($table, string $alias, string $condition, $bind = []);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
@@ -44,41 +34,45 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false);
+	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false);
+	
+	/**
+	 * @param string|IMySqlCommandConstructor $table
+	 * @param string $alias
+	 * @param string $condition
+	 * @param mixed|array $bind
+	 * @param bool $outer
+	 * @return static
+	 */
+	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false);
 
 
 	/**
 	 * @param string|array $column
-	 * @param array|bool $bind
+	 * @param array|mixed $bind
 	 * @return static
 	 */
 	public function groupBy($column, $bind = []);
 	
 	/**
-	 * @param string $exp
-	 * @param mixed|array|bool $bind
-	 * @return static
-	 */
-	
-	/**
 	 * @param bool $withRollup
 	 * @return static
 	 */
-	public function withRollup($withRollup = true);
+	public function withRollup(bool $withRollup = true);
 
 	/**
 	 * @param string $exp
-	 * @param array|bool $bind
+	 * @param array|mixed $bind
 	 * @return static
 	 */
-	public function having($exp, $bind = []);
+	public function having(string $exp, $bind = []);
 	
 	/**
 	 * @param IMySqlCommandConstructor $select
 	 * @param bool $all
 	 * @return static
 	 */
-	public function union(IMySqlCommandConstructor $select, $all = false);
+	public function union(IMySqlCommandConstructor $select, bool $all = false);
 	
 	/**
 	 * @param IMySqlCommandConstructor $select
@@ -90,13 +84,13 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param bool $forUpdate
 	 * @return static
 	 */
-	public function forUpdate($forUpdate = true);
+	public function forUpdate(bool $forUpdate = true);
 	
 	/**
 	 * @param bool $lockInShareMode
 	 * @return static
 	 */
-	public function lockInShareMode($lockInShareMode = true);
+	public function lockInShareMode(bool $lockInShareMode = true);
 	
 	
 	public function __clone();

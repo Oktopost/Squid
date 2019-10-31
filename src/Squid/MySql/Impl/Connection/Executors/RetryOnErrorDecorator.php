@@ -89,13 +89,8 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 		$this->validators->add($validators);
 		return $this;
 	}
-
-	/**
-	 * @param string $cmd
-	 * @param array $bind
-	 * @return mixed
-	 */
-	public function execute($cmd, array $bind = [])
+	
+	public function execute(string $cmd, array $bind = [])
 	{
 		try
 		{
@@ -108,10 +103,7 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 	}
 	
 	
-	/**
-	 * @return RetryOnErrorDecorator
-	 */
-	public static function createSuggested()
+	public static function createSuggested(): RetryOnErrorDecorator
 	{
 		return new RetryOnErrorDecorator(
 			Validators\ConnectionFailed::class,

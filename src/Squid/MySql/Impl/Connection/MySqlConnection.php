@@ -23,7 +23,7 @@ class MySqlConnection implements IMySqlConnection
 		return $value ? 1 : 0;
 	}
 	
-	private function openConnection() 
+	private function openConnection(): void
 	{
 		try
 		{
@@ -47,7 +47,7 @@ class MySqlConnection implements IMySqlConnection
 	 * @param \PDOStatement $statement
 	 * @param array $params
 	 */
-	private function bindParams(\PDOStatement $statement, array $params)
+	private function bindParams(\PDOStatement $statement, array $params): void
 	{
 		foreach ($params as $index => $value)
 		{
@@ -86,7 +86,7 @@ class MySqlConnection implements IMySqlConnection
 	 * @param string|null $pass
 	 * @param string|null $host
 	 */
-	public function setConfig($db, $user = null, $pass = null, $host = null)
+	public function setConfig($db, $user = null, $pass = null, $host = null): void
 	{
 		if ($db instanceof MySqlConnectionConfig) 
 		{
@@ -102,18 +102,12 @@ class MySqlConnection implements IMySqlConnection
 		$this->config->Host = $host;
 	}
 	
-	/**
-	 * Close any opened connection. If connection is not open, do nothing.
-	 */
-	public function close() 
+	public function close(): void
 	{
 		$this->pdo = null;
 	}
 	
-	/**
-	 * @return bool
-	 */
-	public function isOpen() 
+	public function isOpen(): bool
 	{
 		return !is_null($this->pdo);
 	}
@@ -122,14 +116,19 @@ class MySqlConnection implements IMySqlConnection
 	{
 		return $this->config->Version;
 	}
-
+	
+	public function getProperty(string $key, string $default = ''): string
+	{
+		return $this->config->Properties[$key] ?? $default;
+	}
+	
 	/**
 	 * @param string $cmd Sql SAFE query to execute.
 	 * @param array $bind Array of parameters to bind.
 	 * @throws \PDOException
 	 * @return \PDOStatement
 	 */
-	public function execute($cmd, array $bind = []) 
+	public function execute(string $cmd, array $bind = []) 
 	{
 		if (is_null($this->pdo)) 
 			$this->openConnection();

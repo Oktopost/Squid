@@ -59,12 +59,17 @@ class MySqlConnectionDecorator implements IMySqlConnection
 		return $this->connection->version();
 	}
 	
+	public function getProperty(string $key, string $default = ''): string
+	{
+		return $this->connection->getProperty($key);
+	}
+	
 	/**
 	 * @param string $cmd
 	 * @param array $bind
 	 * @return \PDOStatement
 	 */
-	public function execute($cmd, array $bind = [])
+	public function execute(string $cmd, array $bind = [])
 	{
 		return $this->executor->execute($cmd, $bind);
 	}

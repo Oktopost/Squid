@@ -29,38 +29,21 @@ interface IQuery
 	
 	/**
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
-	 * @param bool $expectOne
+	 * @param bool $failOnMultipleResults
 	 * @return array|false
 	 */
-	public function queryRow($isAssoc = false, $expectOne = true);
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true);
 	
 	/**
-	 * @param bool $expectOne If true and more then one column is selected by the query, throw an exception.
+	 * @param bool $failOnMultipleResults If true and more then one column is selected by the query, throw an exception.
 	 * @return array|bool Numeric array of all the values in the first found row.
 	 */
-	public function queryColumn($expectOne = true);
+	public function queryColumn($failOnMultipleResults = true);
 	
-	/**
-	 * @param mixed $default Default value to return if no results found.
-	 * @param bool $expectOne If true and more then one column or row are
-	 * selected by the query, throw an exception.
-	 * @return mixed First column of the first row, or $default value if nothing found.
-	 */
-	public function queryScalar($default = false, $expectOne = true);
-	
-	/**
-	 * @param bool $expectOne If true and more then one column or row are
-	 * selected by the query, throw an exception.
-	 * @return int|bool False on error.
-	 */
-	public function queryInt($expectOne = true);
-
-	/**
-	 * @param bool $expectOne If true and more then one column or row are
-	 * selected by the query, throw an exception.
-	 * @return bool|null Null on error.
-	 */
-	public function queryBool($expectOne = true);
+	public function queryScalar($default = null, bool $failOnMultipleResults = true);
+	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int;
+	public function queryFloat(?float $default = null, bool $failOnMultipleResults = true): ?float;
+	public function queryBool(?bool $default = null, bool $failOnMultipleResults = true): ?bool;
 	
 	/**
 	 * Execute a SELECT EXISTS (Current query)

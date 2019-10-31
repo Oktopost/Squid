@@ -4,7 +4,7 @@ withRollup
 
 .. code-block:: php
 	
-	public function withRollup($withRollup = true): static
+	public function withRollup(bool $withRollup = true): static
 
 Toggle if ``WITH ROLLUP`` expression should be added to the query.
 

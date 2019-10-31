@@ -62,52 +62,57 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 	
 	/**
 	 * @param bool|int $isAssoc Will accept \PDO::FETCH_*
-	 * @param bool $expectOne
+	 * @param bool $failOnMultipleResults
 	 * @return array|false
 	 */
-	public function queryRow($isAssoc = false, $expectOne = true)
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true)
 	{
-		return $this->source->queryRow($isAssoc, $expectOne);
+		return $this->source->queryRow($isAssoc, $failOnMultipleResults);
 	}
 	
 	/**
-	 * @param bool $expectOne If true and more then one column is selected by the query, throw an exception.
+	 * @param bool $failOnMultipleResults If true and more then one column is selected by the query, throw an exception.
 	 * @return array|bool Numeric array of all the values in the first found row.
 	 */
-	public function queryColumn($expectOne = true)
+	public function queryColumn($failOnMultipleResults = true)
 	{
-		return $this->source->queryColumn($expectOne);
+		return $this->source->queryColumn($failOnMultipleResults);
 	}
 	
 	/**
 	 * @param mixed $default Default value to return if no results found.
-	 * @param bool $expectOne If true and more then one column or row are
+	 * @param bool $failOnMultipleResults If true and more then one column or row are
 	 * selected by the query, throw an exception.
 	 * @return mixed First column of the first row, or $default value if nothing found.
 	 */
-	public function queryScalar($default = false, $expectOne = true)
+	public function queryScalar($default = null, bool $failOnMultipleResults = true)
 	{
-		return $this->source->queryScalar($default, $expectOne);
+		return $this->source->queryScalar($default, $failOnMultipleResults);
 	}
 	
 	/**
-	 * @param bool $expectOne If true and more then one column or row are
+	 * @param bool $failOnMultipleResults If true and more then one column or row are
 	 * selected by the query, throw an exception.
 	 * @return int|bool False on error.
 	 */
-	public function queryInt($expectOne = true)
+	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int
 	{
-		return $this->source->queryInt($expectOne);
+		return $this->source->queryInt($failOnMultipleResults);
+	}
+	
+	public function queryFloat(?float $default = null, bool $failOnMultipleResults = true): ?float
+	{
+		return $this->source->queryFloat($failOnMultipleResults);
 	}
 	
 	/**
-	 * @param bool $expectOne If true and more then one column or row are
+	 * @param bool $failOnMultipleResults If true and more then one column or row are
 	 * selected by the query, throw an exception.
 	 * @return bool|null Null on error.
 	 */
-	public function queryBool($expectOne = true)
+	public function queryBool(?bool $default = null, bool $failOnMultipleResults = true): ?bool
 	{
-		return $this->source->queryBool($expectOne);
+		return $this->source->queryBool($failOnMultipleResults);
 	}
 	
 	/**

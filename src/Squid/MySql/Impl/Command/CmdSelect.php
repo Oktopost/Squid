@@ -170,17 +170,17 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $distinct
 	 * @return static
 	 */
-	public function distinct($distinct = true) 
+	public function distinct(bool $distinct = true) 
 	{
 		return $this->setPart(CmdSelect::PART_DISTINCT, $distinct);
 	}
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
-	 * @param bool|string $alias
+	 * @param string $alias
 	 * @return static
 	 */
-	public function from($table, $alias = false) 
+	public function from($table, ?string $alias = null) 
 	{
 		if ($table instanceof IMySqlCommandConstructor) 
 		{
@@ -203,7 +203,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param mixed|array $bind
 	 * @return static
 	 */
-	public function join($table, $alias, $condition, $bind = []) 
+	public function join($table, string $alias, string $condition, $bind = []) 
 	{
 		return $this->joinWith($table, $alias, $condition, $bind, 'JOIN');
 	}
@@ -216,7 +216,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false) 
+	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) 
 	{
 		return $this->joinWith(
 			$table, $alias, $condition, $bind, 
@@ -231,7 +231,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $outer
 	 * @return static
 	 */
-	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false) 
+	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) 
 	{
 		return $this->joinWith(
 			$table, $alias, $condition, $bind, 
@@ -253,10 +253,10 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	/**
 	 * @param string $exp
-	 * @param mixed|array|bool $bind
+	 * @param mixed|array $bind
 	 * @return static
 	 */
-	public function having($exp, $bind = []) 
+	public function having(string $exp, $bind = []) 
 	{
 		return $this->appendPart(CmdSelect::PART_HAVING, $exp, $bind);
 	}
@@ -274,7 +274,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $withRollup
 	 * @return static
 	 */
-	public function withRollup($withRollup = true)
+	public function withRollup(bool $withRollup = true)
 	{
 		return $this->setPart(CmdSelect::PART_WITH_ROLL_UP, $withRollup);
 	}
@@ -284,7 +284,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $all
 	 * @return static
 	 */
-	public function union(IMySqlCommandConstructor $select, $all = false)
+	public function union(IMySqlCommandConstructor $select, bool $all = false)
 	{
 		$union = 'UNION ' . ($all ? 'ALL ' : '');
 		
@@ -307,7 +307,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $forUpdate
 	 * @return static
 	 */
-	public function forUpdate($forUpdate = true)
+	public function forUpdate(bool $forUpdate = true)
 	{
 		return $this->setPart(CmdSelect::PART_LOCK, 
 			($forUpdate ? 'FOR UPDATE' : false));
@@ -317,7 +317,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $lockInShareMode
 	 * @return static
 	 */
-	public function lockInShareMode($lockInShareMode = true)
+	public function lockInShareMode(bool $lockInShareMode = true)
 	{
 		return $this->setPart(CmdSelect::PART_LOCK, 
 			($lockInShareMode ? 'LOCK IN SHARE MODE' : false));

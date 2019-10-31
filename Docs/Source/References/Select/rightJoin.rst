@@ -4,7 +4,7 @@ rightJoin
 
 .. code-block:: php
 	
-	public function rightJoin($table, $alias, $condition, $bind = false, $outer = false): static
+	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false): static
 
 Add a right join expression to the query.
 
@@ -19,19 +19,19 @@ Add a right join expression to the query.
 
 	Table name, MySQL expression or MySQL command to use as the target. 
 	
-* **$alias**: 
+* **$alias**: *string*
 	
 	Alias for the table/expression.
 
-* **$condition**: 
+* **$condition**: *string*
 
 	Expression to use as the join condition.
 
-* **$bind**:
+* **$bind**: *mixed* | *array* = []
 	
 	Optional scalar or array of bind params. To pass ``false`` as a bind param, use an array - ``[false]``
 
-* **$outer**:
+* **$outer**: *bool* = false
 
 	If set to true, ``RIGHT OUTER JOIN`` is generated.
 

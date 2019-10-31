@@ -122,23 +122,23 @@ class SelectCombiner implements ICmdSelect
 	
 	// Calls on each select
 	
-	public function distinct($distinct = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function distinct(bool $distinct = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function column(...$columns) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columns($columns, $table = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnsExp($columns, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnAs($column, $alias) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnAsExp($column, $alias, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function from($table, $alias = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function join($table, $alias, $condition, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function leftJoin($table, $alias, $condition, $bind = [], $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function rightJoin($table, $alias, $condition, $bind = [], $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function from($table, ?string $alias = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function join($table, string $alias, string $condition, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function groupBy($column, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function having($exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function withRollup($withRollup = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function union(IMySqlCommandConstructor $select, $all = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function having(string $exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function withRollup(bool $withRollup = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function union(IMySqlCommandConstructor $select, bool $all = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function unionAll(IMySqlCommandConstructor $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function forUpdate($forUpdate = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function lockInShareMode($lockInShareMode = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function forUpdate(bool $forUpdate = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function lockInShareMode(bool $lockInShareMode = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function setConnection(IMySqlConnection $conn) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function limit($from, $count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function limitBy($count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
@@ -146,6 +146,7 @@ class SelectCombiner implements ICmdSelect
 	public function orderBy($column, $type = OrderBy::ASC): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function orderByAsc($column): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function orderByDesc($column): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function byId($value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byField($field, $value) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function byFields($fields, $values = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function where($exp, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
@@ -169,11 +170,12 @@ class SelectCombiner implements ICmdSelect
 	public function query() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryNumeric() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryAll($isAssoc = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function queryRow($isAssoc = false, $expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function queryColumn($expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function queryScalar($default = false, $expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function queryInt($expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function queryBool($expectOne = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryRow($isAssoc = false, bool $failOnMultipleResults = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryColumn($failOnMultipleResults = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryScalar($default = null, bool $failOnMultipleResults = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryFloat(?float $default = null, bool $failOnMultipleResults = true): ?float { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryBool(?bool $default = null, bool $failOnMultipleResults = true): ?bool { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryWithCallback($callback, $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryIterator($isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryIteratorBulk(int $size = 100, $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }

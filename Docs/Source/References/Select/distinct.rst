@@ -4,7 +4,7 @@ distinct
 
 .. code-block:: php
 	
-	public function distinct($distinct = true): static
+	public function distinct(bool $distinct = true): static
 
 Toggle if the ``DISTINCT`` keyword should be added to the generated query.
 

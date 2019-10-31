@@ -6,7 +6,7 @@ join
 
 .. code-block:: php
 	
-	public function join($table, $alias, $condition, $bind = []): static
+	public function join($table, string $alias, string $condition, $bind = []): static
 
 | Add an inner join expression to the query. 
 | Table can be a table name or another subquery. 

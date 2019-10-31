@@ -27,10 +27,12 @@ interface IMySqlConnection extends IMySqlExecutor
 	
 	public function version(): string;
 	
+	public function getProperty(string $key, string $default = ''): string;
+	
 	/**
 	 * @param string $cmd
 	 * @param array $bind
 	 * @return \PDOStatement
 	 */
-	public function execute($cmd, array $bind = []);
+	public function execute(string $cmd, array $bind = []);
 }

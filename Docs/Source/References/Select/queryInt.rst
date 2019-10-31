@@ -1,21 +1,26 @@
---------
+========
 queryInt
---------
+========
 
 .. code-block:: php
 
-	public function queryInt($expectOne = true): array
+	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int
 
+Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResults)`` - unless the value is ``null`` it will be casted to an ``int``.
+
+----------
 
 .. rubric:: Parameters
 
-* **$expectOne**: *bool* = true
-	
+* **$failOnMultipleResults**: *bool* = true
+
+----------
 
 .. rubric:: Return
 
-``false`` if the query returned an empty result set, otherwise the first column of the first row, casted to int.
+``$default`` if the query returned an empty result set, otherwise the first column of the first row, casted to int.
 
+----------
 
 .. rubric:: Examples
 

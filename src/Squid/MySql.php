@@ -3,16 +3,18 @@ namespace Squid;
 
 
 use Squid\MySql\ConfigFacade;
-use Squid\MySql\Connection\IMySqlExecuteDecorator;
 use Squid\MySql\IMySqlConnector;
+use Squid\MySql\Config\Property;
 use Squid\MySql\Connection\IMySqlConnection;
+use Squid\MySql\Connection\IMySqlExecuteDecorator;
 
 use Squid\MySql\Impl\MySqlConnector;
 use Squid\MySql\Impl\Connection\ConnectionBuilder;
+
 use Squid\Utils\EmptyWhereInHandler;
 
 
-class MySql
+class MySql extends Property
 {
 	/** @var ConfigFacade */
 	private $configFacade;

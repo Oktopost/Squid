@@ -1,6 +1,6 @@
------
+=====
 query
------
+=====
 
 .. code-block:: php
 
@@ -8,11 +8,14 @@ query
 
 Execute the query and return an array of associative rows.
 
+----------
 
 .. rubric:: Return
 	
-| Array of rows where each row is an associative array. The key of each column is based on the selected column name, or alias, if provided.
+| Array of rows where each row is an associative array. The key of each column is based on the selected column name or alias, if provided.
 | Order of the values in each row will match the order in which the column was specified.
+
+----------
 
 .. rubric:: Examples
 

@@ -15,7 +15,7 @@ groupBy
 	| A single column or an array of columns to group by.
 	| Note that this value is attached to the query as is and therefore should be MySQL safe.
 	
-* **$bind**: *array* | *mixed* = []
+* **$bind**: *mixed* | *array* = []
 
 	Optional scalar or array of scalar bind parameters.
 	

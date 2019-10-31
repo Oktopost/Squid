@@ -5,8 +5,14 @@ namespace Squid\MySql\Command;
 interface IWithWhere 
 {
 	/**
+	 * @param array|string $value
+	 * @return static
+	 */
+	public function byId($value);
+	
+	/**
 	 * @param string $field
-	 * @param array|string $value If array, IN used instead
+	 * @param array|string $value
 	 * @return static
 	 */
 	public function byField($field, $value);

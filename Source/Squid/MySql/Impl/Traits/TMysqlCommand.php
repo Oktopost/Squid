@@ -20,7 +20,7 @@ trait TMysqlCommand
 	/**
 	 * @param IMySqlConnection $conn
 	 */
-	public function setConnection(IMySqlConnection $conn)
+	public function setConnection(IMySqlConnection $conn): void
 	{
 		$this->_conn = $conn;
 	}

@@ -18,12 +18,12 @@ class CmdController extends AbstractCommand implements ICmdController
 	private $isInTransaction = false;
 	
 	
-	public function assemble() 
+	public function assemble(): string 
 	{
 		return $this->command;
 	}
 	
-	public function bind() 
+	public function bind(): array 
 	{
 		return $this->bind;
 	}

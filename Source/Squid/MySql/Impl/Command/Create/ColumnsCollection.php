@@ -30,7 +30,7 @@ class ColumnsCollection implements IColumnsTarget
 	/**
 	 * @return array
 	 */
-	public function assemble()
+	public function assemble(): string
 	{
 		$generatedColumns = [];
 		

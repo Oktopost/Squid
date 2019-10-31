@@ -7,18 +7,18 @@ interface IMySqlCommandConstructor extends IMySqlCommand
 	/**
 	 * @return array
 	 */
-	public function bind();
+	public function bind(): array;
 	
 	/**
 	 * Generate the query string.
 	 * @return string Currently set query.
 	 */
-	public function assemble();
+	public function assemble(): string;
 	
 	/**
 	 * Execute the generated query.
 	 * @throws \PDOException
-	 * @return \PDOStatement
+	 * @return \PDOStatement|mixed
 	 */
 	public function execute();
 }

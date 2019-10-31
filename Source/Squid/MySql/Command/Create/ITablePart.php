@@ -7,5 +7,5 @@ interface ITablePart
 	/**
 	 * @return string
 	 */
-	public function assemble();
+	public function assemble(): string;
 }

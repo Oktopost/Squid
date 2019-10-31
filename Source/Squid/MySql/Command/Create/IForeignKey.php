@@ -88,5 +88,5 @@ interface IForeignKey
 	/**
 	 * @return string
 	 */
-	public function assemble();
+	public function assemble(): string;
 }

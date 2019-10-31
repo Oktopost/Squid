@@ -86,7 +86,7 @@ class KeysCollection
 	/**
 	 * @return array
 	 */
-	public function assemble()
+	public function assemble(): string
 	{
 		$result = [];
 		

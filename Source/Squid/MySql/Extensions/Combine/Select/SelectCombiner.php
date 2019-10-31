@@ -139,7 +139,7 @@ class SelectCombiner implements ICmdSelect
 	public function unionAll(IMySqlCommandConstructor $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function forUpdate(bool $forUpdate = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function lockInShareMode(bool $lockInShareMode = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function setConnection(IMySqlConnection $conn) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function setConnection(IMySqlConnection $conn): void { $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function limit($from, $count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function limitBy($count): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function page($page, $pageSize): IWithLimit { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
@@ -164,8 +164,8 @@ class SelectCombiner implements ICmdSelect
 	
 	// Calls on union of all selects
 	
-	public function bind() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function assemble() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function bind(): array { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function assemble(): string { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function execute() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function query() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryNumeric() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }

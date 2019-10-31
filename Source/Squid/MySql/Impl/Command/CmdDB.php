@@ -51,7 +51,7 @@ class CmdDB extends AbstractCommand implements ICmdDB
 	/**
 	 * @return string
 	 */
-	public function assemble() 
+	public function assemble(): string 
 	{
 		return $this->command;
 	}
@@ -59,7 +59,7 @@ class CmdDB extends AbstractCommand implements ICmdDB
 	/**
 	 * @return array 
 	 */
-	public function bind()
+	public function bind(): array
 	{
 		return $this->bind;
 	}

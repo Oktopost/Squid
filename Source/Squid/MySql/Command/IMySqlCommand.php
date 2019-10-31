@@ -10,7 +10,7 @@ interface IMySqlCommand
 	/**
 	 * @param IMySqlConnection $conn
 	 */
-	public function setConnection(IMySqlConnection $conn);
+	public function setConnection(IMySqlConnection $conn): void;
 	
 	
 	/**

@@ -17,7 +17,7 @@ class CmdLock extends AbstractCommand implements ICmdLock
 	/**
 	 * @return array
 	 */
-	public function bind() 
+	public function bind(): array 
 	{
 		return $this->params;
 	}
@@ -25,7 +25,7 @@ class CmdLock extends AbstractCommand implements ICmdLock
 	/**
 	 * @return string
 	 */
-	public function assemble() 
+	public function assemble(): string 
 	{
 		return $this->sql;
 	}

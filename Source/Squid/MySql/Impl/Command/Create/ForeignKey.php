@@ -153,7 +153,7 @@ class ForeignKey implements IForeignKey
 	/**
 	 * @return string
 	 */
-	public function assemble()
+	public function assemble(): string
 	{
 		$command = 
 			"CONSTRAINT `$this->name` " . 

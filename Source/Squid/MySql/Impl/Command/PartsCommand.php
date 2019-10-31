@@ -137,7 +137,7 @@ abstract class PartsCommand extends AbstractCommand
 	/**
 	 * @return array
 	 */
-	public function bind() 
+	public function bind(): array 
 	{
 		$bindParams = [];
 		
@@ -155,7 +155,7 @@ abstract class PartsCommand extends AbstractCommand
 	/**
 	 * @return string 
 	 */
-	public function assemble() 
+	public function assemble(): string 
 	{
 		return $this->generate();
 	}

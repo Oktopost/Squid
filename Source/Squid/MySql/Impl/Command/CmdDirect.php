@@ -40,7 +40,7 @@ class CmdDirect extends AbstractCommand implements ICmdDirect
 	/**
 	 * @return array
 	 */
-	public function bind() 
+	public function bind(): array 
 	{
 		return $this->params;
 	}
@@ -48,7 +48,7 @@ class CmdDirect extends AbstractCommand implements ICmdDirect
 	/**
 	 * @return string
 	 */
-	public function assemble() 
+	public function assemble(): string 
 	{
 		return $this->sql;
 	}

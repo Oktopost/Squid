@@ -149,7 +149,7 @@ class Column implements ITableColumn
 	/**
 	 * @return string
 	 */
-	public function assemble()
+	public function assemble(): string
 	{
 		$values = array_filter($this->parts);
 		return implode(' ', $values);

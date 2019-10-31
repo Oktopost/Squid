@@ -174,7 +174,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	/**
 	 * @return array
 	 */
-	public function bind()
+	public function bind(): array
 	{
 		$as = $this->parts[self::PART_AS];
 		return ($as instanceof IMySqlCommandConstructor ? $as->bind() : []);
@@ -184,7 +184,7 @@ class CmdCreate extends AbstractCommand implements ICmdCreate
 	 * Generate the query string.
 	 * @return string Currently set query.
 	 */
-	public function assemble()
+	public function assemble(): string
 	{
 		$command = 
 			'CREATE ' . 

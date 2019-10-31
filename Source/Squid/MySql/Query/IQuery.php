@@ -9,8 +9,8 @@ interface IQuery
 {
 	public function select(): ICmdSelect;
 	
-	public function assemble(): string;
-	public function bind(): array;
+	public function assemble(): string: string;
+	public function bind(): array: array;
 	
 	public function query(): array;
 	

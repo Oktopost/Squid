@@ -107,7 +107,7 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 	/**
 	 * @return array
 	 */
-	public function bind()
+	public function bind(): array
 	{
 		return $this->bind;
 	}
@@ -116,7 +116,7 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 	 * Generate the query string.
 	 * @return string Currently set query.
 	 */
-	public function assemble()
+	public function assemble(): string
 	{
 		return $this->command;
 	}

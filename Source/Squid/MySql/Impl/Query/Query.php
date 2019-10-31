@@ -30,12 +30,12 @@ class Query implements IQuery
 		return $this->select;
 	}
 	
-	public function assemble(): string
+	public function assemble(): string: string
 	{
 		return $this->select->assemble();
 	}
 	
-	public function bind(): array
+	public function bind(): array: array
 	{
 		return $this->select->bind();
 	}

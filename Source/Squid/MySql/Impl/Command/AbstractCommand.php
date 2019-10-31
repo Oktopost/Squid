@@ -28,7 +28,7 @@ abstract class AbstractCommand implements IMySqlCommandConstructor
 	 * Set the connection to use.
 	 * @param \Squid\MySql\Connection\IMySqlConnection $conn
 	 */
-	public function setConnection(IMySqlConnection $conn) 
+	public function setConnection(IMySqlConnection $conn): void 
 	{
 		$this->conn = $conn;
 	}

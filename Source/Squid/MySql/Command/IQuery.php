@@ -38,7 +38,7 @@ interface IQuery
 	 * @param bool $failOnMultipleResults If true and more then one column is selected by the query, throw an exception.
 	 * @return array|bool Numeric array of all the values in the first found row.
 	 */
-	public function queryColumn($failOnMultipleResults = true);
+	public function queryColumn(bool $failOnMultipleResults = true);
 	
 	public function queryScalar($default = null, bool $failOnMultipleResults = true);
 	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int;
@@ -52,21 +52,22 @@ interface IQuery
 	public function queryExists();
 	
 	/**
-	 * Execute SELECT COUNT(*). If the query is a group by query, number of distinct values is returned.
+	 * Execute SELECT COUNT(*).
 	 * @return int|bool
 	 */
 	public function queryCount();
 	
 	/**
-	 * @param callable $callback Called for each selected row. 
+	 * @param callable $callback Called for each selected row.
 	 * If callback returns false, queryWithCallback will abort and return false.
 	 * If callback returns 0, queryWithCallback will abort and return true.
 	 * For any other value, callback will continue to the next row.
 	 * If no rows selected at all, queryWithCallback will still return true.
+	 * @param array|null $result Array of non scalar values returned by the callback.
 	 * @param bool $isAssoc
 	 * @return bool
 	 */
-	public function queryWithCallback($callback, $isAssoc = true);
+	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true);
 	
 	/**
 	 * Return an iterator to iterate over all found rows.

@@ -55,7 +55,7 @@ class StatementResult implements IStatementResult
 	 * @param bool $failOnMultipleResults If true and more then one column is selected by the query, throw an exception.
 	 * @return array|bool Numeric array of all the values in the first found row.
 	 */
-	public function queryColumn($failOnMultipleResults = true)
+	public function queryColumn(bool $failOnMultipleResults = true)
 	{
 		// TODO: Implement queryColumn() method.
 	}
@@ -127,7 +127,7 @@ class StatementResult implements IStatementResult
 	 * @param bool $isAssoc
 	 * @return bool
 	 */
-	public function queryWithCallback($callback, $isAssoc = true)
+	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true)
 	{
 		// TODO: Implement queryWithCallback() method.
 	}

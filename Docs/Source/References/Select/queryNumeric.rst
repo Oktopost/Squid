@@ -1,6 +1,6 @@
-------------
+============
 queryNumeric
-------------
+============
 
 .. code-block:: php
 
@@ -8,11 +8,14 @@ queryNumeric
 
 Execute the query and return an array of numeric rows.
 
+----------	
 
 .. rubric:: Return
 	
 | Array of rows where each row is a numeric array. 
 | Order of the values in each row will match the order in which the column was specified.  
+
+----------	
 
 .. rubric:: Examples
 

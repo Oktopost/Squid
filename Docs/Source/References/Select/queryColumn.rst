@@ -1,29 +1,39 @@
------------
+===========
 queryColumn
------------
+===========
 
 .. code-block:: php
 
-	public function queryColumn($oneOrNone = true): array
+	public function queryColumn(bool $failOnMultipleResults = true): array
 
+Return the value of the first column in a numeric array.
+
+----------
 
 .. rubric:: Parameters
 
-* **$oneOrNone**: *bool* = true
-	
+* **$failOnMultipleResults**: *bool* = true
+
+	If set to **true** and more then one row is selected, an exception will be thrown.
+
+----------
 
 .. rubric:: Return
 
+| Array containing all the values from the first column in the result set. If the result was an empty, an empty array is returned.
+
+----------
 
 .. rubric:: Examples
 
 .. code-block:: php
 	:linenos:
 	
-	$user = $select
+	$ids = $select
 		->column('ID')
 		->from('User')
 		->byField('IsLoggedIn', true)
+		->limitBy(5)
 		->queryColumn();
 	
-	// $user = ['ID' => 34, 'Name' => 'Bob']
+	// $ids = [1, 2, 4, 29, 34]

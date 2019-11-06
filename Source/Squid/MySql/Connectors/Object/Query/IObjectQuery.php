@@ -29,7 +29,7 @@ interface IObjectQuery
 	 * For any other value, callback will continue to the next row.
 	 * @return bool
 	 */
-	public function queryWithCallback($callback);
+	public function queryWithCallback(callable $callback);
 	
 	/**
 	 * Return an iterator to iterate over all found objects.

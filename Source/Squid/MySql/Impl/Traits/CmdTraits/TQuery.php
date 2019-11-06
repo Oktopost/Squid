@@ -74,7 +74,7 @@ trait TQuery
 		return ($result === false ? null : $result);
 	}
 	
-	public function queryColumn($oneOrNone = true)
+	public function queryColumn(bool $failOnMultipleResults = true): array
 	{
 		$result = $this->execute();
 		$data = [];
@@ -83,7 +83,7 @@ trait TQuery
 		{
 			return $result;
 		}
-		else if ($oneOrNone && $result->columnCount() > 1)
+		else if ($failOnMultipleResults && $result->columnCount() > 1)
 		{
 			throw new SquidException('More than one column was selected!');
 		}
@@ -134,20 +134,30 @@ trait TQuery
 		return (is_null($result) ? null : (bool)$result);
 	}
 	
-	public function queryWithCallback($callback, $isAssoc = true) 
+	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true)
 	{
 		$fetchMode = $this->resolveFetchMode($isAssoc);
-		$result = $this->execute();
+		$cmdResult = $this->execute();
+		$returnValues = [];
 		
-		if (!$result)
-			return $result;
+		if (!$cmdResult)
+			return $cmdResult;
 		
-		while ($row = $result->fetch($fetchMode)) 
+		while ($row = $cmdResult->fetch($fetchMode)) 
 		{
 			$value = call_user_func($callback, $row);
 			
-			if ($value === false)	return false;
-			else if ($value === 0)	break;
+			if ($value === false) return false;
+			else if ($value === 0) break;
+			else if (is_array($result) && !is_scalar($value) && !is_null($value)) 
+			{
+				$returnValues[] = $value;
+			}
+		}
+		
+		if ($returnValues)
+		{
+			$result = $returnValues;
 		}
 		
 		return true;
@@ -206,10 +216,12 @@ trait TQuery
 		{
 			while ($row = $result->fetch($fetchMode))
 			{
-				if (!isset($row[$key]) || !key_exists($value, $row)) 
+				if (!isset($row[$key]) || !key_exists($value, $row))
+				{
 					throw new MySqlException(
 						"Key '$key' or Value '$value' columns not found in the query result: " . 
 						implode(array_keys($row)));
+				}
 				
 				$map[$row[$key]] = $row[$value];
 			}
@@ -298,9 +310,11 @@ trait TQuery
 			while ($row = $result->fetch($fetchMode))
 			{
 				if (!isset($row[$key]))
+				{
 					throw new MySqlException(
 						"Key '$key' column not found in the query result: " .
 						implode(array_keys($row)));
+				}
 				
 				if ($removeColumnFromRow)
 				{

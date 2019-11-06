@@ -62,7 +62,7 @@ class JoinedObjectSelect extends SelectDecorator implements ICmdObjectSelect
 	 * For any other value, callback will continue to the next row.
 	 * @return bool
 	 */
-	public function queryWithCallback($callback)
+	public function queryWithCallback(callable $callback)
 	{
 		throw new SquidException('queryWithCallback is not supported for joined table');
 	}

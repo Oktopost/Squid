@@ -4,8 +4,8 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 use Squid\MySql;
 use Squid\MySql\Command\ICmdSelect;
-use Squid\Exceptions\SquidException;
 use Squid\MySql\Connection\IMySqlConnection;
+use Squid\MySql\Impl\Traits\CmdTraits\Utils\LikeGenerator;
 use Squid\Utils\EmptyWhereInHandler;
 
 
@@ -160,5 +160,63 @@ trait TWithWhere
 	public function whereNotExists(ICmdSelect $select) 
 	{
 		return $this->whereExists($select, true);
+	}
+	
+	public function whereLike(string $exp, $value, ?string $escapeChar = null) 
+	{
+		/** @var MySql\Command\IWithWhere $this */
+		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		LikeGenerator::generateLike($this, $escape, $exp, 'LIKE', $escapeChar, $value);
+		return $this;
+	}
+	
+	public function whereNotLike(string $exp, $value, ?string $escapeChar = null) 
+	{
+		/** @var MySql\Command\IWithWhere $this */
+		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		LikeGenerator::generateLike($this, $escape, $exp, 'NOT LIKE', $escapeChar, $value);
+		return $this;
+	}
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param bool $negate
+	 * @return static
+	 */
+	public function whereContains(string $exp, $value, bool $negate = false)
+	{
+		/** @var MySql\Command\IWithWhere $this */
+		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		LikeGenerator::generateEscapedLike($this, $escape, $exp, '%', (string)$value, '%', $negate);
+		return $this;
+	}
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param bool $negate
+	 * @return static
+	 */
+	public function whereStartsWith(string $exp, $value, bool $negate = false)
+	{
+		/** @var MySql\Command\IWithWhere $this */
+		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		LikeGenerator::generateEscapedLike($this, $escape, $exp, '', (string)$value, '%', $negate);
+		return $this;
+	}
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param bool $negate
+	 * @return static
+	 */
+	public function whereEndsWith(string $exp, $value, bool $negate = false)
+	{
+		/** @var MySql\Command\IWithWhere $this */
+		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		LikeGenerator::generateEscapedLike($this, $escape, $exp, '%', (string)$value, '', $negate);
+		return $this;
 	}
 }

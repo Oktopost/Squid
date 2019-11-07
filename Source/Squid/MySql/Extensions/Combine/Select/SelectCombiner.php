@@ -154,6 +154,11 @@ class SelectCombiner implements ICmdSelect
 	public function whereNotIn($field, $values) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereExists(ICmdSelect $select, $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereNotExists(ICmdSelect $select) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereLike(string $exp, $value, ?string $escapeChar = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereNotLike(string $exp, $value, ?string $escapeChar = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereContains(string $exp, $value, bool $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereStartsWith(string $exp, $value, bool $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function whereEndsWith(string $exp, $value, bool $negate = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereBetween(string $field, $greater, $less): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereNotEqual(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function whereLess(string $field, $value): IWithExtendedWhere { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

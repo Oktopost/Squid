@@ -1,1 +1,3 @@
-1. all $bind = false changed to $bind = []
+1. All $bind = false changed to $bind = []
+2. Add ?array $result = null 
+3. Add whereLike, whereContains, whereStartsWith, whereEndsWith

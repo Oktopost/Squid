@@ -67,4 +67,44 @@ interface IWithWhere
 	 * @return static
 	 */
 	public function whereNotExists(ICmdSelect $select);
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param string|null $escapeChar
+	 * @return static
+	 */
+	public function whereLike(string $exp, $value, ?string $escapeChar = null);
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param string|null $escapeChar
+	 * @return static
+	 */
+	public function whereNotLike(string $exp, $value, ?string $escapeChar = null);
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param bool $negate
+	 * @return static
+	 */
+	public function whereContains(string $exp, $value, bool $negate = false);
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param bool $negate
+	 * @return static
+	 */
+	public function whereStartsWith(string $exp, $value, bool $negate = false);
+	
+	/**
+	 * @param string $exp
+	 * @param mixed $value
+	 * @param bool $negate
+	 * @return static
+	 */
+	public function whereEndsWith(string $exp, $value, bool $negate = false);
 }

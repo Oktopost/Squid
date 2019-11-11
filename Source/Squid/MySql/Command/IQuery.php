@@ -87,18 +87,10 @@ interface IQuery
 	public function queryIteratorBulk(int $size = 100, $isAssoc = true);
 	
 	/**
-	 * Return an array where the result of one column is the index and the second is value.
-	 * @param int|string $key Name of the key column.
-	 * @param int|string $value Name of the value column
-	 * @return array|false
-	 */
-	public function queryMap($key = 0, $value = 1);
-	
-	/**
 	 * @param string $className LiteObject class name.
 	 * @return LiteObject|null
 	 */
-	public function queryObject(string $className): ?LiteObject;
+	public function queryObject(string $className);
 	
 	/**
 	 * @param string $className LiteObject class name.
@@ -107,18 +99,50 @@ interface IQuery
 	public function queryObjects(string $className): array;
 	
 	/**
-	 * Return array where each value is an array of rows grouped by a single column.
-	 * @param string|int $byColumn Column to group by.
-	 * @param bool $removeColumn If set to true, the group by column is removed from the row.
-	 * @return Map
+	 * @param int $key
+	 * @param int $value
+	 * @param bool $useMap
+	 * @return array|Map
+	 */
+	public function queryValuesMap($key = 0, $value = 1, bool $useMap = false);
+	
+	/**
+	 * @param int $key
+	 * @param int $value
+	 * @param bool $useMap
+	 * @return array|Map
+	 */
+	public function queryValuesGroup($key = 0, $value = 1, bool $useMap = false);
+	
+	/**
+	 * @param int $key
+	 * @param bool $excludeKey
+	 * @param bool $useMap
+	 * @return array|Map
+	 */
+	public function queryRecordsMap($key = 0, bool $excludeKey = false, bool $useMap = false);
+	
+	/**
+	 * @param int $key
+	 * @param bool $excludeKey
+	 * @param bool $useMap
+	 * @return array|Map
+	 */
+	public function queryRecordsGroup($key = 0, bool $excludeKey = false, bool $useMap = false);
+	
+	
+	/**
+	 * @deprecated 
+	 */
+	public function queryMap($key = 0, $value = 1);
+	
+	/**
+	 * @deprecated 
 	 */
 	public function queryGroupBy($byColumn, bool $removeColumn = false): Map;
 	
 	/**
-	 * Return an array where the result of one column is the index and the remaining data is value.
-	 * @param int|string $key Name of the key column.
-	 * @param bool $removeColumnFromRow Should remove the key column from values.
-	 * @return array|false
+	 * @deprecated 
 	 */
 	public function queryMapRow($key = 0, $removeColumnFromRow = false);
 }

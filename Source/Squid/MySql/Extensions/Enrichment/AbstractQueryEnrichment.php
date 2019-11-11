@@ -202,7 +202,7 @@ abstract class AbstractQueryEnrichment implements IQueryEnrichment
 		return $this->source->queryMapRow($key, $removeColumnFromRow);
 	}
 	
-	public function queryObject(string $className): ?LiteObject
+	public function queryObject(string $className)
 	{
 		return $this->source->queryObject($className);
 	}

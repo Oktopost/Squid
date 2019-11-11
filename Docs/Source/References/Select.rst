@@ -143,11 +143,10 @@ List of entry points grouped by scope
 	Select/queryWithCallback
 	Select/queryIterator
 	Select/queryIteratorBulk
-	Select/queryMap
-	Select/queryObject
-	Select/queryObjects
-	Select/queryGroupBy
-	Select/queryMapRow
+	Select/queryValuesMap
+	Select/queryValuesGroup
+	Select/queryRecordsMap
+	Select/queryRecordsGroup
 
 
 .. rubric:: Additional Query Flags

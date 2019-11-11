@@ -166,7 +166,7 @@ class StatementResult implements IStatementResult
 		// TODO: Implement queryMap() method.
 	}
 	
-	public function queryObject(string $className): ?LiteObject
+	public function queryObject(string $className)
 	{
 		// TODO: Implement queryObject() method.
 	}

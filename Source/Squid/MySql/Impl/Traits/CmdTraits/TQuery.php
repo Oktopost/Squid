@@ -16,6 +16,35 @@ use Squid\Exceptions\SquidException;
  */
 trait TQuery 
 {
+	private function queryValues($key, $value = null, bool $useMap = false, callable $operator)
+	{
+		$fetchMode = $this->resolveFetchMode(is_string($key) || is_string($value));
+		$result = $this->execute();
+		$map = [];
+		
+		try
+		{
+			while ($row = $result->fetch($fetchMode))
+			{
+				if (!key_exists($key, $row) || ($value && !key_exists($value, $row)))
+				{
+					throw new MySqlException(
+						"Key '$key' or Value '$value' columns not found in the query result: " . 
+						implode(array_keys($row)));
+				}
+				
+				$operator($map, $row[$key] ?? 0, is_null($value) ? $row : $row[$value]);
+				
+			}
+		}
+		finally
+		{
+			$result->closeCursor();
+		}
+		
+		return $useMap ? new Map($map) : $map;
+	}
+	
 	private function resolveFetchMode($fetchMode)
 	{
 		if ($fetchMode === true) return \PDO::FETCH_ASSOC;
@@ -206,36 +235,50 @@ trait TQuery
 		}
 	}
 	
-	public function queryMap($key = 0, $value = 1)
+	public function queryValuesMap($key = 0, $value = 1, bool $useMap = false)
 	{
-		$fetchMode = $this->resolveFetchMode(is_string($key) || is_string($value));
-		$result = $this->execute();
-		$map = [];
-		
-		try
+		return $this->queryValues($key, $value, $useMap, function (array &$map, $key, $value)
 		{
-			while ($row = $result->fetch($fetchMode))
-			{
-				if (!isset($row[$key]) || !key_exists($value, $row))
-				{
-					throw new MySqlException(
-						"Key '$key' or Value '$value' columns not found in the query result: " . 
-						implode(array_keys($row)));
-				}
-				
-				$map[$row[$key]] = $row[$value];
-			}
-		}
-		// Free resources when generator released before reaching the end of the iteration.
-		finally
-		{
-			$result->closeCursor();
-		}
-		
-		return $map;
+			$map[$key] = $value;
+		});
 	}
 	
-	public function queryObject(string $className): ?LiteObject
+	public function queryValuesGroup($key = 0, $value = 1, bool $useMap = false)
+	{
+		return $this->queryValues($key, $value, $useMap, function (array &$map, $key, $value)
+		{
+			$map[$key][] = $value;
+		});
+	}
+	
+	public function queryRecordsMap($key = 0, bool $excludeKey = false, bool $useMap = false)
+	{
+		return $this->queryValues($key, null, $useMap, 
+			function (array &$map, $keyValue, $row) 
+				use ($key, $excludeKey)
+			{
+				if ($excludeKey)
+					unset($row[$key]);
+				
+				$map[$keyValue] = $row;
+			});
+	}
+	
+	public function queryRecordsGroup($key = 0, bool $excludeKey = false, bool $useMap = false)
+	{
+		return $this->queryValues($key, null, $useMap, 
+			function (array &$map, $keyValue, $row) 
+				use ($key, $excludeKey)
+			{
+				if ($excludeKey)
+					unset($row[$key]);
+				
+				$map[$keyValue][] = $row;
+			});
+	}
+	
+	
+	public function queryObject(string $className)
 	{
 		$result = $this->queryRow(true);
 		
@@ -299,40 +342,15 @@ trait TQuery
 		return $map;
 	}
 	
+	
+	
+	public function queryMap($key = 0, $value = 1)
+	{
+		return $this->queryValuesMap($key, $value, false);	
+	}
+	
 	public function queryMapRow($key = 0, $removeColumnFromRow = false)
 	{
-		$fetchMode = $this->resolveFetchMode(is_string($key));
-		$result = $this->execute();
-		$map = [];
-		
-		try
-		{
-			while ($row = $result->fetch($fetchMode))
-			{
-				if (!isset($row[$key]))
-				{
-					throw new MySqlException(
-						"Key '$key' column not found in the query result: " .
-						implode(array_keys($row)));
-				}
-				
-				if ($removeColumnFromRow)
-				{
-					$map[$row[$key]] = $row;
-					unset($map[$row[$key]][$key]);
-				}
-				else
-				{
-					$map[$row[$key]] = $row;
-				}
-			}
-		}
-		// Free resources when generator released before reaching the end of the iteration.
-		finally
-		{
-			$result->closeCursor();
-		}
-		
-		return $map;
+		return $this->queryRecordsGroup($key, $removeColumnFromRow, false);
 	}
 }

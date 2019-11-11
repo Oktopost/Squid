@@ -6,11 +6,15 @@ queryExists
 
 	public function queryExists(): bool|null
 	
-Execute a ``SELECT EXISTS($select)`` on the command. 
+Execute a ``SELECT EXISTS($select)`` on the command.
+
+----------
 
 .. rubric:: Return
 	
-True if the sub query contains at least one record.
+**true** if the sub query contains at least one record.
+
+----------
 
 .. rubric:: Examples
 

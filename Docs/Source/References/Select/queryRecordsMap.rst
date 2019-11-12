@@ -8,7 +8,7 @@ queryRecordsMap
 
 	public function queryRecordsMap($key = 0, bool $excludeKey = false, bool $useMap = false): array|Structura\Map;
 
-Query the entire data set, but return an array were each record is mapped to the value of the ``$key`` column.
+Query the entire data set and return an array where each record is mapped to the value of the ``$key`` column.
 
 ----------
 
@@ -21,7 +21,7 @@ Query the entire data set, but return an array were each record is mapped to the
 
 * **$excludeKey**: *bool* = false
 
-	If set to true, the ``$key`` column will be remove from the record.
+	If set to true, the ``$key`` column will be removed from the record.
 
 * **$useMap**: *bool* = false
 

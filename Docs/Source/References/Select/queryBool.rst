@@ -14,11 +14,13 @@ Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResult
 
 * **$failOnMultipleResults**: *bool* = true
 
+    If set to **true** and more than one row is selected, an exception will be thrown.
+
 ----------
 
 .. rubric:: Return
 
-``$default`` if the query returned an empty result set, otherwise the first column of the first row, casted to float.
+``$default`` if the query returned an empty result set, otherwise the first column of the first row, casted to bool.
 
 ----------
 
@@ -27,9 +29,9 @@ Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResult
 .. code-block:: php
 	:linenos:
 	
-	$maxUserLoginRate = $select
-		->column('MAX(LoginRate)')
+	$isLowRate = $select
+		->column('MAX(LoginRate) < 0.3')
 		->from('User')
-		->queryFloat();
+		->queryBool();
 	
-	// $minID = 0.23
+	// $isLowRate = true

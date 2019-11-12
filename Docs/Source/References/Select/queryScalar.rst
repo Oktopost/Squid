@@ -18,7 +18,7 @@ queryScalar
 
 * **$failOnMultipleResults**: *bool* = true
 
-	If set to ``true`` and more then one column **or** row is selected, throw an exception. 
+	If set to ``true`` and more than one column **or** row is selected, throw an exception.
 
 ----------	
 

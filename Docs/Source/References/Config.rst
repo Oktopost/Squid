@@ -41,7 +41,7 @@ connector.
 		]);
 
 | Each set of configuration values is attached to it's connector, and can not be altered later on.
-| Here we will create 2 different connectors, each with it's own config.
+| Here we will create 2 different connectors, each with its own config.
 
 .. code-block:: php
 	:linenos:
@@ -66,7 +66,7 @@ connector.
 			'version'	=> '5.6'
 		]);
 
-	$usersConnector = $mysql->getConnector('users');
+	$usersConnector = $mysql->getConnector('main');
 	$cacheConnector = $mysql->getConnector('cache');
 
 | Any command generated from the ``$usersConnector`` object, will be sent to **localhost**, and any command from ``$cacheConnector`` will be sent to the server **10.0.0.23**.
@@ -74,4 +74,4 @@ connector.
 
 .. note::
 
-	The expression ``$mysql->addConnector([/* ... */])`` is eqvivalent to ``$mysql->addConnector('main', [/* ... */])``
+	The expression ``$mysql->addConnector([/* ... */])`` is equivalent to ``$mysql->addConnector('main', [/* ... */])``

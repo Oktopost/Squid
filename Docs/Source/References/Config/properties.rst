@@ -2,7 +2,7 @@
 Properties
 ==========
 
-Properties are additional settings that can effect the behaviour of some methods and commands in squid.
+Properties are additional settings that can affect the behaviour of some methods and commands in squid.
 
 
 PROP_LIKE_ESCAPE_CHAR

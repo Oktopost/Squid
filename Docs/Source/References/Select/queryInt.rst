@@ -14,6 +14,8 @@ Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResult
 
 * **$failOnMultipleResults**: *bool* = true
 
+    If set to **true** and more than one row is selected, an exception will be thrown.
+
 ----------
 
 .. rubric:: Return

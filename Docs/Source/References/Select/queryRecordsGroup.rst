@@ -8,7 +8,7 @@ queryRecordsGroup
 
 	public function queryRecordsGroup($key = 0, bool $excludeKey = false, bool $useMap = false): array|Structura\Map;
 
-Query the entire data set, and group each record based on the value of the ``$key`` column.
+Query the entire data set and group each record based on the value of the ``$key`` column.
 
 ----------
 
@@ -21,7 +21,7 @@ Query the entire data set, and group each record based on the value of the ``$ke
 
 * **$excludeKey**: *bool* = false
 
-	If set to true, the ``$key`` column will be remove from the record.
+	If set to true, the ``$key`` column will be removed from the record.
 
 * **$useMap**: *bool* = false
 
@@ -51,7 +51,7 @@ Query the entire data set, and group each record based on the value of the ``$ke
 	// $map = [
 	// 		26 => [
 	//			['Id' => 123, 'Name' => 'John', ...],
-	//			['Id' => 165, 'Name' => 'John', ...],
+	//			['Id' => 165, 'Name' => 'Alexey', ...],
 	//			...
 	//		],
 	// 		27 =>[
@@ -76,7 +76,7 @@ Using a numeric index:
 	// $map = [
 	// 		26 => [
 	//			[123, 'John', ...],
-	//			[165, 'John', ...],
+	//			[165, 'Alexey', ...],
 	//			...
 	//		],
 	// 		27 =>[

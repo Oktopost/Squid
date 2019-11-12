@@ -19,7 +19,7 @@ orderBy
 
 * **$type**:  *string* 
 	
-	Is the query will be descending or ascending
+	Is the query descending or ascending
 
 ----------
 
@@ -54,5 +54,5 @@ The **$type** parameter can be either 0 for ascending order or 1 for descending.
 	``$column`` parameter is treated as an SQL expression, therefore it must be a safe SQL string.
 
 
-* :code:`orderByorderByAsc($column)` is equivalent to :code:`orderBy($column, OrderBy::ASC)`
-* :code:`orderByorderByDesc($column)` is equivalent to :code:`orderBy($column, OrderBy::DESC)`
+* :code:`orderByAsc($column)` is equivalent to :code:`orderBy($column, OrderBy::ASC)`
+* :code:`orderByDesc($column)` is equivalent to :code:`orderBy($column, OrderBy::DESC)`

@@ -6,11 +6,11 @@ queryWithCallback
 
 .. code-block:: php
 
-	public function queryWithCallback(callable $callback, ?array $result = null, bool $isAssoc = true)
+	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true)
 
-Instead of returned the result, pass each row to the provided callback.
+Instead of returning the result, pass each row to the provided callback.
 
-``queryWithCallback`` with generally use less memory then any other query command, specially when working with big data sets. 
+``queryWithCallback`` will generally use less memory than any other query command, especially when working with big data sets.
 Instead of storing the entire data set in a single array, ``queryWithCallback`` will only allocate enough memory to the currently processed record.
 
 

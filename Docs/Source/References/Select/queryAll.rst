@@ -22,7 +22,7 @@ Execute the query and return the entire result set in a single array.
 
 .. rubric:: Return
 	
-| Array of the entire results set.
+| Array of the entire result set.
 | Each row is represented as an associative or numeric array based on the ``$isAssoc`` parameter.
 
 ----------

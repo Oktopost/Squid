@@ -7,7 +7,7 @@ columnsExp
 	public function columnsExp($columns, $bind = false): static
 
 Add a single expression to the :code:`SELECT` clause. Note that the string is appended as is, meaning that if a comma is 
-present in the :code:`$columns` parameter, it will also be present is the query.
+present in the :code:`$columns` parameter, it will also be present in the query.
 
 ----------
 
@@ -19,7 +19,7 @@ present in the :code:`$columns` parameter, it will also be present is the query.
 
 * **$bind**:  *mixed* | *array* | *false* 
 	
-	Array of bind values or a single bind value. Empty array of false will be considered as no bind values. 
+	Array of bind values or a single bind value. Empty array or false will be considered as no bind values.
 	Use ``[false]`` to bind the ``false`` value
 
 ----------

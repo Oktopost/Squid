@@ -4,7 +4,7 @@ orderByDesc
 
 .. code-block:: php
 
-	public function orderByAsc($column): static
+	public function orderByDesc($column): static
 
 Equivalent to :code:`orderBy($column, OrderBy::DESC)`
 

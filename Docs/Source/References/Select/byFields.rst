@@ -9,7 +9,7 @@ byFields
 	public function byFields($fields, $values = null): static
 
 Append multiple compare expressions to the WHERE clause either using a numeric array of fields and numeric array of values,
-or by using an associative array in format [field name/expression => value] 
+or by using an associative array in the format [field name/expression => value]
 
 ----------
 
@@ -47,7 +47,7 @@ or by using an associative array in format [field name/expression => value]
 * **$value**: *array* = false
 
 	| Array of values to assign to fields under the same index from ``$fields`` when ``$fields`` is a numeric array.
-	| A value can be a scalar or another array of scalars. The later will generate an ``IN`` clause instead of ``=`` 
+	| A value can be a scalar or another array of scalars. The latter will generate an ``IN`` clause instead of ``=``
 
 
 ----------

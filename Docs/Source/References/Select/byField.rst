@@ -9,7 +9,7 @@ byField
 	public function byField($field, $value): static
 
 | Add an expression to the WHERE clause that compares ``$field`` with ``$value``. 
-| Compare expression used, is depended on the type of ``$value``.
+| Compare expression used is depended on the type of ``$value``.
 
 ----------
 
@@ -22,7 +22,7 @@ byField
 * **$value**: *mixed* | *array* | *null*
 
 	| If a scalar value is passed, it will be used as a bind value for the generated query. 
-	| If an array passed, an ``IN`` expression is generated instead of ``=``. Array must not be empty, and contain only 
+	| If an array passed, an ``IN`` expression is generated instead of ``=``. Array must not be empty and contain only
 	  scalar values. All the values in this array are used as bind params and therefore *safe*.
 	| Passing ``null`` will generate a ``ISNULL($field)`` expression. 
 	

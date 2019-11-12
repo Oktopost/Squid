@@ -8,9 +8,9 @@ queryIterator
 
 	public function queryIterator($isAssoc = true): iterable
 
-Return's an iterator that can be used to go over the entire result set.
+Returns an iterator that can be used to go over the entire result set.
 
-Similar to :ref:`select_queryWithCallback`, ``queryIterator`` will use less memory then selecting the entire data set at once. 
+Similar to :ref:`select_queryWithCallback`, ``queryIterator`` will use less memory than selecting the entire data set at once.
 Only enough memory for a single element is used per iteration.
 
 ----------	

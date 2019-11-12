@@ -22,7 +22,7 @@ Select
 	
 	$connector = $mysql->getConnector('main');
 	
-	$select = $connector->select()
+	$users = $connector->select()
 		->from('Users')
 		->byField('Status', 'active')
 		->orderBy('Name')

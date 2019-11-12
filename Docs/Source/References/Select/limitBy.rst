@@ -29,5 +29,5 @@ Reference to ``$this``
 .. code-block:: php
 	:linenos:
 	
-	$select->page(3, 10);
-	// SELECT ... LIMIT 30, 10
+	$select->limitBy(10);
+	// SELECT ... LIMIT 0, 10

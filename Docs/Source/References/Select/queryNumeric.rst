@@ -26,6 +26,6 @@ Execute the query and return an array of numeric rows.
 		->column('ID', 'Name')
 		->from('User')
 		->byField('IsLoggedIn', true)
-		->query();
+		->queryNumeric();
 	
 	// $users = [ [1, 'Bob'], [2, 'Jen'] ]

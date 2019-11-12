@@ -20,13 +20,13 @@ To clone repository
 
 .. code-block:: shell-session
 	
-	composer require oktopost/squid
+	git clone git@github.com:Oktopost/Squid.git
 	
 With optional composer install and running tests
 
 .. code-block:: shell-session
 	
-	cd squid
+	cd Squid
 	composer install
 	composer test
 
@@ -67,15 +67,16 @@ Now we can use this connector to create a new command.
 		->byField('Email', $email)
 		->byField('IsValid', true);
 
-	$user = $select->query();
+	$users = $select->query();
 
-	if (is_null($user))
+	if (!$users)
 	{
 		// ...
 	}
 	else
 	{
-		$id = $user['ID'];
+		$ids = array_column($users, 'ID);
+		// ...
 	}
 
 **Inserting Data**
@@ -97,10 +98,10 @@ Decorating Connection
 =====================
 
 A connection can be decorated by passing an instance of :code:`Squid\MySql\Connection\IMySqlExecuteDecorator`.
-Any MySQL query that is execute via this connection, will be passed through the decorator first. This way a 
+Any MySQL query that is executed via this connection, will be passed through the decorator first. This way a
 full control is given over the execution flow. 
 
-For example, the decorator :code:`TimeoutDecorator` below, will print out any command running for more then 0.3 seconds into the output buffer.
+For example, the decorator :code:`TimeoutDecorator` below, will print out any command running for more then 0.2 seconds into the output buffer.
 
 
 .. code-block:: php
@@ -116,6 +117,7 @@ For example, the decorator :code:`TimeoutDecorator` below, will print out any co
 	
 	class TimeoutDecorator implements MySql\Connection\IMySqlExecuteDecorator
 	{
+        /** @var float */
 		private $timeout;
 		
 		/** @var IMySqlExecutor */
@@ -186,7 +188,7 @@ For example, the decorator :code:`TimeoutDecorator` below, will print out any co
 		->columnsExp('SLEEP(?)', 0.3)
 		->queryInt(); 
 
-The output will  be 
+The output will be
 
 .. code-block:: shell-session
 	

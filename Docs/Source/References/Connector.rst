@@ -3,7 +3,7 @@ Connector
 ---------
 
 
-Connector reference to an instance implementing the interface :code:`Squid\MySql\IMySqlConnector` 
+Connector references to an instance implementing the interface :code:`Squid\MySql\IMySqlConnector`
 and obtained usually in the following way:
 
 .. code-block:: php
@@ -24,7 +24,7 @@ and obtained usually in the following way:
 A connector is not a wrapper for MySQL connection. Rather it holds a reference to a connection and used 
 as a *Simple Factory* object to create and initialize different MySQL command objects.
 
-Usually, for each type of MySQL query there is a different Squid class. For example, for the **SELECT** command we 
+For each of the common types of MySQL queries there is a different Squid class. For example, for the **SELECT** command we
 would use an instance implementing :code:`Squid\MySql\Command\ICmdSelect` and for **DELETE** :code:`Squid\MySql\Command\ICmdDelete`.
 
 Example of obtaining such objects from the connector:
@@ -135,7 +135,7 @@ transaction
 ===========
 
 	Get a command object to manage the current transaction.
-	As the transaction objects not share a state, its best to use only one transaction object per connection at any given time.
+	As the transaction objects do not share a state, it's best to use only one transaction object per connection at any given time.
 
 	.. code-block:: php
 
@@ -171,7 +171,7 @@ close
 name
 ====
 
-	Get the name of the config used to initialize this conenctor.
+	Get the name of the config used to initialize this connector.
 
 	.. code-block:: php
 

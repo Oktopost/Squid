@@ -14,7 +14,7 @@ debug
 
 .. rubric:: Return
 	
-An array containing the result of ``assemble()`` as the first value and ``bind()`` as teh second:
+An array containing the result of ``assemble()`` as the first value and ``bind()`` as the second:
 
 .. code-block:: php
 

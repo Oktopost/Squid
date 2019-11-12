@@ -9,7 +9,7 @@ leftJoin
 Add a left join expression to the query.
 
 | Refer to the :ref:`select_join` method for more info. 
-| The behaviour of this too methods is identical, excluding the excluding the ``LEFT``/``LEFT OUTER`` keywords.
+| The behaviour of this two methods is identical, excluding the ``LEFT``/``LEFT OUTER`` keywords.
 
 ----------
 

@@ -6,7 +6,7 @@ column
 	
 	public function column(...$columns): static
 
-List columns to append to the :code:`SELECT` clause.
+List of columns to append to the :code:`SELECT` clause.
 
 ----------
 

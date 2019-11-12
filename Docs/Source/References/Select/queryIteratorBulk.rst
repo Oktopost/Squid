@@ -6,7 +6,7 @@ queryIteratorBulk
 
 	public function queryIteratorBulk(int $size = 100, $isAssoc = true): \Iterator
 
-This function is similar to :ref:`select_queryIterator`, exception that the iterator will return an array of records
+This function is similar to :ref:`select_queryIterator`, except that the iterator will return an array of records
 instead of a single record. Each iteration (excluding the last one) will have ``$size`` elements. 
 
 ----------	

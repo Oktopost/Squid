@@ -6,7 +6,7 @@ page
 
 	public function page($page, $pageSize): static
 
-Append a ``LIMIT`` expression eqvivalent to selecting the Nth page, given a size of ``$pageSize`` elements per page.
+Append a ``LIMIT`` expression equivalent to selecting the Nth page, given a size of ``$pageSize`` elements per page.
 
 For example, the offset of the 7th page with 6 elements per page is: ``7 * 6 = 42``, therefore ``->page(7, 6)`` 
 will generate the expression ``LIMIT 42, 6``.

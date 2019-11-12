@@ -36,7 +36,7 @@ Reference to ``$this``
 
 ----------
 
-Unlike other methods in ``ICmdSelect``, if ``from`` method is called more then once, the new value will override existing value.
+Unlike other methods in ``ICmdSelect``, if ``from`` method is called more than once, the new value will override existing value.
 
 .. code-block:: php
 	:linenos:
@@ -82,7 +82,7 @@ Is equal to
 	FROM 
 		User JOIN Account ON User.OwnerId = Account.Id
 
-Therefore any ``FROM a, b, ...`` can be replaces with ``FROM a JOIN b ON ... JOIN c ON ...``.
+Therefore any ``FROM a, b, ...`` can be replaced with ``FROM a JOIN b ON ... JOIN c ON ...``.
 
 ----------
 
@@ -120,7 +120,7 @@ Using another ``SELECT`` command as the ``FROM`` expression
 
 	// SELECT * 
 	// FROM 
-	//	(SELECT DISTINCT Status as st FROM User u WHERE IsBanned=? ) sub_u 
+	//	(SELECT DISTINCT Status as st FROM User u WHERE IsBanned=?) sub_u
 	// WHERE sub_u.st IN (?,?)
 	// 
 	// Bind: [true,"active","deleted"]

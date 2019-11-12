@@ -4,7 +4,7 @@ queryFloat
 
 .. code-block:: php
 
-	public function queryFloat(?int $default = null, bool $failOnMultipleResults = true): ?float
+	public function queryFloat(?float $default = null, bool $failOnMultipleResults = true): ?float
 
 Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResults)`` - unless the value is ``null`` it will be casted to ``float``.
 
@@ -13,6 +13,8 @@ Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResult
 .. rubric:: Parameters
 
 * **$failOnMultipleResults**: *bool* = true
+
+    If set to **true** and more than one row is selected, an exception will be thrown.
 
 ----------
 
@@ -32,4 +34,4 @@ Alias to :ref:`select_queryScalar`, ``$select->queryScalar($failOnMultipleResult
 		->from('User')
 		->queryFloat();
 	
-	// $minID = 0.23
+	// $maxUserLoginRate = 0.23

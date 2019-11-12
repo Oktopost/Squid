@@ -77,7 +77,7 @@ Add a join expression with another table to the query
 	
 	$select
 		->from('User', 'u')
-		->leftJoin('Account', 'a', 'a.OwnerId = u.Id AND u.Status = ?', ['active']);
+		->join('Account', 'a', 'a.OwnerId = u.Id AND u.Status = ?', ['active']);
 
 	// SELECT * FROM User u JOIN Account a ON a.OwnerId = u.Id AND u.Status = ? 
 	// Bind: ['active']
@@ -86,10 +86,16 @@ Add a join expression with a sub query
 
 .. code-block:: php
 	:linenos:
-	
-	$select
+
+    $subSelect = $mysql->getConnector()->select()
+		->distinct()
+		->columnAs('u.Id', 'id')
 		->from('User', 'u')
-		->leftJoin('Account', 'a', 'a.OwnerId = u.Id AND u.Status = ?', ['active']);
+		->byField('IsBanned', true);
+
+	$select
+		->from('Account', 'a')
+		->join($subSelect, 'sub_u', 'sub_u.id = a.OwnerId');
 
 	// SELECT * 
 	// FROM 

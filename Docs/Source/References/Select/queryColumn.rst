@@ -14,13 +14,13 @@ Return the value of the first column in a numeric array.
 
 * **$failOnMultipleResults**: *bool* = true
 
-	If set to **true** and more then one row is selected, an exception will be thrown.
+	If set to **true** and more than one column is selected, an exception will be thrown.
 
 ----------
 
 .. rubric:: Return
 
-| Array containing all the values from the first column in the result set. If the result was an empty, an empty array is returned.
+| Array containing all the values from the first column in the result set. If the result was empty, an empty array is returned.
 
 ----------
 

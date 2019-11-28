@@ -47,8 +47,6 @@ Reference to ``$this``
 		->union($select1);
 
 
-	$select3 
-
 	// (SELECT 0 FROM Dual ) UNION ALL 
 	// (SELECT Id FROM User WHERE IsBanned=? AND IsLoggedIn=? ) 
 	// Bind: [false, true] 

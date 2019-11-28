@@ -16,7 +16,7 @@ Alias to :ref:`select_where`, ``$select->where("$field >= ?", $value)``.
 	
 	Field name or MySQL expression to compare. 
 
-* **$greater**: *mixed*
+* **$value**: *mixed*
 
 	Any scalar value to compare with.
 

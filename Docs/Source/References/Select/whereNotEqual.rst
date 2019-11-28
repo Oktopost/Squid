@@ -17,7 +17,7 @@ whereNotEqual
 	
 	Field name or MySQL expression to compare. 
 
-* **$greater**: *mixed*
+* **$value**: *mixed*
 
 	Any scalar value to compare with, including **null**.
 

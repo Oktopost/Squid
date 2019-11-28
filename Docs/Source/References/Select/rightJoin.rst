@@ -9,7 +9,7 @@ rightJoin
 Add a right join expression to the query.
 
 | Refer to the :ref:`select_join` method for more info. 
-| The behaviour of this too methods is identical, excluding the excluding the ``RIGHT``/``RIGHT OUTER`` keywords.
+| The behaviour of this two methods is identical, excluding the ``RIGHT``/``RIGHT OUTER`` keywords.
 
 ----------
 

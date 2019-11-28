@@ -4,7 +4,7 @@ whereLessOrEquals
 
 .. code-block:: php
 	
-	public function whereLessOrEquals(string $field, $value): static
+	public function whereLessOrEqual(string $field, $value): static
 
 Alias to :ref:`select_where`, ``$select->where("$field <= ?", $value)``.
 
@@ -16,7 +16,7 @@ Alias to :ref:`select_where`, ``$select->where("$field <= ?", $value)``.
 	
 	Field name or MySQL expression to compare. 
 
-* **$greater**: *mixed*
+* **$value**: *mixed*
 
 	Any scalar value to compare with.
 
@@ -37,7 +37,7 @@ Reference to ``$this``
 	
 	$select
 		->from('User')
-		->whereLessOrEquals('Created', '2019-01-01'); 
+		->whereLessOrEqual('Created', '2019-01-01');
 
 	// SELECT * FROM User WHERE Created <= ? 
 	// Bind: ["2019-01-01"]

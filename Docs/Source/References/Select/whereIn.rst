@@ -21,10 +21,10 @@ Generate a ``WHERE A IN ()`` expression. The generated string can be different b
 * **$values**: *mixed* | *Squid\MySql\Command\ICmdSelect* 
 
 	| Scalar value, array of values or an instance of ``ICmdSelect`` to use as sub query.
-	| A Select command in squid, extends the ``ICmdSelect`` interface and therefor can be passed to this method.
+	| A Select command in Squid extends the ``ICmdSelect`` interface and therefore can be passed to this method.
 
 	If ``$fields`` is an **array**, ``$values`` parameter must be a sub query that selected the same number of fields **OR**
-	and array where each record is an array containing the same number of elements as number of fields. See examples for implementation.
+	an array where each record is an array containing the same number of elements as number of fields. See examples for implementation.
 
 * **$negate**: *bool* = false
 
@@ -47,9 +47,9 @@ Reference to ``$this``
 	
 	$select
 		->from('User')
-		->whereNotIn('Status', ['valid', 'banned']);
+		->whereIn('Status', ['valid', 'banned']);
 
-	// SELECT * FROM User WHERE Status NOT IN (?,?) 
+	// SELECT * FROM User WHERE Status IN (?,?)
 	// Bind: ["valid","banned"]
 
 It's possible to pass a subquery as shown in the example below:
@@ -81,7 +81,7 @@ When comparing a set of fields, the ``$value`` parameter must be array of sets w
 	
 	$select = $mysql->getConnector()->select();
 	
-	echo $select
+	$select
 		->from('User')
 		->whereIn(
 			['Status', 'State'], 
@@ -103,7 +103,7 @@ When comparing a set of fields, the ``$value`` parameter must be array of sets w
 		
 		$select = $mysql->getConnector()->select();
 		
-		echo $select
+		$select
 			->from('User')
 			->whereIn(
 				['Status', 'State'], 
@@ -116,7 +116,7 @@ When comparing a set of fields, the ``$value`` parameter must be array of sets w
 		// SELECT * FROM User WHERE (Status,State) IN ((?,?),(?,?))
 		// Bind: ["valid", "active", "invalid", "inactive"]
 
-	The reason being how MySQL 5.6 uses indexes. 
+	The reason behind this is how MySQL 5.6 uses indexes.
 	
 	| Even if an index on ``Status, State`` exists, the ``IN`` query would not use this index, which can result in bad performance. However ``AND OR`` statement would use such index. 
 	| This is not the case in MySQL 5.7 and greater. 

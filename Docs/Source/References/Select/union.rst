@@ -62,4 +62,4 @@ Reference to ``$this``
 	// (SELECT Id FROM Account WHERE Disabled=? ) UNION 
 	// (SELECT Id FROM User WHERE IsBanned=? AND IsLoggedIn=? ) UNION 
 	// (SELECT 0 FROM Dual ) 
-	// Bind: [false, true, true] 
+	// Bind: [true, false, true]

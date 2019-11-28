@@ -8,7 +8,7 @@ whereExists
 	
 	public function whereExists(ICmdSelect $select, $negate = false): static
 
-Add an ``EXISTS /*sub query*/`` expression to the where claus. 
+Add an ``EXISTS /*sub query*/`` expression to the where clause.
 
 ----------
 
@@ -17,7 +17,7 @@ Add an ``EXISTS /*sub query*/`` expression to the where claus.
 * **$select**: *Squid\MySql\Command\ICmdSelect*
 
 	| The subquery to compare with.
- 	| A Select command in squid, extends the ``ICmdSelect`` interface and therefor can be passed to this method.
+ 	| A Select command in Squid extends the ``ICmdSelect`` interface and therefore can be passed to this method.
 
 * **$negate**: *bool* = false
 

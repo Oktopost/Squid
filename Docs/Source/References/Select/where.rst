@@ -10,9 +10,9 @@ where
 
 Attach a condition to the WHERE clause. 
 
-The condition is attached as is, without any ``()``, and all condtions in the WHERE clause are combined using ``AND``.
+The condition is attached as is, without any ``()``, and all conditions in the WHERE clause are combined using ``AND``.
 
-| Any other command that adds conditions to the WHERE clause eventualy calls the ``where()`` method.
+| Any other command that adds conditions to the WHERE clause eventually calls the ``where()`` method.
 | For example ``->byField('a', 'b')`` equals ``->where('a = ?', ['b'])``.
 
 ----------

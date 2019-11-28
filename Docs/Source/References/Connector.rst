@@ -55,7 +55,7 @@ select
 insert
 ======
 
-	Create an object for an **INSERT** query.
+	Create an :ref:`insert` object for the **INSERT** query.
 
 	.. code-block:: php
 

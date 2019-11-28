@@ -9,7 +9,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
 	 * @return static
 	 */
-	public function ignore($ignore = true);
+	public function ignore(bool $ignore = true);
 	
 	/**
 	 * Set the table to select into.
@@ -18,7 +18,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * if set later using values with assoc array.
 	 * @return static
 	 */
-	public function into($table, array $fields = null);
+	public function into(string $table, array $fields = null);
 	
 	/**
 	 * Set the default values to use.
@@ -35,7 +35,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * will be set to the default. See defaultValues(...) method.
 	 * @return static
 	 */
-	public function values($values);
+	public function values(array $values);
 	
 	/**
 	 * Append a number of rows at once.
@@ -44,7 +44,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * $values parameter in values function, must apply on each value in the $valuesSet array.
 	 * @return static
 	 */
-	public function valuesBulk($valuesSet);
+	public function valuesBulk(array $valuesSet);
 	
 	/**
 	 * Insert data using row sql string. Note that expressions must be Sql safe.
@@ -53,7 +53,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * @param array|mixed $bind
 	 * @return static
 	 */
-	public function valuesExp($expression, $bind = []);
+	public function valuesExp(string $expression, array $bind = []);
 	
 	/**
 	 * Use select command to insert into the table. 

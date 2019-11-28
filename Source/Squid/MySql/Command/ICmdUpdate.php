@@ -9,7 +9,7 @@ interface ICmdUpdate extends IDml, IMySqlCommandConstructor, IWithWhere, IWithSe
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
 	 * @return static
 	 */
-	public function ignore($ignore = true);
+	public function ignore(bool $ignore = true);
 	
 	/**
 	 * Set the table to update.

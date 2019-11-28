@@ -14,6 +14,11 @@ trait TDml
 	 */
 	public function executeDml($returnCount = false) 
 	{
+		return $this->exec($returnCount);
+	}
+	
+	public function exec(bool $returnCount = false)
+	{
 		$result	= $this->execute();
 		
 		if (!$result)

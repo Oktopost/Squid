@@ -135,7 +135,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
 	 * @return static
 	 */
-	public function ignore($ignore = true)
+	public function ignore(bool $ignore = true)
 	{
 		return $this->setPart(CmdInsert::PART_IGNORE, $ignore);
 	}
@@ -147,7 +147,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * if set later using values with assoc array.
 	 * @return static
 	 */
-	public function into($table, array $fields = null)
+	public function into(string $table, array $fields = null)
 	{
 		$this->setPart(CmdInsert::PART_INTO, $table);
 		
@@ -179,7 +179,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * (if fields where set earlier) will be checked to have a default value.
 	 * @return static
 	 */
-	public function values($values) 
+	public function values(array $values) 
 	{
 		if (isset($values[0]))
 			return $this->appendByPosition($values);
@@ -203,7 +203,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * $values parameter in values function, must apply on each value in the $valuesSet array.
 	 * @return static
 	 */
-	public function valuesBulk($valuesSet)
+	public function valuesBulk(array $valuesSet)
 	{
 		foreach ($valuesSet as $row) 
 		{
@@ -222,7 +222,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * @param mixed|array $bind Single bind param or array of bind params.
 	 * @return static
 	 */
-	public function valuesExp($expression, $bind = [])
+	public function valuesExp(string $expression, array $bind = [])
 	{
 		return $this->appendPart(
 			CmdInsert::PART_VALUES, 

@@ -67,7 +67,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 * @param bool $ignore If true, use ignore flag, otherwise don't.
 	 * @return static
 	 */
-	public function ignore($ignore = true) 
+	public function ignore(bool $ignore = true) 
 	{
 		return $this->setPart(CmdUpdate::PART_IGNORE, $ignore);
 	}

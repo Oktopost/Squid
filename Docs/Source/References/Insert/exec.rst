@@ -13,9 +13,9 @@ exec
 
 .. rubric:: Parameters
 
-* **$field**: *string*
+* **$returnCount**: *bool* = true
 	
-	Name of the field to compare to the ``$value`` parameter. ``$field`` can also be any *safe* MySQL expression. 
+	If set to true, return number of affected rows.
 	
 ----------
 
@@ -58,4 +58,4 @@ exec
 		->exec();
 
 The values will be ``$insertA = 1`` as one record was inserted, ``$insertB = 0`` as no records were inserted due to duplicate 
-key and ``$insertC = true`` because even so no records were inserted, the query was still complete successfully.
+key and ``$insertC = true`` because even though no records were inserted, the query was still completed successfully.

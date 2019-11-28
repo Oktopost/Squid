@@ -6,7 +6,7 @@ into
 
 .. code-block:: php
 	
-	public function byField($field, $value): static
+	public function into(string $table, array $fields = null): static
 
 
 ----------

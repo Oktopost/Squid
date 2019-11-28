@@ -32,7 +32,7 @@ Reference to ``$this``
 .. code-block:: php
 	:linenos:
 	
-	echo $insert
+	$insert
 		->into('BannedUser', ['ID', 'Name'])
 		->asSelect(
 			$select

@@ -8,7 +8,7 @@ defaultValues
 	
 	public function defaultValues(array $default)
 
-Set the values that should be use when a record passed to :ref:`insert_values` or :ref:`insert_valuesBulk` is missing a column that's
+Set the values that should be used when a record passed to :ref:`insert_values` or :ref:`insert_valuesBulk` is missing a column that's
 required for this insert command.
 
 See the :ref:`insert_into` method for more information on how the required columns are detected.

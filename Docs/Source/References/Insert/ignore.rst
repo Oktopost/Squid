@@ -10,8 +10,8 @@ ignore
 
 Execute the insert command as ``INSERT IGNORE INTO ...``
 
-When the ``IGNORE`` command is present, any duplicate key errors are ignored and the duplicate values will not update inserted 
-or updated. However any other type of error, will not be ignore. This is MySQL's behaviour and not controller by Squid.
+When the ``IGNORE`` command is present, any duplicate key errors are ignored and the duplicate values will not update
+existing data. However any other type of error will not be ignore. This is MySQL's behaviour and not controlled by Squid.
 
 ----------
 

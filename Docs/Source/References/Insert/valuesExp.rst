@@ -6,7 +6,7 @@ valuesExp
 
 .. code-block:: php
 	
-	public function byField($field, $value): static
+	public function valuesExp(string $expression, array $bind = []): static
 
 
 ----------

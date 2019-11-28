@@ -6,7 +6,7 @@ values
 
 .. code-block:: php
 	
-	public function byField($field, $value): static
+	public function values(array $values): static
 
 
 ----------

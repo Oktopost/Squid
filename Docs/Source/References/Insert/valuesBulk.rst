@@ -32,7 +32,7 @@ See :ref:`insert_values` method for more information.
 
 * **$valuesSet**: *array*
 	
-	Array of records. Each record is an asosiative or numeric array of values.
+	Array of records. Each record is an associative or numeric array of values.
 	
 ----------
 

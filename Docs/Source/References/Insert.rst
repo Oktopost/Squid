@@ -22,7 +22,7 @@ Insert
 	
 	$connector = $mysql->getConnector('main');
 	
-	$select = $connector->insert()
+	$connector->insert()
 		->into('Users')
 		->values([
 			'Name'	=> 'John',

@@ -8,6 +8,8 @@ into
 	
 	public function into(string $table, array $fields = null): static
 
+    @TODO: COMPLETE
+
 
 ----------
 

@@ -8,6 +8,8 @@ values
 	
 	public function values(array $values): static
 
+    @TODO: COMPLETE
+
 
 ----------
 

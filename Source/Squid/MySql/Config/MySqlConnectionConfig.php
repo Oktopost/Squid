@@ -12,6 +12,7 @@ use Objection\LiteObject;
  * @property int	$Port
  * @property string	$User
  * @property string	$Pass
+ * @property bool	$ReuseConnection
  * @property array	$PDOFlags
  * @property string	$Version
  * @property array	$Properties
@@ -41,14 +42,15 @@ class MySqlConnectionConfig extends LiteObject
 	protected function _setup() 
 	{
 		return [
-			'DB'			=> LiteSetup::createString(),
-			'Host'			=> LiteSetup::createString('localhost'),
-			'Port'			=> LiteSetup::createInt(3306),
-			'User'			=> LiteSetup::createString(),
-			'Pass'			=> LiteSetup::createString(),
-			'PDOFlags'		=> LiteSetup::createArray(),
-			'Version'		=> LiteSetup::createString('5.6'),
-			'Properties'	=> LiteSetup::createArray(self::DEFAULT_PROPERTIES)
+			'DB'				=> LiteSetup::createString(),
+			'Host'				=> LiteSetup::createString('localhost'),
+			'Port'				=> LiteSetup::createInt(3306),
+			'User'				=> LiteSetup::createString(),
+			'Pass'				=> LiteSetup::createString(),
+			'ReuseConnection'	=> LiteSetup::createBool(false),
+			'PDOFlags'			=> LiteSetup::createArray(),
+			'Version'			=> LiteSetup::createString('5.6'),
+			'Properties'		=> LiteSetup::createArray(self::DEFAULT_PROPERTIES)
 		];
 	}
 	

@@ -8,7 +8,7 @@ use Squid\Exceptions\SquidException;
 class ConfigLoadersCollection implements IConfigLoader 
 {
 	/** @var IConfigLoader[] */
-	private $collections;
+	private $collections = [];
 	
 	
 	/**
@@ -22,7 +22,7 @@ class ConfigLoadersCollection implements IConfigLoader
 
 	/**
 	 * @param string $connName
-	 * @return array
+	 * @return MySqlConnectionConfig
 	 * @throws SquidException
 	 */
 	public function getConfig($connName) 

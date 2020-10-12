@@ -14,6 +14,7 @@ class ConfigParser
 	use \Traitor\TStaticClass;
 	
 	
+	private static $TRUE_VALUES = ['1', 'on', 'true'];
 	private static $MAP = 
 	[
 		'db'		=> ['db', 'database', 'dbname'],
@@ -22,12 +23,13 @@ class ConfigParser
 		'user'		=> ['user', 'username'],
 		'port'		=> ['port'],
 		'flags'		=> ['flags', 'attribute'],
-		'version'	=> ['version']
+		'version'	=> ['version'],
+		'reuse'		=> ['reuse', 'reuse-connection']
 	];
 	
 	
 	/**
-	 * @param string $default
+	 * @param string|array $default
 	 * @param string $sectionName
 	 * @param array $config
 	 * @return string
@@ -41,6 +43,14 @@ class ConfigParser
 		}
 		
 		return $default;
+	}
+	
+	private static function getBoolean(bool $default, string $sectionName, array $config): bool
+	{
+		$value = self::getValue($default ? '1' : '0', $sectionName, $config);
+		$value = strtolower(trim($value));
+		
+		return in_array($value, self::$TRUE_VALUES);
 	}
 	
 	private static function getProperties(array $config): array
@@ -106,7 +116,8 @@ class ConfigParser
 		$object->PDOFlags	= self::getValue([], 'flags', $config);
 		$object->Version	= self::getValue($object->Version, 'version', $config);
 		
-		$object->Properties = self::getProperties($config);
+		$object->Properties			= self::getProperties($config);
+		$object->ReuseConnection	= self::getBoolean(false, 'reuse', $config);
 		
 		return $object;
 	}

@@ -49,11 +49,10 @@ class InsertConnectorTest extends TestCase
 		self::assertEquals(1, $subject->insertRow(['a' => 1, 'b' => 2]));
 	}
 	
-	/**
-	 * @expectedException \Squid\MySql\Exceptions\MySqlException
-	 */
 	public function test_insertRow_RawAlreadyExists()
 	{
+		$this->expectException(\Squid\MySql\Exceptions\MySqlException::class);
+		
 		$subject = $this->subject(['a' => 1, 'b' => 2]);
 		$subject->insertRow(['a' => 1, 'b' => 2]);
 	}
@@ -80,11 +79,10 @@ class InsertConnectorTest extends TestCase
 		self::assertEquals(2, $subject->insertAll([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]]));
 	}
 	
-	/**
-	 * @expectedException \Squid\MySql\Exceptions\MySqlException
-	 */
 	public function test_insertAll_RawAlreadyExists()
 	{
+		$this->expectException(\Squid\MySql\Exceptions\MySqlException::class);
+		
 		$subject = $this->subject(['a' => 3, 'b' => 4]);
 		$subject->insertAll([['a' => 1, 'b' => 2], ['a' => 3, 'b' => 4]]);
 	}
@@ -120,11 +118,10 @@ class InsertConnectorTest extends TestCase
 		self::assertRowCount(1, $this->table, ['a' => 4, 'b' => 3]);
 	}
 	
-	/**
-	 * @expectedException \Squid\MySql\Exceptions\MySqlException
-	 */
 	public function test_insertAllIntoFields_RawAlreadyExists()
 	{
+		$this->expectException(\Squid\MySql\Exceptions\MySqlException::class);
+		
 		$subject = $this->subject(['a' => 3, 'b' => 4]);
 		$subject->insertAllIntoFields(['a', 'b'], [[1, 2], [3, 4]]);
 	}

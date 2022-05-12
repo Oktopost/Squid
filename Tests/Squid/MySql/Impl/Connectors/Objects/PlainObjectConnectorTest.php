@@ -59,12 +59,11 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertRowExists($this->table, $this->row(1, 2));
 		self::assertLastRowExists($this->table);
 	}
-
-	/**
-	 * @expectedException \Squid\MySql\Exceptions\MySqlException
-	 */
+	
 	public function test_insertObjects_ObjectWithSameKeyExists_ErrorThrown()
 	{
+		$this->expectException(\Squid\MySql\Exceptions\MySqlException::class);
+		
 		$this->subject($this->row(1, 2))->insertObjects($this->newObject(1, 4));
 	}
 	
@@ -120,11 +119,10 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
 	public function test_selectObjectByFields_NumberOfMatchingObjects_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByFields(['b' => 2]);
 	}
 	
@@ -143,11 +141,10 @@ class PlainObjectConnectorTest extends TestCase
 		self::assertEquals(self::$LAST_ROW, $res->toArray());
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
 	public function test_selectObjectByField_NumberOfMatchingObjects_OnlyFirstObjectReturned()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$this->subject([$this->row(1, 2), $this->row(2, 2)])->selectObjectByField('b', 2);
 	}
 	

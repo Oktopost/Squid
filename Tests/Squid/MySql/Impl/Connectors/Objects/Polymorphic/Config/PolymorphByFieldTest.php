@@ -48,12 +48,11 @@ class PolymorphByFieldTest extends TestCase
 		
 		self::assertEquals(['a'	=> 'conn1', 'b'	=> 'conn2'], $subject->callGetConnectorsByClass());
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
+	
 	public function test_addClass_ClassNamePassedButConnecorIsNull_ThrowException()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = new PolymorphByFieldTestHelper();
 		$subject->addClass('a');
 	}
@@ -111,12 +110,11 @@ class PolymorphByFieldTest extends TestCase
 		
 		self::assertEquals(['a'	=> 'rule1', 'b'	=> 'rule2'], $subject->callGetByFieldRules());
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
+	
 	public function test_addFieldRule_FieldPassedAsThingButWithoutRule_ThrowException()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = new PolymorphByFieldTestHelper();
 		$subject->addFieldRule('a');
 	}

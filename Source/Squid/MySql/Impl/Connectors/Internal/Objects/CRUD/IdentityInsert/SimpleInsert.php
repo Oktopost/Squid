@@ -2,9 +2,9 @@
 namespace Squid\MySql\Impl\Connectors\Internal\Objects\CRUD\IdentityInsert;
 
 
-use Squid\MySql\Impl\Connectors\Objects\ObjectConnector;
 use Squid\MySql\Impl\Connectors\Internal\Objects\AbstractORMConnector;
 use Squid\MySql\Connectors\Objects\CRUD\Generic\IObjectInsert;
+use Squid\MySql\Impl\Connectors\Objects\Generic\GenericObjectConnector;
 
 
 /**
@@ -15,7 +15,7 @@ class SimpleInsert implements IObjectInsert
 	/** @var AbstractORMConnector */
 	private $ormConnector;
 	
-	/** @var ObjectConnector */
+	/** @var GenericObjectConnector */
 	private $insertObject;
 	
 	
@@ -36,7 +36,7 @@ class SimpleInsert implements IObjectInsert
 	public function insertObjects($objects, bool $ignore = false)
 	{
 		if (!$this->insertObject)
-			$this->insertObject = new ObjectConnector($this->ormConnector);
+			$this->insertObject = new GenericObjectConnector($this->ormConnector);
 		
 		return $this->insertObject->insertObjects($objects, $ignore);
 	}

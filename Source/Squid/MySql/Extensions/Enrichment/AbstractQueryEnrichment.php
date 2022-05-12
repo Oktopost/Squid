@@ -2,7 +2,6 @@
 namespace Squid\MySql\Extensions\Enrichment;
 
 
-use Objection\LiteObject;
 use Structura\Map;
 use Squid\MySql\Command\IQuery;
 

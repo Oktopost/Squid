@@ -94,6 +94,7 @@ class StandardSelector implements IObjectSelector
 			{
 				return $callback($this->getMap()->toObject($row));
 			},
+			$result,
 			true);
 	}
 

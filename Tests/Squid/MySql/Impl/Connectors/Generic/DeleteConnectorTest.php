@@ -6,15 +6,16 @@ use Squid\MySql\Command\ICmdDelete;
 use Squid\MySql\Connectors\Table\ITableNameConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 
 class DeleteConnectorTest extends TestCase
 {
-	/** @var ICmdDelete|\PHPUnit_Framework_MockObject_MockObject */
+	/** @var ICmdDelete|MockObject */
 	private $delete;
 	
-	/** @var AbstractSingleTableConnector|\PHPUnit_Framework_MockObject_MockObject */
+	/** @var AbstractSingleTableConnector|MockObject */
 	private $connector;
 	
 	
@@ -55,7 +56,7 @@ class DeleteConnectorTest extends TestCase
 	}
 	
 	
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->mockDelete();
 		$this->mockAbstractTableConnector();

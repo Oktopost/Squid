@@ -14,17 +14,15 @@ use Squid\MySql\Connectors\Objects\Generic\IGenericObjectConnector;
 
 class AbstractPolymorphByFieldTest extends TestCase
 {
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		SkeletonOverride::get()->clear();
 	}
-
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
+	
 	public function test_getConnector_ConnectorForClassNotDefined_ThrowsException()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = new AbstractPolymorphByFieldTestHelper(['a' => new GenericObjectConnector()], []);
 		$subject->getConnector('b');
 	}
@@ -46,12 +44,10 @@ class AbstractPolymorphByFieldTest extends TestCase
 		self::assertSame($conn, $subject->getConnector('a'));
 	}
 	
-	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
 	public function test_getObjectConnector_ConnectorForClassNotDefined_ThrowsException()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = new AbstractPolymorphByFieldTestHelper(['a' => new GenericObjectConnector()], []);
 		$subject->getObjectConnector(new DummyObject());
 	}
@@ -204,12 +200,10 @@ class AbstractPolymorphByFieldTest extends TestCase
 			$sorted);
 	}
 	
-	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
 	public function test_sortExpressionsByGroups_InvalidType_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = new AbstractPolymorphByFieldTestHelper([], ['a' => 123]);
 		$subject->sortExpressionsByGroups(['a' => 'b']);
 	}
@@ -245,11 +239,10 @@ class AbstractPolymorphByFieldTest extends TestCase
 			$sorted);
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
 	public function test_sortExpressionsByGroups_ArrayRule_FiledValueNotInRuleList_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = new AbstractPolymorphByFieldTestHelper([], 
 			[
 				'fldA' => ['a' => 'grpA']

@@ -19,7 +19,7 @@ trait TIdKey
 		return $this->_idField;
 	}
 	
-	private function getIdProperty(): string
+	protected function getIdProperty(): string
 	{
 		return $this->_idProperty;
 	}

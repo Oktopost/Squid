@@ -2,7 +2,9 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\Select;
 
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Impl\Command\CmdSelect;
 use Squid\MySql\Impl\Connectors\Utils\Select\SelectDecorator;
@@ -12,12 +14,12 @@ use Squid\OrderBy;
 
 class SelectDecoratorTest extends TestCase
 {
-	/** @var \PHPUnit_Framework_MockObject_MockObject|ICmdSelect */
+	/** @var MockObject|ICmdSelect */
 	private $select;
 	
 	
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|IMySqlConnector
+	 * @return MockObject|IMySqlConnector
 	 */
 	private function mockIMySqlConnector(): IMySqlConnector
 	{

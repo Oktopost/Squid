@@ -44,12 +44,11 @@ class SelectConnectorTest extends TestCase
 		$res = $subject->oneByField('a', 1);
 		self::assertEquals(self::$LAST_ROW, $res);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_oneByField_NumberOfRowsFound_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject([$this->row(1, 2, 3), $this->row(1, 5, 6)]);
 		$subject->oneByField('a', 1);
 	}
@@ -135,12 +134,11 @@ class SelectConnectorTest extends TestCase
 		$res = $subject->oneByFields(['a' => 1, 'b' => 2]);
 		self::assertEquals(self::$LAST_ROW, $res);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_oneByFields_NumberOfRowsFound_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject([$this->row(1, 2, 3), $this->row(1, 2, 6)]);
 		$subject->oneByFields(['a' => 1, 'b' => 2]);
 	}

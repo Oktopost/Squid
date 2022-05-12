@@ -90,20 +90,17 @@ class ConfigParserTest extends TestCase
 		self::assertEquals('abc', $result->User);
 	}
 	
-	
-	/**
-	 * @expectedException \Squid\Exceptions\InvalidConfigPropertyException
-	 */
 	public function test_InvalidPropertyPassed_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\InvalidConfigPropertyException::class);
+		
 		ConfigParser::parse(['properties' => ['a' => true]]);
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\InvalidConfigPropertyValueException
-	 */
 	public function test_InvalidPropertyValuePassed_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\InvalidConfigPropertyValueException::class);
+		
 		ConfigParser::parse(['properties' => [MySql::PROP_ID_FIELD => '']]);
 	}
 	

@@ -505,21 +505,19 @@ class OneToOneConnectorTest extends TestCase
 		self::assertEquals(2, $res[1]->a);
 		self::assertNull($res[1]->child);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_query_QueryIterator_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject();
 		$subject->query()->orderBy('a')->queryIterator();
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
 	public function test_query_queryWithCallback_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject();
 		$subject->query()->orderBy('a')->queryWithCallback(function() {});
 	}

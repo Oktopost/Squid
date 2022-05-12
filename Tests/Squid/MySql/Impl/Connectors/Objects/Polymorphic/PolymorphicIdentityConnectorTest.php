@@ -95,13 +95,11 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		
 		return $subject;
 	}
-
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
+	
 	public function test_delete_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$config = new PolymorphByField();
 		$subject = new PolymorphicIdentityConnector();
 		$subject->setPolymorphicConfig($config);
@@ -133,12 +131,10 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		self::assertRowCount(0, $this->tableB);
 	}
 	
-	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
 	public function test_insert_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$config = new PolymorphByField();
 		$subject = new PolymorphicIdentityConnector();
 		$subject->setPolymorphicConfig($config);
@@ -158,12 +154,11 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		self::assertRowCount(0, $this->tableA);
 		self::assertRowCount(1, $this->tableB);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_insert_ObjectAlreadyExists_ErrorThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject(['a' => 1]);
 		$subject->insert($this->dummyA(1));
 	}
@@ -179,12 +174,10 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		self::assertRowCount(1, $this->tableB);
 	}
 	
-	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
 	public function test_upsert_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$config = new PolymorphByField();
 		$subject = new PolymorphicIdentityConnector();
 		$subject->setPolymorphicConfig($config);
@@ -228,12 +221,10 @@ class PolymorphicIdentityConnectorTest extends TestCase
 		self::assertRowCount(1, $this->tableB);
 	}
 	
-	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
 	public function test_update_ConnectorIsNotIGenericIdentityConnector_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$config = new PolymorphByField();
 		$subject = new PolymorphicIdentityConnector();
 		$subject->setPolymorphicConfig($config);

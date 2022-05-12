@@ -101,7 +101,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param array|false $bind
 	 * @return static
 	 */
-	private function addColumn(array $columns, $bind)
+	protected function addColumn($columns, $bind)
 	{
 		$this->appendPart(CmdSelect::PART_COLUMNS, $columns, $bind);
 		return $this;

@@ -57,7 +57,7 @@ abstract class PartsCommand extends AbstractCommand
 	/**
 	 * Append new query to given part.
 	 * @param int $part Part to append to.
-	 * @param string $sql Command to append.
+	 * @param string|string[] $sql Command to append.
 	 * @param mixed[] $bind Bind params.
 	 * @return static
 	 */

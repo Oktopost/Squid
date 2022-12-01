@@ -2,7 +2,6 @@
 namespace Squid\MySql\Config;
 
 
-use Squid\MySql;
 use Squid\Exceptions\InvalidConfigPropertyException;
 use Squid\Exceptions\InvalidConfigPropertyValueException;
 
@@ -67,31 +66,31 @@ class ConfigParser
 		
 		
 		// Validate default ID field
-		if (array_key_exists(MySql::PROP_ID_FIELD, $properties))
+		if (array_key_exists(Property::PROP_ID_FIELD, $properties))
 		{
-			$value = (string)$properties[MySql::PROP_ID_FIELD];
+			$value = (string)$properties[Property::PROP_ID_FIELD];
 			
 			if (!$value)
 			{
 				throw new InvalidConfigPropertyValueException(
-					MySql::PROP_ID_FIELD, $value, 'Default ID can not be empty');
+					Property::PROP_ID_FIELD, $value, 'Default ID can not be empty');
 			}
 			
-			$result[MySql::PROP_ID_FIELD] = $value;
+			$result[Property::PROP_ID_FIELD] = $value;
 		}
 		
 		// Validate LIKE escape character 
-		if (array_key_exists(MySql::PROP_LIKE_ESCAPE_CHAR, $properties))
+		if (array_key_exists(Property::PROP_LIKE_ESCAPE_CHAR, $properties))
 		{
-			$value = (string)$properties[MySql::PROP_LIKE_ESCAPE_CHAR];
+			$value = (string)$properties[Property::PROP_LIKE_ESCAPE_CHAR];
 			
 			if (strlen($value) != 1)
 			{
 				throw new InvalidConfigPropertyValueException(
-					MySql::PROP_LIKE_ESCAPE_CHAR, $value, 'LIKE escape character must be a string of size 1');
+					Property::PROP_LIKE_ESCAPE_CHAR, $value, 'LIKE escape character must be a string of size 1');
 			}
 			
-			$result[MySql::PROP_LIKE_ESCAPE_CHAR] = $value;
+			$result[Property::PROP_LIKE_ESCAPE_CHAR] = $value;
 		}
 		
 		

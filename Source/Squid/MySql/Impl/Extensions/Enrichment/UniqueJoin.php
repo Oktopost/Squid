@@ -67,6 +67,7 @@ class UniqueJoin extends AbstractQueryEnrichment
 					$data[$index][$this->asColumn] = $row;
 				}
 			},
+			$result,
 			$isAssoc
 		);
 		

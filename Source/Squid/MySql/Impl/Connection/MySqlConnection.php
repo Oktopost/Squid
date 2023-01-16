@@ -29,8 +29,6 @@ class MySqlConnection implements IMySqlConnection
 	
 	private function openConnection(): void
 	{
-		$exceptions = [];
-		
 		for ($i = -1; $i < self::MAX_RETRIES; $i++)
 		{
 			try
@@ -44,15 +42,15 @@ class MySqlConnection implements IMySqlConnection
 			}
 			catch (\PDOException $e)
 			{
-				$exceptions[] = $e;
-				
-				usleep(self::RETRY_DELAY);
+				if ($i != self::MAX_RETRIES)
+				{
+					usleep(self::RETRY_DELAY);
+				}
+				else
+				{
+					throw MySqlException::create($e);
+				}
 			}
-		}
-		
-		if (!$this->pdo)
-		{
-			throw MySqlException::create($exceptions);
 		}
 		
 		foreach ($this->config->PDOFlags as $flag => $value)

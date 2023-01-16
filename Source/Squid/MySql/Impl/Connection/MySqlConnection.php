@@ -42,7 +42,7 @@ class MySqlConnection implements IMySqlConnection
 			}
 			catch (\PDOException $e)
 			{
-				if ($i != self::MAX_RETRIES)
+				if ($i != self::MAX_RETRIES - 1)
 				{
 					usleep(self::RETRY_DELAY);
 				}

@@ -11,6 +11,10 @@ use Squid\Exceptions\SquidException;
 
 class MySqlConnection implements IMySqlConnection 
 {
+	CONST MAX_RETRIES = 2;
+	CONST RETRY_DELAY = 2000;
+	
+	
 	/** @var MySqlConnectionConfig */
 	private $config = null;
 	
@@ -25,16 +29,28 @@ class MySqlConnection implements IMySqlConnection
 	
 	private function openConnection(): void
 	{
-		try
+		for ($i = -1; $i < self::MAX_RETRIES; $i++)
 		{
-			$this->pdo = new \PDO(
-				$this->config->getPDOConnectionString(),
-				$this->config->User,
-				$this->config->Pass);
-		}
-		catch (\PDOException $e)
-		{
-			throw MySqlException::create($e);
+			try
+			{
+				$this->pdo = new \PDO(
+					$this->config->getPDOConnectionString(),
+					$this->config->User,
+					$this->config->Pass);
+				
+				break;
+			}
+			catch (\PDOException $e)
+			{
+				if ($i != self::MAX_RETRIES - 1)
+				{
+					usleep(self::RETRY_DELAY);
+				}
+				else
+				{
+					throw MySqlException::create($e);
+				}
+			}
 		}
 		
 		foreach ($this->config->PDOFlags as $flag => $value)

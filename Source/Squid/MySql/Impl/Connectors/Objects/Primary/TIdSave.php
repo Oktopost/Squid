@@ -1,5 +1,4 @@
 <?php
-
 namespace Squid\MySql\Impl\Connectors\Objects\Primary;
 
 

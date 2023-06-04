@@ -4,6 +4,7 @@ namespace Squid\MySql\Connectors\Objects\Primary;
 
 use Squid\MySql\Connectors\Objects\CRUD\Identity\IIdentityInsert;
 
+
 interface IInsertHandler
 {
 	/**

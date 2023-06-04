@@ -75,16 +75,16 @@ class CmdMultiQuery extends AbstractCommand implements ICmdMultiQuery
 		if (!$result) 
 			throw new MySqlException('Could not execute multiset query!');
 		
-			while (true)
+		while (true)
+		{
+			yield new StatementResult($result);
+			
+			if (!$result->nextRowset())
 			{
-				yield new StatementResult($result);
-				
-				if (!$result->nextRowset())
-				{
-					$this->checkForError($result);
-					break;
-				}
+				$this->checkForError($result);
+				break;
 			}
+		}
 	}
 	
 	/**

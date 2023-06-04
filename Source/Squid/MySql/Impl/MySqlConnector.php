@@ -33,9 +33,12 @@ class MySqlConnector implements IMySqlConnector
 	/**
 	 * @param string $name
 	 */
-	public function __construct($name)
+	public function __construct($name, ?IMySqlConnection $connection = null)
 	{
 		$this->connectionName = $name;
+		
+		if ($connection)
+			$this->connection = $connection;
 	}
 	
 	

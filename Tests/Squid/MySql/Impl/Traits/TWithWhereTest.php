@@ -36,7 +36,7 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 	{
 		if ($this->value instanceof ICmdSelect)
 		{
-			self::assertContains($this->value->assemble(), $exp);
+			self::assertStringContainsString($this->value->assemble(), $exp);
 			self::assertEquals($this->value->bind(), $bind);
 		}
 		else if ($this->isMultiDimensionalArray($this->value))
@@ -53,7 +53,7 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 	{
 		if (is_array($this->field))
 		{
-			self::assertContains(implode(',', $this->field), $exp);
+			self::assertStringContainsString(implode(',', $this->field), $exp);
 			
 			if (!$this->value instanceof ICmdSelect)
 			{
@@ -62,7 +62,7 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 		}
 		else
 		{
-			self::assertContains($this->field, $exp);
+			self::assertStringContainsString($this->field, $exp);
 		}
 	}
 	
@@ -93,13 +93,11 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 		$this->checkValue($bind, $exp);
 		$this->checkField($exp);
 	}
-
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_whereIn_PassEmptyValue()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$this->field = 'field';
 		$this->value = null;
 		

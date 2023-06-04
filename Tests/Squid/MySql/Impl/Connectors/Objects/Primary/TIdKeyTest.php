@@ -41,23 +41,21 @@ class TIdKeyTest extends TestCase
 		
 		self::assertKeyIs(['a' => 'b'], $subject);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_CalledMoreThenOnce_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = new TIdKeyTestHelper();
 		$subject->setIdKey('a');
 		
 		$subject->setIdKey('b');
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_MoreThenOneColumnInArrayPassed_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = new TIdKeyTestHelper();
 		$subject->setIdKey(['a' => 'b', 'c' => 'd']);
 		

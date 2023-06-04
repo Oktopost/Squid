@@ -2,14 +2,16 @@
 namespace Squid\MySql\Impl\Command;
 
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+
 use Squid\MySql\Connection\IMySqlConnection;
 
 
 class CmdTransactionTest extends TestCase
 {
 	/**
-	 * @return IMySqlConnection|\PHPUnit_Framework_MockObject_MockObject
+	 * @return IMySqlConnection|MockObject
 	 */
 	private function mockConnection(): IMySqlConnection
 	{
@@ -20,7 +22,7 @@ class CmdTransactionTest extends TestCase
 
 	/**
 	 * @param bool $result
-	 * @return \PHPUnit_Framework_MockObject_MockObject|IMySqlConnection
+	 * @return MockObject|IMySqlConnection
 	 */
 	private function mockConnectionWithResult($result = true)
 	{
@@ -32,7 +34,7 @@ class CmdTransactionTest extends TestCase
 	/**
 	 * @param string $command
 	 * @param bool $result
-	 * @return \PHPUnit_Framework_MockObject_MockObject|IMySqlConnection
+	 * @return MockObject|IMySqlConnection
 	 */
 	private function mockConnectionExpect(string $command, $result = true)
 	{
@@ -67,12 +69,11 @@ class CmdTransactionTest extends TestCase
 		$transaction = $this->getSubject('START TRANSACTION');
 		$transaction->startTransaction();
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\AlreadyInTransactionException
-	 */
+	
 	public function test_startTransaction_CalledTwice_ErrorThrown()
 	{
+		$this->expectException(\Squid\Exceptions\AlreadyInTransactionException::class);
+		
 		$transaction = $this->getSubject();
 		$transaction->startTransaction();
 		$transaction->startTransaction();
@@ -89,12 +90,11 @@ class CmdTransactionTest extends TestCase
 		$subject->startTransaction();
 		$subject->commit();
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\NotInTransactionException
-	 */
+	
 	public function test_commit_NotInTransaction_ErrorThrown()
 	{
+		$this->expectException(\Squid\Exceptions\NotInTransactionException::class);
+		
 		$transaction = $this->getSubject();
 		$transaction->commit();
 	}
@@ -232,5 +232,4 @@ class CmdTransactionTest extends TestCase
 		
 		$this->assertTrue($transaction->isInTransaction());
 	}
-	
 }

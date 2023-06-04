@@ -6,8 +6,8 @@ use Squid\MySql\Connectors\Generic;
 use Squid\MySql\Connectors\IGenericCRUDConnector;
 use Squid\MySql\Connectors\Table\ISingleTableConnector;
 
+use Squid\MySql\Impl\Connectors\Generic\CountConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
-use Squid\MySql\Impl\Connectors\Internal\Generic\CountConnector;
 use Squid\MySql\Impl\Connectors\Generic\DeleteConnector;
 use Squid\MySql\Impl\Connectors\Generic\InsertConnector;
 use Squid\MySql\Impl\Connectors\Generic\SelectConnector;

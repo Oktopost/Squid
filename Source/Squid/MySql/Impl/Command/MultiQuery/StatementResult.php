@@ -3,7 +3,6 @@ namespace Squid\MySql\Impl\Command\MultiQuery;
 
 
 use Structura\Map;
-use Objection\LiteObject;
 use Squid\MySql\Command\MultiQuery\IStatementResult;
 
 
@@ -203,5 +202,25 @@ class StatementResult implements IStatementResult
 	public function queryGroupBy($byColumn, bool $removeColumn = false): Map
 	{
 		// TODO: Implement queryGroupBy() method.
+	}
+	
+	public function queryValuesMap($key = 0, $value = 1, bool $useMap = false)
+	{
+		// TODO: Implement queryValuesMap() method.
+	}
+	
+	public function queryValuesGroup($key = 0, $value = 1, bool $useMap = false)
+	{
+		// TODO: Implement queryValuesGroup() method.
+	}
+	
+	public function queryRecordsMap($key = 0, bool $excludeKey = false, bool $useMap = false)
+	{
+		// TODO: Implement queryRecordsMap() method.
+	}
+	
+	public function queryRecordsGroup($key = 0, bool $excludeKey = false, bool $useMap = false)
+	{
+		// TODO: Implement queryRecordsGroup() method.
 	}
 }

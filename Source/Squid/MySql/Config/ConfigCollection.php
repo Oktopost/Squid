@@ -2,7 +2,6 @@
 namespace Squid\MySql\Config;
 
 
-use Squid\MySql\Impl\Connection\MySqlConnection;
 use Squid\Exceptions\SquidException;
 
 

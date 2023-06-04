@@ -90,6 +90,14 @@ class MySqlConnection implements IMySqlConnection
 	}
 	
 	
+	public function __construct(?MySqlConnectionConfig $config = null)
+	{
+		if ($config)
+		{
+			$this->setConfig($config);
+		}
+	}
+	
 	public function __destruct()
 	{
 		$this->close();

@@ -235,12 +235,11 @@ class PolymorphicConnectorTest extends TestCase
 		self::assertInstanceOf(DummyObject::class, $result);
 		self::assertEquals(1, $result->a);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_selectObjectByField_ObjectExistsInNumberOfTables_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject(['a' => 1], ['a' => 1, 'c' => 2]);
 		
 		$subject->selectObjectByField('a', 1);
@@ -274,12 +273,11 @@ class PolymorphicConnectorTest extends TestCase
 		self::assertInstanceOf(DummyObject::class, $result);
 		self::assertEquals(1, $result->a);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_selectObjectByFields_ObjectExistsInNumberOfTables_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject(['a' => 1], ['a' => 1, 'c' => 2]);
 		
 		$subject->selectObjectByFields(['a' => 1]);
@@ -427,13 +425,11 @@ class PolymorphicConnectorTest extends TestCase
 		
 		self::assertCount(3, $result);
 	}
-
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidUsageException
-	 */
+	
 	public function test_selectObjects_OrderByPassed_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
+		
 		$subject = $this->subject();
 		$subject->selectObjects(['a']);
 	}
@@ -590,11 +586,10 @@ class PolymorphicConnectorTest extends TestCase
 		self::assertRowCount(1, $this->tableB);
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
 	public function test_insertObjects_InsertSingleObjectThatAlreadyExists_ThrowsException()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = $this->subject(['a' => 1]);
 		$subject->insertObjects($this->dummyA(1));
 	}

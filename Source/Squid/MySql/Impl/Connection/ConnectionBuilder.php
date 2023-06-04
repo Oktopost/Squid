@@ -2,6 +2,7 @@
 namespace Squid\MySql\Impl\Connection;
 
 
+use Squid\MySql\Scope\ConnectionScopesContainer;
 use Squid\MySql\Config\MySqlConnectionConfig;
 use Squid\MySql\Connection\IMySqlExecutor;
 use Squid\MySql\Connection\IMySqlConnection;
@@ -10,14 +11,25 @@ use Squid\MySql\Connection\IMySqlExecuteDecorator;
 
 class ConnectionBuilder
 {
+	private static ?ConnectionScopesContainer $container = null;
+	
 	/** @var IMySqlExecuteDecorator[] */
-	private $decorators = [];
+	private array $decorators = [];
 	
 	
-	/**
-	 * @param IMySqlExecutor $first
-	 * @return IMySqlExecutor
-	 */
+	private static function getConnectionScopeContainer(): ConnectionScopesContainer
+	{
+		if (!self::$container)
+			self::$container = new ConnectionScopesContainer();
+		
+		return self::$container;
+	}
+	
+	private function store(MySqlConnectionConfig $config, IMySqlConnection $connection): void
+	{
+		self::getConnectionScopeContainer()->create($config, $connection);
+	}
+	
 	private function getExecutors(IMySqlExecutor $first): IMySqlExecutor
 	{
 		$last = $first;
@@ -32,7 +44,33 @@ class ConnectionBuilder
 		return $last;
 	}
 	
-
+	private function createNew(MySqlConnectionConfig $config): IMySqlConnection
+	{
+		$connection = new MySqlConnection($config);
+		$executor = $this->getExecutors($connection);
+		
+		return new MySqlConnectionDecorator($connection, $executor);
+	}
+	
+	private function createOrReuse(MySqlConnectionConfig $config): IMySqlConnection
+	{
+		$container = self::getConnectionScopeContainer();
+		$scopeDecorator = $container->get($config);
+		
+		if (!$scopeDecorator)
+		{
+			$scopeDecorator = $container->create($config, new MySqlConnection($config));
+		}
+		
+		$connection = $scopeDecorator->connection();
+		
+		$executor = $this->getExecutors($connection);
+		$scopeDecorator->init($executor);
+		
+		return new MySqlConnectionDecorator($connection, $scopeDecorator);
+	}
+	
+	
 	/**
 	 * @param IMySqlExecuteDecorator[] $decorators
 	 */
@@ -42,16 +80,22 @@ class ConnectionBuilder
 	}
 	
 	/**
-	 * @param MySqlConnectionConfig $config
-	 * @return IMySqlConnection
+	 * @param IMySqlExecuteDecorator[] $decorators
 	 */
+	public function addDecorators(array $decorators): void
+	{
+		$this->decorators = array_merge($this->decorators, $decorators);
+	}
+	
 	public function create(MySqlConnectionConfig $config): IMySqlConnection
 	{
-		$connection = new MySqlConnection();
-		$connection->setConfig($config);
-		
-		$executor = $this->getExecutors($connection);
-		
-		return new MySqlConnectionDecorator($connection, $executor);
+		if ($config->ReuseConnection)
+		{
+			return $this->createOrReuse($config);
+		}
+		else
+		{
+			return $this->createNew($config);
+		}
 	}
 }

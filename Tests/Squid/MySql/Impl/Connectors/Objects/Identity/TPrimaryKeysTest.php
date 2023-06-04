@@ -48,32 +48,29 @@ class TPrimaryKeysTest extends TestCase
 		
 		self::assertKeysAre(['a' => 'b', 'c' => 'd'], $subject);
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_CalledMoreThenOnce_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = new TPrimaryKeysTestHelper();
 		$subject->setPrimaryKeys('a');
 		
 		$subject->setPrimaryKeys('b');
 	}
-
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
+	
 	public function test_EmptyArrayPassed_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = new TPrimaryKeysTestHelper();
 		$subject->setPrimaryKeys([]);
 	}
 	
-	/**
-	 * @expectedException \Squid\Exceptions\SquidException
-	 */
 	public function test_EmptyStringPassed_ExceptionThrown()
 	{
+		$this->expectException(\Squid\Exceptions\SquidException::class);
+		
 		$subject = new TPrimaryKeysTestHelper();
 		$subject->setPrimaryKeys('');
 	}

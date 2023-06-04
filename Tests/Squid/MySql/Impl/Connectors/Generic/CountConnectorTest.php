@@ -6,16 +6,17 @@ use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connectors\Table\ITableNameConnector;
 use Squid\MySql\Impl\Connectors\Internal\Table\AbstractSingleTableConnector;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 
 class CountConnectorTest extends TestCase
 {
 	
-	/** @var ICmdSelect|\PHPUnit_Framework_MockObject_MockObject */
+	/** @var ICmdSelect|MockObject */
 	private $select;
 	
-	/** @var AbstractSingleTableConnector|\PHPUnit_Framework_MockObject_MockObject */
+	/** @var AbstractSingleTableConnector|MockObject */
 	private $connector;
 	
 	
@@ -49,7 +50,7 @@ class CountConnectorTest extends TestCase
 	}
 	
 	
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->mockSelect();
 		$this->mockAbstractTableConnector();

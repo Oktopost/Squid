@@ -103,4 +103,29 @@ class SelectDecorator implements ISelect
 	{
 		return (string)$this->select;
 	}
+	
+	public function whereLike(string $exp, $value, ?string $escapeChar = null)
+	{
+		// TODO: Implement whereLike() method.
+	}
+	
+	public function whereNotLike(string $exp, $value, ?string $escapeChar = null)
+	{
+		// TODO: Implement whereNotLike() method.
+	}
+	
+	public function whereContains(string $exp, $value, bool $negate = false)
+	{
+		// TODO: Implement whereContains() method.
+	}
+	
+	public function whereStartsWith(string $exp, $value, bool $negate = false)
+	{
+		// TODO: Implement whereStartsWith() method.
+	}
+	
+	public function whereEndsWith(string $exp, $value, bool $negate = false)
+	{
+		// TODO: Implement whereEndsWith() method.
+	}
 }

@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 use Squid\MySql;
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Config\Property;
 use Squid\MySql\Connection\IMySqlConnection;
 use Squid\MySql\Impl\Traits\CmdTraits\Utils\LikeGenerator;
 use Squid\Utils\EmptyWhereInHandler;
@@ -63,7 +64,7 @@ trait TWithWhere
 	 */
 	public function byId($value) 
 	{
-		$field = $this->getConn()->getProperty(MySql::PROP_ID_FIELD, 'Id');
+		$field = $this->getConn()->getProperty(Property::PROP_ID_FIELD, 'Id');
 		return $this->byField($field, $value);
 	}
 	
@@ -165,7 +166,7 @@ trait TWithWhere
 	public function whereLike(string $exp, $value, ?string $escapeChar = null) 
 	{
 		/** @var MySql\Command\IWithWhere $this */
-		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		$escape = $this->getConn()->getProperty(Property::PROP_LIKE_ESCAPE_CHAR);
 		LikeGenerator::generateLike($this, $escape, $exp, 'LIKE', $escapeChar, $value);
 		return $this;
 	}
@@ -173,7 +174,7 @@ trait TWithWhere
 	public function whereNotLike(string $exp, $value, ?string $escapeChar = null) 
 	{
 		/** @var MySql\Command\IWithWhere $this */
-		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		$escape = $this->getConn()->getProperty(Property::PROP_LIKE_ESCAPE_CHAR);
 		LikeGenerator::generateLike($this, $escape, $exp, 'NOT LIKE', $escapeChar, $value);
 		return $this;
 	}
@@ -187,7 +188,7 @@ trait TWithWhere
 	public function whereContains(string $exp, $value, bool $negate = false)
 	{
 		/** @var MySql\Command\IWithWhere $this */
-		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		$escape = $this->getConn()->getProperty(Property::PROP_LIKE_ESCAPE_CHAR);
 		LikeGenerator::generateEscapedLike($this, $escape, $exp, '%', (string)$value, '%', $negate);
 		return $this;
 	}
@@ -201,7 +202,7 @@ trait TWithWhere
 	public function whereStartsWith(string $exp, $value, bool $negate = false)
 	{
 		/** @var MySql\Command\IWithWhere $this */
-		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		$escape = $this->getConn()->getProperty(Property::PROP_LIKE_ESCAPE_CHAR);
 		LikeGenerator::generateEscapedLike($this, $escape, $exp, '', (string)$value, '%', $negate);
 		return $this;
 	}
@@ -215,7 +216,7 @@ trait TWithWhere
 	public function whereEndsWith(string $exp, $value, bool $negate = false)
 	{
 		/** @var MySql\Command\IWithWhere $this */
-		$escape = $this->getConn()->getProperty(MySql::PROP_LIKE_ESCAPE_CHAR);
+		$escape = $this->getConn()->getProperty(Property::PROP_LIKE_ESCAPE_CHAR);
 		LikeGenerator::generateEscapedLike($this, $escape, $exp, '%', (string)$value, '', $negate);
 		return $this;
 	}

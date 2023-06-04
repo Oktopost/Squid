@@ -16,7 +16,7 @@ use Squid\Exceptions\SquidException;
  */
 trait TQuery 
 {
-	private function queryValues($key, $value = null, bool $useMap = false, callable $operator)
+	private function queryValues($key, $value, bool $useMap, callable $operator)
 	{
 		$fetchMode = $this->resolveFetchMode(is_string($key) || is_string($value));
 		$result = $this->execute();

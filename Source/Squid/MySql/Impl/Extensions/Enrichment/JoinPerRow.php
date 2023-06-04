@@ -63,7 +63,6 @@ class JoinPerRow extends AbstractQueryEnrichment
 					$data[$index][$this->asColumn][] = $row;
 				}
 			},
-			$result,
 			$isAssoc
 		);
 		

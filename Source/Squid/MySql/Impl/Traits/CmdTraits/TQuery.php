@@ -163,7 +163,7 @@ trait TQuery
 		return (is_null($result) ? null : (bool)$result);
 	}
 	
-	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true)
+	public function queryWithCallback(callable $callback, bool $isAssoc = true, ?array &$result = null)
 	{
 		$fetchMode = $this->resolveFetchMode($isAssoc);
 		$cmdResult = $this->execute();

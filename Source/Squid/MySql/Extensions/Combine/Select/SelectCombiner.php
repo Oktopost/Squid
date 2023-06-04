@@ -181,7 +181,7 @@ class SelectCombiner implements ICmdSelect
 	public function queryInt(?int $default = null, bool $failOnMultipleResults = true): ?int { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryFloat(?float $default = null, bool $failOnMultipleResults = true): ?float { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryBool(?bool $default = null, bool $failOnMultipleResults = true): ?bool { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryWithCallback(callable $callback, bool $isAssoc = true, ?array &$result = null) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryIterator($isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryIteratorBulk(int $size = 100, $isAssoc = true) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryMap($key = 0, $value = 1) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }

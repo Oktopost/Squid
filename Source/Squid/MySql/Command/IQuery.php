@@ -67,7 +67,7 @@ interface IQuery
 	 * @param bool $isAssoc
 	 * @return bool
 	 */
-	public function queryWithCallback(callable $callback, ?array &$result = null, bool $isAssoc = true);
+	public function queryWithCallback(callable $callback, bool $isAssoc = true, ?array &$result = null);
 	
 	/**
 	 * Return an iterator to iterate over all found rows.

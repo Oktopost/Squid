@@ -351,6 +351,6 @@ trait TQuery
 	
 	public function queryMapRow($key = 0, $removeColumnFromRow = false)
 	{
-		return $this->queryRecordsGroup($key, $removeColumnFromRow, false);
+		return $this->queryRecordsMap($key, $removeColumnFromRow, false);
 	}
 }

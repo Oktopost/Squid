@@ -14,6 +14,15 @@ class CmdLock extends AbstractCommand implements ICmdLock
 	private $params;
 	
 	
+	private function get_safe_key(string $key): string
+	{
+		if (strlen($key) > 64)
+			$key = md5($key);
+		
+		return $key;
+	}
+	
+	
 	/**
 	 * @return array
 	 */
@@ -37,8 +46,10 @@ class CmdLock extends AbstractCommand implements ICmdLock
 	 */
 	public function lock($key, $timeout = 5) 
 	{
-		if (!is_int($timeout) || $timeout < 0 || $timeout > 5) 
+		if (!is_int($timeout) || $timeout < 0 || $timeout > 40) 
 			throw new SquidException("Invalid value for timeout '$timeout'");
+		
+		$key = $this->get_safe_key($key);
 		
 		$this->sql = 'SELECT GET_LOCK(?, ?)';
 		$this->params = array($key, $timeout);
@@ -56,6 +67,8 @@ class CmdLock extends AbstractCommand implements ICmdLock
 	 */
 	public function unlock($key) 
 	{
+		$key = $this->get_safe_key($key);
+		
 		$this->sql = 'DO RELEASE_LOCK(?)';
 		$this->params = array($key);
 		parent::execute();

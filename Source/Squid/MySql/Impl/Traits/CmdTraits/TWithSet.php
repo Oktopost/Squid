@@ -46,7 +46,7 @@ trait TWithSet
 		if (is_null($value))
 		{
 			$exp = 'NULL';
-			$value = false;
+			$value = [];
 		}
 		else
 		{

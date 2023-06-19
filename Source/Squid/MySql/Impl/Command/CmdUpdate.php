@@ -56,9 +56,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 				Assembly::appendSet($this->getPart(CmdUpdate::PART_SET), true) . 
 				Assembly::appendWhere($this->getPart(CmdUpdate::PART_WHERE), true) . 
 				Assembly::appendOrderBy($this->getPart(CmdUpdate::PART_ORDER_BY)) . 
-				Assembly::appendLimit(
-					$this->getPart(CmdUpdate::PART_LIMIT), 
-					$this->getBind(CmdUpdate::PART_LIMIT));
+				Assembly::append('LIMIT', $this->getPart(CmdUpdate::PART_LIMIT));
 	}
 	
 	
@@ -112,7 +110,7 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	 */
 	public function limit($from, $count): IWithLimit
 	{
-		return $this->setPart(CmdUpdate::PART_LIMIT, true, ($from ? array($from, $count) : $count));
+		return $this->setPart(CmdUpdate::PART_LIMIT, ($from ? [(int)$from . ', ' . (int)$count] : [(int)$count]));
 	}
 	
 	

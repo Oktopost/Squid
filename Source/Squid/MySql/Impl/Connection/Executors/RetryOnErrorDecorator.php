@@ -35,13 +35,13 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 	 * @param array $bind
 	 * @return mixed
 	 */
-	private function retry(\Exception $e, $cmd, array $bind = [])
+	private function retry(\Throwable $e, $cmd, array $bind = [])
 	{
 		$config = $this->getConfig($e);
 		
 		for ($i = 0; $i < $config['retries']; $i++)
 		{
-			usleep($config['ms-delay'] * 1000000);
+			usleep($config['ms-delay'] * 1000);
 			
 			try
 			{
@@ -71,7 +71,7 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 	
 
 	/**
-	 * @param string[]|IErrorValidator[] ...$validators
+	 * @param string[]|IErrorValidator[]|string ...$validators
 	 */
 	public function __construct(...$validators)
 	{
@@ -96,7 +96,7 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 		{
 			return parent::execute($cmd, $bind);
 		}
-		catch (\Exception $e)
+		catch (\Throwable $e)
 		{
 			return $this->retry($e, $cmd, $bind);
 		}
@@ -107,7 +107,8 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 	{
 		return new RetryOnErrorDecorator(
 			Validators\ConnectionFailed::class,
-			Validators\DeadlockFound::class
+			Validators\DeadlockFound::class,
+			Validators\HostnameResolveValidator::class
 		);
 	}
 }

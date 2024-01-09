@@ -5,6 +5,7 @@ namespace Squid\MySql\Impl\Command;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\IMySqlCommandConstructor;
+use Structura\Strings;
 
 
 class CmdSelect extends PartsCommand implements ICmdSelect 
@@ -178,10 +179,24 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @param string|IMySqlCommandConstructor $table
 	 * @param string $alias
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function from($table, ?string $alias = null) 
+	public function from($table, ?string $alias = null, bool $escape = true)
 	{
+		if ($escape)
+		{
+			if (is_string($table))
+			{
+				if (!Strings::contains($table, ' ') && !Strings::contains($table, ',') &&
+					!Strings::isStartsWith($table, '`')
+				)
+				{
+					$table = "`{$table}`";
+				}
+			}
+		}
+		
 		if ($table instanceof IMySqlCommandConstructor) 
 		{
 			$this->setPart(CmdSelect::PART_FROM, false);			

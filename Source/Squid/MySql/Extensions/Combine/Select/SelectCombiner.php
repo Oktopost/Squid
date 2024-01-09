@@ -128,7 +128,7 @@ class SelectCombiner implements ICmdSelect
 	public function columnsExp($columns, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnAs($column, $alias) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnAsExp($column, $alias, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
-	public function from($table, ?string $alias = null) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function from($table, ?string $alias = null, bool $escape = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function join($table, string $alias, string $condition, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }

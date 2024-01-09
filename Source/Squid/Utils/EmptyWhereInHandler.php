@@ -22,8 +22,13 @@ class EmptyWhereInHandler
 	}
 	
 	
-	public static function handle(string $field, IWithWhere $where): void
+	public static function handle(string|array $field, IWithWhere $where): void
 	{
+		if (is_array($field))
+		{
+			$field = implode(',', $field);
+		}
+		
 		if (self::$handler)
 		{
 			$callback = self::$handler;

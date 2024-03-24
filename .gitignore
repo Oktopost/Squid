@@ -13,7 +13,4 @@
 # Test objects
 test.php
 
-# Build dir
-/build
-
 .phpunit.result.cache

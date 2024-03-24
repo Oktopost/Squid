@@ -6,7 +6,15 @@ jobs:
   run_tests:
     name: Unit Tests
     runs-on: ubuntu-latest
-
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: __squid__test__
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,6 +28,7 @@ jobs:
         uses: php-actions/composer@v6
       
       - name: Run PHPUnit
-        run: |
-          export SQUID_ENV=action
+        env:
+          SQUID_ENV: action
+        run:
           composer test

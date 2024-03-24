@@ -15,7 +15,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-
-      - name: Run PHPUnit
+      
+      - name: Install Dependencies
         uses: php-actions/composer@v6
+      
+      - name: Run PHPUnit
         run: composer test

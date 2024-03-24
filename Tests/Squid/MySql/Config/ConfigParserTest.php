@@ -3,7 +3,6 @@ namespace Squid\MySql\Config;
 
 
 use PHPUnit\Framework\TestCase;
-use Squid\MySql;
 
 
 class ConfigParserTest extends TestCase
@@ -101,14 +100,14 @@ class ConfigParserTest extends TestCase
 	{
 		$this->expectException(\Squid\Exceptions\InvalidConfigPropertyValueException::class);
 		
-		ConfigParser::parse(['properties' => [MySql::PROP_ID_FIELD => '']]);
+		ConfigParser::parse(['properties' => [Property::PROP_ID_FIELD => '']]);
 	}
 	
 	public function test_ValidPropertyPassed_PropertySet()
 	{
-		$config = ConfigParser::parse(['properties' => [MySql::PROP_ID_FIELD => 'ABC']]);
+		$config = ConfigParser::parse(['properties' => [Property::PROP_ID_FIELD => 'ABC']]);
 		
-		self::assertEquals('ABC', $config->Properties[MySql::PROP_ID_FIELD]); 
+		self::assertEquals('ABC', $config->Properties[Property::PROP_ID_FIELD]); 
 	}
 	
 	public function test_DefaultPropertyValuesSet()

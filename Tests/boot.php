@@ -1,11 +1,8 @@
 <?php
-use lib\DataSet;
-
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 
-foreach (glob(__DIR__ . '/lib/*') as $item)
+foreach (glob(__DIR__ . '/Source/*') as $item)
 {
 	if (is_file($item))
 	{
@@ -13,4 +10,6 @@ foreach (glob(__DIR__ . '/lib/*') as $item)
 	}
 }
 
-DataSet::setup();
+
+\SquidTest\Config::setup();
+\SquidTest\TestDB::setup();

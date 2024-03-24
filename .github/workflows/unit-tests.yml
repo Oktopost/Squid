@@ -20,4 +20,6 @@ jobs:
         uses: php-actions/composer@v6
       
       - name: Run PHPUnit
-        run: composer test
+        run: |
+          export SQUID_ENV=action
+          composer test

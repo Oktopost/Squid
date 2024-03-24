@@ -5,7 +5,7 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 /**
  * Implements calculation behavior for the IWithSet interface. Relies on the using class
  * to implement method _set($exp, $bind).
- * @method mixed _set(string $exp, $bind = [])
+ * @method static _set(string $exp, $bind = [])
  * @see \Squid\MySql\Command\IWithSet
  */
 trait TWithSet 

@@ -4,7 +4,7 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
 
 /**
  * @mixin \Squid\MySql\Command\IWithColumns
- * @method addColumn(array $columns, array $bind)
+ * @method static addColumn(array $columns, array $bind)
  */
 trait TWithColumn
 {

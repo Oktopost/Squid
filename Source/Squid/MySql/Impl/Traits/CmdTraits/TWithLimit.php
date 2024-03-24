@@ -10,8 +10,8 @@ use Squid\OrderBy;
  * Implements calculation behavior for the IWithLimit interface. Relies on the using class
  * to implement methods limit($from, $count), and _orderBy(array $expressions).
  * 
- * @method mixed limit(int $from, int $count)
- * @method mixed _orderBy(array $expressions)
+ * @method static limit(int $from, int $count)
+ * @method static _orderBy(array $expressions)
  * @mixin \Squid\MySql\Command\IWithLimit
  */
 trait TWithLimit 

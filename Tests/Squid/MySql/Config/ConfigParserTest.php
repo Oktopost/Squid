@@ -28,7 +28,6 @@ class ConfigParserTest extends TestCase
 	}
 	
 	
-	
 	public function test_PortSet()
 	{
 		$result = ConfigParser::parse(['port' => 123]);

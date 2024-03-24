@@ -1,13 +1,20 @@
 <?php
-namespace Squid;
+namespace Squid\Tests;
 
 
+use Squid\MySql;
 use Squid\MySql\IMySqlConnector;
 
 
-class MySqlAssert
+class MySqlTestConnection
 {
 	private static array|null $config;
+	
+	
+	public static function select(): MySql\Command\ICmdSelect
+	{
+		return self::requireTestConnector()->select();
+	}
 	
 	
 	public static function requireTestConnector(): IMySqlConnector

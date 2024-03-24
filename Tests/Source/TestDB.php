@@ -4,7 +4,7 @@ namespace SquidTest;
 
 use Squid\MySql;
 use Squid\MySql\IMySqlConnector;
-use Squid\MySqlAssert;
+use Squid\Tests\MySqlTestConnection;
 
 
 class TestDB
@@ -35,6 +35,6 @@ class TestDB
 	public static function setup(): void
 	{
 		self::reset();
-		MySqlAssert::setTestConfig(Config::get());
+		MySqlTestConnection::setTestConfig(Config::get());
 	}
 }

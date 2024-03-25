@@ -4,7 +4,7 @@ namespace SquidTest;
 
 class Config
 {
-	private const DEFAULT_SQUID_ENV	= 'default';
+	private const DEFAULT_SQUID_ENV	= 'local';
 	
 	
 	public const DB_NAME	= '__squid__test__';

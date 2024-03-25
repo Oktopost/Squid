@@ -133,4 +133,87 @@ class TWithColumnTest extends TestCase implements IWithColumns
 		self::assertEquals([], $this->lastBind);
 	}
 	
+	
+	public function test_columnsExp_ColumnPassedAsString(): void
+	{
+		$this->columnsExp('a');
+		
+		
+		self::assertEquals(['a'], $this->lastColumn);
+		self::assertEquals([], $this->lastBind);
+	}
+	
+	public function test_columnsExp_EmptyArrayPassed(): void
+	{
+		$this->columnsExp([]);
+		
+		
+		self::assertEquals([], $this->lastColumn);
+		self::assertEquals([], $this->lastBind);
+	}
+	
+	public function test_columnsExp_OneColumnPassed(): void
+	{
+		$this->columnsExp(['a']);
+		
+		
+		self::assertEquals(['a'], $this->lastColumn);
+		self::assertEquals([], $this->lastBind);
+	}
+	
+	public function test_columnsExp_MultipleColumnsPassed(): void
+	{
+		$this->columnsExp(['a', 'b', 'c']);
+		
+		
+		self::assertEquals(['a', 'b', 'c'], $this->lastColumn);
+		self::assertEquals([], $this->lastBind);
+	}
+	
+	public function test_columnsExp_SameColumnPassedTwice(): void
+	{
+		$this->columnsExp(['a', 'b', 'a']);
+		
+		
+		self::assertEquals(['a', 'b', 'a'], $this->lastColumn);
+		self::assertEquals([], $this->lastBind);
+	}
+	
+	public function test_columnsExp_BindArgumentPassed(): void
+	{
+		$this->columnsExp(['a'], [1]);
+		
+		
+		self::assertEquals(['a'], $this->lastColumn);
+		self::assertEquals([1], $this->lastBind);
+	}
+	
+	public function test_columnsExp_BindArgumentsPassed(): void
+	{
+		$this->columnsExp(['a'], [1, 2, 3]);
+		
+		
+		self::assertEquals(['a'], $this->lastColumn);
+		self::assertEquals([1, 2, 3], $this->lastBind);
+	}
+	
+	
+	public function test_columnAs(): void
+	{
+		$this->columnAs('a', 'b');
+		
+		
+		self::assertEquals(['a as b'], $this->lastColumn);
+		self::assertEquals([], $this->lastBind);
+	}
+	
+	
+	public function test_columnAsExp(): void
+	{
+		$this->columnAsExp('a', 'b', [1, 2, 3]);
+		
+		
+		self::assertEquals(['a as b'], $this->lastColumn);
+		self::assertEquals([1, 2, 3], $this->lastBind);
+	}
 }

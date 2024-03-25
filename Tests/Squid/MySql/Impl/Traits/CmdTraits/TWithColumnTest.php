@@ -25,7 +25,7 @@ class TWithColumnTest extends TestCase implements IWithColumns
 	
 	
 	/** @noinspection PhpHierarchyChecksInspection */
-	public function addColumn(array $columns, array $bind): static
+	public function addColumn(array $columns, $bind): static
 	{
 		$this->lastColumn = $columns;
 		$this->lastBind = $bind;
@@ -186,6 +186,22 @@ class TWithColumnTest extends TestCase implements IWithColumns
 		
 		self::assertEquals(['a'], $this->lastColumn);
 		self::assertEquals([1], $this->lastBind);
+	}
+	
+	public function test_columnsExp_FalseLikeValues(): void
+	{
+		$this->columnsExp(['a'], false);
+		
+		
+		self::assertEquals(['a'], $this->lastColumn);
+		self::assertEquals(false, $this->lastBind);
+		
+		
+		$this->columnsExp(['a'], null);
+		
+		
+		self::assertEquals(['a'], $this->lastColumn);
+		self::assertEquals(null, $this->lastBind);
 	}
 	
 	public function test_columnsExp_BindArgumentsPassed(): void

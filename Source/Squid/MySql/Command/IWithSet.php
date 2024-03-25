@@ -20,7 +20,6 @@ interface IWithSet
 	public function setExp($field, $exp = false, $bind = []);
 	
 	/**
-	 * @see https://dev.mysql.com/doc/refman/5.7/en/case.html
 	 * @param string $field
 	 * @param string $caseField
 	 * @param array $whenValuesThen
@@ -30,7 +29,6 @@ interface IWithSet
 	public function setCase($field, $caseField, array $whenValuesThen, $elseValue = false);
 	
 	/**
-	 * @see https://dev.mysql.com/doc/refman/5.7/en/case.html
 	 * @param string $field
 	 * @param string $caseExp
 	 * @param array $whenValuesThenExp

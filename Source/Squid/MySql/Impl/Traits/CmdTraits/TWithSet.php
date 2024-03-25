@@ -10,9 +10,6 @@ namespace Squid\MySql\Impl\Traits\CmdTraits;
  */
 trait TWithSet 
 {
-	/**
-	 * @inheritdoc
-	 */
 	private function setFields($fields, $values)
 	{
 		$fieldsCount = count($fields);
@@ -25,9 +22,6 @@ trait TWithSet
 		return $this;
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	private function setFieldsAssoc($fields)
 	{
 		foreach ($fields as $field => $value)
@@ -38,9 +32,6 @@ trait TWithSet
 		return $this;
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	private function setField($field, $value)
 	{
 		if (is_null($value))
@@ -57,9 +48,6 @@ trait TWithSet
 		return $this->_set("$field=$exp", $value);
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	private function setExpressionFields($fields, $expressions, $bind)
 	{
 		$fieldsCount = count($fields);
@@ -73,9 +61,6 @@ trait TWithSet
 		return $this;
 	}
 	
-	/**
-	 * @inheritdoc
-	 */
 	private function setExpressionFieldsAssoc($fields)
 	{
 		foreach ($fields as $field => $exp)
@@ -88,8 +73,9 @@ trait TWithSet
 	
 	
 	/**
-	 * @param array|bool $value
-	 * @inheritdoc
+	 * @param string|array $field
+	 * @param mixed|array|bool $value
+	 * @return static
 	 */
 	public function set($field, $value = false) 
 	{
@@ -102,9 +88,11 @@ trait TWithSet
 		return $this->setFieldsAssoc($field);
 	}
 	
-	/**
-	 * @param string|array|false $exp
-	 * @inheritdoc
+	/** 
+	 * @param string|array
+	 * @param string|array|bool $exp
+	 * @param array|bool $bind
+	 * @return static
 	 */
 	public function setExp($field, $exp = false, $bind = []) 
 	{
@@ -116,8 +104,11 @@ trait TWithSet
 	}
 	
 	/**
-	 * @see https://dev.mysql.com/doc/refman/5.7/en/case.html
-	 * @inheritdoc
+	 * @param string $field
+	 * @param string $caseField
+	 * @param array $whenValuesThen
+	 * @param string|bool $elseValue
+	 * @return static
 	 */
 	public function setCase($field, $caseField, array $whenValuesThen, $elseValue = false) 
 	{
@@ -140,8 +131,12 @@ trait TWithSet
 	}
 	
 	/**
-	 * @see https://dev.mysql.com/doc/refman/5.7/en/case.html
-	 * @inheritdoc
+	 * @param string $field
+	 * @param string $caseExp
+	 * @param array $whenValuesThenExp
+	 * @param string|bool $elseExp
+	 * @param string|bool $bindParams
+	 * @return static
 	 */
 	public function setCaseExp($field, $caseExp, array $whenValuesThenExp, $elseExp = false, $bindParams = false) 
 	{

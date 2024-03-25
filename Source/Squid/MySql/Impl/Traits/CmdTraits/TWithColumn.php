@@ -39,7 +39,7 @@ trait TWithColumn
 	
 	/**
 	 * @param string|array $columns
-	 * @param bool|array $bind
+	 * @param array $bind
 	 * @return static
 	 */
 	public function columnsExp($columns, $bind = []) 

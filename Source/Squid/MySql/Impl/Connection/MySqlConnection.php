@@ -165,10 +165,18 @@ class MySqlConnection implements IMySqlConnection
 			throw MySqlException::create($this->pdo->errorInfo());
 		
 		$this->bindParams($statement, $bind);
-		$result = $statement->execute();
+		
+		try
+		{
+			$result = $statement->execute();
+		}
+		catch (\PDOException $e)
+		{
+			throw MySqlException::create($e);
+		}
 		
 		if (!$result)
-			throw MySqlException::create($statement->errorInfo());
+ 			throw MySqlException::create($statement->errorInfo());
 		
 		return $statement;
 	}

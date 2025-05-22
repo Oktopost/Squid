@@ -19,6 +19,13 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	public function from($table, ?string $alias = null, bool $escape = true);
 	
 	/**
+	 * @param ICmdSelect $select
+	 * @param string $alias
+	 * @return static
+	 */
+	public function with(ICmdSelect $select, string $alias);
+	
+	/**
 	 * @param string|IMySqlCommandConstructor $table
 	 * @param string $alias
 	 * @param string $condition

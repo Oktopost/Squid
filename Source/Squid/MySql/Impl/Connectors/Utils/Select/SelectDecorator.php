@@ -79,6 +79,7 @@ class SelectDecorator implements ISelect
 	
 	public function distinct(bool $distinct = true) { $this->select->distinct($distinct); return $this; }
 	public function from($table, ?string $alias = null, bool $escape = true) { $this->select->from($table, $alias, $escape); return $this; }
+	public function with(ICmdSelect $select, string $alias) { return $this->select->with($select, $alias); }
 	public function join($table, string $alias, string $condition, $bind = [], bool $escape = true) { $this->select->join($table, $alias, $condition, $bind, $escape); return $this; }
 	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false, bool $escape = true) { $this->select->leftJoin($table, $alias, $condition, $bind, $outer, $escape); return $this; }
 	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false, bool $escape = true) { $this->select->rightJoin($table, $alias, $condition, $bind, $outer, $escape); return $this; }

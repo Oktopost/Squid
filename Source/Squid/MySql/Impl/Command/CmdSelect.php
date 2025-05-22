@@ -7,7 +7,7 @@ use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\IMySqlCommandConstructor;
 
 
-class CmdSelect extends PartsCommand implements ICmdSelect 
+class CmdSelect extends PartsCommand implements ICmdSelect
 {
 	use \Squid\MySql\Impl\Traits\CmdTraits\TQuery;
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithWhere;
@@ -16,23 +16,25 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	use \Squid\MySql\Impl\Traits\CmdTraits\TWithExtendedWhere;
 	
 	
-	const PART_DISTINCT		= 0;
-	const PART_COLUMNS		= 1;
-	const PART_FROM			= 2;
-	const PART_WHERE		= 3;
-	const PART_GROUP_BY		= 4;
-	const PART_WITH_ROLL_UP	= 5;
-	const PART_HAVING		= 6;
-	const PART_ORDER_BY		= 7;
-	const PART_LIMIT		= 8;
-	const PART_UNION		= 9;
-	const PART_LOCK			= 10;
+	const PART_WITH			= 0;
+	const PART_DISTINCT		= 1;
+	const PART_COLUMNS		= 2;
+	const PART_FROM			= 3;
+	const PART_WHERE		= 4;
+	const PART_GROUP_BY		= 5;
+	const PART_WITH_ROLL_UP	= 6;
+	const PART_HAVING		= 7;
+	const PART_ORDER_BY		= 8;
+	const PART_LIMIT		= 9;
+	const PART_UNION		= 10;
+	const PART_LOCK			= 11;
 	
 	
 	/**
 	 * @var array Collection of default values.
 	 */
 	private static $DEFAULT = array(
+		CmdSelect::PART_WITH			=> false,
 		CmdSelect::PART_DISTINCT		=> false,
 		CmdSelect::PART_COLUMNS			=> false,
 		CmdSelect::PART_FROM			=> false,
@@ -104,7 +106,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 			$bind
 		);
 	}
-
+	
 	/**
 	 * @see \Squid\MySql\Impl\Traits\CmdTraits\TWithColumn
 	 * @param string[] $columns
@@ -122,7 +124,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * Get the parts this query can have.
 	 * @return array Array containing only the part as keys and values set to false.
 	 */
-	protected function getDefaultParts() 
+	protected function getDefaultParts()
 	{
 		return CmdSelect::$DEFAULT;
 	}
@@ -131,17 +133,25 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * Combine all the parts into one sql.
 	 * @return string Sql query
 	 */
-	protected function generate() 
+	protected function generate()
 	{
-		$command = 
-			'SELECT ' . 
-				($this->getPart(CmdSelect::PART_DISTINCT) ? 'DISTINCT ' : ''). 
-				Assembly::appendDirectly(($this->getPart(CmdSelect::PART_COLUMNS) ?: array('*')), ',');
+		$command = '';
+		$with = $this->getPart(CmdSelect::PART_WITH);
+		
+		if ($with)
+		{
+			$command .= 'WITH' . Assembly::append('', $with);
+		}
+		
+		$command .=
+			'SELECT ' .
+			($this->getPart(CmdSelect::PART_DISTINCT) ? 'DISTINCT ' : '').
+			Assembly::appendDirectly(($this->getPart(CmdSelect::PART_COLUMNS) ?: array('*')), ',');
 		
 		$union = $this->getPart(CmdSelect::PART_UNION);
 		$from = $this->getPart(CmdSelect::PART_FROM);
 		
-		if (!$from && !$union) 
+		if (!$from && !$union)
 		{
 			return $command;
 		}
@@ -151,13 +161,13 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		$command .=
 			Assembly::append('FROM', $from, ' ') .
 			Assembly::appendWhere($this->getPart(CmdSelect::PART_WHERE)) .
-			Assembly::append('GROUP BY', $this->getPart(CmdSelect::PART_GROUP_BY)) . 
-			($this->getPart(CmdSelect::PART_WITH_ROLL_UP) ? 'WITH ROLLUP ' : '') . 
-			Assembly::append('HAVING', $this->getPart(CmdSelect::PART_HAVING)) . 
+			Assembly::append('GROUP BY', $this->getPart(CmdSelect::PART_GROUP_BY)) .
+			($this->getPart(CmdSelect::PART_WITH_ROLL_UP) ? 'WITH ROLLUP ' : '') .
+			Assembly::append('HAVING', $this->getPart(CmdSelect::PART_HAVING)) .
 			Assembly::append('ORDER BY', $this->getPart(CmdSelect::PART_ORDER_BY)) .
 			Assembly::append('LIMIT', $this->getPart(CmdSelect::PART_LIMIT));
 		
-		if ($union) 
+		if ($union)
 		{
 			$union = implode(' ', $union);
 			$command = "($command) $union";
@@ -180,7 +190,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param bool $distinct
 	 * @return static
 	 */
-	public function distinct(bool $distinct = true) 
+	public function distinct(bool $distinct = true)
 	{
 		return $this->setPart(CmdSelect::PART_DISTINCT, $distinct);
 	}
@@ -193,9 +203,9 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	public function from($table, ?string $alias = null, bool $escape = true)
 	{
-		if ($table instanceof IMySqlCommandConstructor) 
+		if ($table instanceof IMySqlCommandConstructor)
 		{
-			$this->setPart(CmdSelect::PART_FROM, false);			
+			$this->setPart(CmdSelect::PART_FROM, false);
 			return $this->fromSubQuery($table, $alias);
 		}
 		else
@@ -206,12 +216,26 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 			}
 		}
 		
-		if ($alias) 
+		if ($alias)
 		{
 			$table = "$table $alias";
 		}
 		
 		return $this->setPart(CmdSelect::PART_FROM, [$table]);
+	}
+	
+	/**
+	 * @param ICmdSelect $select
+	 * @param string $alias
+	 * @return static
+	 */
+	public function with(ICmdSelect $select, string $alias)
+	{
+		return $this->appendPart(
+			CmdSelect::PART_WITH,
+			$alias . " AS ({$select->assemble()})",
+			$select->bind()
+		);
 	}
 	
 	/**
@@ -245,7 +269,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		bool $escape = true)
 	{
 		return $this->joinWith(
-			$table, $alias, $condition, $bind, 
+			$table, $alias, $condition, $bind,
 			($outer ? 'LEFT OUTER JOIN' : 'LEFT JOIN'), $escape);
 	}
 	
@@ -267,7 +291,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		bool $escape = true)
 	{
 		return $this->joinWith(
-			$table, $alias, $condition, $bind, 
+			$table, $alias, $condition, $bind,
 			($outer ? 'RIGHT OUTER JOIN' : 'RIGHT JOIN'), $escape);
 	}
 	
@@ -277,7 +301,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param array|bool $bind
 	 * @return static
 	 */
-	public function groupBy($column, $bind = []) 
+	public function groupBy($column, $bind = [])
 	{
 		if (is_array($column)) $column = implode(',', $column);
 		
@@ -289,18 +313,18 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param mixed|array $bind
 	 * @return static
 	 */
-	public function having(string $exp, $bind = []) 
+	public function having(string $exp, $bind = [])
 	{
 		return $this->appendPart(CmdSelect::PART_HAVING, $exp, $bind);
 	}
 	
 	/**
-	 * @param array $columns
+	 * @param array $expressions
 	 * @return mixed
 	 */
-	public function _orderBy(array $columns) 
+	public function _orderBy(array $expressions)
 	{
-		return $this->appendPart(CmdSelect::PART_ORDER_BY, $columns);
+		return $this->appendPart(CmdSelect::PART_ORDER_BY, $expressions);
 	}
 	
 	/**
@@ -322,8 +346,8 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		$union = 'UNION ' . ($all ? 'ALL ' : '');
 		
 		return $this->appendPart(
-			CmdSelect::PART_UNION, 
-			$union . "({$select->assemble()})", 
+			CmdSelect::PART_UNION,
+			$union . "({$select->assemble()})",
 			$select->bind());
 	}
 	
@@ -342,7 +366,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	public function forUpdate(bool $forUpdate = true)
 	{
-		return $this->setPart(CmdSelect::PART_LOCK, 
+		return $this->setPart(CmdSelect::PART_LOCK,
 			($forUpdate ? 'FOR UPDATE' : false));
 	}
 	
@@ -352,7 +376,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	public function lockInShareMode(bool $lockInShareMode = true)
 	{
-		return $this->setPart(CmdSelect::PART_LOCK, 
+		return $this->setPart(CmdSelect::PART_LOCK,
 			($lockInShareMode ? 'LOCK IN SHARE MODE' : false));
 	}
 	
@@ -363,7 +387,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 */
 	public function where(string $exp, $bind = [])
 	{
-		return $this->appendPart(CmdSelect::PART_WHERE, $exp, $bind); 
+		return $this->appendPart(CmdSelect::PART_WHERE, $exp, $bind);
 	}
 	
 	/**
@@ -384,8 +408,8 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 		$cmdExists = new CmdSelect();
 		$cmdExists->setConnection($this->getConn());
 		$cmdExists->setPart(
-			CmdSelect::PART_COLUMNS, 
-			['EXISTS (' . $this->assemble() . ')'], 
+			CmdSelect::PART_COLUMNS,
+			['EXISTS (' . $this->assemble() . ')'],
 			$this->bind());
 		
 		$result = $cmdExists->queryScalar(null);
@@ -396,7 +420,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	/**
 	 * @return int|bool|null
 	 */
-	public function queryCount() 
+	public function queryCount()
 	{
 		$union		= $this->getPart(CmdSelect::PART_UNION);
 		$distinct	= $this->getPart(CmdSelect::PART_DISTINCT);

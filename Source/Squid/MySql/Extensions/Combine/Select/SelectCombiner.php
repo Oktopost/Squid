@@ -1,17 +1,15 @@
 <?php
-namespace Squid\MySql\Impl\Extensions\Combine\Select;
+namespace Squid\MySql\Extensions\Combine\Select;
 
-
-use Objection\LiteObject;
-use Structura\Map;
 
 use Squid\OrderBy;
-
-use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\ICmdSelect;
+use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\IWithExtendedWhere;
 use Squid\MySql\Command\IMySqlCommandConstructor;
 use Squid\MySql\Connection\IMySqlConnection;
+
+use Structura\Map;
 
 
 class SelectCombiner implements ICmdSelect
@@ -129,6 +127,7 @@ class SelectCombiner implements ICmdSelect
 	public function columnAs($column, $alias) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function columnAsExp($column, $alias, $bind = []) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function from($table, ?string $alias = null, bool $escape = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
+	public function with(ICmdSelect $select, string $alias) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function join($table, string $alias, string $condition, $bind = [], bool $escape = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false, bool $escape = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
 	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false, bool $escape = true) { return $this->invokeOnAll(__FUNCTION__, ...func_get_args()); }
@@ -190,7 +189,10 @@ class SelectCombiner implements ICmdSelect
 	public function queryMapRow($key = 0, $removeColumnFromRow = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryGroupBy($byColumn, bool $removeColumn = false): Map { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	public function queryCount() { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
-	
+	public function queryValuesMap($key = 0, $value = 1, bool $useMap = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryValuesGroup($key = 0, $value = 1, bool $useMap = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryRecordsMap($key = 0, bool $excludeKey = false, bool $useMap = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
+	public function queryRecordsGroup($key = 0, bool $excludeKey = false, bool $useMap = false) { return $this->invokeOnUnion(__FUNCTION__, ...func_get_args()); }
 	
 	/**
 	 * Execute a SELECT EXISTS On each query. Will stop when at least one query returns true.

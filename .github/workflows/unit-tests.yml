@@ -20,7 +20,7 @@ jobs:
           --health-timeout=5s
           --health-retries=5
         volumes:
-          - ./Tests/MySQL/create.sql:/docker-entrypoint-initdb.d/init.sql
+          - ${{ github.workspace }}/Tests/MySQL/create.sql:/docker-entrypoint-initdb.d/init.sql
 
     steps:
       - name: Checkout code

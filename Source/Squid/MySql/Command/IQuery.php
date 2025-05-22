@@ -87,8 +87,9 @@ interface IQuery
 	public function queryIteratorBulk(int $size = 100, $isAssoc = true);
 	
 	/**
-	 * @param string $className LiteObject class name.
-	 * @return LiteObject|null
+	 * @template T
+	 * @param class-string<T> $className LiteObject class name.
+	 * @return T|null
 	 */
 	public function queryObject(string $className);
 	

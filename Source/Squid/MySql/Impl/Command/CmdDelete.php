@@ -57,10 +57,16 @@ class CmdDelete extends PartsCommand implements ICmdDelete
 	/**
 	 * Set the table to delete from.
 	 * @param string $table Name of the table to delete from.
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function from($table)
+	public function from($table, bool $escape = true)
 	{
+		if ($escape)
+		{
+			$table = "`{$table}`";
+		}
+		
 		return $this->setPart(CmdDelete::PART_FROM, $table);
 	}
 	

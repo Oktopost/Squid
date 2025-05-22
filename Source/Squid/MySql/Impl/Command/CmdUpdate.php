@@ -73,10 +73,16 @@ class CmdUpdate extends PartsCommand implements ICmdUpdate
 	/**
 	 * Set the table to update.
 	 * @param string $table Name of the table to update.
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function table($table) 
+	public function table($table, bool $escape = true)
 	{
+		if ($escape)
+		{
+			$table = "`{$table}`";
+		}
+		
 		return $this->setPart(CmdUpdate::PART_TABLE, $table);
 	}
 	

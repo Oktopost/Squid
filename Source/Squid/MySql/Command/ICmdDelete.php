@@ -6,7 +6,8 @@ interface ICmdDelete extends IDml, IMySqlCommandConstructor, IWithWhere, IWithLi
 {	
 	/**
 	 * @param string $table
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function from($table);
+	public function from($table, bool $escape = true);
 }

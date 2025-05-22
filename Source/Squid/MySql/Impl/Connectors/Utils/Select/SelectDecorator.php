@@ -79,9 +79,9 @@ class SelectDecorator implements ISelect
 	
 	public function distinct(bool $distinct = true) { $this->select->distinct($distinct); return $this; }
 	public function from($table, ?string $alias = null, bool $escape = true) { $this->select->from($table, $alias, $escape); return $this; }
-	public function join($table, string $alias, string $condition, $bind = []) { $this->select->join($table, $alias, $condition, $bind); return $this; }
-	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { $this->select->leftJoin($table, $alias, $condition, $bind, $outer); return $this; }
-	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) { $this->select->rightJoin($table, $alias, $condition, $bind, $outer); return $this; }
+	public function join($table, string $alias, string $condition, $bind = [], bool $escape = true) { $this->select->join($table, $alias, $condition, $bind, $escape); return $this; }
+	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false, bool $escape = true) { $this->select->leftJoin($table, $alias, $condition, $bind, $outer, $escape); return $this; }
+	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false, bool $escape = true) { $this->select->rightJoin($table, $alias, $condition, $bind, $outer, $escape); return $this; }
 	public function groupBy($column, $bind = []) { $this->select->groupBy($column, $bind); return $this; }
 	public function having(string $exp, $bind = []) { $this->select->having($exp, $bind); return $this; }
 	public function union(IMySqlCommandConstructor $select, bool $all = false) { $this->select->union($select, $all); return $this; }

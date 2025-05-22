@@ -14,7 +14,8 @@ interface ICmdUpdate extends IDml, IMySqlCommandConstructor, IWithWhere, IWithSe
 	/**
 	 * Set the table to update.
 	 * @param string $table Name of the table to update.
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function table($table);
+	public function table($table, bool $escape = true);
 }

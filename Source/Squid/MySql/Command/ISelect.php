@@ -23,9 +23,10 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function join($table, string $alias, string $condition, $bind = []);
+	public function join($table, string $alias, string $condition, $bind = [], bool $escape = true);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
@@ -33,9 +34,16 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param string $condition
 	 * @param mixed|array $bind
 	 * @param bool $outer
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false);
+	public function leftJoin(
+		$table,
+		string $alias,
+		string $condition,
+		$bind = [],
+		bool $outer = false,
+		bool $escape = true);
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
@@ -43,9 +51,16 @@ interface ISelect extends IWithWhere, IWithExtendedWhere, IWithLimit, IWithColum
 	 * @param string $condition
 	 * @param mixed|array $bind
 	 * @param bool $outer
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false);
+	public function rightJoin(
+		$table,
+		string $alias,
+		string $condition,
+		$bind = [],
+		bool $outer = false,
+		bool $escape = true);
 
 
 	/**

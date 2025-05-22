@@ -12,8 +12,9 @@ interface IMySqlConnection extends IMySqlExecutor
 	 * @param string $user
 	 * @param string $pass
 	 * @param string $host
+	 * @param string|null $charset
 	 */
-	public function setConfig($db, $user = null, $pass = null, $host = null);
+	public function setConfig($db, $user = null, $pass = null, $host = null, ?string $charset = null);
 	
 	/**
 	 * Close this connection. Do nothing if the connection is already closed.

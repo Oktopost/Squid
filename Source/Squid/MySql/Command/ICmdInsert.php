@@ -14,7 +14,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	/**
 	 * Set the table to select into.
 	 * @param string $table Table name.
-	 * @param array|null $fields Set of fields to insert data into. This can be ignored 
+	 * @param array|null $fields Set of fields to insert data into. This can be ignored
 	 * if set later using values with assoc array.
 	 * @return static
 	 */

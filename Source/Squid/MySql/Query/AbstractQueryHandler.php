@@ -76,7 +76,7 @@ abstract class AbstractQueryHandler implements IQueryHandler
 		
 		if ($this->table)
 		{
-			$this->query->select()->from($this->table);
+			$this->query->select()->from($this->table, null, false);
 		}
 	}
 	

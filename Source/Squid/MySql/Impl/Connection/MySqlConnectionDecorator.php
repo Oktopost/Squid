@@ -32,8 +32,9 @@ class MySqlConnectionDecorator implements IMySqlConnection
 	 * @param string $user
 	 * @param string $pass
 	 * @param string $host
+	 * @param string|null $charset
 	 */
-	public function setConfig($db, $user = null, $pass = null, $host = null)
+	public function setConfig($db, $user = null, $pass = null, $host = null, ?string $charset = null)
 	{
 		$this->connection->setConfig($db, $user, $pass, $host);
 	}

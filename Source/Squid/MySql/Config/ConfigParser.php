@@ -23,6 +23,7 @@ class ConfigParser
 		'port'		=> ['port'],
 		'flags'		=> ['flags', 'attribute'],
 		'version'	=> ['version'],
+		'charset'	=> ['charset'],
 		'reuse'		=> ['reuse', 'reuse-connection']
 	];
 	
@@ -114,6 +115,8 @@ class ConfigParser
 		$object->User		= self::getValue('', 'user', $config);
 		$object->PDOFlags	= self::getValue([], 'flags', $config);
 		$object->Version	= self::getValue($object->Version, 'version', $config);
+		
+		$object->CharSet	= self::getValue(null, 'charset', $config);
 		
 		$object->Properties			= self::getProperties($config);
 		$object->ReuseConnection	= self::getBoolean(false, 'reuse', $config);

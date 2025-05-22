@@ -16,6 +16,7 @@ use Objection\LiteObject;
  * @property array	$PDOFlags
  * @property string	$Version
  * @property array	$Properties
+ * @property string $CharSet
  */
 class MySqlConnectionConfig extends LiteObject 
 {
@@ -50,7 +51,8 @@ class MySqlConnectionConfig extends LiteObject
 			'ReuseConnection'	=> LiteSetup::createBool(false),
 			'PDOFlags'			=> LiteSetup::createArray(),
 			'Version'			=> LiteSetup::createString('5.6'),
-			'Properties'		=> LiteSetup::createArray(self::DEFAULT_PROPERTIES)
+			'Properties'		=> LiteSetup::createArray(self::DEFAULT_PROPERTIES),
+			'CharSet'			=> LiteSetup::createString(null)
 		];
 	}
 	
@@ -65,6 +67,11 @@ class MySqlConnectionConfig extends LiteObject
 		if ($this->DB)
 		{
 			$connString .= ";dbname={$this->DB}";
+		}
+		
+		if ($this->CharSet)
+		{
+			$connString .= ";charset={$this->CharSet}";
 		}
 		
 		return $connString;

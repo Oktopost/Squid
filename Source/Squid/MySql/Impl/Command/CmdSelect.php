@@ -5,7 +5,6 @@ namespace Squid\MySql\Impl\Command;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Command\IWithLimit;
 use Squid\MySql\Command\IMySqlCommandConstructor;
-use Structura\Strings;
 
 
 class CmdSelect extends PartsCommand implements ICmdSelect 
@@ -82,12 +81,22 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $condition
 	 * @param array|bool $bind
 	 * @param string $join
+	 * @param bool $escape
 	 * @return static
 	 */
-	private function joinWith($joinWith, $alias, $condition, $bind, $join)
+	private function joinWith($joinWith, $alias, $condition, $bind, $join, bool $escape = true)
 	{
 		if ($joinWith instanceof IMySqlCommandConstructor)
+		{
 			return $this->fromSubQuery($joinWith, $alias, $condition, $join);
+		}
+		else
+		{
+			if ($escape)
+			{
+				$joinWith = "`{$joinWith}`";
+			}
+		}
 		
 		return $this->appendPart(
 			CmdSelect::PART_FROM,
@@ -178,29 +187,23 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	
 	/**
 	 * @param string|IMySqlCommandConstructor $table
-	 * @param string $alias
+	 * @param string|null $alias
 	 * @param bool $escape
 	 * @return static
 	 */
 	public function from($table, ?string $alias = null, bool $escape = true)
 	{
-		if ($escape)
-		{
-			if (is_string($table))
-			{
-				if (!Strings::contains($table, ' ') && !Strings::contains($table, ',') &&
-					!Strings::isStartsWith($table, '`')
-				)
-				{
-					$table = "`{$table}`";
-				}
-			}
-		}
-		
 		if ($table instanceof IMySqlCommandConstructor) 
 		{
 			$this->setPart(CmdSelect::PART_FROM, false);			
 			return $this->fromSubQuery($table, $alias);
+		}
+		else
+		{
+			if ($escape)
+			{
+				$table = "`{$table}`";
+			}
 		}
 		
 		if ($alias) 
@@ -216,11 +219,12 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $alias
 	 * @param string $condition
 	 * @param mixed|array $bind
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function join($table, string $alias, string $condition, $bind = []) 
+	public function join($table, string $alias, string $condition, $bind = [], bool $escape = true)
 	{
-		return $this->joinWith($table, $alias, $condition, $bind, 'JOIN');
+		return $this->joinWith($table, $alias, $condition, $bind, 'JOIN', $escape);
 	}
 	
 	/**
@@ -229,13 +233,20 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $condition
 	 * @param mixed|array $bind
 	 * @param bool $outer
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function leftJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) 
+	public function leftJoin(
+		$table,
+		string $alias,
+		string $condition,
+		$bind = [],
+		bool $outer = false,
+		bool $escape = true)
 	{
 		return $this->joinWith(
 			$table, $alias, $condition, $bind, 
-			($outer ? 'LEFT OUTER JOIN' : 'LEFT JOIN'));
+			($outer ? 'LEFT OUTER JOIN' : 'LEFT JOIN'), $escape);
 	}
 	
 	/**
@@ -244,13 +255,20 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	 * @param string $condition
 	 * @param mixed|array $bind
 	 * @param bool $outer
+	 * @param bool $escape
 	 * @return static
 	 */
-	public function rightJoin($table, string $alias, string $condition, $bind = [], bool $outer = false) 
+	public function rightJoin(
+		$table,
+		string $alias,
+		string $condition,
+		$bind = [],
+		bool $outer = false,
+		bool $escape = true)
 	{
 		return $this->joinWith(
 			$table, $alias, $condition, $bind, 
-			($outer ? 'RIGHT OUTER JOIN' : 'RIGHT JOIN'));
+			($outer ? 'RIGHT OUTER JOIN' : 'RIGHT JOIN'), $escape);
 	}
 	
 	
@@ -376,7 +394,7 @@ class CmdSelect extends PartsCommand implements ICmdSelect
 	}
 	
 	/**
-	 * @return int|bool
+	 * @return int|bool|null
 	 */
 	public function queryCount() 
 	{

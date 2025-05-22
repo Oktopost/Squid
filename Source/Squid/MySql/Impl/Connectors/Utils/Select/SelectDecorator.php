@@ -92,8 +92,12 @@ class SelectDecorator implements ISelect
 	public function withRollup(bool $withRollup = true) { $this->select->withRollup($withRollup); return $this; }
 	public function forUpdate(bool $forUpdate = true) { $this->select->forUpdate($forUpdate); return $this; }
 	public function lockInShareMode(bool $lockInShareMode = true) { $this->select->lockInShareMode($lockInShareMode); return $this; }
-
-
+	public function whereLike(string $exp, $value, ?string $escapeChar = null) { return $this->select->whereLike($exp, $value, $escapeChar); }
+	public function whereNotLike(string $exp, $value, ?string $escapeChar = null) { return $this->select->whereNotLike($exp, $value, $escapeChar); }
+	public function whereContains(string $exp, $value, bool $negate = false) { return $this->select->whereContains($exp, $value, $negate); }
+	public function whereStartsWith(string $exp, $value, bool $negate = false) { return $this->select->whereStartsWith($exp, $value, $negate); }
+	public function whereEndsWith(string $exp, $value, bool $negate = false) { return $this->select->whereEndsWith($exp, $value, $negate); }
+	
 	public function __clone()
 	{
 		$this->select = clone $this->select;
@@ -102,30 +106,5 @@ class SelectDecorator implements ISelect
 	public function __toString()
 	{
 		return (string)$this->select;
-	}
-	
-	public function whereLike(string $exp, $value, ?string $escapeChar = null)
-	{
-		// TODO: Implement whereLike() method.
-	}
-	
-	public function whereNotLike(string $exp, $value, ?string $escapeChar = null)
-	{
-		// TODO: Implement whereNotLike() method.
-	}
-	
-	public function whereContains(string $exp, $value, bool $negate = false)
-	{
-		// TODO: Implement whereContains() method.
-	}
-	
-	public function whereStartsWith(string $exp, $value, bool $negate = false)
-	{
-		// TODO: Implement whereStartsWith() method.
-	}
-	
-	public function whereEndsWith(string $exp, $value, bool $negate = false)
-	{
-		// TODO: Implement whereEndsWith() method.
 	}
 }

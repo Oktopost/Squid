@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Oktopost/Squid.svg?branch=master)](https://travis-ci.org/Oktopost/Squid)
 
 # Squid
 Squid is a MySQL library

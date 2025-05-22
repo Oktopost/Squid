@@ -409,11 +409,10 @@ class ByPropertiesTest extends TestCase
 		self::assertEquals($object->a, $object->child->a);
 		self::assertEquals($object->b, $object->child->c);
 	}
-	
+
 	public function test_save_ConnectorDoesNotHAveSaveMethod_ExceptionThrown()
 	{
-		$this->expectException(\Squid\Exceptions\SquidUsageException::class);
-		
+		self::expectException(\Squid\Exceptions\SquidUsageException::class);
 		$subject = $this->subject();
 		
 		$object = new ByPropertiesParent();

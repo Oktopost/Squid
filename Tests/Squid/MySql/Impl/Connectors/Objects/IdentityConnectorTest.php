@@ -11,6 +11,7 @@ use Objection\LiteObject;
 use PHPUnit\Framework\TestCase;
 use Squid\MySql\Connectors\Objects\Generic\IGenericObjectConnector;
 use Squid\MySql\Impl\Connectors\Objects\Generic\GenericObjectConnector;
+use Squid\MySql\Impl\Connectors\Objects\IdentityConnector;
 
 
 class IdentityConnectorTest extends TestCase

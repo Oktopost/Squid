@@ -117,7 +117,7 @@ class DataSet
 	public static function setup()
 	{
 		self::$mysql = new MySql();
-		self::$mysql->config()->setConfig(Config::get());
+		self::$mysql->config()->addConfig('main', Config::get());
 		self::clearDB();
 	}
 }

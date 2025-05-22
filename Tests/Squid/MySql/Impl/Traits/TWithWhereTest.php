@@ -4,6 +4,7 @@ namespace Squid\MySql\Impl\Traits;
 
 use PHPUnit\Framework\TestCase;
 
+use Squid\Exceptions\SquidException;
 use Squid\MySql;
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Connection\IMySqlConnection;
@@ -88,16 +89,19 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 	}
 	
 	
-	public function where(string $exp, $bind = []): void
+	/**
+	 * It ss called inside the trait
+	 */
+	public function where($exp, $bind = false): void
 	{
 		$this->checkValue($bind, $exp);
 		$this->checkField($exp);
 	}
-	
+
+
 	public function test_whereIn_PassEmptyValue()
 	{
-		$this->expectException(\Squid\Exceptions\SquidException::class);
-		
+		self::expectException(SquidException::class);
 		$this->field = 'field';
 		$this->value = null;
 		
@@ -168,6 +172,6 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 	
 	protected function getConn(): ?IMySqlConnection
 	{
-		return null;
+		// TODO: Implement getConn() method.
 	}
 }

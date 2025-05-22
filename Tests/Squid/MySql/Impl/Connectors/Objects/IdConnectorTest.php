@@ -6,11 +6,10 @@ use lib\DataSet;
 use lib\TDBAssert;
 use lib\DummyObject;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-use Squid\MySql\Connectors\Objects\ID\IIdGenerator;
 use Squid\MySql\Connectors\Objects\Generic\IGenericObjectConnector;
+use Squid\MySql\Connectors\Objects\ID\IIdGenerator;
 
 
 class IdConnectorTest extends TestCase
@@ -62,7 +61,7 @@ class IdConnectorTest extends TestCase
 	
 	public function test_insert_IdGenerator()
 	{
-		/** @var IIdGenerator|MockObject $generator */
+		/** @var IIdGenerator|\PHPUnit_Framework_MockObject_MockObject $generator */
 		$generator = $this->getMockBuilder(IIdGenerator::class)->getMock();
 		$table = DataSet::table(['a', 'b']);
 		
@@ -91,7 +90,7 @@ class IdConnectorTest extends TestCase
 	
 	public function test_insert_AutoIncId()
 	{
-		/** @var IIdGenerator|MockObject $generator */
+		/** @var IIdGenerator|\PHPUnit_Framework_MockObject_MockObject $generator */
 		$generator = $this->getMockBuilder(IIdGenerator::class)->getMock();
 		$table = DataSet::table(['a', 'b']);
 		

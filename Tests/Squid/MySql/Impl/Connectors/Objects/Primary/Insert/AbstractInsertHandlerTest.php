@@ -3,7 +3,6 @@ namespace Squid\MySql\Impl\Connectors\Objects\Primary\Insert;
 
 
 use lib\DummyObject;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Squid\MySql\Connectors\Objects\CRUD\Identity\IIdentityInsert;
 
@@ -54,7 +53,7 @@ class AbstractInsertHandlerTest extends TestCase
 	
 	public function test_HandlerIsIIdentityInsert_CallbackValueReturned()
 	{
-		/** @var MockObject|IIdentityInsert $mock */
+		/** @var \PHPUnit_Framework_MockObject_MockObject|IIdentityInsert $mock */
 		$mock = $this->createMock(IIdentityInsert::class);
 		
 		$subject = new AbstractInsertHandlerTestHelper();
@@ -69,7 +68,7 @@ class AbstractInsertHandlerTest extends TestCase
 	{
 		$target = [new DummyObject(), new DummyObject()];
 		
-		/** @var MockObject|IIdentityInsert $mock */
+		/** @var \PHPUnit_Framework_MockObject_MockObject|IIdentityInsert $mock */
 		$mock = $this->createMock(IIdentityInsert::class);
 		
 		$subject = new AbstractInsertHandlerTestHelper();

@@ -2,9 +2,7 @@
 namespace Squid\MySql\Impl\Connectors\Extensions\Select;
 
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
 use Squid\MySql\Command\ICmdSelect;
 use Squid\MySql\Impl\Command\CmdSelect;
 use Squid\MySql\Impl\Connectors\Utils\Select\SelectDecorator;
@@ -14,12 +12,12 @@ use Squid\OrderBy;
 
 class SelectDecoratorTest extends TestCase
 {
-	/** @var MockObject|ICmdSelect */
+	/** @var \PHPUnit_Framework_MockObject_MockObject|ICmdSelect */
 	private $select;
 	
 	
 	/**
-	 * @return MockObject|IMySqlConnector
+	 * @return \PHPUnit_Framework_MockObject_MockObject|IMySqlConnector
 	 */
 	private function mockIMySqlConnector(): IMySqlConnector
 	{
@@ -61,6 +59,7 @@ class SelectDecoratorTest extends TestCase
 		
 		
 		// WHERE
+		self::assertSame($subject, $subject->byId('a'));
 		self::assertSame($subject, $subject->byField('a', 'b'));
 		self::assertSame($subject, $subject->byFields(['a' => 'b']));
 		self::assertSame($subject, $subject->whereIn('a', [1]));
@@ -78,7 +77,7 @@ class SelectDecoratorTest extends TestCase
 		self::assertSame($subject, $subject->columns(['a']));
 		self::assertSame($subject, $subject->columnsExp('a'));
 		self::assertSame($subject, $subject->columnAs('a', 'b'));
-		self::assertSame($subject, $subject->columnAsExp('a', 'b', $bind = []));
+		self::assertSame($subject, $subject->columnAsExp('a', 'b', $bind = false));
 	}
 	
 	
@@ -209,6 +208,13 @@ class SelectDecoratorTest extends TestCase
 		$this->assertMethod('forUpdate', [true, false]);
 	}
 	
+	
+	public function test_byId()
+	{
+		$this->assertMethodRecalls('byId', 'byId', [
+			[['a'], ['a']]
+		]);
+	}
 	
 	public function test_byField()
 	{

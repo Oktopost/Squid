@@ -6,8 +6,8 @@ use lib\DataSet;
 use Objection\LiteObject;
 use Objection\LiteSetup;
 use PHPUnit\Framework\TestCase;
-use Squid\MySql\Impl\Connectors\Objects\PlainObjectConnector;
 use Squid\MySql\Impl\Connectors\Internal\Objects\AbstractORMConnector;
+use Squid\MySql\Impl\Connectors\Objects\PlainObjectConnector;
 
 
 class TPlainDecoratorTest extends TestCase

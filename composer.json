@@ -31,11 +31,16 @@
 		"oktopost/jsonencode": "^1.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^8.1"
+		"phpunit/phpunit": "^10.5"
 	},
 	"autoload": {
 		"psr-0": {
 			"Squid": "Source"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"lib\\": "Tests/lib/"
 		}
 	},
 	"scripts": {

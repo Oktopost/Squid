@@ -12,6 +12,9 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: _squid_test_
+          MYSQL_USER: _squid_test_u_
+          MYSQL_PASSWORD: _squid_test_pass_
         ports:
           - 3306:3306
         options: >-
@@ -19,8 +22,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-        volumes:
-          - ${{ github.workspace }}/Tests/MySQL/create.sql:/docker-entrypoint-initdb.d/init.sql
 
     steps:
       - name: Checkout code
@@ -35,13 +36,18 @@ jobs:
       - name: Wait for MySQL to be ready
         run: |
           for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -u _squid_test_u_ -p_squid_test_pass_ --silent; then
+            if mysqladmin ping -h 127.0.0.1 -u root -proot --silent; then
               echo "MySQL is ready"
               break
             fi
             echo "Waiting for MySQL ($i)..."
             sleep 1
           done
+
+      - name: Force mysql_native_password for test user
+        run: |
+          mysql -h 127.0.0.1 -u root -proot -e "\
+            ALTER USER '_squid_test_u_'@'%' IDENTIFIED WITH mysql_native_password BY '_squid_test_pass_';"
 
       - name: Install Dependencies
         uses: php-actions/composer@v6

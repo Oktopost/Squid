@@ -18,7 +18,7 @@ interface ICmdInsert extends IDml, IMySqlCommandConstructor
 	 * if set later using values with assoc array.
 	 * @return static
 	 */
-	public function into(string $table, array $fields = null);
+	public function into(string $table, ?array $fields = null);
 	
 	/**
 	 * Set the default values to use.

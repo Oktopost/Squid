@@ -20,7 +20,7 @@ abstract class AbstractMySqlExecuteDecorator implements IMySqlExecuteDecorator
 	/**
 	 * @param IMySqlExecutor $child Decorated executor.
 	 */
-	public function init(IMySqlExecutor $child = null)
+	public function init(?IMySqlExecutor $child = null)
 	{
 		$this->child = $child;
 	}

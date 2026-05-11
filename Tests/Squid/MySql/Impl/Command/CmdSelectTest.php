@@ -14,7 +14,7 @@ class CmdSelectTest extends TestCase
 	 * @param TestTable $table
 	 * @return \Squid\MySql\Command\ICmdSelect
 	 */
-	private function select(TestTable $table = null)
+	private function select(?TestTable $table = null)
 	{
 		$select = DataSet::connector()->select();
 

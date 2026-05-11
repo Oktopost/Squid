@@ -7,5 +7,5 @@ interface IMySqlExecuteDecorator extends IMySqlExecutor
 	/**
 	 * @param IMySqlExecutor $child Decorated executor.
 	 */
-	public function init(IMySqlExecutor $child = null);
+	public function init(?IMySqlExecutor $child = null);
 }

@@ -12,7 +12,7 @@ abstract class Connector implements IConnector
 	private $connector;
 	
 	
-	public function __construct(Connector $connector = null)
+	public function __construct(?Connector $connector = null)
 	{
 		if ($connector)
 		{

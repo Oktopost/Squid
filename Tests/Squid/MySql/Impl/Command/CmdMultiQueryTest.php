@@ -14,7 +14,7 @@ class CmdMultiQueryTest extends TestCase
 	 * @param TestTable $table
 	 * @return \Squid\MySql\Command\ICmdInsert
 	 */
-	private function insert(TestTable $table = null, array $data = [])
+	private function insert(?TestTable $table = null, array $data = [])
 	{
 		$insert = DataSet::connector()
 			->insert()
@@ -24,7 +24,7 @@ class CmdMultiQueryTest extends TestCase
 		return $insert;
 	}
 	
-	private function insertString(TestTable $table = null, array $data = []): string
+	private function insertString(?TestTable $table = null, array $data = []): string
 	{
 		$insert = DataSet::connector()
 			->insert()

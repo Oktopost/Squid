@@ -16,7 +16,7 @@ abstract class AbstractSingleTableConnector extends Connector implements ISingle
 	private $table;
 	
 	
-	public function __construct(AbstractSingleTableConnector $connector = null)
+	public function __construct(?AbstractSingleTableConnector $connector = null)
 	{
 		parent::__construct($connector);
 		

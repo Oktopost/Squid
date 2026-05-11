@@ -147,7 +147,7 @@ class CmdInsert extends PartsCommand implements ICmdInsert
 	 * if set later using values with assoc array.
 	 * @return static
 	 */
-	public function into(string $table, array $fields = null)
+	public function into(string $table, ?array $fields = null)
 	{
 		$this->setPart(CmdInsert::PART_INTO, $table);
 		

@@ -1,17 +1,24 @@
-<phpunit bootstrap="Tests/boot.php"
-         convertNoticesToExceptions="false"
-         convertWarningsToExceptions="false">
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./Source/</directory>
-        </whitelist>
-    </filter>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://w3.org"
+         xsi:noNamespaceSchemaLocation="https://phpunit.de"
+         bootstrap="Tests/boot.php"
+         displayDetailsOnTestsThatTriggerNotices="false"
+         displayDetailsOnTestsThatTriggerWarnings="false">
+
+    <source restrictNotices="false" restrictWarnings="false">
+        <include>
+            <directory suffix=".php">./Source</directory>
+        </include>
+    </source>
+
     <testsuites>
         <testsuite name="Squid">
             <directory>Tests/Squid</directory>
         </testsuite>
     </testsuites>
-    <logging>
-         <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
+    <coverage>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+        </report>
+    </coverage>
 </phpunit>

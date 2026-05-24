@@ -77,7 +77,6 @@ class TWithWhereTest extends TestCase implements MySql\Command\IWithWhere
 		{
 			$r = new \ReflectionClass(EmptyWhereInHandler::class);
 			$p = $r->getProperty('handler');
-			$p->setAccessible(true);
 			$p->setValue(null, null);
 		}
 	}

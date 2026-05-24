@@ -14,7 +14,7 @@ class CallbackDecorator extends AbstractMySqlExecuteDecorator
 	private $postCallback;
 
 	
-	public function __construct(callable $preCallback = null, callable $postCallback = null)
+	public function __construct(?callable $preCallback = null, ?callable $postCallback = null)
 	{
 		$this->preCallback = $preCallback;
 		$this->postCallback = $postCallback;

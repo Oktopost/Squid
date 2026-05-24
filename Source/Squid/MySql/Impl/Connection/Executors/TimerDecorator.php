@@ -15,7 +15,7 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 	private $unixStartTime;
 	
 	
-	protected function measure(string $cmd, array $bind = [], $runTime): void
+	protected function measure(string $cmd, array $bind = [], $runTime = 0): void
 	{
 		if (!$this->callback)
 			throw new SquidException(
@@ -27,7 +27,7 @@ class TimerDecorator extends AbstractMySqlExecuteDecorator
 	}
 	
 	
-	public function __construct(callable $callback = null)
+	public function __construct(?callable $callback = null)
 	{
 		$this->callback = $callback;
 	}

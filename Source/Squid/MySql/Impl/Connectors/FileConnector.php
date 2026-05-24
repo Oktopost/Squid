@@ -12,7 +12,7 @@ class FileConnector
 	private $connector;
 	
 	
-	public function __construct(IMySqlConnector $connector = null)
+	public function __construct(?IMySqlConnector $connector = null)
 	{
 		if ($connector) 
 			$this->connector = $connector; 

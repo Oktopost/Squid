@@ -44,7 +44,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 			
 			if ($data)
 			{
-				$instance->fromArray($data);
+				$instance->fromArrayFiltered($data);
 			}
 			
 			return $instance;
@@ -65,7 +65,7 @@ abstract class AbstractObjectConnector implements IObjectConnector
 		{
 			/** @var LiteObject $className */
 			$className = $this->className;
-			return $className::allFromArray($data);
+			return $className::allFromArrayFiltered($data);
 		}
 	}
 

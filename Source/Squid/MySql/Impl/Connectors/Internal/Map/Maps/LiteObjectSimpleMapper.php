@@ -52,7 +52,7 @@ class LiteObjectSimpleMapper implements IRowMap
 		/** @var LiteObject $object */
 		$object = new $className;
 		
-		return $object->fromArray($row);
+		return $object->fromArrayFiltered($row);
 	}
 	
 	/**
@@ -61,6 +61,6 @@ class LiteObjectSimpleMapper implements IRowMap
 	 */
 	public function toObjects(array $rows): array
 	{
-		return $this->className::allFromArray($rows);
+		return $this->className::allFromArrayFiltered($rows);
 	}
 }

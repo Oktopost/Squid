@@ -44,7 +44,7 @@ class MySqlException extends SquidException
 			$message = trim(substr($message, $codePosition + strlen("[{$exception->getCode()}]") + 1));
 		}
 		
-		return new MySqlException($message, $exception->getCode());
+		return new MySqlException($message, (int)$exception->getCode(), $exception);
 	}
 
 	/**

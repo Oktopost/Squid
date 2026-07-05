@@ -21,10 +21,9 @@ class ValidatorsSet
 
 
 	/**
-	 * @param \Exception $e
 	 * @return array|false
 	 */
-	public function getConfigFor(\Exception $e)
+	public function getConfigFor(\Throwable $e)
 	{
 		foreach ($this->validators as $validator)
 		{

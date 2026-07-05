@@ -205,7 +205,7 @@ class CmdTransactionTest extends TestCase
 			$transaction->commit();
 			$this->fail('No Exception thrown');
 		}
-		catch (\Exception $e) {}
+		catch (\Throwable $e) {}
 
 		$this->assertFalse($transaction->isInTransaction());
 	}
@@ -229,7 +229,7 @@ class CmdTransactionTest extends TestCase
 			$transaction->rollback();
 			$this->fail('No Exception thrown');
 		}
-		catch (\Exception $e) {}
+		catch (\Throwable $e) {}
 
 		$this->assertFalse($transaction->isInTransaction());
 	}
@@ -244,7 +244,7 @@ class CmdTransactionTest extends TestCase
 			$transaction->startTransaction();
 			$this->fail('No Exception thrown');
 		}
-		catch (\Exception $e) {}
+		catch (\Throwable $e) {}
 
 		$this->assertTrue($transaction->isInTransaction());
 	}

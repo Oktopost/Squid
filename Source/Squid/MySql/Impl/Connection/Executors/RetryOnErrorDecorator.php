@@ -19,7 +19,7 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 	 * @param \Exception $e
 	 * @return array
 	 */
-	private function getConfig(\Exception $e)
+	private function getConfig(\Throwable $e)
 	{
 		$config = $this->validators->getConfigFor($e);
 		
@@ -47,7 +47,7 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 			{
 				return parent::execute($cmd, $bind);
 			}
-			catch (\Exception $new)
+			catch (\Throwable $new)
 			{
 				if (!$this->isSameError($e, $new))
 					throw $new;
@@ -57,12 +57,7 @@ class RetryOnErrorDecorator extends AbstractMySqlExecuteDecorator
 		throw $e;
 	}
 
-	/**
-	 * @param \Exception $original
-	 * @param \Exception $new
-	 * @return bool
-	 */
-	private function isSameError(\Exception $original, \Exception $new)
+	private function isSameError(\Throwable $original, \Throwable $new): bool
 	{
 		return (
 			$original->getCode() == $new->getCode() && 

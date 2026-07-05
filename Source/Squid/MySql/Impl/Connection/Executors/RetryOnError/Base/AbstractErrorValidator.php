@@ -13,7 +13,7 @@ abstract class AbstractErrorValidator implements IErrorValidator
 	 * @param string $regex
 	 * @return bool
 	 */
-	protected function isMessageMatch(\Exception $e, $regex)
+	protected function isMessageMatch(\Throwable $e, $regex)
 	{
 		return (preg_match($regex, $e->getMessage()) === 1);
 	}
@@ -46,5 +46,5 @@ abstract class AbstractErrorValidator implements IErrorValidator
 	 * @param \Exception $e
 	 * @return bool
 	 */
-	public abstract function isHandled(\Exception $e);
+	public abstract function isHandled(\Throwable $e);
 }

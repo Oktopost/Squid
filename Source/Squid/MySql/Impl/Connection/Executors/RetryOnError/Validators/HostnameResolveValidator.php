@@ -21,7 +21,7 @@ class HostnameResolveValidator extends AbstractErrorValidator
 	 * @param \Exception $e
 	 * @return bool
 	 */
-	public function isHandled(\Exception $e)
+	public function isHandled(\Throwable $e)
 	{
 		return 
 			$this->isMessageMatch($e, "/^.*Temporary failure in name resolution.*$/") ||

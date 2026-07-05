@@ -35,7 +35,7 @@ class SilentErrorDecorator extends AbstractMySqlExecuteDecorator
 		{
 			$result = parent::execute($cmd, $bind);
 		}
-		catch (\Exception $e)
+		catch (\Throwable $e)
 		{
 			if ($this->callback)
 			{

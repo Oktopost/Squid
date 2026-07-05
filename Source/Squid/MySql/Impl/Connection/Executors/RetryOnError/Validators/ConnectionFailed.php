@@ -21,7 +21,7 @@ class ConnectionFailed extends AbstractErrorValidator
 	 * @param \Exception $e
 	 * @return bool
 	 */
-	public function isHandled(\Exception $e)
+	public function isHandled(\Throwable $e)
 	{
 		return 
 			$this->isMessageMatch($e, "/^Unknown MySQL server host '.*' \\([0-9]*\\)$/") || 

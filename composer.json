@@ -28,7 +28,8 @@
 		"oktopost/skeleton": "^2.0.4",
 		"oktopost/traitor": "^2.1",
 		"oktopost/structura": "^3.0.2",
-		"oktopost/jsonencode": "^1.0"
+		"oktopost/jsonencode": "^1.0",
+		"psr/log": "^1.1 || ^2.0 || ^3.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^10.5"

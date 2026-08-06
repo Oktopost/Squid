@@ -7,6 +7,7 @@ use Squid\MySql\Exceptions\MySqlException;
 use Squid\MySql\Connection\IMySqlConnection;
 
 use Squid\Exceptions\SquidException;
+use Squid\Utils\Logging;
 
 
 class MySqlConnection implements IMySqlConnection 
@@ -115,8 +116,30 @@ class MySqlConnection implements IMySqlConnection
 	{
 		if ($db instanceof MySqlConnectionConfig) 
 		{
+			if (!$db->CharSet)
+			{
+				$logger = Logging::getLogger();
+				$logger->notice('charset value not set',
+					[
+						'scope' => 'Charset',
+						'database' => $db->DB, 'host' => $db->Host,
+						'exception' => new \Exception()
+					]);
+			}
+			
 			$this->config = $db;
 			return;
+		}
+		
+		if (!$charset)
+		{
+			$logger = Logging::getLogger();
+			$logger->notice('charset value not set',
+				[
+					'scope' => 'Charset',
+					'database' => $db, 'host' => $host,
+					'exception' => new \Exception()
+				]);
 		}
 		
 		$this->config = new MySqlConnectionConfig();
